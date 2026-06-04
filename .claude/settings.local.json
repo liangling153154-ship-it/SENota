@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(del \"c:\\\\Users\\\\Administrator\\\\Desktop\\\\PROJECT\\\\SEN WEB OTA\\\\distances.html\" \"c:\\\\Users\\\\Administrator\\\\Desktop\\\\PROJECT\\\\SEN WEB OTA\\\\km-checklist.html\")",
+      "Bash(del \"c:\\\\Users\\\\Administrator\\\\Desktop\\\\PROJECT\\\\SEN WEB OTA\\\\map.html\")",
+      "PowerShell(Remove-Item \"c:\\\\Users\\\\Administrator\\\\Desktop\\\\PROJECT\\\\SEN WEB OTA\\\\km-data.txt\" -Confirm:$false)",
+      "Bash(mkdir \"c:\\\\Users\\\\Administrator\\\\Desktop\\\\PROJECT\\\\SEN WEB OTA\\\\itinerary-v2\")"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\Administrator\\Desktop\\PROJECT\\SEN WEB OTA"
+    ]
+  }
+}
