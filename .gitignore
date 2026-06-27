@@ -6,3 +6,10 @@ node_modules/
 .idea/
 *.tmp
 *.bak
+.verify/
+
+# Dev tooling / skills — not part of the website product
+impeccable-main/
+.agents/
+.claude/
+.codex/

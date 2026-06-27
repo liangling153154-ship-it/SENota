@@ -5,39 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Food Guide · Sen's Homestay · Cao Bang</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --green-dark:  #2D6A4F;
-      --green-mid:   #52B788;
-      --green-light: #D8F3DC;
-      --orange:      #E76F51;
-      --orange-dark: #C25B3F;
-      --cream:       #F8F4E9;
-      --brown:       #5C3D2E;
-      --text:        #1a1a1a;
-      --text-muted:  #666;
-      --radius:      14px;
-      --shadow:      0 4px 24px rgba(0,0,0,0.09);
+      --paper:#FBF7EF; --paper-2:#F3EBDA; --surface:#FFFFFF;
+      --ink:#2A2118; --ink-soft:#6B5D4C;
+      --terra:#B65A36; --terra-deep:#9A4A2E; --terra-soft:#C97048;
+      --forest:#3C5A40; --forest-deep:#2C4530; --amber:#C8841F;
+      --on-dark:#F6EFE2; --on-dark-soft:#D8CDB8;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1); --r-pill:999px;
+      --green-dark:var(--forest); --green-mid:var(--terra-soft); --green-light:var(--paper-2);
+      --orange:var(--terra-deep); --orange-dark:var(--terra); --cream:var(--paper);
+      --brown:var(--ink); --white:#FFFFFF; --text:var(--ink); --text-muted:var(--ink-soft);
+      --radius:16px; --shadow:0 4px 14px rgba(42,33,24,0.07), 0 14px 34px rgba(42,33,24,0.09); --line:rgba(42,33,24,0.10);
+      --gd:var(--forest); --gm:var(--terra-soft); --gl:var(--paper-2); --or:var(--terra-deep); --cr:var(--paper); --tx:var(--ink); --tm:var(--ink-soft); --sh:var(--shadow); --r:16px;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text); overflow-x: hidden; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust:100%; }
+    body { font-family: 'Hanken Grotesk', system-ui, sans-serif; background: var(--paper); color: var(--ink); overflow-x: hidden; -webkit-font-smoothing:antialiased; }
+    h1,h2,h3,h4 { font-family:'Bricolage Grotesque','Hanken Grotesk',sans-serif; letter-spacing:-0.02em; text-wrap:balance; }
     img { display: block; width: 100%; object-fit: cover; }
     a { text-decoration: none; color: inherit; }
 
     /* NAV */
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 999; display: flex; align-items: center; justify-content: space-between; padding: 18px 48px; background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(45,106,79,0.12); transition: box-shadow 0.3s; }
-    nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.10); }
-    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; color: var(--green-dark); font-weight: 700; white-space: nowrap; }
-    .nav-logo span { color: var(--orange); }
-    .nav-links { display: flex; gap: 32px; align-items: center; }
-    .nav-links a { font-size: 0.9rem; font-weight: 500; color: var(--brown); transition: color 0.2s; }
-    .nav-links a:hover, .nav-links a.active { color: var(--green-dark); }
-    .nav-cta { background: var(--orange); color: white !important; padding: 10px 22px; border-radius: 50px; font-size: 0.88rem; transition: background 0.2s, transform 0.2s; }
-    .nav-cta:hover { background: var(--orange-dark); transform: translateY(-1px); }
-    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-    .nav-hamburger span { width: 24px; height: 2px; background: var(--green-dark); border-radius: 2px; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 300; display: flex; align-items: center; justify-content: space-between; height: 72px; padding: 0 34px; background: rgba(251,247,239,0.9); backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); transition: box-shadow 0.4s var(--ease); }
+    nav.scrolled { box-shadow: 0 6px 22px rgba(42,33,24,0.10); }
+    .nav-logo { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.34rem; color: var(--ink); font-weight: 800; letter-spacing:-0.02em; white-space: nowrap; display:flex; align-items:center; gap:9px; }
+    .nav-logo .leaf { width:25px; height:25px; color:var(--terra-deep); stroke:currentColor; fill:none; stroke-width:1.7; }
+    .nav-logo span { color: var(--terra-deep); }
+    .nav-links { display: flex; gap: 26px; align-items: center; }
+    .nav-links a { font-size: 0.92rem; font-weight: 600; color: var(--ink-soft); transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--terra-deep); }
+    .nav-cta { display:inline-flex; align-items:center; gap:7px; background: var(--terra-deep); color: white !important; padding: 10px 20px; border-radius: var(--r-pill); font-weight:700; font-size: 0.86rem; transition: background 0.2s, transform 0.2s; }
+    .nav-cta:hover { background: var(--terra); transform: translateY(-2px); }
+    .nav-cta svg { width:15px; height:15px; fill:currentColor; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding:8px; }
+    .nav-hamburger span { width: 24px; height: 2px; background: var(--ink); border-radius: 2px; }
 
     /* HERO */
     .hero { height: 72vh; min-height: 480px; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
@@ -46,8 +50,8 @@
     .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%); }
     .hero-content { position: relative; z-index: 2; padding: 0 24px; }
     .hero-label { font-size: 0.72rem; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 14px; display: block; }
-    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 6vw, 4.8rem); color: white; line-height: 1.05; margin-bottom: 16px; font-weight: 700; }
-    .hero h1 em { color: #a8d5b8; font-style: italic; }
+    .hero h1 { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(2.8rem, 6vw, 4.8rem); color: white; line-height: 1.05; margin-bottom: 16px; font-weight: 700; }
+    .hero h1 em { color: #F2C28E; font-style: italic; }
     .hero-sub { color: rgba(255,255,255,0.7); font-size: 1rem; max-width: 460px; margin: 0 auto; line-height: 1.7; }
 
     /* FILTER */
@@ -55,7 +59,7 @@
     .filter-inner { max-width: 1100px; margin: 0 auto; display: flex; gap: 32px; align-items: center; flex-wrap: wrap; }
     .filter-group { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
     .filter-group-label { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); font-weight: 500; margin-right: 4px; }
-    .filter-btn { background: var(--cream); border: 1.5px solid rgba(45,106,79,0.2); color: var(--green-dark); font-family: 'DM Sans', sans-serif; font-size: 0.8rem; font-weight: 500; padding: 6px 16px; border-radius: 50px; cursor: pointer; transition: all 0.2s; }
+    .filter-btn { background: var(--cream); border: 1.5px solid rgba(45,106,79,0.2); color: var(--green-dark); font-family: 'Hanken Grotesk', sans-serif; font-size: 0.8rem; font-weight: 500; padding: 6px 16px; border-radius: 50px; cursor: pointer; transition: all 0.2s; }
     .filter-btn:hover { background: var(--green-light); border-color: var(--green-dark); }
     .filter-btn.active { background: var(--green-dark); color: white; border-color: var(--green-dark); }
     .filter-divider { width: 1px; height: 28px; background: rgba(0,0,0,0.1); }
@@ -64,7 +68,7 @@
     #planner { background: var(--green-dark); padding: 48px; }
     .planner-inner { max-width: 1100px; margin: 0 auto; }
     .planner-label { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 10px; display: block; }
-    .planner-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.5rem, 2.5vw, 2rem); color: white; margin-bottom: 24px; }
+    .planner-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(1.5rem, 2.5vw, 2rem); color: white; margin-bottom: 24px; }
     .planner-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
     .planner-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius); padding: 16px 18px; cursor: pointer; transition: all 0.2s; }
     .planner-card:hover { background: rgba(255,255,255,0.14); transform: translateY(-2px); }
@@ -103,14 +107,14 @@
     .badge { font-size: 0.65rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 4px 10px; border-radius: 50px; display: inline-block; }
     .badge-here { background: var(--green-dark); color: white; }
     .food-card.card-home { border: 2px solid var(--green-dark); }
-    .badge-veg { background: #52B788; color: white; }
+    .badge-veg { background: var(--terra-soft); color: white; }
     .meal-tags { position: absolute; bottom: 10px; right: 10px; display: flex; gap: 4px; z-index: 2; flex-wrap: wrap; justify-content: flex-end; max-width: 60%; }
     .meal-tag { background: rgba(0,0,0,0.55); backdrop-filter: blur(4px); color: white; font-size: 0.65rem; padding: 3px 8px; border-radius: 50px; }
 
     /* Card body */
     .food-body { padding: 18px 18px 14px; flex: 1; display: flex; flex-direction: column; }
     .food-restaurant { font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; color: var(--green-mid); font-weight: 600; margin-bottom: 4px; }
-    .food-dish { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; color: var(--green-dark); margin-bottom: 2px; line-height: 1.2; }
+    .food-dish { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.2rem; color: var(--green-dark); margin-bottom: 2px; line-height: 1.2; }
     .food-dish-en { font-size: 0.78rem; color: var(--text-muted); font-style: italic; margin-bottom: 10px; }
     .food-tagline { font-size: 0.83rem; color: var(--text); line-height: 1.55; margin-bottom: 8px; }
     .food-unique { font-size: 0.78rem; color: var(--brown); background: rgba(92,61,46,0.07); border-left: 2px solid var(--orange); padding: 7px 10px; border-radius: 0 6px 6px 0; margin-bottom: 14px; line-height: 1.5; }
@@ -118,13 +122,13 @@
     /* Card footer */
     .food-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.06); }
     .food-price { font-size: 0.82rem; font-weight: 600; color: var(--green-dark); }
-    .btn-maps { display: inline-flex; align-items: center; gap: 6px; background: var(--green-dark); color: white; font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 500; padding: 8px 16px; border-radius: 50px; transition: background 0.2s, transform 0.2s; }
-    .btn-maps:hover { background: #1e4d38; transform: translateY(-1px); }
+    .btn-maps { display: inline-flex; align-items: center; gap: 6px; background: var(--green-dark); color: white; font-family: 'Hanken Grotesk', sans-serif; font-size: 0.78rem; font-weight: 500; padding: 8px 16px; border-radius: 50px; transition: background 0.2s, transform 0.2s; }
+    .btn-maps:hover { background: var(--forest-deep); transform: translateY(-1px); }
 
     /* CTA */
-    #cta { background: linear-gradient(135deg, #1a3d2a, var(--green-dark)); padding: 64px 48px; text-align: center; }
+    #cta { background: linear-gradient(135deg, var(--forest-deep), var(--green-dark)); padding: 64px 48px; text-align: center; }
     .cta-label { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 12px; display: block; }
-    #cta h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3vw, 2.6rem); color: white; margin-bottom: 12px; }
+    #cta h2 { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(1.8rem, 3vw, 2.6rem); color: white; margin-bottom: 12px; }
     #cta p { color: rgba(255,255,255,0.65); margin-bottom: 28px; font-size: 0.92rem; line-height: 1.65; max-width: 420px; margin-left: auto; margin-right: auto; }
     .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
     .btn-wa { background: #25D366; color: white; padding: 13px 28px; border-radius: 50px; font-weight: 500; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 20px rgba(37,211,102,0.35); transition: filter 0.2s, transform 0.2s; }
@@ -142,9 +146,12 @@
     .fade-in.visible { opacity: 1; transform: none; }
 
     @media (max-width: 960px) {
-      nav { padding: 16px 24px; }
-      .nav-links { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: white; padding: 24px; gap: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
+      nav { padding: 0 20px; }
+      .nav-links { display: none; flex-direction: column; align-items:stretch; position: absolute; top: 100%; left: 0; right: 0; background: var(--terra-deep); padding: 14px 18px calc(14px + env(safe-area-inset-bottom)); gap: 2px; box-shadow: var(--shadow); }
       .nav-links.open { display: flex; }
+      .nav-links a:not(.nav-cta), nav.scrolled .nav-links a:not(.nav-cta) { font-size:1rem; padding:15px 10px; color:#fff; opacity:1; border-bottom:1px solid rgba(255,255,255,0.16); }
+      .nav-links a:not(.nav-cta):last-of-type { border-bottom:none; }
+      .nav-links .nav-cta { justify-content:center; margin-top:12px; padding:14px 20px; font-size:0.95rem; }
       .nav-hamburger { display: flex; }
       .filter-section, #restaurants, #planner, #cta { padding: 24px; }
       .food-grid { grid-template-columns: 1fr; }
@@ -160,7 +167,10 @@
 <body>
 
 <nav id="navbar">
-  <a href="index.html" class="nav-logo">Sen's Homestay</a>
+  <a href="index.html" class="nav-logo">
+    <svg class="leaf" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 20s-7-3-7-9a4 4 0 017-2.6A4 4 0 0118 11c0 6-7 9-7 9z"/><path d="M11 11v9" stroke-width="1.5"/></svg>
+    Sen's Homestay
+  </a>
   <div class="nav-links" id="navLinks">
     <a href="rooms.html">Rooms</a>
     <a href="motorbike.html">Motorbike</a>
@@ -170,7 +180,10 @@
     <a href="itinerary.html">Plan Trip</a>
     <a href="bus-ticket.html">Bus Tickets</a>
 
-    <a href="https://wa.me/84822946888" class="nav-cta" target="_blank">💬 WhatsApp</a>
+    <a href="https://wa.me/84822946888" class="nav-cta" target="_blank">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
+      WhatsApp
+    </a>
   </div>
   <div class="nav-hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
 </nav>

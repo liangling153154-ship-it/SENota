@@ -1,14 +1,18 @@
 /* itinerary-v2.css — mobile-first practical planner */
 :root{
-  --gd:#2D6A4F; --gm:#52B788; --gl:#D8F3DC;
-  --or:#E76F51; --od:#C25B3F; --cr:#F8F4E9; --crd:#F0EBDB;
-  --brown:#5C3D2E; --tx:#1a1a1a; --tm:#666; --tl:#9a9a9a;
-  --line:rgba(45,106,79,0.13);
-  --sh:0 4px 24px rgba(0,0,0,0.09);
-  --sh-lg:0 12px 40px rgba(0,0,0,0.18);
-  --r:14px; --r-sm:10px;
-  --serif:'Cormorant Garamond', serif;
-  --sans:'DM Sans', sans-serif;
+  --paper:#FBF7EF; --paper-2:#F3EBDA; --surface:#FFFFFF;
+  --ink:#2A2118; --ink-soft:#6B5D4C;
+  --terra:#B65A36; --terra-deep:#9A4A2E; --terra-soft:#C97048;
+  --forest:#3C5A40; --forest-deep:#2C4530; --amber:#C8841F;
+  --gd:var(--forest); --gm:var(--terra-soft); --gl:var(--paper-2);
+  --or:var(--terra-deep); --od:var(--terra); --cr:var(--paper); --crd:var(--paper-2);
+  --brown:var(--ink); --tx:var(--ink); --tm:var(--ink-soft); --tl:#9a8f7e;
+  --line:rgba(42,33,24,0.10);
+  --sh:0 4px 14px rgba(42,33,24,0.07),0 14px 34px rgba(42,33,24,0.09);
+  --sh-lg:0 8px 22px rgba(42,33,24,0.10),0 26px 54px rgba(42,33,24,0.14);
+  --r:16px; --r-sm:10px; --ease:cubic-bezier(0.16,1,0.3,1);
+  --serif:'Bricolage Grotesque', sans-serif;
+  --sans:'Hanken Grotesk', system-ui, sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
