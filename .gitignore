@@ -13,3 +13,6 @@ impeccable-main/
 .agents/
 .claude/
 .codex/
+
+# Source video master (the compressed images/hero/hero.mp4 is what ships)
+video-hero/
