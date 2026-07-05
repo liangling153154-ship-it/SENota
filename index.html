@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <title>Sen's Homestay · Cao Bang, Vietnam</title>
   <meta name="description" content="A highland home in Cao Bang, northern Vietnam. Rooms, motorbike rental, guided tours, local food and bus tickets, all arranged by Sen." />
+  <!-- Bilingual: this is the English version; the Vietnamese version lives in /vi/. -->
+  <link rel="alternate" hreflang="en" href="index.html" />
+  <link rel="alternate" hreflang="vi" href="vi/index.html" />
+  <link rel="alternate" hreflang="x-default" href="index.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -137,6 +141,56 @@
     .nav-hamburger span { width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: background 0.3s var(--ease); }
     nav.scrolled .nav-hamburger span { background: var(--ink); }
 
+    /* ============ LANGUAGE SWITCH (EN | VI) ============ */
+    /* A small pill next to the WhatsApp CTA. On the hero it reads light; on scroll it darkens. */
+    .lang-switch { display: inline-flex; align-items: center; border-radius: var(--r-pill); overflow: hidden;
+                   box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.55); }
+    nav.scrolled .lang-switch { box-shadow: inset 0 0 0 1.5px var(--line-strong); }
+    .lang-switch a { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.02em; padding: 6px 12px;
+                     color: #fff; opacity: 0.9; transition: background 0.2s, color 0.2s, opacity 0.2s; line-height: 1; }
+    nav.scrolled .lang-switch a { color: var(--ink-soft); }
+    .lang-switch a.active { background: var(--terra-deep); color: #fff !important; opacity: 1; }
+    .lang-switch a:not(.active):hover { opacity: 1; }
+    .lang-switch a::after { display: none !important; }   /* kill the nav underline effect */
+
+    /* ============ LANGUAGE GATE (first-visit picker) ============ */
+    .lang-gate { position: fixed; inset: 0; z-index: var(--z-overlay); display: none;
+                 align-items: center; justify-content: center; padding: 24px;
+                 background: rgba(24,20,14,0.55); backdrop-filter: blur(6px); }
+    .lang-gate.show { display: flex; animation: gate-fade 0.4s var(--ease); }
+    @keyframes gate-fade { from { opacity: 0; } to { opacity: 1; } }
+    .lang-gate-card { background: var(--paper); color: var(--ink); border-radius: var(--r);
+                      box-shadow: var(--shadow-lg); width: 100%; max-width: 420px; padding: 34px 30px;
+                      text-align: center; position: relative; }
+    .lang-gate-card .leaf { width: 34px; height: 34px; color: var(--terra-deep); margin: 0 auto 14px; }
+    .lang-gate-card h2 { font-size: 1.5rem; margin-bottom: 4px; }
+    .lang-gate-card .lg-sub { font-size: 0.92rem; color: var(--ink-soft); margin-bottom: 22px; }
+    .lang-gate-opts { display: flex; flex-direction: column; gap: 12px; }
+    .lang-gate-opts a { display: flex; align-items: center; gap: 14px; text-align: left;
+                        padding: 14px 18px; border-radius: var(--r-sm); min-height: 44px;
+                        background: var(--surface); box-shadow: inset 0 0 0 1.5px var(--line-strong);
+                        transition: transform 0.3s var(--ease), box-shadow 0.25s, background 0.25s; }
+    .lang-gate-opts a:hover { transform: translateY(-2px); box-shadow: inset 0 0 0 1.5px var(--terra-deep); background: rgba(182,90,54,0.06); }
+    .lang-gate-opts .flag { font-size: 1.5rem; line-height: 1; flex-shrink: 0; }
+    .lang-gate-opts .lg-label { font-weight: 700; font-size: 1rem; color: var(--ink); }
+    .lang-gate-opts .lg-native { font-size: 0.8rem; color: var(--ink-soft); }
+    .lang-gate-close { position: absolute; top: 12px; right: 12px; width: 36px; height: 36px;
+                       display: flex; align-items: center; justify-content: center; cursor: pointer;
+                       color: var(--ink-soft); border-radius: 50%; background: transparent; border: none; }
+    .lang-gate-close:hover { background: rgba(42,33,24,0.06); color: var(--ink); }
+    .lang-gate-close .icon { width: 18px; height: 18px; }
+
+    /* Soft suggestion bar: shown to a returning VI-preferring visitor who lands on the EN page. */
+    .lang-hint { position: fixed; left: 50%; transform: translateX(-50%) translateY(20px);
+                 bottom: calc(20px + env(safe-area-inset-bottom)); z-index: var(--z-float);
+                 display: none; align-items: center; gap: 12px; max-width: calc(100vw - 32px);
+                 background: var(--ink); color: #fff; padding: 12px 14px 12px 18px; border-radius: var(--r-pill);
+                 box-shadow: var(--shadow-lg); font-size: 0.88rem; opacity: 0; transition: opacity 0.4s var(--ease), transform 0.4s var(--ease); }
+    .lang-hint.show { display: flex; opacity: 1; transform: translateX(-50%) translateY(0); }
+    .lang-hint a { background: #fff; color: var(--ink); font-weight: 700; padding: 8px 14px; border-radius: var(--r-pill); min-height: 36px; display: inline-flex; align-items: center; white-space: nowrap; }
+    .lang-hint button { background: transparent; border: none; color: rgba(255,255,255,0.7); cursor: pointer; padding: 6px; display: inline-flex; }
+    .lang-hint button .icon { width: 16px; height: 16px; }
+
     /* ============ HERO ============ */
     #hero { position: relative; min-height: 100vh; min-height: 100dvh; display: flex; align-items: flex-end; overflow: hidden; padding: 120px 0 64px; }
     .hero-bg { position: absolute; inset: 0; z-index: 0; background: var(--forest-deep); }
@@ -147,23 +201,30 @@
       transform: scale(1.06); opacity: 0; transition: transform 10s var(--ease), opacity 1.2s ease;
     }
     #hero.loaded .hero-bg .hero-photo { transform: scale(1); opacity: 1; }
-    /* video sits over the poster, fades in once it can play */
-    .hero-bg .hero-video {
+    /* video sits over the poster, fades in once it can play.
+       Two clips: .hero-video is the vertical 9:16 clip for MOBILE; .hero-video-desktop is the
+       landscape 16:9 clip for DESKTOP. Each is shown only on its breakpoint (see media queries). */
+    .hero-bg .hero-video, .hero-bg .hero-video-desktop {
       position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
       object-position: center 42%;   /* keep road + mountains in frame */
       opacity: 0; transition: opacity 1s ease; will-change: opacity;
     }
+    .hero-bg .hero-video-desktop { display: none; }   /* off until desktop opts in */
     .hero-bg .hero-photo { background-position: center 42%; }   /* poster matches video framing */
-    .hero-bg .hero-video.ready { opacity: 1; }
-    /* reduced motion: never autoplay-feel; hide video, keep the still poster */
+    .hero-bg .hero-video.ready, .hero-bg .hero-video-desktop.ready { opacity: 1; }
+    /* reduced motion: never autoplay-feel; hide both videos, keep the still poster */
     @media (prefers-reduced-motion: reduce) {
-      .hero-bg .hero-video { display: none; }
+      .hero-bg .hero-video, .hero-bg .hero-video-desktop { display: none !important; }
     }
-    /* Desktop: a vertical 9:16 video over a wide viewport over-crops. Shrink the hero to a
-       cinematic band and bias the framing up so the road/mountains read, not a tight zoom. */
+    /* Desktop (>=901px): the vertical 9:16 clip over-crops on a wide viewport, so hide it and play
+       the landscape .hero-video-desktop instead; the poster is the landscape still. */
     @media (min-width: 901px) {
-      #hero { min-height: 0; height: 80vh; max-height: 760px; }
-      .hero-bg .hero-video, .hero-bg .hero-photo { object-position: center 38%; background-position: center 38%; }
+      .hero-bg .hero-video { display: none; }
+      .hero-bg .hero-video-desktop { display: block; }
+      .hero-bg .hero-photo {
+        background-image: url('images/hero/hero-desktop.jpg');
+        object-position: center 50%; background-position: center 50%;
+      }
     }
     /* Top: gentle darkening for nav + headline legibility. Bottom: a SLIM fade to paper only in
        the last ~14% so the photo stays clear and vivid (no milky "fog" over the whole lower half). */
@@ -286,9 +347,12 @@
     .bus-head h3 { color: #fff; font-size: 1.24rem; }
     .bus-head p { font-size: 0.82rem; color: var(--on-dark); opacity: 0.85; margin-top: 3px; }
     .bus-grid { padding: 24px 28px; display: grid; grid-template-columns: repeat(auto-fill, minmax(214px, 1fr)); gap: 12px; }
-    .dest { background: var(--paper-2); border-radius: var(--r-sm); padding: 16px 18px; }
-    .dest-top { display: flex; align-items: center; gap: 9px; margin-bottom: 9px; }
-    .dest-top .icon { width: 18px; height: 18px; color: var(--terra-deep); }
+    /* destination = image on the LEFT, all text on the RIGHT */
+    .dest { background: var(--paper-2); border-radius: var(--r-sm); overflow: hidden;
+            display: flex; align-items: stretch; }
+    .dest-photo { width: 84px; flex: 0 0 84px; object-fit: cover; align-self: stretch; }
+    .dest-info { flex: 1; min-width: 0; padding: 13px 15px; }
+    .dest-head { margin-bottom: 8px; }
     .dest-name { font-size: 0.96rem; font-weight: 700; color: var(--ink); font-family: 'Bricolage Grotesque', sans-serif; }
     .dest-time { font-size: 0.76rem; color: var(--ink-soft); }
     .dest-body { font-size: 0.85rem; color: var(--ink-soft); line-height: 1.85; }
@@ -447,6 +511,10 @@
       .nav-links a:not(.nav-cta):last-of-type { border-bottom: none; }
       .nav-links a:not(.nav-cta)::after { display: none; }
       .nav-links .nav-cta { justify-content: center; margin-top: 12px; padding: 14px 20px; font-size: 0.95rem; }
+      /* language switch inside the terracotta mobile panel: white outline, centered */
+      .nav-links .lang-switch { align-self: center; margin-top: 14px; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.55); }
+      .nav-links .lang-switch a, nav.scrolled .nav-links .lang-switch a { color: #fff; padding: 10px 18px; border-bottom: none; }
+      .nav-links .lang-switch a.active { background: rgba(255,255,255,0.22); }
       .nav-hamburger { display: flex; }
       .section-pad { padding: 64px 0; }
       .hl-grid { grid-template-columns: 1fr; gap: 28px; }
@@ -512,6 +580,35 @@
 </head>
 <body>
 
+<!-- ============ LANGUAGE GATE (first visit only) ============ -->
+<div class="lang-gate" id="langGate" role="dialog" aria-modal="true" aria-labelledby="langGateTitle">
+  <div class="lang-gate-card">
+    <button class="lang-gate-close" onclick="dismissGate()" aria-label="Close">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <svg class="leaf icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 20s-7-3-7-9a4 4 0 017-2.6A4 4 0 0118 11c0 6-7 9-7 9z"/><path d="M11 11v9" stroke-width="1.5"/></svg>
+    <h2 id="langGateTitle">Welcome to Sen's</h2>
+    <p class="lg-sub">Choose your language · Chọn ngôn ngữ</p>
+    <div class="lang-gate-opts">
+      <a href="index.html" onclick="setLang('en')">
+        <span class="flag">🇬🇧</span>
+        <span><span class="lg-label">English</span><br><span class="lg-native">For international travellers</span></span>
+      </a>
+      <a href="vi/index.html" onclick="setLang('vi')">
+        <span class="flag">🇻🇳</span>
+        <span><span class="lg-label">Tiếng Việt</span><br><span class="lg-native">Dành cho khách Việt Nam</span></span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Soft hint for a returning VI-preferring visitor who lands here on the EN page -->
+<div class="lang-hint" id="langHint" role="status">
+  <span>Bạn muốn xem bản tiếng Việt?</span>
+  <a href="vi/index.html" onclick="setLang('vi')">Xem tiếng Việt</a>
+  <button onclick="dismissHint()" aria-label="Đóng"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+</div>
+
 <!-- ============ NAV ============ -->
 <nav id="navbar">
   <a href="index.html" class="nav-logo">
@@ -526,6 +623,10 @@
     <a href="services.html">Services</a>
     <a href="itinerary.html">Plan Trip</a>
     <a href="bus-ticket.html">Bus Tickets</a>
+    <span class="lang-switch">
+      <a href="index.html" class="active" aria-current="true">EN</a>
+      <a href="vi/index.html" onclick="setLang('vi')">VI</a>
+    </span>
     <a href="https://wa.me/84822946888?text=Hi%20Sen!%20I%27d%20like%20to%20book%20a%20room." class="nav-cta" target="_blank">
       <svg class="icon icon-fill" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
       WhatsApp
@@ -538,10 +639,10 @@
 <section id="hero">
   <div class="hero-bg">
     <div class="hero-photo"></div>
-    <video class="hero-video" id="heroVideo" autoplay muted loop playsinline preload="auto"
-           poster="images/hero/hero-main.jpg" aria-hidden="true">
-      <source src="images/hero/hero.mp4" type="video/mp4">
-    </video>
+    <video class="hero-video" id="heroVideo" muted loop playsinline preload="none"
+           poster="images/hero/hero-main.jpg" data-src="images/hero/hero.mp4" aria-hidden="true"></video>
+    <video class="hero-video-desktop" id="heroVideoDesktop" muted loop playsinline preload="none"
+           poster="images/hero/hero-desktop.jpg" data-src="images/hero/hero-desktop.mp4" aria-hidden="true"></video>
   </div>
   <div class="wrap">
     <div class="hero-content">
@@ -640,42 +741,15 @@
         <a href="bus-ticket.html" class="btn btn-amber" style="padding:11px 20px;font-size:0.84rem;">Book a seat <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
       <div id="busTicketGrid" class="bus-grid">
-        <div class="dest">
-          <div class="dest-top"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="2.5"/></svg><div><div class="dest-name">Ha Noi</div><div class="dest-time">~6 hrs</div></div></div>
-          <div class="dest-body"><span class="tag-bus tag-limo">Limousine</span><br>7am · 9am · 10am · 11am · 12pm · 2pm · 3pm · 4pm<br><span class="tag-bus tag-sleep">Sleeper bus</span><br>9am · 12pm · 8:30pm</div>
-        </div>
-        <div class="dest">
-          <div class="dest-top"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="2.5"/></svg><div><div class="dest-name">Ha Giang</div><div class="dest-time">~8 hrs</div></div></div>
-          <div class="dest-body"><span class="tag-bus tag-limo">Limousine</span><br>8am · 4pm</div>
-        </div>
-        <div class="dest">
-          <div class="dest-top"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="2.5"/></svg><div><div class="dest-name">Bac Ninh</div><div class="dest-time">~6 hrs · no transit</div></div></div>
-          <div class="dest-body"><span class="tag-bus tag-sleep">Sleeper bus</span><br>8:30pm</div>
-        </div>
-        <div class="dest">
-          <div class="dest-top"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="2.5"/></svg><div><div class="dest-name">Ninh Binh</div><div class="dest-time">~9 hrs · no transit</div></div></div>
-          <div class="dest-body"><span class="tag-bus tag-sleep">Sleeper bus</span><br>7pm</div>
-        </div>
-        <div class="dest">
-          <div class="dest-top"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="2.5"/></svg><div><div class="dest-name">Cat Ba Island</div><div class="dest-time">~10 hrs · no transit</div></div></div>
-          <div class="dest-body"><span class="tag-bus tag-sleep">Sleeper bus</span><br>8:30pm</div>
-        </div>
-        <div class="dest">
-          <div class="dest-top"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="2.5"/></svg><div><div class="dest-name">Ha Long</div><div class="dest-time">~9 hrs · no transit</div></div></div>
-          <div class="dest-body"><span class="tag-bus tag-sleep">Sleeper bus</span><br>8:30pm</div>
-        </div>
-        <div class="dest">
-          <div class="dest-top"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="2.5"/></svg><div><div class="dest-name">Quang Ninh</div><div class="dest-time">no transit</div></div></div>
-          <div class="dest-body"><span class="tag-bus tag-sleep">Sleeper bus</span><br>8am · 8pm</div>
-        </div>
-        <div class="dest">
-          <div class="dest-top"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="2.5"/></svg><div><div class="dest-name">Hai Phong</div><div class="dest-time">~9 hrs · no transit</div></div></div>
-          <div class="dest-body"><span class="tag-bus tag-sleep">Sleeper bus</span><br>8:30pm</div>
-        </div>
-        <div class="dest">
-          <div class="dest-top"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0116 0z"/><circle cx="12" cy="10" r="2.5"/></svg><div><div class="dest-name">Ba Be Lake</div><div class="dest-time">~3 hrs</div></div></div>
-          <div class="dest-body"><span class="tag-bus tag-limo">Limousine</span><br>12pm</div>
-        </div>
+        <div class="dest"><img class="dest-photo" loading="lazy" src="images/bus/ha-noi.jpg" alt="Ha Noi" onerror="this.style.display=&quot;none&quot;"><div class="dest-info"><div class="dest-head"><div class="dest-name">Ha Noi</div><div class="dest-time">~6 hrs</div></div><div class="dest-body"><span class="tag-bus tag-limo">Limousine</span><br>7am · 9am · 10am · 11am · 12pm · 2pm · 3pm · 4pm<br><span class="tag-bus tag-sleep">Sleeper bus</span><br>9am · 12pm · 8:30pm</div></div></div>
+        <div class="dest"><img class="dest-photo" loading="lazy" src="images/bus/ha-giang.jpg" alt="Ha Giang" onerror="this.style.display=&quot;none&quot;"><div class="dest-info"><div class="dest-head"><div class="dest-name">Ha Giang</div><div class="dest-time">~8 hrs</div></div><div class="dest-body"><span class="tag-bus tag-limo">Limousine</span><br>8am · 4pm</div></div></div>
+        <div class="dest"><img class="dest-photo" loading="lazy" src="images/bus/bac-ninh.jpg" alt="Bac Ninh" onerror="this.style.display=&quot;none&quot;"><div class="dest-info"><div class="dest-head"><div class="dest-name">Bac Ninh</div><div class="dest-time">~6 hrs · no transit</div></div><div class="dest-body"><span class="tag-bus tag-sleep">Sleeper bus</span><br>8:30pm</div></div></div>
+        <div class="dest"><img class="dest-photo" loading="lazy" src="images/bus/ninh-binh.jpg" alt="Ninh Binh" onerror="this.style.display=&quot;none&quot;"><div class="dest-info"><div class="dest-head"><div class="dest-name">Ninh Binh</div><div class="dest-time">~9 hrs · no transit</div></div><div class="dest-body"><span class="tag-bus tag-sleep">Sleeper bus</span><br>7pm</div></div></div>
+        <div class="dest"><img class="dest-photo" loading="lazy" src="images/bus/cat-ba.jpg" alt="Cat Ba Island" onerror="this.style.display=&quot;none&quot;"><div class="dest-info"><div class="dest-head"><div class="dest-name">Cat Ba Island</div><div class="dest-time">~10 hrs · no transit</div></div><div class="dest-body"><span class="tag-bus tag-sleep">Sleeper bus</span><br>8:30pm</div></div></div>
+        <div class="dest"><img class="dest-photo" loading="lazy" src="images/bus/ha-long.jpg" alt="Ha Long" onerror="this.style.display=&quot;none&quot;"><div class="dest-info"><div class="dest-head"><div class="dest-name">Ha Long</div><div class="dest-time">~9 hrs · no transit</div></div><div class="dest-body"><span class="tag-bus tag-sleep">Sleeper bus</span><br>8:30pm</div></div></div>
+        <div class="dest"><img class="dest-photo" loading="lazy" src="images/bus/quang-ninh.jpg" alt="Quang Ninh" onerror="this.style.display=&quot;none&quot;"><div class="dest-info"><div class="dest-head"><div class="dest-name">Quang Ninh</div><div class="dest-time">no transit</div></div><div class="dest-body"><span class="tag-bus tag-sleep">Sleeper bus</span><br>8am · 8pm</div></div></div>
+        <div class="dest"><img class="dest-photo" loading="lazy" src="images/bus/hai-phong.jpg" alt="Hai Phong" onerror="this.style.display=&quot;none&quot;"><div class="dest-info"><div class="dest-head"><div class="dest-name">Hai Phong</div><div class="dest-time">~9 hrs · no transit</div></div><div class="dest-body"><span class="tag-bus tag-sleep">Sleeper bus</span><br>8:30pm</div></div></div>
+        <div class="dest"><img class="dest-photo" loading="lazy" src="images/bus/ba-be.jpg" alt="Ba Be Lake" onerror="this.style.display=&quot;none&quot;"><div class="dest-info"><div class="dest-head"><div class="dest-name">Ba Be Lake</div><div class="dest-time">~3 hrs</div></div><div class="dest-body"><span class="tag-bus tag-limo">Limousine</span><br>12pm</div></div></div>
       </div>
       <div class="bus-foot">
         <p>Pick-up at Sen's Homestay. Times may vary, Sen will confirm. No booking fee.</p>
@@ -763,15 +837,15 @@
       </article>
     </div>
 
-    <!-- ROUTE MAP -->
+    <!-- CAOBANG TRAVEL MAP (interactive map app) -->
     <div class="stack">
       <div class="panel reveal">
         <div class="mr-media" style="background:#161616;">
-          <img loading="lazy" src="images/map_hero.jpg" alt="A map view of the Cao Bang touring route" onerror="this.style.display='none'">
+          <img loading="lazy" src="images/travel-map-hero.jpg" alt="An interactive map of Cao Bang with local pins and routes" onerror="this.style.display='none'">
           <div class="mr-overlay">
-            <span class="mr-flag">Interactive · Plan your trip</span>
-            <h3>Cao Bang Route Map</h3>
-            <p>Build your own itinerary: pick destinations, plan by day, send to Sen for a quote.</p>
+            <span class="mr-flag">Interactive · Written by a local</span>
+            <h3>CaoBang Travel Map</h3>
+            <p>A genuinely useful map of Cao Bang, hand-marked by Sen: every waterfall, viewpoint, cafe and road that's actually worth it.</p>
           </div>
           <span class="mr-badge" style="background:rgba(20,15,10,0.72);border:1px solid rgba(244,233,216,0.22);color:var(--cream-bright);backdrop-filter:blur(4px);"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 4 6v14l5-2 6 2 5-2V4l-5 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg> Map</span>
         </div>
@@ -782,10 +856,28 @@
             <span class="pill"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 18l4-7 3 4 2-3 5 6z"/><circle cx="8" cy="7" r="1.5"/></svg> Nguom Ngao</span>
             <span class="pill"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 19l6-11 4 6 2-3 6 8z"/></svg> Ba Quang</span>
           </div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <a href="map.html" class="link-btn btn-line" style="padding:10px 18px;font-size:0.82rem;">View Map</a>
-            <a href="itinerary.html" class="link-btn btn-amber" style="padding:11px 20px;font-size:0.84rem;">Plan Your Trip <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+          <a href="map/index.html" class="link-btn btn-amber" style="padding:11px 20px;font-size:0.84rem;">Open the Map <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+      </div>
+
+      <!-- ITINERARY BUILDER -->
+      <div class="panel reveal">
+        <div class="mr-media" style="background:#1f2d1a;">
+          <img loading="lazy" src="images/itinerary-hero.jpg" alt="A day-by-day Cao Bang itinerary planned with Sen" onerror="this.style.display='none'">
+          <div class="mr-overlay">
+            <span class="mr-flag">Recommend &amp; build · Get a quote</span>
+            <h3>Plan Your Itinerary</h3>
+            <p>Start from Sen's recommended routes, then build your own day-by-day plan and send it over for a quick quote.</p>
           </div>
+          <span class="mr-badge" style="background:var(--amber);color:var(--char);"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> Itinerary</span>
+        </div>
+        <div class="mr-foot">
+          <div class="tags">
+            <span class="pill"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.7-5.1 4.6 1.4 6.8L12 17.8 5.9 20.4l1.4-6.8L2.2 9l6.9-.7L12 2z"/></svg> Recommended routes</span>
+            <span class="pill"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V5a2 2 0 012-2h10a2 2 0 012 2v16M9 21v-6h6v6"/></svg> Day by day</span>
+            <span class="pill"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg> Free quote</span>
+          </div>
+          <a href="itinerary.html" class="link-btn btn-amber" style="padding:11px 20px;font-size:0.84rem;">Build Itinerary <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
         </div>
       </div>
 
@@ -949,6 +1041,34 @@
 </a>
 
 <script>
+  /* ============ LANGUAGE GATE + SWITCH ============
+     Self-contained; copy verbatim into every page. Only LANG_HERE changes per page.
+     - senLang in localStorage remembers the visitor's choice ('en' | 'vi').
+     - First visit (no choice): show the picker.
+     - Returning VI-preferrer on an EN page: show a soft hint, never auto-redirect. */
+  const LANG_HERE = 'en';                 // <-- 'vi' on pages under /vi/
+  function setLang(l){ try { localStorage.setItem('senLang', l); } catch(e){} }
+  function dismissGate(){
+    document.getElementById('langGate').classList.remove('show');
+    setLang(LANG_HERE);                    // staying here counts as the choice; don't ask again
+  }
+  function dismissHint(){
+    document.getElementById('langHint').classList.remove('show');
+    try { sessionStorage.setItem('senHintDismissed','1'); } catch(e){}
+  }
+  (function(){
+    let saved = null; try { saved = localStorage.getItem('senLang'); } catch(e){}
+    if (!saved) {                          // first visit anywhere -> ask
+      document.getElementById('langGate').classList.add('show');
+    } else if (saved !== LANG_HERE) {      // prefers the other language but landed here
+      let dismissed = null; try { dismissed = sessionStorage.getItem('senHintDismissed'); } catch(e){}
+      if (!dismissed) document.getElementById('langHint').classList.add('show');
+    }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') document.getElementById('langGate').classList.remove('show');
+    });
+  })();
+
   window.addEventListener('scroll', () => {
     document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 24);
   });
@@ -974,18 +1094,22 @@
 
   window.addEventListener('load', () => document.getElementById('hero').classList.add('loaded'));
 
-  // Hero video: fade in once it can play; respect reduced-motion (keep the still poster).
+  // Hero video: pick ONE clip by viewport so the other file is never downloaded.
+  //   reduced-motion -> neither (still poster stays)
+  //   mobile (<901px) -> vertical 9:16 clip (#heroVideo)
+  //   desktop (>=901px) -> landscape 16:9 clip (#heroVideoDesktop)
   (function(){
-    const v = document.getElementById('heroVideo');
-    if (!v) return;
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reduce) { v.removeAttribute('autoplay'); try { v.pause(); } catch(e){} return; }
+    if (reduce) return;                           // no fetch, no play — poster stays
+    const isDesktop = window.matchMedia('(min-width: 901px)').matches;
+    const v = document.getElementById(isDesktop ? 'heroVideoDesktop' : 'heroVideo');
+    if (!v || !v.dataset.src) return;
+    v.src = v.dataset.src;                         // attach source only for the active clip
     const reveal = () => v.classList.add('ready');
-    if (v.readyState >= 3) reveal();
-    else v.addEventListener('canplay', reveal, { once: true });
-    // some mobile browsers need an explicit play() nudge
+    v.addEventListener('canplay', reveal, { once: true });
     const tryPlay = () => { const p = v.play(); if (p && p.catch) p.catch(()=>{}); };
     v.addEventListener('loadeddata', tryPlay, { once: true });
+    v.load();
   })();
   const io = new IntersectionObserver((entries) => {
     entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });

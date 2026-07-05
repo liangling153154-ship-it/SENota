@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <title>Tour Cao Bằng · Sen's Homestay</title>
+  <meta name="description" content="Tour Cao Bằng đi xe máy hoặc ô tô riêng. Sen là người bản địa dẫn đường, lo lịch trình, ăn ngủ và báo giá gọn lẹ." />
+  <link rel="alternate" hreflang="vi" href="tours.html" />
+  <link rel="alternate" hreflang="en" href="../tours.html" />
+  <link rel="alternate" hreflang="x-default" href="../tours.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Light highland design system */
+      --paper:#FBF7EF; --paper-2:#F3EBDA; --surface:#FFFFFF;
+      --ink:#2A2118; --ink-soft:#6B5D4C;
+      --terra:#B65A36; --terra-deep:#9A4A2E; --terra-soft:#C97048;
+      --forest:#3C5A40; --forest-deep:#2C4530; --amber:#C8841F;
+      --on-dark:#F6EFE2; --on-dark-soft:#D8CDB8;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --r-pill: 999px;
+      --green-dark:  var(--forest);
+      --green-mid:   var(--terra-soft);
+      --green-light: var(--paper-2);
+      --orange:      var(--terra-deep);
+      --orange-dark: var(--terra);
+      --cream:       var(--paper);
+      --brown:       var(--ink);
+      --white:       #FFFFFF;
+      --text:        var(--ink);
+      --text-muted:  var(--ink-soft);
+      --radius:      16px;
+      --shadow:      0 4px 14px rgba(42,33,24,0.07), 0 14px 34px rgba(42,33,24,0.09);
+      --line:        rgba(42,33,24,0.10);
+      --gd:var(--forest); --gm:var(--terra-soft); --gl:var(--paper-2);
+      --or:var(--terra-deep); --cr:var(--paper); --tx:var(--ink); --tm:var(--ink-soft);
+      --sh:var(--shadow); --r:16px;
+      --z-base: 1; --z-raised: 10; --z-sticky: 100; --z-float: 200; --z-nav: 300; --z-overlay: 400;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: 'Hanken Grotesk', system-ui, sans-serif;
+      background: var(--paper); color: var(--ink); overflow-x: hidden; line-height: 1.6;
+      -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+    }
+    img { display: block; width: 100%; object-fit: cover; }
+    a { text-decoration: none; color: inherit; }
+    h1, h2, h3, h4 {
+      font-family: 'Bricolage Grotesque', 'Hanken Grotesk', sans-serif;
+      font-weight: 700; line-height: 1.08; letter-spacing: -0.02em;
+      color: var(--ink); text-wrap: balance;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; inset: 0 0 auto 0; z-index: var(--z-nav);
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px; padding: 0 34px;
+      background: rgba(251,247,239,0.9); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line); transition: box-shadow 0.4s var(--ease);
+    }
+    nav.scrolled { box-shadow: 0 6px 22px rgba(42,33,24,0.10); }
+    .nav-logo { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.34rem; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; display: flex; align-items: center; gap: 9px; }
+    .nav-logo .leaf { width: 25px; height: 25px; color: var(--terra-deep); stroke: currentColor; fill: none; stroke-width: 1.7; }
+    .nav-links { display: flex; gap: 26px; align-items: center; }
+    .nav-links a { font-size: 0.92rem; font-weight: 600; color: var(--ink-soft); transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--terra-deep); }
+    .nav-cta { display: inline-flex; align-items: center; gap: 7px; background: var(--terra-deep); color: #fff !important; padding: 9px 18px; border-radius: var(--r-pill); font-weight: 700; font-size: 0.86rem; transition: background 0.2s, transform 0.2s; }
+    .nav-cta:hover { background: var(--terra); transform: translateY(-2px); }
+    .nav-cta svg { width: 15px; height: 15px; fill: currentColor; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; }
+    .nav-hamburger span { width: 24px; height: 2px; background: var(--ink); border-radius: 2px; }
+
+    /* ============ LANGUAGE SWITCH (EN | VI) ============ */
+    .lang-switch { display: inline-flex; align-items: center; border-radius: var(--r-pill); overflow: hidden; box-shadow: inset 0 0 0 1.5px rgba(42,33,24,0.18); margin: 0 4px; }
+    .lang-switch a { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.02em; padding: 6px 12px; color: var(--ink-soft); opacity: 0.9; transition: background 0.2s, color 0.2s; line-height: 1; }
+    .lang-switch a.active { background: var(--terra-deep); color: #fff !important; opacity: 1; }
+    .lang-switch a:not(.active):hover { opacity: 1; }
+
+    /* ============ LANGUAGE GATE ============ */
+    .lang-gate { position: fixed; inset: 0; z-index: var(--z-overlay); display: none; align-items: center; justify-content: center; padding: 24px; background: rgba(24,20,14,0.55); backdrop-filter: blur(6px); }
+    .lang-gate.show { display: flex; animation: gate-fade 0.4s var(--ease); }
+    @keyframes gate-fade { from { opacity: 0; } to { opacity: 1; } }
+    .lang-gate-card { background: var(--paper); color: var(--ink); border-radius: var(--r); box-shadow: var(--shadow); width: 100%; max-width: 420px; padding: 34px 30px; text-align: center; position: relative; }
+    .lang-gate-card .leaf { width: 34px; height: 34px; color: var(--terra-deep); margin: 0 auto 14px; }
+    .lang-gate-card h2 { font-size: 1.5rem; margin-bottom: 4px; }
+    .lang-gate-card .lg-sub { font-size: 0.92rem; color: var(--ink-soft); margin-bottom: 22px; }
+    .lang-gate-opts { display: flex; flex-direction: column; gap: 12px; }
+    .lang-gate-opts a { display: flex; align-items: center; gap: 14px; text-align: left; padding: 14px 18px; border-radius: 10px; min-height: 44px; background: var(--surface); box-shadow: inset 0 0 0 1.5px rgba(42,33,24,0.18); transition: transform 0.3s var(--ease), box-shadow 0.25s, background 0.25s; }
+    .lang-gate-opts a:hover { transform: translateY(-2px); box-shadow: inset 0 0 0 1.5px var(--terra-deep); background: rgba(182,90,54,0.06); }
+    .lang-gate-opts .flag { font-size: 1.5rem; line-height: 1; flex-shrink: 0; }
+    .lang-gate-opts .lg-label { font-weight: 700; font-size: 1rem; color: var(--ink); }
+    .lang-gate-opts .lg-native { font-size: 0.8rem; color: var(--ink-soft); }
+    .lang-gate-close { position: absolute; top: 12px; right: 12px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink-soft); border-radius: 50%; background: transparent; border: none; }
+    .lang-gate-close:hover { background: rgba(42,33,24,0.06); color: var(--ink); }
+    .lang-gate-close svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.7; }
+
+    /* Soft hint for returning visitor */
+    .lang-hint { position: fixed; left: 50%; transform: translateX(-50%) translateY(20px); bottom: calc(20px + env(safe-area-inset-bottom)); z-index: var(--z-float); display: none; align-items: center; gap: 12px; max-width: calc(100vw - 32px); background: var(--ink); color: #fff; padding: 12px 14px 12px 18px; border-radius: 999px; box-shadow: var(--shadow); font-size: 0.88rem; opacity: 0; transition: opacity 0.4s var(--ease), transform 0.4s var(--ease); }
+    .lang-hint.show { display: flex; opacity: 1; transform: translateX(-50%) translateY(0); }
+    .lang-hint a { background: #fff; color: var(--ink); font-weight: 700; padding: 8px 14px; border-radius: 999px; min-height: 36px; display: inline-flex; align-items: center; white-space: nowrap; }
+    .lang-hint button { background: transparent; border: none; color: rgba(255,255,255,0.7); cursor: pointer; padding: 6px; display: inline-flex; }
+    .lang-hint button svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.7; }
+
+    /* HERO */
+    .hero { height: 88vh; min-height: 560px; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+    .hero-bg { position: absolute; inset: 0; background: var(--forest-deep); }
+    .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.55) 100%); }
+    .hero-content { position: relative; z-index: 2; padding: 0 24px; }
+    .hero-label { font-size: 0.72rem; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 16px; display: block; }
+    .hero h1 { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(3rem, 7vw, 5.5rem); color: #fff; line-height: 1.05; margin-bottom: 20px; font-weight: 800; }
+    .hero h1 em { color: #F2C28E; font-style: italic; }
+    .hero-sub { color: rgba(255,255,255,0.75); font-size: 1.05rem; max-width: 520px; margin: 0 auto 36px; line-height: 1.7; }
+    .hero-scroll { color: rgba(255,255,255,0.38); font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; animation: bounce 2s infinite; display: block; }
+    @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(7px)} }
+
+    /* STEP 1 */
+    #step1 { padding: 80px 48px 60px; }
+    .step-header { text-align: center; margin-bottom: 44px; }
+    .step-pill { display: inline-flex; align-items: center; gap: 8px; background: var(--green-dark); color: #fff; font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; padding: 7px 18px; border-radius: 50px; margin-bottom: 14px; font-weight: 700; }
+    .step-header h2 { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); color: var(--green-dark); margin-bottom: 8px; }
+    .step-header p { color: var(--text-muted); font-size: 0.92rem; max-width: 520px; margin: 0 auto; line-height: 1.65; }
+    .vehicle-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 1100px; margin: 0 auto; }
+    .vehicle-btn { background: #fff; border: 2px solid rgba(45,106,79,0.15); border-radius: var(--radius); padding: 28px 20px; text-align: center; cursor: pointer; transition: all 0.25s; }
+    .vehicle-btn:hover { border-color: var(--green-dark); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(45,106,79,0.15); }
+    .vehicle-btn.active { border-color: var(--green-dark); background: var(--green-dark); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(45,106,79,0.25); }
+    .vehicle-btn.active .vb-name, .vehicle-btn.active .vb-desc { color: #fff; }
+    .vehicle-btn.active .vb-tag { background: rgba(255,255,255,0.18); color: #fff; }
+    .vehicle-btn.budget { border-style: dashed; border-color: rgba(45,106,79,0.2); background: var(--cream); }
+    .vehicle-btn.budget.active { background: var(--brown); border-color: var(--brown); border-style: solid; }
+    .vb-icon { font-size: 2.2rem; margin-bottom: 10px; display: block; }
+    .vb-name { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--green-dark); margin-bottom: 6px; display: block; }
+    .vb-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.55; display: block; }
+    .vb-tag { display: inline-block; margin-top: 10px; font-size: 0.68rem; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 12px; border-radius: 50px; background: var(--green-light); color: var(--green-dark); font-weight: 600; }
+    .vb-tag.orange { background: rgba(182,90,54,0.1); color: var(--terra); }
+    .vb-tag.muted { background: rgba(42,33,24,0.08); color: var(--brown); }
+    .vehicle-hint { text-align: center; margin-top: 22px; font-size: 0.82rem; color: var(--text-muted); }
+    .vehicle-hint a { color: var(--green-dark); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+
+    /* STEP 2 */
+    #step2 { padding: 0 48px 80px; opacity: 0; transform: translateY(32px); transition: opacity 0.5s ease, transform 0.5s ease; pointer-events: none; }
+    #step2.visible { opacity: 1; transform: none; pointer-events: all; }
+    .step2-header { text-align: center; padding: 56px 0 44px; }
+    .vehicle-confirm { display: inline-flex; align-items: center; gap: 8px; background: var(--green-dark); color: #fff; padding: 9px 22px; border-radius: 50px; font-size: 0.82rem; font-weight: 600; margin-bottom: 14px; }
+    .step2-header h2 { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(1.8rem, 3vw, 2.4rem); color: var(--green-dark); }
+
+    /* TOURS GRID */
+    .tours-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; max-width: 1080px; margin: 0 auto; }
+    .tour-card { background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; transition: transform 0.25s, box-shadow 0.25s; }
+    .tour-card:hover { transform: translateY(-5px); box-shadow: 0 20px 52px rgba(0,0,0,0.12); }
+    .tour-card.span2 { grid-column: span 2; display: grid; grid-template-columns: 5fr 6fr; }
+
+    /* CARD HERO */
+    .card-hero { position: relative; overflow: hidden; height: 260px; background: #1e3a2a; flex-shrink: 0; }
+    .tour-card.span2 .card-hero { height: 100%; min-height: 320px; }
+    .card-hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .tour-card:hover .card-hero-img { transform: scale(1.04); }
+    .card-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.08) 55%, transparent 100%); }
+    .card-hero-top { position: absolute; top: 14px; left: 14px; display: flex; flex-direction: column; gap: 6px; z-index: 2; }
+    .card-hero-bottom { position: absolute; bottom: 16px; left: 18px; right: 18px; z-index: 2; }
+    .card-duration-days { font-family: 'Hanken Grotesk', sans-serif; font-size: 2.8rem; color: #fff; font-weight: 800; line-height: 1; letter-spacing: -1px; }
+    .card-duration-label { font-size: 0.72rem; color: rgba(255,255,255,0.65); letter-spacing: 2px; text-transform: uppercase; margin-top: 2px; }
+    .cbadge { font-size: 0.68rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 5px 12px; border-radius: 50px; display: inline-block; }
+    .cbadge-pop { background: var(--orange); color: #fff; }
+    .cbadge-best { background: #FFD166; color: var(--brown); }
+    .cbadge-loop { background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.35); backdrop-filter: blur(4px); }
+
+    /* CARD BODY */
+    .card-body { padding: 22px 22px 18px; flex: 1; display: flex; flex-direction: column; }
+    .card-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.3rem; color: var(--green-dark); margin-bottom: 3px; }
+    .card-subtitle { font-size: 0.78rem; color: var(--text-muted); font-style: italic; margin-bottom: 16px; }
+    .day-buttons { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    .day-btn { background: var(--cream); border: 1.5px solid rgba(45,106,79,0.2); color: var(--green-dark); font-family: 'Hanken Grotesk', sans-serif; font-size: 0.75rem; font-weight: 600; padding: 6px 14px; border-radius: 50px; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 5px; }
+    .day-btn:hover { background: var(--green-light); border-color: var(--green-dark); }
+    .day-btn .day-km { color: var(--text-muted); font-size: 0.68rem; font-weight: 500; }
+    .card-pricing { background: var(--cream); border-radius: 10px; padding: 13px 14px; margin-bottom: 14px; }
+    .pricing-lbl { font-size: 0.67rem; text-transform: uppercase; letter-spacing: 2px; color: var(--green-mid); font-weight: 600; margin-bottom: 8px; }
+    .price-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.83rem; margin-bottom: 4px; }
+    .price-row:last-child { margin-bottom: 0; }
+    .price-group { color: var(--text-muted); }
+    .price-val { font-weight: 700; color: var(--green-dark); }
+    .price-usd { font-size: 0.7rem; color: var(--text-muted); font-weight: 400; margin-left: 4px; }
+    .driver-note { background: rgba(42,33,24,0.06); border: 1px solid rgba(42,33,24,0.15); border-radius: 8px; padding: 9px 13px; font-size: 0.76rem; color: var(--brown); margin-bottom: 14px; line-height: 1.5; }
+    .self-drive-note { background: rgba(82,183,136,0.08); border: 1px solid rgba(82,183,136,0.25); border-radius: 8px; padding: 9px 13px; font-size: 0.76rem; color: var(--green-dark); margin-bottom: 14px; line-height: 1.5; }
+    .card-actions { display: flex; gap: 10px; margin-top: auto; }
+    .btn-book { flex: 1; background: var(--orange); color: #fff; font-family: 'Hanken Grotesk', sans-serif; font-size: 0.82rem; font-weight: 700; padding: 11px; border-radius: 50px; border: none; cursor: pointer; transition: background 0.2s, transform 0.2s; text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .btn-book:hover { background: var(--orange-dark); transform: translateY(-1px); }
+
+    /* LOLO EXPERIENCES */
+    .lolo-wrap { max-width: 1080px; margin: 24px auto 0; }
+    .lolo-card { background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); display: grid; grid-template-columns: 1fr 2fr; border: 2px dashed rgba(82,183,136,0.3); }
+    .lolo-visual { background: linear-gradient(135deg, var(--forest-deep), #3d8b6b); display: flex; align-items: center; justify-content: center; padding: 40px; min-height: 200px; }
+    .lolo-visual-inner { text-align: center; color: #fff; }
+    .lolo-visual-inner h3 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.5rem; margin-bottom: 5px; }
+    .lolo-visual-inner p { font-size: 0.8rem; color: rgba(255,255,255,0.6); }
+    .lolo-body { padding: 28px; display: flex; flex-direction: column; justify-content: center; }
+    .lolo-body h3 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.3rem; color: var(--green-dark); margin: 10px 0 7px; }
+    .lolo-body > p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 14px; }
+    .lolo-acts { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 16px; }
+    .lolo-act { background: var(--green-light); color: var(--green-dark); font-size: 0.73rem; padding: 5px 11px; border-radius: 50px; font-weight: 500; }
+    .lolo-prices { margin-bottom: 16px; }
+    .btn-lolo { display: inline-flex; align-items: center; gap: 8px; background: var(--green-dark); color: #fff; padding: 11px 22px; border-radius: 50px; font-size: 0.83rem; font-weight: 700; transition: background 0.2s; }
+    .btn-lolo:hover { background: var(--forest-deep); }
+
+    /* MODAL */
+    .modal-overlay { position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.75); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 24px; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal { background: #fff; border-radius: 20px; max-width: 720px; width: 100%; max-height: 88vh; overflow-y: auto; transform: scale(0.95) translateY(20px); transition: transform 0.3s; }
+    .modal-overlay.open .modal { transform: scale(1) translateY(0); }
+    .modal-header { padding: 22px 24px 0; display: flex; justify-content: space-between; align-items: flex-start; }
+    .modal-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.4rem; color: var(--green-dark); }
+    .modal-sub { font-size: 0.8rem; color: var(--text-muted); margin-top: 3px; }
+    .modal-close { background: var(--cream); border: none; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.2s; }
+    .modal-close:hover { background: #e0ddd3; }
+    .modal-body { padding: 20px 24px 24px; }
+    .modal-day-tabs { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
+    .modal-tab { background: var(--cream); border: 1.5px solid rgba(45,106,79,0.2); color: var(--green-dark); font-size: 0.78rem; font-weight: 600; padding: 7px 16px; border-radius: 50px; cursor: pointer; transition: all 0.2s; font-family: 'Hanken Grotesk', sans-serif; }
+    .modal-tab.active { background: var(--green-dark); color: #fff; border-color: var(--green-dark); }
+    .modal-day-meta { background: var(--cream); border-radius: 10px; padding: 12px 14px; margin-bottom: 16px; font-size: 0.82rem; color: var(--text-muted); display: flex; gap: 16px; flex-wrap: wrap; }
+    .modal-day-meta span { display: flex; align-items: center; gap: 5px; font-weight: 500; }
+    .modal-places { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .modal-place { border-radius: 12px; overflow: hidden; background: var(--green-light); }
+    .modal-place-img { height: 180px; width: 100%; object-fit: cover; }
+    .modal-place-ph { height: 180px; display: flex; align-items: center; justify-content: center; font-size: 2rem; background: var(--green-light); }
+    .modal-place-info { padding: 10px 12px; }
+    .modal-place-name { font-weight: 700; font-size: 0.88rem; color: var(--green-dark); margin-bottom: 3px; }
+    .modal-place-desc { font-size: 0.76rem; color: var(--text-muted); line-height: 1.5; }
+
+    /* SERVICES / INCLUDED */
+    #included { background: var(--green-dark); padding: 72px 48px; }
+    .inc-inner { max-width: 960px; margin: 0 auto; }
+    .section-label { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 10px; display: block; font-weight: 700; }
+    .section-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(1.8rem, 3vw, 2.4rem); color: #fff; margin-bottom: 36px; }
+    .inc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .inc-col h4 { font-size: 0.7rem; letter-spacing: 2.5px; text-transform: uppercase; font-weight: 700; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .inc-col.yes h4 { color: var(--green-mid); }
+    .inc-col.no h4 { color: rgba(231,111,81,0.8); }
+    .inc-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .inc-list li { display: flex; gap: 10px; font-size: 0.84rem; color: rgba(255,255,255,0.78); line-height: 1.45; }
+    .inc-list li .ico { flex-shrink: 0; }
+    .inc-note { margin-top: 26px; text-align: center; font-size: 0.78rem; color: rgba(255,255,255,0.4); line-height: 1.65; }
+
+    /* BUDGET / DRIVER ONLY */
+    #driver-only { padding: 64px 48px; background: var(--cream); border-top: 1px solid rgba(45,106,79,0.1); }
+    .do-inner { max-width: 840px; margin: 0 auto; text-align: center; }
+    .do-section-label { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; display: block; font-weight: 700; }
+    .do-inner h2 { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(1.5rem, 2.5vw, 2rem); color: var(--brown); margin-bottom: 10px; }
+    .do-inner > p { font-size: 0.87rem; color: var(--text-muted); margin-bottom: 28px; line-height: 1.65; }
+    .do-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; text-align: left; }
+    .do-card { background: #fff; border-radius: var(--radius); padding: 22px; border: 1.5px solid rgba(92,61,46,0.12); }
+    .do-icon { font-size: 1.6rem; margin-bottom: 10px; }
+    .do-card h4 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.05rem; color: var(--brown); margin-bottom: 6px; }
+    .do-card p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 12px; }
+    .do-price { font-size: 0.88rem; font-weight: 700; color: var(--brown); }
+    .do-price span { font-size: 0.72rem; font-weight: 400; color: var(--text-muted); }
+    .do-warning { margin-top: 22px; font-size: 0.78rem; color: var(--text-muted); line-height: 1.65; }
+
+    /* MEMORIES */
+    #memories { padding: 80px 48px; background: #fff; }
+    .mem-header { text-align: center; margin-bottom: 44px; }
+    .mem-header .mem-label { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 10px; display: block; font-weight: 700; }
+    .mem-header h2 { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--green-dark); margin-bottom: 8px; }
+    .mem-header p { font-size: 0.9rem; color: var(--text-muted); max-width: 380px; margin: 0 auto; line-height: 1.65; }
+    .masonry { columns: 4; column-gap: 14px; max-width: 1200px; margin: 0 auto; }
+    .masonry-item { break-inside: avoid; margin-bottom: 14px; border-radius: 12px; overflow: hidden; cursor: pointer; }
+    .masonry-item img { width: 100%; height: auto; display: block; transition: transform 0.4s ease; }
+    .masonry-item:hover img { transform: scale(1.04); }
+    .masonry-ph { background: var(--green-light); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--green-dark); }
+    .masonry-item:nth-child(4n+1) .masonry-ph { height: 240px; }
+    .masonry-item:nth-child(4n+2) .masonry-ph { height: 180px; }
+    .masonry-item:nth-child(4n+3) .masonry-ph { height: 200px; }
+    .masonry-item:nth-child(4n)   .masonry-ph { height: 160px; }
+
+    /* CTA */
+    #cta { background: linear-gradient(135deg, var(--forest-deep), var(--green-dark)); padding: 80px 48px; text-align: center; }
+    #cta .cta-label { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 14px; display: block; font-weight: 700; }
+    #cta h2 { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(2rem, 4vw, 3rem); color: #fff; margin-bottom: 14px; }
+    #cta p { color: rgba(255,255,255,0.65); margin-bottom: 36px; font-size: 0.95rem; line-height: 1.65; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-wa { background: #25D366; color: #fff; padding: 14px 30px; border-radius: 50px; font-weight: 700; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 20px rgba(37,211,102,0.35); transition: filter 0.2s, transform 0.2s; }
+    .btn-wa:hover { filter: brightness(1.08); transform: translateY(-2px); }
+    .btn-outline { background: transparent; border: 1.5px solid rgba(255,255,255,0.35); color: #fff; padding: 14px 30px; border-radius: 50px; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 10px; transition: background 0.2s, transform 0.2s; font-weight: 700; }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+    /* FOOTER */
+    footer { background: #0f2419; color: rgba(255,255,255,0.4); text-align: center; padding: 22px; font-size: 0.8rem; }
+    footer a { color: var(--green-mid); }
+    .wa-float { position: fixed; bottom: 28px; right: 28px; width: 56px; height: 56px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.45); z-index: 998; transition: transform 0.2s; }
+    .wa-float:hover { transform: scale(1.1); }
+    .wa-float svg { width: 28px; fill: #fff; }
+
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 960px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; flex-direction: column; align-items: stretch; position: absolute; top: 100%; left: 0; right: 0; background: var(--terra-deep); padding: 14px 18px calc(14px + env(safe-area-inset-bottom)); gap: 2px; box-shadow: var(--shadow); }
+      .nav-links.open { display: flex; }
+      .nav-links a:not(.nav-cta), nav.scrolled .nav-links a:not(.nav-cta) { font-size: 1rem; padding: 15px 10px; color: #fff; opacity: 1; border-bottom: 1px solid rgba(255,255,255,0.16); }
+      .nav-links a:not(.nav-cta):last-of-type { border-bottom: none; }
+      .nav-links .nav-cta { justify-content: center; margin-top: 12px; padding: 14px 20px; font-size: 0.95rem; }
+      .nav-links .lang-switch { align-self: center; margin-top: 14px; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.55); }
+      .nav-links .lang-switch a { color: #fff; padding: 10px 18px; border-bottom: none; }
+      .nav-links .lang-switch a.active { background: rgba(255,255,255,0.22); }
+      .nav-hamburger { display: flex; }
+      .hero { height: 70vh; }
+      #step1 { padding: 56px 24px 40px; }
+      .vehicle-grid { grid-template-columns: 1fr 1fr; max-width: 600px; margin: 0 auto; }
+      #step2 { padding: 0 24px 60px; }
+      .tours-grid { grid-template-columns: 1fr; }
+      .tour-card.span2 { grid-column: span 1; display: flex; flex-direction: column; }
+      .tour-card.span2 .card-hero { min-height: 220px; height: 220px; }
+      .lolo-card { grid-template-columns: 1fr; }
+      .masonry { columns: 2; }
+      #included, #driver-only, #memories, #cta { padding: 52px 24px; }
+      .inc-grid, .do-cards { grid-template-columns: 1fr; }
+      .modal-places { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 540px) {
+      .vehicle-grid { grid-template-columns: 1fr; }
+      .masonry { columns: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============ LANGUAGE GATE (first visit only) ============ -->
+<div class="lang-gate" id="langGate" role="dialog" aria-modal="true" aria-labelledby="langGateTitle">
+  <div class="lang-gate-card">
+    <button class="lang-gate-close" onclick="dismissGate()" aria-label="Đóng">
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <svg class="leaf" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 20s-7-3-7-9a4 4 0 017-2.6A4 4 0 0118 11c0 6-7 9-7 9z"/><path d="M11 11v9" stroke-width="1.5"/></svg>
+    <h2 id="langGateTitle">Chào mừng đến Sen's</h2>
+    <p class="lg-sub">Chọn ngôn ngữ · Choose your language</p>
+    <div class="lang-gate-opts">
+      <a href="tours.html" onclick="setLang('vi')">
+        <span class="flag">🇻🇳</span>
+        <span><span class="lg-label">Tiếng Việt</span><br><span class="lg-native">Dành cho khách Việt Nam</span></span>
+      </a>
+      <a href="../tours.html" onclick="setLang('en')">
+        <span class="flag">🇬🇧</span>
+        <span><span class="lg-label">English</span><br><span class="lg-native">For international travellers</span></span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Soft hint for returning visitor -->
+<div class="lang-hint" id="langHint" role="status">
+  <span>Prefer English?</span>
+  <a href="../tours.html" onclick="setLang('en')">View in English</a>
+  <button onclick="dismissHint()" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+</div>
+
+<!-- ============ NAV ============ -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <svg class="leaf" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 20s-7-3-7-9a4 4 0 017-2.6A4 4 0 0118 11c0 6-7 9-7 9z"/><path d="M11 11v9" stroke-width="1.5"/></svg>
+    Sen's Homestay
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="rooms.html">Phòng</a>
+    <a href="motorbike.html">Thuê xe máy</a>
+    <a href="tours.html" class="active">Tour</a>
+    <a href="food.html">Ăn uống</a>
+    <a href="services.html">Dịch vụ</a>
+    <a href="itinerary.html">Lịch trình</a>
+    <a href="bus-ticket.html">Vé xe khách</a>
+    <span class="lang-switch">
+      <a href="../tours.html" onclick="setLang('en')">EN</a>
+      <a href="tours.html" class="active" aria-current="true">VI</a>
+    </span>
+    <a href="https://wa.me/84822946888?text=Ch%C3%A0o%20Sen!%20M%C3%ACnh%20mu%E1%BB%91n%20%C4%91%E1%BA%B7t%20tour%20Cao%20B%E1%BA%B1ng." class="nav-cta" target="_blank">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
+      WhatsApp
+    </a>
+  </div>
+  <div class="nav-hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<div class="hero">
+  <div class="hero-bg">
+    <img loading="lazy" src="../images/tours/hero.jpg" alt="Cao Bằng Tours" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div style=\'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:0.9rem;color:rgba(255,255,255,0.5);\'>../images/tours/hero.jpg</div>')">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-label">Tour · Cao Bằng · Việt Nam</span>
+    <h1>Vi vu Cao Bằng<br><em>Sen lo đường đi</em></h1>
+    <p class="hero-sub">Chọn xe, chọn tour, còn lại để Sen lo. Đi Bản Giốc, Hồ Ba Bể, Nguyên Bình hay bản làng đều có sẵn cung.</p>
+    <span class="hero-scroll">↓ Chọn phương tiện di chuyển</span>
+  </div>
+</div>
+
+<!-- ============ STEP 1 ============ -->
+<section id="step1">
+  <div class="step-header fade-in">
+    <div class="step-pill">Bước 1: Chọn bạn đồng hành</div>
+    <h2>Đi kiểu nào?</h2>
+    <p>Chọn ô tô hay xe máy bên dưới là ra giá ngay. Muốn đổi lịch trình thì nhắn Sen, rất linh hoạt.</p>
+  </div>
+  <div class="vehicle-grid fade-in">
+    <div class="vehicle-btn" onclick="selectVehicle('car-guide', this)">
+      <span class="vb-icon">🚗</span>
+      <span class="vb-name">Đi ô tô riêng (Có tài xế)</span>
+      <span class="vb-desc">Xe 4-7 chỗ rộng rãi, tránh mưa nắng, cực an toàn. Tài xế kiêm HDV bản địa bao nhiệt tình.</span>
+      <span class="vb-tag">Thoải mái nhất</span>
+    </div>
+    <div class="vehicle-btn" onclick="selectVehicle('easy-rider', this)">
+      <span class="vb-icon">🏍️</span>
+      <span class="vb-name">Xe ôm bản địa (Easy Rider)</span>
+      <span class="vb-desc">Ngồi sau xe phượt của các anh HDV bản địa. Chỉ việc ngắm cảnh, chụp ảnh và tận hưởng gió trời.</span>
+      <span class="vb-tag orange">Trải nghiệm nhất</span>
+    </div>
+    <div class="vehicle-btn budget" onclick="selectVehicle('driver-only', this)">
+      <span class="vb-icon">🚗🏍️</span>
+      <span class="vb-name">Chỉ thuê xe và tài xế</span>
+      <span class="vb-desc">Tiết kiệm tối đa. Tài xế bản địa đón trả tận nơi. Bạn tự túc ăn uống & vé tham quan.</span>
+      <span class="vb-tag muted">Tiết kiệm</span>
+    </div>
+    <div class="vehicle-btn budget" onclick="selectVehicle('self-ride', this)">
+      <span class="vb-icon">🏍️⛽</span>
+      <span class="vb-name">Tự lái xe máy theo đoàn</span>
+      <span class="vb-desc">Tự lái xe của Sen bám theo đoàn có HDV dẫn đường. Giảm ngay 20% giá Easy Rider.</span>
+      <span class="vb-tag muted">Phượt thủ</span>
+    </div>
+  </div>
+  <div class="vehicle-hint fade-in">Tự phượt xe máy tự túc đi lẻ? <a href="motorbike.html">Xem bảng giá thuê xe máy của Sen →</a></div>
+</section>
+
+<!-- ============ STEP 2 ============ -->
+<section id="step2">
+  <div class="step2-header">
+    <span class="vehicle-confirm" id="vehicleConfirm">🚗 Ô tô riêng + HDV</span>
+    <h2>Bước 2: Chọn cung đường</h2>
+  </div>
+
+  <div class="tours-grid">
+
+    <!-- 1D: Classic Day -->
+    <div class="tour-card fade-in">
+      <div class="card-hero">
+        <img loading="lazy" class="card-hero-img" src="../images/tours/card-1d.jpg" alt="Tour 1 ngày Bản Giốc" onerror="this.style.opacity='0';var ph=document.createElement('div');ph.style.cssText='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:0.78rem;color:rgba(255,255,255,0.45);';ph.textContent='../images/tours/card-1d.jpg';this.parentElement.appendChild(ph);">
+        <div class="card-hero-overlay"></div>
+        <div class="card-hero-top"><span class="cbadge cbadge-best">✨ Tour tinh gọn</span></div>
+        <div class="card-hero-bottom">
+          <div class="card-duration-days">1 Ngày</div>
+          <div class="card-duration-label">Tour trọn gói trong ngày</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Thác Bản Giốc & Núi Mắt Thần</h3>
+        <p class="card-subtitle">Đi bè tre sát chân thác Bản Giốc, check-in động Ngườm Ngao và thung lũng Mắt Thần.</p>
+        <div class="day-buttons">
+          <button class="day-btn" onclick="openModal('1d',0)">🗺️ Lịch trình chi tiết <span class="day-km">~195km</span></button>
+        </div>
+        <div class="card-pricing">
+          <div class="pricing-lbl" id="pl-1d">Giá trọn gói mỗi người</div>
+          <div id="pr-1d">
+            <div class="price-row"><span class="price-group">Giá từ</span><span class="price-val">1.570.000đ <span class="price-usd">/ người</span></span></div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="https://wa.me/84822946888?text=Ch%C3%A0o%20Sen!%20M%C3%ACnh%20mu%E1%BB%91n%20%C4%91%E1%BA%B7t%20tour%201%20ng%C3%A0y." class="btn-book" target="_blank">💬 Đặt tour</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2D: East Loop -->
+    <div class="tour-card fade-in">
+      <div class="card-hero">
+        <img loading="lazy" class="card-hero-img" src="../images/tours/card-2d.jpg" alt="Tour 2 ngày 1 đêm" onerror="this.style.opacity='0';var ph=document.createElement('div');ph.style.cssText='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:0.78rem;color:rgba(255,255,255,0.45);';ph.textContent='../images/tours/card-2d.jpg';this.parentElement.appendChild(ph);">
+        <div class="card-hero-overlay"></div>
+        <div class="card-hero-top"><span class="cbadge cbadge-best">🔥 Đang hot</span></div>
+        <div class="card-hero-bottom">
+          <div class="card-duration-days">2 Ngày</div>
+          <div class="card-duration-label">Đông Cao Bằng trọn vẹn · Nghỉ TP</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Khám phá Đông Cao Bằng</h3>
+        <p class="card-subtitle">Trọn gói Bản Giốc, Ngườm Ngao, Pác Bó và dòng suối Lê-nin xanh ngọc.</p>
+        <div class="day-buttons">
+          <button class="day-btn" onclick="openModal('2d',0)">🗺️ Ngày 1 <span class="day-km">~183km</span></button>
+          <button class="day-btn" onclick="openModal('2d',1)">🗺️ Ngày 2 <span class="day-km">~136km</span></button>
+        </div>
+        <div class="card-pricing">
+          <div class="pricing-lbl" id="pl-2d">Giá trọn gói mỗi người</div>
+          <div id="pr-2d">
+            <div class="price-row"><span class="price-group">1–3 người</span><span class="price-val">3.450.000đ <span class="price-usd">/ người</span></span></div>
+            <div class="price-row"><span class="price-group">4–8 người</span><span class="price-val">2.900.000đ <span class="price-usd">/ người</span></span></div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="https://wa.me/84822946888?text=Ch%C3%A0o%20Sen!%20M%C3%ACnh%20mu%E1%BB%91n%20%C4%91%E1%BA%B7t%20tour%202D%20%C4%90%C3%B4ng%20Cao%20B%E1%BA%B1ng." class="btn-book" target="_blank">💬 Đặt tour</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2D1N: Overnighter -->
+    <div class="tour-card span2 fade-in">
+      <div class="card-hero">
+        <img loading="lazy" class="card-hero-img" src="../images/tours/card-2d1n.jpg" alt="Tour ngủ bản đá cổ" onerror="this.style.opacity='0';var ph=document.createElement('div');ph.style.cssText='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:0.78rem;color:rgba(255,255,255,0.45);';ph.textContent='../images/tours/card-2d1n.jpg';this.parentElement.appendChild(ph);">
+        <div class="card-hero-overlay"></div>
+        <div class="card-hero-top"><span class="cbadge cbadge-best">🏡 Trải nghiệm bản địa</span></div>
+        <div class="card-hero-bottom">
+          <div class="card-duration-days">2N 1Đ</div>
+          <div class="card-duration-label">Ngủ đêm tại Làng đá cổ Khuổi Ky</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Đêm tại bản đá Khuổi Ky</h3>
+        <p class="card-subtitle">Ngủ nhà sàn đá cổ 400 tuổi của người Tày, đón bình minh sát sạt thác Bản Giốc.</p>
+        <div class="day-buttons">
+          <button class="day-btn" onclick="openModal('2d1n',0)">🗺️ Ngày 1 <span class="day-km">~124km</span></button>
+          <button class="day-btn" onclick="openModal('2d1n',1)">🗺️ Ngày 2 <span class="day-km">~114km</span></button>
+        </div>
+        <div class="card-pricing">
+          <div class="pricing-lbl" id="pl-2d1n">Giá trọn gói mỗi người · Gồm chỗ nghỉ</div>
+          <div id="pr-2d1n">
+            <div class="price-row"><span class="price-group">1–3 người</span><span class="price-val">3.580.000đ <span class="price-usd">/ người</span></span></div>
+            <div class="price-row"><span class="price-group">4–8 người</span><span class="price-val">2.950.000đ <span class="price-usd">/ người</span></span></div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="https://wa.me/84822946888?text=Ch%C3%A0o%20Sen!%20M%C3%ACnh%20mu%E1%BB%91n%20%C4%91%E1%BA%B7t%20tour%202D1N%20ng%E1%BB%A7%20Khu%E1%BB%99i%20Ky." class="btn-book" target="_blank">💬 Đặt tour</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3D2N: Deep Adventure -->
+    <div class="tour-card fade-in">
+      <div class="card-hero">
+        <img loading="lazy" class="card-hero-img" src="../images/tours/card-3d2n.jpg" alt="Tour Bản Giốc và Ba Bể" onerror="this.style.opacity='0';var ph=document.createElement('div');ph.style.cssText='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:0.78rem;color:rgba(255,255,255,0.45);';ph.textContent='../images/tours/card-3d2n.jpg';this.parentElement.appendChild(ph);">
+        <div class="card-hero-overlay"></div>
+        <div class="card-hero-top"><span class="cbadge cbadge-best">🌟 Tour kinh điển</span></div>
+        <div class="card-hero-bottom">
+          <div class="card-duration-days">3N 2Đ</div>
+          <div class="card-duration-label">Cung Bản Giốc & Hồ Ba Bể</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Bản Giốc & Hồ Ba Bể</h3>
+        <p class="card-subtitle">Một vòng núi đèo Cao Bằng, rồi qua Hồ Ba Bể đổi gió cho nhẹ đầu.</p>
+        <div class="day-buttons">
+          <button class="day-btn" onclick="openModal('3d2n',0)">🗺️ Ngày 1 <span class="day-km">~136km</span></button>
+          <button class="day-btn" onclick="openModal('3d2n',1)">🗺️ Ngày 2 <span class="day-km">~124km</span></button>
+          <button class="day-btn" onclick="openModal('3d2n',2)">🗺️ Ngày 3 <span class="day-km">~102km</span></button>
+        </div>
+        <div class="card-pricing">
+          <div class="pricing-lbl" id="pl-3d2n">Giá trọn gói mỗi người · Gồm chỗ nghỉ</div>
+          <div id="pr-3d2n">
+            <div class="price-row"><span class="price-group">1–3 người</span><span class="price-val">5.150.000đ <span class="price-usd">/ người</span></span></div>
+            <div class="price-row"><span class="price-group">4–8 người</span><span class="price-val">4.550.000đ <span class="price-usd">/ người</span></span></div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="https://wa.me/84822946888?text=Ch%C3%A0o%20Sen!%20M%C3%ACnh%20mu%E1%BB%91n%20%C4%91%E1%BA%B7t%20tour%203D2N." class="btn-book" target="_blank">💬 Đặt tour</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4D3N: Grand Loop -->
+    <div class="tour-card fade-in">
+      <div class="card-hero">
+        <img loading="lazy" class="card-hero-img" src="../images/tours/card-4d3n.jpg" alt="Tour 4 ngày 3 đêm" onerror="this.style.opacity='0';var ph=document.createElement('div');ph.style.cssText='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:0.78rem;color:rgba(255,255,255,0.45);';ph.textContent='../images/tours/card-4d3n.jpg';this.parentElement.appendChild(ph);">
+        <div class="card-hero-overlay"></div>
+        <div class="card-hero-top"><span class="cbadge cbadge-loop">🗺️ Vòng cung Cao Bằng</span></div>
+        <div class="card-hero-bottom">
+          <div class="card-duration-days">4N 3Đ</div>
+          <div class="card-duration-label">Đại vòng cung trọn vẹn · 3 đêm nghỉ</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <h3 class="card-title">Vòng cung Cao Bằng</h3>
+        <p class="card-subtitle">Cung phượt Nguyên Bình xanh mướt, đèo 14 tầng Khâu Cốc Chà & đồi chè Kolia.</p>
+        <div class="day-buttons">
+          <button class="day-btn" onclick="openModal('4d3n',0)">🗺️ Ngày 1 <span class="day-km">~124km</span></button>
+          <button class="day-btn" onclick="openModal('4d3n',1)">🗺️ Ngày 2 <span class="day-km">~149km</span></button>
+          <button class="day-btn" onclick="openModal('4d3n',2)">🗺️ Ngày 3 <span class="day-km">~69km</span></button>
+          <button class="day-btn" onclick="openModal('4d3n',3)">🗺️ Ngày 4 <span class="day-km">~144km</span></button>
+        </div>
+        <div class="card-pricing">
+          <div class="pricing-lbl" id="pl-4d3n">Giá trọn gói mỗi người · Gồm chỗ nghỉ</div>
+          <div id="pr-4d3n">
+            <div class="price-row"><span class="price-group">1–3 người</span><span class="price-val">4.910.000đ <span class="price-usd">/ người</span></span></div>
+            <div class="price-row"><span class="price-group">4–8 người</span><span class="price-val">6.150.000đ <span class="price-usd">/ người</span></span></div>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="https://wa.me/84822946888?text=Ch%C3%A0o%20Sen!%20M%C3%ACnh%20mu%E1%BB%91n%20%C4%91%E1%BA%B7t%20tour%204D3N%20V%C3%B2ng%20cung%20Cao%20B%E1%BA%B1ng." class="btn-book" target="_blank">💬 Đặt tour</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- LOLO -->
+  <div class="lolo-wrap fade-in">
+    <div class="lolo-card">
+      <div class="lolo-visual" style="position:relative;overflow:hidden;">
+        <img loading="lazy" src="../images/tours/card-lolo.jpg" alt="Lolo Village"
+             style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;"
+             onerror="this.style.display='none'">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.15) 100%);"></div>
+        <div class="lolo-visual-inner" style="position:relative;z-index:2;">
+          <h3>Bản Lô Lô</h3>
+          <p>3 Ngày · 2 Đêm · Ô tô hoặc xe máy</p>
+        </div>
+      </div>
+      <div class="lolo-body">
+        <span class="cbadge cbadge-pop" style="width:fit-content;">✨ Trải nghiệm mới</span>
+        <h3>Trải nghiệm bản người Lô Lô</h3>
+        <p>Trải nghiệm văn hóa Lô Lô độc đáo: tập dệt vải, nấu bếp củi, dạo quanh bản cổ và ăn cơm gia đình cùng dân bản cực kỳ đầm ấm.</p>
+        <div class="lolo-acts">
+          <span class="lolo-act">🧵 Tập dệt vải</span>
+          <span class="lolo-act">🪓 Bổ củi</span>
+          <span class="lolo-act">🍳 Cùng nấu bếp củi</span>
+          <span class="lolo-act">🐄 Cho gia súc ăn</span>
+          <span class="lolo-act">🥾 Đi bộ quanh bản</span>
+        </div>
+        <div class="lolo-prices">
+          <div class="price-row"><span class="price-group" style="font-size:0.82rem;">Giá mỗi người</span><span class="price-val">5.850.000đ <span class="price-usd">/ người</span></span></div>
+        </div>
+        <a href="https://wa.me/84822946888?text=Ch%C3%A0o%20Sen!%20M%C3%ACnh%20mu%E1%BB%91n%20h%E1%BB%8Fi%20th%C3%B4ng%20tin%20v%E1%BB%81%20tr%E1%BA%A3i%20nghi%E1%BB%87m%20b%E1%BA%A3n%20L%C3%B4%20L%C3%B4." class="btn-lolo" target="_blank">💬 Nhắn Sen tư vấn chi tiết</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INCLUDED ============ -->
+<section id="included">
+  <div class="inc-inner fade-in">
+    <span class="section-label">Dịch vụ</span>
+  <h2 class="section-title">Tour này gồm gì?</h2>
+    <div class="inc-grid">
+      <div class="inc-col yes">
+        <h4>✅ Gói tour đã bao gồm:</h4>
+        <ul class="inc-list">
+          <li><span class="ico">🎟️</span> Vé vào cổng các điểm tham quan</li>
+          <li><span class="ico">🍳</span> Ăn sáng & ăn trưa (ăn tối với tour ngủ qua đêm)</li>
+          <li><span class="ico">💧</span> Nước uống (1 chai/ngày)</li>
+          <li><span class="ico">👨‍🦯</span> HDV bản địa nhiệt tình, cực thạo đường</li>
+          <li><span class="ico">⛽</span> Xe & xăng suốt tuyến (trừ gói tự lái)</li>
+          <li><span class="ico">🛏️</span> Phòng nghỉ homestay sạch sẽ, ấm áp</li>
+          <li><span class="ico">🌧️</span> Mũ bảo hiểm đạt chuẩn + áo mưa bộ</li>
+          <li><span class="ico">📋</span> Lịch trình linh hoạt, thích là dừng check-in</li>
+        </ul>
+      </div>
+      <div class="inc-col no">
+        <h4>❌ Chưa bao gồm</h4>
+        <ul class="inc-list">
+          <li><span class="ico">🥤</span> Nước uống gọi thêm khi ăn và dọc đường</li>
+          <li><span class="ico">🗣️</span> HDV tiếng Anh (nếu cần): +300k/ngày</li>
+          <li><span class="ico">🚌</span> Vé xe giường nằm Hà Nội ↔ Cao Bằng</li>
+          <li><span class="ico">💸</span> Tip cho tài xế hoặc hướng dẫn viên</li>
+          <li><span class="ico">🧺</span> Chi tiêu cá nhân ngoài chương trình</li>
+        </ul>
+      </div>
+    </div>
+    <p class="inc-note">👶 Trẻ em dưới 8 tuổi giảm ngay 20% giá tour &nbsp;·&nbsp; 🛵 Tự lái xe máy theo đoàn giảm ngay 20% giá tour</p>
+  </div>
+</section>
+
+<!-- ============ DRIVER ONLY ============ -->
+<section id="driver-only">
+  <div class="do-inner">
+    <span class="do-section-label">Lựa chọn tiết kiệm</span>
+    <h2>Bạn chỉ cần thuê xe và tài xế?</h2>
+    <p>Tự túc ăn uống & vé tham quan. Xe kèm tài xế bản địa đón tận nơi cực kỳ kinh tế.</p>
+    <div class="do-cards fade-in">
+      <div class="do-card">
+        <div class="do-icon">🚗</div>
+        <h4>Chỉ thuê xe ô tô</h4>
+        <p>Xe 4-7 chỗ kèm tài xế bản địa kiêm người chỉ đường. Đi theo lịch trình tự chọn thoải mái.</p>
+        <div class="do-price">1.900.000đ / ngày <span>· Trọn gói cả xe (tối đa 4 người)</span></div>
+      </div>
+      <div class="do-card">
+        <div class="do-icon">🏍️</div>
+        <h4>Chỉ tài xế xe máy</h4>
+        <p>Tài xế bản địa kiêm bạn đồng hành chở vi vu xe máy, luồn lách mọi ngóc ngách đèo dốc.</p>
+        <div class="do-price">Nhắn Sen báo giá <span>· tùy theo chặng đi thực tế</span></div>
+      </div>
+    </div>
+    <p class="do-warning">⚠️ Chưa bao gồm ăn uống, vé tham quan. Sen gợi ý quán ăn chuẩn vị địa phương trên đường đi cho bạn.</p>
+  </div>
+</section>
+
+<!-- ============ MEMORIES ============ -->
+<section id="memories">
+  <div class="mem-header fade-in">
+    <span class="mem-label">Khoảnh khắc đẹp</span>
+    <h2>Những khoảnh khắc đáng nhớ</h2>
+    <p>Ảnh chụp thực tế từ các bạn trẻ phượt thủ đã đồng hành cùng Sen's Homestay.</p>
+  </div>
+  <div class="masonry fade-in" id="memoriesGrid"></div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section id="cta">
+  <span class="cta-label">Sẵn sàng khám phá?</span>
+  <h2>Nhắn Sen chốt lịch</h2>
+  <p>Chỉ cần gửi ngày đi, số người và gu của bạn. Sen sẽ ráp lịch trình gọn, đúng nhu cầu và báo giá luôn.</p>
+  <div class="cta-btns">
+    <a href="https://wa.me/84822946888?text=Ch%C3%A0o%20Sen!%20M%C3%ACnh%20mu%E1%BB%91n%20%C4%91%E1%BA%B7t%20tour%20Cao%20B%E1%BA%B1ng." class="btn-wa" target="_blank">
+      <svg viewBox="0 0 24 24" fill="white" width="20"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
+      Nhắn WhatsApp đặt ngay
+    </a>
+    <a href="rooms.html" class="btn-outline">🛏️ Xem phòng homestay</a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <p>© 2025 Sen's Homestay · Cao Bằng, Việt Nam &nbsp;·&nbsp; <a href="https://wa.me/84822946888" target="_blank">WhatsApp</a> &nbsp;·&nbsp; Made with ❤️ in Cao Bang</p>
+</footer>
+
+<a href="https://wa.me/84822946888?text=Ch%C3%A0o%20Sen!" class="wa-float" target="_blank">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
+</a>
+
+<!-- ============ MODAL ============ -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title" id="modalTitle"></div>
+        <div class="modal-sub" id="modalSub"></div>
+      </div>
+      <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-day-tabs" id="modalTabs"></div>
+      <div class="modal-day-meta" id="modalMeta"></div>
+      <div class="modal-places" id="modalPlaces"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // NAV scrolled state
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+  });
+  function toggleNav() { document.getElementById('navLinks').classList.toggle('open'); }
+
+  // FADE IN ON SCROLL
+  const obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.07 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+  // LANGUAGE GATE + SWITCH
+  const LANG_HERE = 'vi';
+  function setLang(l){ try { localStorage.setItem('senLang', l); } catch(e){} }
+  function dismissGate(){
+    document.getElementById('langGate').classList.remove('show');
+    setLang(LANG_HERE);
+  }
+  function dismissHint(){
+    document.getElementById('langHint').classList.remove('show');
+    try { sessionStorage.setItem('senHintDismissed','1'); } catch(e){}
+  }
+  (function(){
+    let saved = null; try { saved = localStorage.getItem('senLang'); } catch(e){}
+    if (!saved) {
+      document.getElementById('langGate').classList.add('show');
+    } else if (saved !== LANG_HERE) {
+      let dismissed = null; try { dismissed = sessionStorage.getItem('senHintDismissed'); } catch(e){}
+      if (!dismissed) document.getElementById('langHint').classList.add('show');
+    }
+  })();
+
+  // TOUR DATA
+  const tourData = {
+    '1d': { title: 'Classic Day (Tour 1 ngày)', days: [
+      { label:'Full Day', km:'~195km', depart:'7h30', back:'17h–18h', night:'Về lại thành phố', places:[
+        { name:'Làng rèn Phúc Sen', desc:'Làng nghề truyền thống lâu đời của người Nùng An — xem nghệ nhân rèn công cụ thủ công sắc bén.', img:'../images/places/blacksmith.jpg', emoji:'🔨', pos:'center 35%' },
+        { name:'Thác Bản Giốc', desc:'Ngọn thác biên giới đẹp nhất Việt Nam, tung bọt trắng xóa giữa mây trời biên cương.', img:'../images/places/ban-gioc.jpg', emoji:'💧' },
+        { name:'Đèo Thoong Cót', desc:'Cung đèo quanh co uốn lượn — leo bộ 10 phút lên đỉnh ngắm toàn cảnh thung lũng xanh thẳm.', img:'../images/places/thoongot.jpg', emoji:'🏔️' },
+        { name:'Núi Mắt Thần', desc:'Hốc núi thủng tự nhiên độc lạ nằm giữa lòng thảo nguyên cỏ xanh mướt.', img:'../images/places/eye-mountain.jpg', emoji:'👁️' },
+      ]}
+    ]},
+    '2d': { title:'Đông Cao Bằng trọn vẹn', days:[
+      { label:'Ngày 1', km:'~183km', night:'Nghỉ tại thành phố', places:[
+        { name:'Làng rèn Phúc Sen', desc:'Ghé thăm làng nghề rèn Phúc Sen nổi tiếng.', img:'../images/places/blacksmith.jpg', emoji:'🔨', pos:'center 35%' },
+        { name:'Động Ngườm Ngao', desc:'Hang động thạch nhũ lung linh uốn lượn như cánh sen đá khổng lồ.', img:'../images/places/nguom-ngao.jpg', emoji:'🪨' },
+        { name:'Làng đá cổ Khuổi Ky', desc:'Ngôi làng đá cổ kính hơn 400 năm tuổi bình yên dưới chân núi.', img:'../images/places/stone-village.jpg', emoji:'🏘️' },
+        { name:'Thác Bản Giốc', desc:'Tham quan thác nước Bản Giốc biên cương.', img:'../images/places/ban-gioc.jpg', emoji:'💧' },
+        { name:'Đèo Thoong Cót', desc:'Ngắm cảnh núi rừng bao la qua đèo dốc Thoong Cót.', img:'../images/places/thoongot.jpg', emoji:'🏔️' },
+      ]},
+      { label:'Ngày 2', km:'~136km', night:'Về lại thành phố', places:[
+        { name:'Núi Mắt Thần', desc:'Ngắm danh thắng núi Mắt Thần và thung lũng thảo nguyên.', img:'../images/places/eye-mountain.jpg', emoji:'👁️' },
+        { name:'Hồ Thang Hen', desc:'Hồ nước ngọt tự nhiên quanh năm xanh trong tựa ngọc bích.', img:'../images/places/thang-hen.jpg', emoji:'🏞️' },
+        { name:'Thung lũng Lũng Luông', desc:'Thung lũng ruộng bậc thang nên thơ ẩn hiện trong sương sớm.', img:'../images/places/lung-luong.jpg', emoji:'🌾' },
+        { name:'Pác Bó', desc:'Suối Lê-nin xanh trong vắt nhìn tận đáy và hang Cốc Bó lịch sử.', img:'../images/places/pac-bo.jpg', emoji:'🌿' },
+      ]},
+    ]},
+    '2d1n': { title:'Ngủ đêm Bản Giốc', days:[
+      { label:'Ngày 1', km:'~124km', night:'Nghỉ tại Làng đá Khuổi Ky', places:[
+        { name:'Làng rèn Phúc Sen', desc:'Tìm hiểu nghề rèn thủ công truyền thống.', img:'../images/places/blacksmith.jpg', emoji:'🔨', pos:'center 35%' },
+        { name:'Đồi cỏ Ba Quầng', desc:'Thảo nguyên cỏ cháy Ba Quầng mênh mông, hoang sơ cực đẹp.', img:'../images/places/ba-quang.jpg', emoji:'🏔️' },
+        { name:'Động Ngườm Ngao', desc:'Chiêm ngưỡng hang động thạch nhũ độc đáo.', img:'../images/places/nguom-ngao.jpg', emoji:'🪨' },
+        { name:'Làng đá cổ Khuổi Ky', desc:'Nghỉ đêm nhà sàn đá cổ của người Tày bản địa ấm cúng.', img:'../images/places/stone-village.jpg', emoji:'🛏️' },
+      ]},
+      { label:'Ngày 2', km:'~114km', night:'Về lại thành phố', places:[
+        { name:'Chùa Phật Tích Bản Giốc', desc:'Tựa lưng núi ngắm trọn thác Bản Giốc và vùng biên giới từ trên cao.', img:'../images/places/phat-tich.jpg', emoji:'🛕' },
+        { name:'Thác Bản Giốc', desc:'Ngắm thác Bản Giốc biên cương hùng vĩ.', img:'../images/places/ban-gioc.jpg', emoji:'💧' },
+        { name:'Đèo Thoong Cót', desc:'Vượt cung đèo Thoong Cót uốn lượn.', img:'../images/places/thoongot.jpg', emoji:'🏔️' },
+        { name:'Núi Mắt Thần', desc:'Núi Mắt Thần nằm giữa thảo nguyên cỏ xanh.', img:'../images/places/eye-mountain.jpg', emoji:'👁️' },
+      ]},
+    ]},
+    '3d2n': { title:'Bản Giốc & Hồ Ba Bể', days:[
+      { label:'Ngày 1', km:'~136km', night:'Nghỉ tại thành phố', places:[
+        { name:'Pác Bó', desc:'Thăm di tích suối Lê-nin, núi Các Mác.', img:'../images/places/pac-bo.jpg', emoji:'🌿' },
+        { name:'Thung lũng Lũng Luông', desc:'Ngắm ruộng bậc thang lúa xanh trong lòng thung lũng.', img:'../images/places/lung-luong.jpg', emoji:'🌾' },
+        { name:'Núi Mắt Thần', desc:'Check-in núi thủng mắt thần bên thung lũng cỏ rộng lớn.', img:'../images/places/eye-mountain.jpg', emoji:'👁️' },
+        { name:'Hồ Thang Hen', desc:'Hồ nước phẳng lặng lãng mạn giữa lòng núi rừng.', img:'../images/places/thang-hen.jpg', emoji:'🏞️' },
+      ]},
+      { label:'Ngày 2', km:'~124km', night:'Nghỉ tại Làng đá Khuổi Ky', places:[
+        { name:'Làng rèn Phúc Sen', desc:'Tìm hiểu nghề rèn Phúc Sen lâu đời.', img:'../images/places/blacksmith.jpg', emoji:'🔨', pos:'center 35%' },
+        { name:'Đồi cỏ Ba Quầng', desc:'Thảo nguyên đồi cỏ Ba Quầng hoang sơ bát ngát.', img:'../images/places/ba-quang.jpg', emoji:'🏔️' },
+        { name:'Động Ngườm Ngao', desc:'Chiêm ngưỡng hang động thạch nhũ độc đáo.', img:'../images/places/nguom-ngao.jpg', emoji:'🪨' },
+        { name:'Làng đá cổ Khuổi Ky', desc:'Trải nghiệm nghỉ đêm nhà sàn đá cổ kính.', img:'../images/places/stone-village.jpg', emoji:'🛏️' },
+      ]},
+      { label:'Ngày 3', km:'~102km', night:'Về lại thành phố', places:[
+        { name:'Chùa Phật Tích Bản Giốc', desc:'Ngắm cảnh biên cương linh thiêng.', img:'../images/places/phat-tich.jpg', emoji:'🛕' },
+        { name:'Thác Bản Giốc', desc:'Đi bè mảng áp sát chân thác Bản Giốc cực kỳ ấn tượng.', img:'../images/places/ban-gioc.jpg', emoji:'💧' },
+        { name:'Đèo Thoong Cót', desc:'Vượt đèo đón hoàng hôn buông lãng mạn.', img:'../images/places/thoongot.jpg', emoji:'🏔️' },
+      ]},
+    ]},
+    '4d3n': { title:'Vòng cung Cao Bằng', days:[
+      { label:'Ngày 1', km:'~124km', night:'Nghỉ tại Làng đá Khuổi Ky', places:[
+        { name:'Làng rèn Phúc Sen', desc:'Tham quan nghề rèn thủ công truyền thống.', img:'../images/places/blacksmith.jpg', emoji:'🔨', pos:'center 35%' },
+        { name:'Đồi cỏ Ba Quầng', desc:'Ngắm thảo nguyên cỏ xanh uốn lượn.', img:'../images/places/ba-quang.jpg', emoji:'🏔️' },
+        { name:'Thác Bản Giốc', desc:'Khám phá thác Bản Giốc hùng vĩ.', img:'../images/places/ban-gioc.jpg', emoji:'💧' },
+        { name:'Chùa Phật Tích Bản Giốc', desc:'Vãn cảnh chùa Phật Tích yên bình sườn núi.', img:'../images/places/phat-tich.jpg', emoji:'🛕' },
+      ]},
+      { label:'Ngày 2', km:'~149km', night:'Nghỉ tại homestay Pác Bó', places:[
+        { name:'Động Ngườm Ngao', desc:'Chiêm ngưỡng kỳ quan động Ngườm Ngao.', img:'../images/places/nguom-ngao.jpg', emoji:'🪨' },
+        { name:'Đèo Thoong Cót', desc:'Vượt cung đèo Thoong Cót trập trùng.', img:'../images/places/thoongot.jpg', emoji:'🏔️' },
+        { name:'Núi Mắt Thần', desc:'Ghé thăm danh thắng núi thủng mắt thần.', img:'../images/places/eye-mountain.jpg', emoji:'👁️' },
+        { name:'Hồ Thang Hen', desc:'Hồ nước ngọt phẳng lặng trong thung lũng Trà Lĩnh.', img:'../images/places/thang-hen.jpg', emoji:'🏞️' },
+        { name:'Thung lũng Lũng Luông', desc:'Băng qua thung lũng bậc thang lúa nên thơ.', img:'../images/places/lung-luong.jpg', emoji:'🌾' },
+      ]},
+      { label:'Ngày 3', km:'~69km', night:'Nghỉ tại Khâu Cốc Chà', places:[
+        { name:'Pác Bó', desc:'Khu di tích suối Lê-nin, núi Các Mác.', img:'../images/places/pac-bo.jpg', emoji:'🌿' },
+        { name:'Khu di tích Kim Đồng', desc:'Tưởng niệm anh hùng thiếu niên Kim Đồng.', img:'../images/places/kim-dong.jpg', emoji:'🏛️' },
+        { name:'Đèo Khâu Cốc Chà', desc:'Con đèo 15 tầng dốc quanh co quanh sườn núi hiểm trở và kỳ vĩ bậc nhất.', img:'../images/places/khau-coc-cha.jpg', emoji:'⛰️' },
+      ]},
+      { label:'Ngày 4', km:'~144km', night:'Về lại thành phố', places:[
+        { name:'Rừng trúc Nguyên Bình', desc:'Rừng trúc Nguyên Bình xanh mướt như phim cổ trang.', img:'../images/places/bamboo.jpg', emoji:'🎋' },
+        { name:'Đỉnh Phia Oắc', desc:'Ngắm đỉnh núi Phia Oắc tuyết phủ mùa đông.', img:'../images/places/phia-oac.jpg', emoji:'🌫️' },
+        { name:'Đồi chè Kolia', desc:'Đồi chè Kolia trải rộng xanh mướt mắt.', img:'../images/places/kolia-tea.jpg', emoji:'🍃' },
+      ]},
+    ]},
+  };
+
+  // PRICING DATA
+  const vehicleNames = {
+    'car-guide': '🚗 Ô tô riêng + HDV',
+    'easy-rider': '🏍️ Easy Rider + HDV',
+    'driver-only': '🚗🏍️ Chỉ thuê tài xế',
+    'self-ride': '🏍️⛽ Tự lái xe máy theo đoàn'
+  };
+
+  const pricing = {
+    'car-guide': { lbl: 'Xe ô tô riêng + Hướng dẫn viên · Giá mỗi người',
+      '1d':[{g:'Từ 1–8 người',p:'1.570.000đ',u:'/ người'}],
+      '2d':[{g:'Nhóm 1–3 người',p:'3.450.000đ',u:'/ người'},{g:'Nhóm 4–8 người',p:'2.900.000đ',u:'/ người'}],
+      '2d1n':[{g:'Nhóm 1–3 người',p:'3.580.000đ',u:'/ người'},{g:'Nhóm 4–8 người',p:'2.950.000đ',u:'/ người'}],
+      '3d2n':[{g:'Nhóm 1–3 người',p:'5.150.000đ',u:'/ người'},{g:'Nhóm 4–8 người',p:'4.550.000đ',u:'/ người'}],
+      '4d3n':[{g:'Nhóm 1–3 người',p:'4.910.000đ',u:'/ người'},{g:'Nhóm 4–8 người',p:'6.150.000đ',u:'/ người'}],
+    },
+    'easy-rider': { lbl: 'Easy Rider + Hướng dẫn viên · Giá mỗi người',
+      '1d':[{g:'Từ 1–8 người',p:'1.570.000đ',u:'/ người'}],
+      '2d':[{g:'Nhóm 1–3 người',p:'3.450.000đ',u:'/ người'},{g:'Nhóm 4–8 người',p:'2.900.000đ',u:'/ người'}],
+      '2d1n':[{g:'Nhóm 1–3 người',p:'3.580.000đ',u:'/ người'},{g:'Nhóm 4–8 người',p:'2.950.000đ',u:'/ người'}],
+      '3d2n':[{g:'Nhóm 1–3 người',p:'5.150.000đ',u:'/ người'},{g:'Nhóm 4–8 người',p:'4.550.000đ',u:'/ người'}],
+      '4d3n':[{g:'Nhóm 1–3 người',p:'4.910.000đ',u:'/ người'},{g:'Nhóm 4–8 người',p:'6.150.000đ',u:'/ người'}],
+    },
+    'driver-only': { lbl: 'Chỉ thuê xe và tài xế · Không hướng dẫn viên, tự túc ăn uống',
+      '1d':[{g:'Xe ô tô — nguyên xe',p:'1.900.000đ',u:'/ ngày'},{g:'Xe máy',p:'Nhắn Sen báo giá',u:''}],
+      '2d':[{g:'Xe ô tô — nguyên xe',p:'1.900.000đ',u:'/ ngày'},{g:'Xe máy',p:'Nhắn Sen báo giá',u:''}],
+      '2d1n':[{g:'Xe ô tô — nguyên xe',p:'1.900.000đ',u:'/ ngày'},{g:'Xe máy',p:'Nhắn Sen báo giá',u:''}],
+      '3d2n':[{g:'Xe ô tô — nguyên xe',p:'1.900.000đ',u:'/ ngày'},{g:'Xe máy',p:'Nhắn Sen báo giá',u:''}],
+      '4d3n':[{g:'Xe ô tô — nguyên xe',p:'1.900.000đ',u:'/ ngày'},{g:'Xe máy',p:'Nhắn Sen báo giá',u:''}],
+    },
+    'self-ride': { lbl: 'Tự lái xe máy theo đoàn · Giảm 20% · Khách tự đổ xăng',
+      '1d':[{g:'Từ 1–8 người',p:'1.256.000đ',u:'/ người'}],
+      '2d':[{g:'Nhóm 1–3 người',p:'2.760.000đ',u:'/ người'},{g:'Nhóm 4–8 người',p:'2.320.000đ',u:'/ người'}],
+      '2d1n':[{g:'Nhóm 1–3 người',p:'2.864.000đ',u:'/ người'},{g:'Nhóm 4–8 người',p:'2.360.000đ',u:'/ người'}],
+      '3d2n':[{g:'Nhóm 1–3 người',p:'4.120.000đ',u:'/ người'},{g:'Nhóm 4–8 người',p:'3.640.000đ',u:'/ người'}],
+      '4d3n':[{g:'Nhóm 1–3 người',p:'3.928.000đ',u:'/ người'},{g:'Nhóm 4–8 người',p:'4.920.000đ',u:'/ người'}],
+    },
+  };
+
+  let currentVehicle = 'car-guide';
+
+  function selectVehicle(key, btn) {
+    document.querySelectorAll('.vehicle-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentVehicle = key;
+    document.getElementById('vehicleConfirm').textContent = vehicleNames[key];
+    ['1d','2d','2d1n','3d2n','4d3n'].forEach(t => {
+      const pl = document.getElementById('pl-' + t);
+      const pr = document.getElementById('pr-' + t);
+      if (!pl || !pr) return;
+      const d = pricing[key];
+      const overnight = t.includes('n') ? ' · Đã bao gồm lưu trú qua đêm' : '';
+      pl.textContent = d.lbl + overnight;
+      pr.innerHTML = d[t].map(r =>
+        `<div class="price-row"><span class="price-group">${r.g}</span><span class="price-val">${r.p} <span class="price-usd">${r.u}</span></span></div>`
+      ).join('');
+    });
+    document.querySelectorAll('.driver-note, .self-drive-note').forEach(n => n.remove());
+    if (key === 'easy-rider') {
+      document.querySelectorAll('.card-pricing').forEach(el => {
+        const n = document.createElement('div');
+        n.className = 'self-drive-note';
+        n.innerHTML = '🛵 Bạn muốn tự chạy xe máy đi cùng đoàn? Giảm ngay 20% so với giá thuê Easy Rider. Nhắn Sen để giữ xe trống nha.';
+        el.after(n);
+      });
+    }
+    if (key === 'self-ride') {
+      document.querySelectorAll('.card-pricing').forEach(el => {
+        const n = document.createElement('div');
+        n.className = 'self-drive-note';
+        n.innerHTML = '⛽ Bạn sẽ tự chạy xe máy đi cùng đoàn có HDV dẫn đường. Giá đã bao gồm mức giảm 20%. <strong>Khách tự trả tiền xăng</strong> — xe máy, HDV dẫn đường, vé tham quan và bữa trưa đã gồm trọn gói.';
+        el.after(n);
+      });
+    }
+    if (key === 'driver-only') {
+      document.querySelectorAll('.card-pricing').forEach(el => {
+        const n = document.createElement('div');
+        n.className = 'driver-note';
+        n.innerHTML = '⚠️ Gói này chỉ bao gồm xe và tài xế bản địa quen đường. Không bao gồm HDV dẫn tour, ăn uống hay vé vào cổng các điểm tham quan.';
+        el.after(n);
+      });
+    }
+    const step2 = document.getElementById('step2');
+    step2.classList.add('visible');
+    setTimeout(() => step2.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+  }
+
+  // MODAL ITINERARY
+  let currentTour = null, currentDay = 0;
+
+  function openModal(tourKey, dayIdx) {
+    currentTour = tourKey; currentDay = dayIdx;
+    renderModal();
+    document.getElementById('modalOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function renderModal() {
+    const tour = tourData[currentTour];
+    document.getElementById('modalTitle').textContent = tour.title;
+    document.getElementById('modalTabs').innerHTML = tour.days.map((d, i) =>
+      `<button class="modal-tab${i===currentDay?' active':''}" onclick="switchDay(${i})">${d.label}</button>`
+    ).join('');
+    renderDay();
+  }
+  function renderDay() {
+    const day = tourData[currentTour].days[currentDay];
+    document.getElementById('modalSub').textContent = `${day.label} · ${day.km} · ${day.night || 'Về lại thành phố'}`;
+    document.getElementById('modalMeta').innerHTML =
+      `<span>📏 ${day.km}</span><span>🌙 Nơi nghỉ: ${day.night || 'Về lại thành phố'}</span>`
+      + (day.depart ? `<span>⏰ Khởi hành ${day.depart}</span>` : '')
+      + (day.back ? `<span>🏠 Trở về tầm ${day.back}</span>` : '');
+    document.getElementById('modalPlaces').innerHTML = day.places.map(p =>
+      `<div class="modal-place">
+        <img loading="lazy" class="modal-place-img" src="${p.img}" alt="${p.name}"
+             style="object-position:${p.pos || 'center'}"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="modal-place-ph" style="display:none;font-size:0.72rem;color:var(--text-muted);font-family:monospace;padding:12px;text-align:center;word-break:break-all;">${p.img}</div>
+        <div class="modal-place-info">
+          <div class="modal-place-name">${p.name}</div>
+          <div class="modal-place-desc">${p.desc}</div>
+        </div>
+      </div>`
+    ).join('');
+    document.querySelectorAll('.modal-tab').forEach((t,i) => t.classList.toggle('active', i===currentDay));
+  }
+  function switchDay(idx) { currentDay = idx; renderDay(); }
+  function closeModal(e) { if (e.target === document.getElementById('modalOverlay')) closeModalDirect(); }
+  function closeModalDirect() { document.getElementById('modalOverlay').classList.remove('open'); document.body.style.overflow = ''; }
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModalDirect(); });
+
+  // MEMORIES GALLERY
+  const grid = document.getElementById('memoriesGrid');
+  for (let i = 1; i <= 16; i++) {
+    const num = String(i).padStart(2, '0');
+    const item = document.createElement('div');
+    item.className = 'masonry-item';
+    item.innerHTML = `
+      <img loading="lazy" src="../images/memories/${num}.jpg" alt="Kỷ niệm của du khách ${i}"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="masonry-ph" style="display:none;font-size:0.72rem;color:var(--text-muted);font-family:monospace;padding:16px;text-align:center;">../images/memories/${num}.jpg</div>`;
+    grid.appendChild(item);
+  }
+
+  // DEFAULT: Car+Guide selected on load, step2 visible immediately
+  const defaultBtn = document.querySelector('.vehicle-btn');
+  selectVehicle('car-guide', defaultBtn);
+  document.getElementById('step2').classList.add('visible');
+  document.getElementById('step2').style.transition = 'none';
+
+</script>
+</body>
+</html>

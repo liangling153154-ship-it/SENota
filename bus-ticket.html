@@ -4,6 +4,9 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Bus Tickets from Cao Bang · Sen's Homestay</title>
+<link rel="alternate" hreflang="en" href="bus-ticket.html" />
+<link rel="alternate" hreflang="vi" href="vi/bus-ticket.html" />
+<link rel="alternate" hreflang="x-default" href="bus-ticket.html" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -66,11 +69,14 @@ nav.scrolled{box-shadow:0 6px 22px rgba(42,33,24,0.10)}
 .step-block.locked{opacity:0.4;pointer-events:none}
 
 /* DESTINATION GRID */
-.dest-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px}
-.dest-card{border:2px solid var(--line);border-radius:12px;padding:14px 16px;cursor:pointer;transition:all 0.18s;user-select:none;background:#fdfcf8;position:relative}
+.dest-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+/* image on the LEFT, text on the RIGHT */
+.dest-card{border:2px solid var(--line);border-radius:12px;cursor:pointer;transition:all 0.18s;user-select:none;background:#fdfcf8;position:relative;display:flex;align-items:stretch;overflow:hidden}
 .dest-card:hover{border-color:var(--gm);background:var(--gl)}
 .dest-card.selected{border-color:var(--gd);background:var(--gl)}
-.dest-card.selected::after{content:'✓';position:absolute;top:10px;right:12px;width:20px;height:20px;border-radius:50%;background:var(--gd);color:white;font-size:0.68rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+.dest-card.selected::after{content:'✓';position:absolute;top:10px;right:12px;width:20px;height:20px;border-radius:50%;background:var(--gd);color:white;font-size:0.68rem;font-weight:700;display:flex;align-items:center;justify-content:center;z-index:2}
+.dest-media{width:92px;flex:0 0 92px;object-fit:cover;align-self:stretch}
+.dest-content{flex:1;min-width:0;padding:13px 15px}
 .dest-icon{font-size:1.4rem;margin-bottom:5px;line-height:1}
 .dest-name{font-size:0.9rem;font-weight:600;color:var(--tx);margin-bottom:2px}
 .dest-dur{font-size:0.68rem;color:var(--tm);margin-bottom:7px}
@@ -261,6 +267,10 @@ footer a{color:var(--gm)}
 </a>
 
 <script>
+// destination id -> photo file in images/bus/
+const DEST_IMG = { hanoi:'ha-noi', hagiang:'ha-giang', bacninh:'bac-ninh', ninhbinh:'ninh-binh',
+  catba:'cat-ba', halong:'ha-long', quangninh:'quang-ninh', haiphong:'hai-phong', babe:'ba-be' };
+
 const DESTINATIONS = [
   {
     id:'hanoi', icon:'🏙️', name:'Ha Noi', duration:'~6 hrs',
@@ -333,7 +343,11 @@ function buildDestGrid(){
     const card = document.createElement('div');
     card.className = 'dest-card';
     card.id = 'dest-' + d.id;
-    card.innerHTML = `<div class="dest-icon">${d.icon}</div><div class="dest-name">${d.name}</div><div class="dest-dur">${d.duration}</div><div class="dest-times">${html}</div>`;
+    const imgSlug = DEST_IMG[d.id];
+    const media = imgSlug
+      ? `<img class="dest-media" loading="lazy" src="images/bus/${imgSlug}.jpg" alt="${d.name}" onerror="this.style.display='none'">`
+      : `<div class="dest-icon">${d.icon}</div>`;
+    card.innerHTML = `${media}<div class="dest-content"><div class="dest-name">${d.name}</div><div class="dest-dur">${d.duration}</div><div class="dest-times">${html}</div></div>`;
     card.onclick = () => selectDest(d.id);
     grid.appendChild(card);
   });

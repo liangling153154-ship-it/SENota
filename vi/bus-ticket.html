@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <title>Vé xe khách từ Cao Bằng · Sen's Homestay</title>
+  <meta name="description" content="Sen đặt vé xe khách đi Hà Nội, Hà Giang, Cát Bà, Hạ Long... Tài xế đón tận homestay, không tính phí dịch vụ." />
+  <link rel="alternate" hreflang="vi" href="bus-ticket.html" />
+  <link rel="alternate" hreflang="en" href="../bus-ticket.html" />
+  <link rel="alternate" hreflang="x-default" href="../bus-ticket.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Light highland design system */
+      --paper:#FBF7EF; --paper-2:#F3EBDA; --surface:#FFFFFF;
+      --ink:#2A2118; --ink-soft:#6B5D4C;
+      --terra:#B65A36; --terra-deep:#9A4A2E; --terra-soft:#C97048;
+      --forest:#3C5A40; --forest-deep:#2C4530; --amber:#C8841F;
+      --on-dark:#F6EFE2; --on-dark-soft:#D8CDB8;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --r-pill: 999px;
+      --green-dark:  var(--forest);
+      --green-mid:   var(--terra-soft);
+      --green-light: var(--paper-2);
+      --orange:      var(--terra-deep);
+      --orange-dark: var(--terra);
+      --cream:       var(--paper);
+      --brown:       var(--ink);
+      --white:       #FFFFFF;
+      --text:        var(--ink);
+      --text-muted:  var(--ink-soft);
+      --radius:      16px;
+      --shadow:      0 4px 14px rgba(42,33,24,0.07), 0 14px 34px rgba(42,33,24,0.09);
+      --line:        rgba(42,33,24,0.10);
+      --gd:var(--forest); --gm:var(--terra-soft); --gl:var(--paper-2);
+      --or:var(--terra-deep); --cr:var(--paper); --tx:var(--ink); --tm:var(--ink-soft);
+      --sh:var(--shadow); --r:16px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: 'Hanken Grotesk', system-ui, sans-serif;
+      background: var(--paper); color: var(--ink); overflow-x: hidden; line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; width: 100%; object-fit: cover; }
+    a { text-decoration: none; color: inherit; }
+    h1, h2, h3, h4 {
+      font-family: 'Bricolage Grotesque', 'Hanken Grotesk', sans-serif;
+      font-weight: 700; line-height: 1.1; letter-spacing: -0.02em;
+      color: var(--ink); text-wrap: balance;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; inset: 0 0 auto 0; z-index: 300;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px; padding: 0 34px;
+      background: rgba(251,247,239,0.9); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line); transition: box-shadow 0.4s var(--ease);
+    }
+    nav.scrolled { box-shadow: 0 6px 22px rgba(42,33,24,0.10); }
+    .nav-logo { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.34rem; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; display: flex; align-items: center; gap: 9px; }
+    .nav-logo .leaf { width: 25px; height: 25px; color: var(--terra-deep); stroke: currentColor; fill: none; stroke-width: 1.7; }
+    .nav-links { display: flex; gap: 26px; align-items: center; }
+    .nav-links a { font-size: 0.92rem; font-weight: 600; color: var(--ink-soft); transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--terra-deep); }
+    .nav-cta { display: inline-flex; align-items: center; gap: 7px; background: var(--terra-deep); color: #fff !important; padding: 10px 20px; border-radius: var(--r-pill); font-weight: 700; font-size: 0.86rem; transition: background 0.2s, transform 0.2s; }
+    .nav-cta:hover { background: var(--terra); transform: translateY(-2px); }
+    .nav-cta svg { width: 15px; height: 15px; fill: currentColor; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; }
+    .nav-hamburger span { width: 24px; height: 2px; background: var(--ink); border-radius: 2px; }
+
+    /* LANGUAGE SWITCH */
+    .lang-switch { display: inline-flex; align-items: center; border-radius: var(--r-pill); overflow: hidden; box-shadow: inset 0 0 0 1.5px rgba(42,33,24,0.18); margin: 0 4px; }
+    .lang-switch a { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.02em; padding: 6px 12px; color: var(--ink-soft); opacity: 0.9; transition: background 0.2s, color 0.2s; line-height: 1; }
+    .lang-switch a.active { background: var(--terra-deep); color: #fff !important; opacity: 1; }
+
+    /* LANGUAGE GATE */
+    .lang-gate { position: fixed; inset: 0; z-index: 400; display: none; align-items: center; justify-content: center; padding: 24px; background: rgba(24,20,14,0.55); backdrop-filter: blur(6px); }
+    .lang-gate.show { display: flex; animation: gate-fade 0.4s var(--ease); }
+    @keyframes gate-fade { from { opacity: 0; } to { opacity: 1; } }
+    .lang-gate-card { background: var(--paper); color: var(--ink); border-radius: var(--radius); box-shadow: var(--shadow); width: 100%; max-width: 420px; padding: 34px 30px; text-align: center; position: relative; }
+    .lang-gate-card .leaf { width: 34px; height: 34px; color: var(--terra-deep); margin: 0 auto 14px; }
+    .lang-gate-card h2 { font-size: 1.5rem; margin-bottom: 4px; }
+    .lang-gate-card .lg-sub { font-size: 0.92rem; color: var(--ink-soft); margin-bottom: 22px; }
+    .lang-gate-opts { display: flex; flex-direction: column; gap: 12px; }
+    .lang-gate-opts a { display: flex; align-items: center; gap: 14px; text-align: left; padding: 14px 18px; border-radius: 10px; min-height: 44px; background: var(--surface); box-shadow: inset 0 0 0 1.5px rgba(42,33,24,0.18); transition: transform 0.3s var(--ease), box-shadow 0.25s, background 0.25s; }
+    .lang-gate-opts a:hover { transform: translateY(-2px); box-shadow: inset 0 0 0 1.5px var(--terra-deep); background: rgba(182,90,54,0.06); }
+    .lang-gate-opts .flag { font-size: 1.5rem; line-height: 1; flex-shrink: 0; }
+    .lang-gate-opts .lg-label { font-weight: 700; font-size: 1rem; color: var(--ink); }
+    .lang-gate-opts .lg-native { font-size: 0.8rem; color: var(--ink-soft); }
+    .lang-gate-close { position: absolute; top: 12px; right: 12px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink-soft); border-radius: 50%; background: transparent; border: none; }
+    .lang-gate-close:hover { background: rgba(42,33,24,0.06); color: var(--ink); }
+    .lang-gate-close svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.7; }
+
+    /* Soft hint */
+    .lang-hint { position: fixed; left: 50%; transform: translateX(-50%) translateY(20px); bottom: calc(20px + env(safe-area-inset-bottom)); z-index: 200; display: none; align-items: center; gap: 12px; max-width: calc(100vw - 32px); background: var(--ink); color: #fff; padding: 12px 14px 12px 18px; border-radius: 999px; box-shadow: var(--shadow); font-size: 0.88rem; opacity: 0; transition: opacity 0.4s var(--ease), transform 0.4s var(--ease); }
+    .lang-hint.show { display: flex; opacity: 1; transform: translateX(-50%) translateY(0); }
+    .lang-hint a { background: #fff; color: var(--ink); font-weight: 700; padding: 8px 14px; border-radius: 999px; min-height: 36px; display: inline-flex; align-items: center; white-space: nowrap; }
+    .lang-hint button { background: transparent; border: none; color: rgba(255,255,255,0.7); cursor: pointer; padding: 6px; display: inline-flex; }
+    .lang-hint button svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.7; }
+
+    /* PAGE HEADER */
+    .pg-head { padding: 120px 40px 36px; max-width: 860px; margin: 0 auto; text-align: center; }
+    .eyebrow { font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase; color: var(--orange); margin-bottom: 10px; display: inline-flex; align-items: center; gap: 8px; }
+    .eyebrow::before { content:''; width: 5px; height: 5px; border-radius: 50%; background: var(--orange); }
+    .pg-head h1 { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(2rem, 4vw, 3rem); color: var(--green-dark); line-height: 1.1; margin-bottom: 12px; }
+    .pg-head h1 em { font-style: italic; color: var(--orange); }
+    .pg-head p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.65; max-width: 520px; margin: 0 auto; }
+
+    /* BOOKING WRAP */
+    .booking-wrap { max-width: 860px; margin: 0 auto; padding: 0 40px 80px; }
+
+    /* STEP BLOCKS */
+    .step-block { background: white; border-radius: var(--radius); border: 1px solid var(--line); box-shadow: var(--shadow); overflow: hidden; margin-bottom: 16px; transition: opacity 0.25s; }
+    .step-head { padding: 16px 22px; border-bottom: 1px solid var(--line); display: flex; align-items: center; gap: 12px; }
+    .step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--green-dark); color: white; font-size: 0.78rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .step-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.15rem; color: var(--green-dark); font-weight: 700; }
+    .step-sub { font-size: 0.72rem; color: var(--text-muted); margin-top: 1px; }
+    .step-body { padding: 18px 22px; }
+    .step-block.locked { opacity: 0.4; pointer-events: none; }
+
+    /* DESTINATION GRID */
+    .dest-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 10px; }
+    /* ảnh bên TRÁI, chữ bên PHẢI */
+    .dest-card { border: 2px solid var(--line); border-radius: 12px; cursor: pointer; transition: all 0.18s; user-select: none; background: #fdfcf8; position: relative; display: flex; align-items: stretch; overflow: hidden; }
+    .dest-card:hover { border-color: var(--green-mid); background: var(--green-light); }
+    .dest-card.selected { border-color: var(--green-dark); background: var(--green-light); }
+    .dest-card.selected::after { content: '✓'; position: absolute; top: 10px; right: 12px; width: 20px; height: 20px; border-radius: 50%; background: var(--green-dark); color: white; font-size: 0.68rem; font-weight: 700; display: flex; align-items: center; justify-content: center; z-index: 2; }
+    .dest-media { width: 92px; flex: 0 0 92px; object-fit: cover; align-self: stretch; }
+    .dest-content { flex: 1; min-width: 0; padding: 13px 15px; }
+    .dest-icon { font-size: 1.4rem; margin-bottom: 5px; line-height: 1; }
+    .dest-name { font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+    .dest-dur { font-size: 0.68rem; color: var(--text-muted); margin-bottom: 7px; }
+    .dest-times { font-size: 0.68rem; color: var(--text-muted); line-height: 1.65; }
+    .type-badge { display: inline-block; font-size: 0.62rem; font-weight: 600; padding: 1px 7px; border-radius: 4px; margin-bottom: 2px; }
+    .badge-limo { background: rgba(45,106,79,0.1); color: var(--green-dark); }
+    .badge-sleep { background: rgba(92,61,46,0.1); color: var(--brown); }
+
+    /* TIME SECTION LABEL */
+    .time-section-label { grid-column: 1/-1; font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding-bottom: 2px; margin-bottom: -2px; border-bottom: 1px solid var(--line); }
+    .time-section-label.lbl-limo { color: var(--green-dark); }
+    .time-section-label.lbl-sleep { color: var(--brown); margin-top: 10px; }
+
+    /* TIME GRID */
+    .time-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 8px; }
+    .time-pill { border: 2px solid var(--line); border-radius: 10px; padding: 11px 12px; cursor: pointer; transition: all 0.15s; text-align: center; background: #fdfcf8; user-select: none; }
+    .time-pill:hover { border-color: var(--green-mid); background: var(--green-light); }
+    .time-pill.selected { border-color: var(--green-dark); background: var(--green-dark); color: white; }
+    .tp-time { font-size: 0.92rem; font-weight: 700; }
+    .tp-type { font-size: 0.61rem; margin-top: 2px; opacity: 0.6; }
+    .time-pill.selected .tp-type { opacity: 0.85; }
+
+    /* FORM */
+    .field-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+    .field-label { font-size: 0.78rem; font-weight: 500; color: var(--brown); }
+    .field-input { padding: 11px 14px; border: 1.5px solid var(--line); border-radius: 10px; font-family: inherit; font-size: 0.88rem; color: var(--text); background: #fdfcf8; outline: none; transition: border-color 0.15s; }
+    .field-input:focus { border-color: var(--green-mid); }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    /* SUMMARY */
+    .summary-box { background: var(--green-light); border: 1px solid rgba(45,106,79,0.18); border-radius: 12px; padding: 16px 18px; margin-bottom: 16px; min-height: 56px; }
+    .s-row { display: flex; gap: 8px; font-size: 0.83rem; line-height: 1.8; }
+    .s-label { color: var(--text-muted); font-size: 0.72rem; min-width: 110px; flex-shrink: 0; padding-top: 2px; }
+    .s-val { font-weight: 600; color: var(--green-dark); }
+    .s-empty { color: var(--text-muted); font-style: italic; font-size: 0.82rem; }
+
+    /* SEND BTN */
+    .send-btn { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 15px; border-radius: 50px; background: #25D366; color: white; font-size: 0.95rem; font-weight: 600; transition: all 0.2s; cursor: pointer; border: none; font-family: inherit; }
+    .send-btn:hover:not(:disabled) { background: #1fba58; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,211,102,0.35); }
+    .send-btn:disabled { background: #c0c0c0; cursor: not-allowed; }
+    .send-btn svg { width: 20px; fill: white; flex-shrink: 0; }
+
+    .info-strip { display: flex; align-items: flex-start; gap: 10px; background: rgba(231,111,81,0.07); border: 1px solid rgba(231,111,81,0.2); border-radius: 10px; padding: 12px 14px; font-size: 0.78rem; color: var(--brown); line-height: 1.55; margin-top: 12px; }
+
+    /* FOOTER */
+    footer { background: #0f2419; color: rgba(255,255,255,0.4); text-align: center; padding: 18px; font-size: 0.76rem; }
+    footer a { color: var(--green-mid); }
+
+    .waf { position: fixed; bottom: 22px; right: 22px; width: 50px; height: 50px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(37,211,102,0.4); z-index: 99; }
+    .waf svg { width: 22px; fill: white; }
+
+    @media (max-width: 700px) {
+      nav { padding: 0 18px; }
+      .nav-links { display: none; flex-direction: column; align-items: stretch; position: absolute; top: 100%; left: 0; right: 0; background: var(--terra-deep); padding: 14px 18px calc(14px + env(safe-area-inset-bottom)); gap: 2px; box-shadow: var(--shadow); }
+      .nav-links.open { display: flex; }
+      .nav-links a:not(.nav-cta), nav.scrolled .nav-links a:not(.nav-cta) { font-size: 1rem; padding: 15px 10px; color: #fff; opacity: 1; border-bottom: 1px solid rgba(255,255,255,0.16); }
+      .nav-links a:not(.nav-cta):last-of-type { border-bottom: none; }
+      .nav-links .nav-cta { justify-content: center; margin-top: 12px; padding: 14px 20px; font-size: 0.95rem; }
+      .nav-hamburger { display: flex; }
+      .pg-head { padding: 100px 16px 24px; }
+      .booking-wrap { padding: 0 16px 60px; }
+      .field-row { grid-template-columns: 1fr; }
+      .dest-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <svg class="leaf" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 20s-7-3-7-9a4 4 0 017-2.6A4 4 0 0118 11c0 6-7 9-7 9z"/><path d="M11 11v9" stroke-width="1.5"/></svg>
+    Sen's Homestay
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="rooms.html">Phòng</a>
+    <a href="motorbike.html">Thuê xe máy</a>
+    <a href="tours.html">Tour</a>
+    <a href="food.html">Ăn uống</a>
+    <a href="services.html">Dịch vụ</a>
+    <a href="itinerary.html">Lịch trình</a>
+    <a href="bus-ticket.html" class="active">Vé xe khách</a>
+    <span class="lang-switch">
+      <a href="../bus-ticket.html" onclick="setLang('en')">EN</a>
+      <a href="bus-ticket.html" class="active" aria-current="true">VI</a>
+    </span>
+    <a href="https://wa.me/84822946888?text=Ch%C3%A0o%20Sen!%20M%C3%ACnh%20mu%E1%BB%91n%20%C4%91%E1%BA%B7t%20v%C3%A9%20xe%20kh%C3%A1ch." class="nav-cta" target="_blank">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
+      WhatsApp
+    </a>
+  </div>
+  <div class="nav-hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="pg-head">
+  <div class="eyebrow">Rời Cao Bằng</div>
+  <h1>Đặt vé xe khách<br><em>đi cho tiện</em></h1>
+  <p>Sen đặt vé miễn phí. Xe đón tận homestay ở trung tâm thành phố, chốt giờ nhanh gọn. Chọn điểm đến rồi nhắn Sen là xong.</p>
+</div>
+
+<div class="booking-wrap">
+
+  <!-- STEP 1 -->
+  <div class="step-block" id="step1">
+    <div class="step-head">
+      <div class="step-num">1</div>
+      <div>
+        <div class="step-title">Bạn muốn đi đâu?</div>
+        <div class="step-sub">Xe đón trực tiếp tại homestay</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <div class="dest-grid" id="destGrid"></div>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step-block locked" id="step2">
+    <div class="step-head">
+      <div class="step-num">2</div>
+      <div>
+        <div class="step-title">Chọn giờ khởi hành</div>
+        <div class="step-sub">Giờ có thể lệch nhẹ, Sen sẽ báo lại khi chốt</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <div class="time-grid" id="timeGrid"></div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step-block locked" id="step3">
+    <div class="step-head">
+      <div class="step-num">3</div>
+      <div>
+        <div class="step-title">Ngày đi & Số khách</div>
+        <div class="step-sub">Để Sen check ghế trống cho bạn</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <div class="field-row">
+        <div class="field-group">
+          <label class="field-label">Ngày khởi hành</label>
+          <input class="field-input" type="date" id="travelDate" oninput="updateSummary()">
+        </div>
+        <div class="field-group">
+          <label class="field-label">Số khách đi</label>
+          <input class="field-input" type="number" id="paxCount" min="1" max="20" value="1" oninput="updateSummary()">
+        </div>
+      </div>
+      <div class="field-group">
+        <label class="field-label">Ghi chú thêm (nếu có)</label>
+        <input class="field-input" id="noteField" placeholder="Ví dụ: ưu tiên giường tầng dưới, nhiều hành lý, v.v..." oninput="updateSummary()">
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step-block locked" id="step4">
+    <div class="step-head">
+      <div class="step-num">4</div>
+      <div>
+        <div class="step-title">Xác nhận & Gửi Sen</div>
+        <div class="step-sub">Sen kiểm tra và trả lời qua WhatsApp khá nhanh</div>
+      </div>
+    </div>
+    <div class="step-body">
+      <div class="summary-box" id="summaryBox">
+        <span class="s-empty">Chọn xong các bước trên là có yêu cầu đặt vé ngay...</span>
+      </div>
+      <button class="send-btn" id="sendBtn" disabled onclick="sendWhatsApp()">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Gửi qua WhatsApp
+      </button>
+      <div class="info-strip">
+        <span style="font-size:1rem;flex-shrink:0;margin-top:1px">ℹ️</span>
+        <span>Sen xác nhận chỗ và báo giá nhà xe qua WhatsApp. Không thêm phí ẩn. Xe đón ngay tại sảnh homestay.</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2025 Sen's Homestay · Cao Bằng &nbsp;·&nbsp; <a href="https://wa.me/84822946888" target="_blank">WhatsApp</a></p>
+</footer>
+
+<a href="https://wa.me/84822946888" class="waf" target="_blank" title="Nhắn cho Sen">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+  });
+  function toggleNav() {
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  // LANGUAGE GATE + SWITCH
+  const LANG_HERE = 'vi';
+  function setLang(l){ try { localStorage.setItem('senLang', l); } catch(e){} }
+  function dismissGate(){
+    document.getElementById('langGate').classList.remove('show');
+    setLang(LANG_HERE);
+  }
+  function dismissHint(){
+    document.getElementById('langHint').classList.remove('show');
+    try { sessionStorage.setItem('senHintDismissed','1'); } catch(e){}
+  }
+  (function(){
+    let saved = null; try { saved = localStorage.getItem('senLang'); } catch(e){}
+    if (!saved) {
+      document.getElementById('langGate').classList.add('show');
+    } else if (saved !== LANG_HERE) {
+      let dismissed = null; try { dismissed = sessionStorage.getItem('senHintDismissed'); } catch(e){}
+      if (!dismissed) document.getElementById('langHint').classList.add('show');
+    }
+  })();
+
+  // id điểm đến -> ảnh trong ../images/bus/
+  const DEST_IMG = { hanoi:'ha-noi', hagiang:'ha-giang', bacninh:'bac-ninh', ninhbinh:'ninh-binh',
+    catba:'cat-ba', halong:'ha-long', quangninh:'quang-ninh', haiphong:'hai-phong', babe:'ba-be' };
+
+  const DESTINATIONS = [
+    {
+      id: 'hanoi', icon: '🏙️', name: 'Hà Nội', duration: '~6 tiếng',
+      times: [
+        { t: '07:00', type: 'Xe Limousine' },
+        { t: '09:00', type: 'Xe Limousine' },
+        { t: '10:00', type: 'Xe Limousine' },
+        { t: '11:00', type: 'Xe Limousine' },
+        { t: '12:00', type: 'Xe Limousine' },
+        { t: '14:00', type: 'Xe Limousine' },
+        { t: '15:00', type: 'Xe Limousine' },
+        { t: '16:00', type: 'Xe Limousine' },
+        { t: '09:00', type: 'Xe giường nằm' },
+        { t: '12:00', type: 'Xe giường nằm' },
+        { t: '20:30', type: 'Xe giường nằm' }
+      ]
+    },
+    {
+      id: 'hagiang', icon: '🌿', name: 'Hà Giang', duration: '~8 tiếng',
+      times: [
+        { t: '08:00', type: 'Xe Limousine' },
+        { t: '16:00', type: 'Xe Limousine' }
+      ]
+    },
+    {
+      id: 'bacninh', icon: '🏭', name: 'Bắc Ninh', duration: '~6 tiếng (không đổi xe)',
+      times: [{ t: '20:30', type: 'Xe giường nằm' }]
+    },
+    {
+      id: 'ninhbinh', icon: '⛩️', name: 'Ninh Bình', duration: '~9 tiếng (không đổi xe)',
+      times: [{ t: '19:00', type: 'Xe giường nằm' }]
+    },
+    {
+      id: 'catba', icon: '🏝️', name: 'Đảo Cát Bà', duration: '~10 tiếng (không đổi xe)',
+      times: [{ t: '20:30', type: 'Xe giường nằm' }]
+    },
+    {
+      id: 'halong', icon: '⛵', name: 'Hạ Long', duration: '~9 tiếng (không đổi xe)',
+      times: [{ t: '20:30', type: 'Xe giường nằm' }]
+    },
+    {
+      id: 'quangninh', icon: '🌅', name: 'Quảng Ninh', duration: 'không đổi xe',
+      times: [
+        { t: '08:00', type: 'Xe giường nằm' },
+        { t: '20:00', type: 'Xe giường nằm' }
+      ]
+    },
+    {
+      id: 'haiphong', icon: '⚓', name: 'Hải Phòng', duration: '~9 tiếng (không đổi xe)',
+      times: [{ t: '20:30', type: 'Xe giường nằm' }]
+    },
+    {
+      id: 'babe', icon: '🌊', name: 'Hồ Ba Bể', duration: '~3 tiếng',
+      times: [{ t: '12:00', type: 'Xe Limousine' }]
+    }
+  ];
+
+  let selectedDest = null;
+  let selectedTime = null;
+  let selectedType = null;
+
+  function buildDestGrid() {
+    const grid = document.getElementById('destGrid');
+    DESTINATIONS.forEach(d => {
+      const limos = d.times.filter(t => t.type === 'Xe Limousine');
+      const sleeps = d.times.filter(t => t.type === 'Xe giường nằm');
+      let html = '';
+      if (limos.length) html += `<span class="type-badge badge-limo">Limousine</span><br>${limos.map(t => t.t).join(' · ')}<br>`;
+      if (sleeps.length) html += `<span class="type-badge badge-sleep">Giường nằm</span><br>${sleeps.map(t => t.t).join(' · ')}`;
+      const card = document.createElement('div');
+      card.className = 'dest-card';
+      card.id = 'dest-' + d.id;
+      const imgSlug = DEST_IMG[d.id];
+      const media = imgSlug
+        ? `<img class="dest-media" loading="lazy" src="../images/bus/${imgSlug}.jpg" alt="${d.name}" onerror="this.style.display='none'">`
+        : `<div class="dest-icon">${d.icon}</div>`;
+      card.innerHTML = `${media}<div class="dest-content"><div class="dest-name">${d.name}</div><div class="dest-dur">${d.duration}</div><div class="dest-times">${html}</div></div>`;
+      card.onclick = () => selectDest(d.id);
+      grid.appendChild(card);
+    });
+  }
+
+  function selectDest(id) {
+    document.querySelectorAll('.dest-card').forEach(c => c.classList.remove('selected'));
+    document.getElementById('dest-' + id).classList.add('selected');
+    selectedDest = id;
+    selectedTime = null;
+    selectedType = null;
+    buildTimeGrid(id);
+    document.getElementById('step2').classList.remove('locked');
+    setTimeout(() => document.getElementById('step2').scrollIntoView({ behavior: 'smooth', block: 'start' }), 120);
+    updateSummary();
+  }
+
+  function buildTimeGrid(destId) {
+    const dest = DESTINATIONS.find(d => d.id === destId);
+    const grid = document.getElementById('timeGrid');
+    grid.innerHTML = '';
+
+    const limos = dest.times.filter(t => t.type === 'Xe Limousine');
+    const sleeps = dest.times.filter(t => t.type === 'Xe giường nằm');
+
+    if (limos.length) {
+      const lbl = document.createElement('div');
+      lbl.className = 'time-section-label lbl-limo';
+      lbl.textContent = 'Xe Limousine';
+      grid.appendChild(lbl);
+      limos.forEach(t => addPill(grid, t));
+    }
+    if (sleeps.length) {
+      const lbl = document.createElement('div');
+      lbl.className = 'time-section-label lbl-sleep';
+      lbl.textContent = 'Xe giường nằm';
+      grid.appendChild(lbl);
+      sleeps.forEach(t => addPill(grid, t));
+    }
+  }
+
+  function addPill(grid, t) {
+    const pill = document.createElement('div');
+    pill.className = 'time-pill';
+    pill.innerHTML = `<div class="tp-time">${t.t}</div><div class="tp-type">${t.type}</div>`;
+    pill.onclick = () => {
+      document.querySelectorAll('.time-pill').forEach(p => p.classList.remove('selected'));
+      pill.classList.add('selected');
+      selectedTime = t.t;
+      selectedType = t.type;
+      document.getElementById('step3').classList.remove('locked');
+      document.getElementById('step4').classList.remove('locked');
+      setTimeout(() => document.getElementById('step3').scrollIntoView({ behavior: 'smooth', block: 'start' }), 120);
+      updateSummary();
+    };
+    grid.appendChild(pill);
+  }
+
+  function updateSummary() {
+    const box = document.getElementById('summaryBox');
+    const btn = document.getElementById('sendBtn');
+    if (!selectedDest || !selectedTime) {
+      box.innerHTML = '<span class="s-empty">Hãy chọn các bước trên để tạo yêu cầu đặt vé...</span>';
+      btn.disabled = true;
+      return;
+    }
+    const dest = DESTINATIONS.find(d => d.id === selectedDest);
+    const dateVal = document.getElementById('travelDate').value;
+    const pax = parseInt(document.getElementById('paxCount').value) || 1;
+    const note = document.getElementById('noteField').value;
+    const fmtDate = dateVal
+      ? new Date(dateVal + 'T00:00:00').toLocaleDateString('vi-VN', { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' })
+      : '<em style="color:var(--text-muted);font-weight:400">chưa chọn ngày</em>';
+
+    box.innerHTML = `
+      <div class="s-row"><span class="s-label">Điểm đến</span><span class="s-val">${dest.icon} ${dest.name}</span></div>
+      <div class="s-row"><span class="s-label">Thời gian chạy</span><span class="s-val">${dest.duration}</span></div>
+      <div class="s-row"><span class="s-label">Giờ đi & Dòng xe</span><span class="s-val">${selectedTime} &nbsp;·&nbsp; ${selectedType}</span></div>
+      <div class="s-row"><span class="s-label">Ngày đi</span><span class="s-val">${fmtDate}</span></div>
+      <div class="s-row"><span class="s-label">Số khách đi</span><span class="s-val">${pax} người</span></div>
+      ${note ? `<div class="s-row"><span class="s-label">Ghi chú thêm</span><span class="s-val">${note}</span></div>` : ''}
+    `;
+    btn.disabled = !dateVal;
+  }
+
+  function sendWhatsApp() {
+    const dest = DESTINATIONS.find(d => d.id === selectedDest);
+    const dateVal = document.getElementById('travelDate').value;
+    const pax = parseInt(document.getElementById('paxCount').value) || 1;
+    const note = document.getElementById('noteField').value;
+    const fmtDate = dateVal
+      ? new Date(dateVal + 'T00:00:00').toLocaleDateString('vi-VN', { weekday: 'long', day: '2-digit', month: '2-digit', year: 'numeric' })
+      : '';
+    let msg = `Chào Sen! Mình muốn đặt vé xe đi từ Cao Bằng:\n\n`;
+    msg += `🎯 Điểm đến: ${dest.name} (${dest.duration})\n`;
+    msg += `🚌 Dòng xe: ${selectedType}\n`;
+    msg += `🕐 Giờ đi: ${selectedTime}\n`;
+    msg += `📅 Ngày đi: ${fmtDate}\n`;
+    msg += `👥 Số khách: ${pax} người\n`;
+    if (note) msg += `📝 Ghi chú: ${note}\n`;
+    msg += `\nĐón mình tại homestay nha. Sen check chỗ trống và báo giá hộ mình nhé. Cảm ơn Sen!`;
+    window.open(`https://wa.me/84822946888?text=${encodeURIComponent(msg)}`, '_blank');
+  }
+
+  buildDestGrid();
+</script>
+</body>
+</html>

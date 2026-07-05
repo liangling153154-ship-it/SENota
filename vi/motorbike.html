@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <title>Thuê xe máy ở Cao Bằng · Sen's Homestay</title>
+  <meta name="description" content="Wave, Future, PG-1, Vision, Air Blade, Winner X, XR. Giao xe free, kèm mũ và áo mưa. Nhắn Sen là có xe." />
+  <link rel="alternate" hreflang="vi" href="motorbike.html" />
+  <link rel="alternate" hreflang="en" href="../motorbike.html" />
+  <link rel="alternate" hreflang="x-default" href="../motorbike.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Light highland design system */
+      --paper:#FBF7EF; --paper-2:#F3EBDA; --surface:#FFFFFF;
+      --ink:#2A2118; --ink-soft:#6B5D4C;
+      --terra:#B65A36; --terra-deep:#9A4A2E; --terra-soft:#C97048;
+      --forest:#3C5A40; --forest-deep:#2C4530; --amber:#C8841F;
+      --on-dark:#F6EFE2; --on-dark-soft:#D8CDB8;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --r-pill: 999px;
+      --green-dark:  var(--forest);
+      --green-mid:   var(--terra-soft);
+      --green-light: var(--paper-2);
+      --orange:      var(--terra-deep);
+      --orange-dark: var(--terra);
+      --cream:       var(--paper);
+      --brown:       var(--ink);
+      --white:       #FFFFFF;
+      --text:        var(--ink);
+      --text-muted:  var(--ink-soft);
+      --radius:      16px;
+      --shadow:      0 4px 14px rgba(42,33,24,0.07), 0 14px 34px rgba(42,33,24,0.09);
+      --line:        rgba(42,33,24,0.10);
+      --gd:var(--forest); --gm:var(--terra-soft); --gl:var(--paper-2);
+      --or:var(--terra-deep); --cr:var(--paper); --tx:var(--ink); --tm:var(--ink-soft);
+      --sh:var(--shadow); --r:16px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: 'Hanken Grotesk', system-ui, sans-serif;
+      background: var(--paper); color: var(--ink); overflow-x: hidden; line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; width: 100%; object-fit: cover; }
+    a { text-decoration: none; color: inherit; }
+    h1, h2, h3, h4 {
+      font-family: 'Bricolage Grotesque', 'Hanken Grotesk', sans-serif;
+      font-weight: 700; line-height: 1.1; letter-spacing: -0.02em;
+      color: var(--ink); text-wrap: balance;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; inset: 0 0 auto 0; z-index: 300;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px; padding: 0 34px;
+      background: rgba(251,247,239,0.9); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line); transition: box-shadow 0.4s var(--ease);
+    }
+    nav.scrolled { box-shadow: 0 6px 22px rgba(42,33,24,0.10); }
+    .nav-logo { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.34rem; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; display: flex; align-items: center; gap: 9px; }
+    .nav-logo .leaf { width: 25px; height: 25px; color: var(--terra-deep); stroke: currentColor; fill: none; stroke-width: 1.7; }
+    .nav-links { display: flex; gap: 26px; align-items: center; }
+    .nav-links a { font-size: 0.92rem; font-weight: 600; color: var(--ink-soft); transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--terra-deep); }
+    .nav-cta { display: inline-flex; align-items: center; gap: 7px; background: var(--terra-deep); color: #fff !important; padding: 10px 20px; border-radius: var(--r-pill); font-weight: 700; font-size: 0.86rem; transition: background 0.2s, transform 0.2s; }
+    .nav-cta:hover { background: var(--terra); transform: translateY(-2px); }
+    .nav-cta svg { width: 15px; height: 15px; fill: currentColor; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; }
+    .nav-hamburger span { width: 24px; height: 2px; background: var(--ink); border-radius: 2px; }
+
+    /* LANGUAGE SWITCH */
+    .lang-switch { display: inline-flex; align-items: center; border-radius: var(--r-pill); overflow: hidden; box-shadow: inset 0 0 0 1.5px rgba(42,33,24,0.18); margin: 0 4px; }
+    .lang-switch a { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.02em; padding: 6px 12px; color: var(--ink-soft); opacity: 0.9; transition: background 0.2s, color 0.2s; line-height: 1; }
+    .lang-switch a.active { background: var(--terra-deep); color: #fff !important; opacity: 1; }
+
+    /* LANGUAGE GATE */
+    .lang-gate { position: fixed; inset: 0; z-index: 400; display: none; align-items: center; justify-content: center; padding: 24px; background: rgba(24,20,14,0.55); backdrop-filter: blur(6px); }
+    .lang-gate.show { display: flex; animation: gate-fade 0.4s var(--ease); }
+    @keyframes gate-fade { from { opacity: 0; } to { opacity: 1; } }
+    .lang-gate-card { background: var(--paper); color: var(--ink); border-radius: var(--radius); box-shadow: var(--shadow); width: 100%; max-width: 420px; padding: 34px 30px; text-align: center; position: relative; }
+    .lang-gate-card .leaf { width: 34px; height: 34px; color: var(--terra-deep); margin: 0 auto 14px; }
+    .lang-gate-card h2 { font-size: 1.5rem; margin-bottom: 4px; }
+    .lang-gate-card .lg-sub { font-size: 0.92rem; color: var(--ink-soft); margin-bottom: 22px; }
+    .lang-gate-opts { display: flex; flex-direction: column; gap: 12px; }
+    .lang-gate-opts a { display: flex; align-items: center; gap: 14px; text-align: left; padding: 14px 18px; border-radius: 10px; min-height: 44px; background: var(--surface); box-shadow: inset 0 0 0 1.5px rgba(42,33,24,0.18); transition: transform 0.3s var(--ease), box-shadow 0.25s, background 0.25s; }
+    .lang-gate-opts a:hover { transform: translateY(-2px); box-shadow: inset 0 0 0 1.5px var(--terra-deep); background: rgba(182,90,54,0.06); }
+    .lang-gate-opts .flag { font-size: 1.5rem; line-height: 1; flex-shrink: 0; }
+    .lang-gate-opts .lg-label { font-weight: 700; font-size: 1rem; color: var(--ink); }
+    .lang-gate-opts .lg-native { font-size: 0.8rem; color: var(--ink-soft); }
+    .lang-gate-close { position: absolute; top: 12px; right: 12px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink-soft); border-radius: 50%; background: transparent; border: none; }
+    .lang-gate-close:hover { background: rgba(42,33,24,0.06); color: var(--ink); }
+    .lang-gate-close svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.7; }
+
+    /* Soft hint */
+    .lang-hint { position: fixed; left: 50%; transform: translateX(-50%) translateY(20px); bottom: calc(20px + env(safe-area-inset-bottom)); z-index: 200; display: none; align-items: center; gap: 12px; max-width: calc(100vw - 32px); background: var(--ink); color: #fff; padding: 12px 14px 12px 18px; border-radius: 999px; box-shadow: var(--shadow); font-size: 0.88rem; opacity: 0; transition: opacity 0.4s var(--ease), transform 0.4s var(--ease); }
+    .lang-hint.show { display: flex; opacity: 1; transform: translateX(-50%) translateY(0); }
+    .lang-hint a { background: #fff; color: var(--ink); font-weight: 700; padding: 8px 14px; border-radius: 999px; min-height: 36px; display: inline-flex; align-items: center; white-space: nowrap; }
+    .lang-hint button { background: transparent; border: none; color: rgba(255,255,255,0.7); cursor: pointer; padding: 6px; display: inline-flex; }
+    .lang-hint button svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.7; }
+
+    /* HERO */
+    .page-hero {
+      padding: 150px 48px 76px;
+      background: linear-gradient(135deg, var(--forest) 0%, var(--forest-deep) 100%);
+      text-align: center; color: #fff; position: relative; overflow: hidden;
+    }
+    .section-label { font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: #E8B987; font-weight: 700; margin-bottom: 12px; }
+    .page-hero h1 { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(2rem, 4vw, 3.2rem); margin-bottom: 16px; line-height: 1.2; }
+    .page-hero p { color: rgba(255,255,255,0.75); font-size: 1.05rem; max-width: 560px; margin: 0 auto 28px; line-height: 1.7; }
+    .hero-tags { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .hero-tag { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); color: white; font-size: 0.82rem; padding: 6px 16px; border-radius: 50px; }
+
+    /* FILTER BAR */
+    .filter-bar {
+      background: white; padding: 20px 48px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; border-bottom: 1px solid rgba(0,0,0,0.07); position: sticky; top: 72px; z-index: 90; box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .filter-label { font-size: 0.82rem; font-weight: 500; color: var(--text-muted); margin-right: 4px; }
+    .filter-btn {
+      padding: 8px 18px; border-radius: 50px; border: 1.5px solid rgba(45,106,79,0.25); background: white; color: var(--green-dark); font-family: 'Hanken Grotesk', sans-serif; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.2s;
+    }
+    .filter-btn:hover { border-color: var(--green-dark); background: var(--green-light); }
+    .filter-btn.active { background: var(--green-dark); color: white; border-color: var(--green-dark); }
+
+    /* BIKES SECTION */
+    #bikes-section { padding: 60px 48px; max-width: 1200px; margin: 0 auto; }
+    .bikes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 32px; }
+
+    /* BIKE CARD */
+    .bike-card {
+      background: white; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: transform 0.25s, box-shadow 0.25s; display: flex; flex-direction: column;
+    }
+    .bike-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.13); }
+    .bike-card.hidden { display: none; }
+
+    .bike-img { position: relative; height: 220px; background: var(--green-light); overflow: hidden; }
+    .bike-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+    .bike-card:hover .bike-img img { transform: scale(1.04); }
+    .bike-img-placeholder { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: var(--green-dark); font-size: 0.8rem; background: var(--green-light); }
+    .bike-emoji { font-size: 2.5rem; opacity: 0.5; }
+
+    .type-badge { position: absolute; top: 14px; left: 14px; z-index: 2; font-size: 0.68rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; padding: 5px 12px; border-radius: 50px; }
+    .badge-auto { background: #3a86c8; color: white; }
+    .badge-semi { background: #c8a23a; color: white; }
+    .badge-manual { background: #c83a3a; color: white; }
+    .price-badge { position: absolute; top: 14px; right: 14px; z-index: 2; background: var(--green-dark); color: white; font-size: 0.82rem; font-weight: 700; padding: 5px 12px; border-radius: 50px; }
+    .bestseller-badge { position: absolute; bottom: 14px; left: 14px; z-index: 2; background: #FFD166; color: var(--brown); font-size: 0.65rem; font-weight: 700; letter-spacing: 1.5px; padding: 4px 10px; border-radius: 4px; }
+
+    .bike-body { padding: 22px; flex: 1; display: flex; flex-direction: column; }
+    .bike-body h3 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.25rem; color: var(--green-dark); margin-bottom: 4px; }
+    .bike-tagline { font-size: 0.8rem; color: var(--green-mid); font-weight: 600; margin-bottom: 12px; }
+    .bike-specs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+    .spec-tag { background: var(--cream); border: 1px solid rgba(45,106,79,0.15); color: var(--brown); font-size: 0.72rem; padding: 4px 10px; border-radius: 50px; }
+
+    .bike-details-content { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; max-height: 0; overflow: hidden; transition: max-height 0.4s var(--ease), opacity 0.3s; opacity: 0; }
+    .bike-details-content.open { max-height: 500px; opacity: 1; margin-top: 10px; padding-top: 14px; border-top: 1px solid rgba(0,0,0,0.06); }
+    .bike-details-content h4 { font-size: 0.85rem; color: var(--green-dark); margin-bottom: 6px; font-family: 'Hanken Grotesk', sans-serif; }
+    .bike-details-content p { margin-bottom: 12px; }
+    .detail-pros-cons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .detail-col h4 { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 1px; color: var(--green-mid); margin-bottom: 6px; }
+    .detail-col ul { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .detail-col li { position: relative; padding-left: 12px; font-size: 0.78rem; line-height: 1.4; }
+    .detail-col li::before { content: "•"; position: absolute; left: 0; color: var(--green-mid); }
+
+    .bike-actions { display: flex; gap: 10px; margin-top: auto; padding-top: 16px; border-top: 1px solid rgba(0,0,0,0.06); }
+    .btn-toggle { flex: 1; background: var(--cream); border: 1.5px solid rgba(45,106,79,0.2); color: var(--green-dark); font-family: 'Hanken Grotesk', sans-serif; font-size: 0.85rem; font-weight: 500; padding: 10px; border-radius: 50px; cursor: pointer; transition: all 0.2s; }
+    .btn-toggle:hover { background: var(--green-light); border-color: var(--green-dark); }
+    .btn-book { flex: 1; background: var(--orange); color: white; font-family: 'Hanken Grotesk', sans-serif; font-size: 0.85rem; font-weight: 500; padding: 10px; border-radius: 50px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: background 0.2s, transform 0.2s; text-decoration: none; }
+    .btn-book:hover { background: var(--orange-dark); transform: translateY(-1px); }
+
+    /* HOW TO RIDE BANNER */
+    .how-to-banner { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+    .how-to-inner { background: #fff; border-radius: var(--radius); padding: 24px 32px; box-shadow: var(--shadow); border: 1.5px solid rgba(45,106,79,0.12); display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .how-to-text h3 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.25rem; color: var(--green-dark); margin-bottom: 4px; }
+    .how-to-text p { font-size: 0.84rem; color: var(--text-muted); line-height: 1.5; }
+    .btn-how-to { background: var(--green-dark); color: white; padding: 10px 24px; border-radius: 50px; font-weight: 600; font-size: 0.85rem; transition: background 0.2s; white-space: nowrap; }
+    .btn-how-to:hover { background: var(--forest-deep); }
+
+    /* INCLUDES, CONDITIONS, TIPS */
+    #includes, #conditions, #tips { padding: 64px 48px; }
+    .includes-inner, .conditions-inner, .tips-inner { max-width: 960px; margin: 0 auto; }
+    .section-title, .conditions-title, .tips-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(1.6rem, 3vw, 2.2rem); color: var(--green-dark); margin-bottom: 32px; }
+
+    .includes-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .include-item { background: white; border-radius: var(--radius); padding: 22px; border: 1px solid rgba(45,106,79,0.1); box-shadow: var(--shadow); }
+    .include-icon { font-size: 1.8rem; margin-bottom: 8px; }
+    .include-item h4 { font-size: 0.95rem; color: var(--green-dark); margin-bottom: 6px; }
+    .include-item p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+
+    .cond-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .cond-item { background: white; border-radius: var(--radius); padding: 20px 22px; border: 1px solid rgba(45,106,79,0.1); display: flex; gap: 14px; box-shadow: var(--shadow); }
+    .cond-icon { font-size: 1.6rem; flex-shrink: 0; margin-top: 2px; }
+    .cond-item h4 { font-size: 0.88rem; color: var(--green-dark); margin-bottom: 4px; }
+    .cond-item p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+
+    .tips-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .tip-item { background: white; border-radius: var(--radius); padding: 20px 22px; border: 1px solid rgba(0,0,0,0.06); display: flex; gap: 14px; box-shadow: var(--shadow); }
+    .tip-item.critical { border-left: 4px solid var(--orange); }
+    .tip-icon { font-size: 1.6rem; flex-shrink: 0; margin-top: 2px; }
+    .tip-item h4 { font-size: 0.88rem; color: var(--green-dark); margin-bottom: 4px; }
+    .tip-item p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+
+    /* CTA */
+    #cta { background: var(--green-dark); padding: 72px 48px; text-align: center; color: white; }
+    #cta .section-label { color: var(--green-mid); }
+    #cta h2 { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(1.8rem, 3vw, 2.4rem); color: white; margin-bottom: 14px; }
+    #cta p { color: rgba(255,255,255,0.72); margin-bottom: 32px; font-size: 0.95rem; }
+    .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-wa { background: #25D366; color: white; padding: 15px 32px; border-radius: 50px; font-weight: 500; font-size: 1rem; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 20px rgba(37,211,102,0.35); transition: filter 0.2s, transform 0.2s; }
+    .btn-wa:hover { filter: brightness(1.08); transform: translateY(-2px); }
+    .btn-outline-white { background: transparent; border: 1.5px solid rgba(255,255,255,0.45); color: white; padding: 15px 32px; border-radius: 50px; font-weight: 500; font-size: 1rem; display: inline-flex; align-items: center; gap: 10px; transition: background 0.2s, transform 0.2s; }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.12); transform: translateY(-2px); }
+
+    footer { background: #1a3d2a; color: rgba(255,255,255,0.5); text-align: center; padding: 24px; font-size: 0.82rem; }
+    footer a { color: var(--green-mid); }
+
+    .wa-float { position: fixed; bottom: 28px; right: 28px; width: 58px; height: 58px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.45); z-index: 299; transition: transform 0.2s; }
+    .wa-float:hover { transform: scale(1.1); }
+    .wa-float svg { width: 30px; fill: white; }
+    .wa-tooltip { position: absolute; right: 68px; background: var(--brown); color: white; font-size: 0.8rem; white-space: nowrap; padding: 7px 14px; border-radius: 8px; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+    .wa-float:hover .wa-tooltip { opacity: 1; }
+
+    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; flex-direction: column; align-items: stretch; position: absolute; top: 100%; left: 0; right: 0; background: var(--terra-deep); padding: 14px 18px calc(14px + env(safe-area-inset-bottom)); gap: 2px; box-shadow: var(--shadow); }
+      .nav-links.open { display: flex; }
+      .nav-links a:not(.nav-cta), nav.scrolled .nav-links a:not(.nav-cta) { font-size: 1rem; padding: 15px 10px; color: #fff; opacity: 1; border-bottom: 1px solid rgba(255,255,255,0.16); }
+      .nav-hamburger { display: flex; }
+      .page-hero { padding: 120px 24px 60px; }
+      .filter-bar { padding: 16px 24px; top: 65px; }
+      #bikes-section { padding: 40px 24px; }
+      .bikes-grid { grid-template-columns: 1fr; }
+      .how-to-banner { padding: 0 24px; }
+      .how-to-inner { flex-direction: column; text-align: center; }
+      .btn-how-to { width: 100%; text-align: center; }
+      #includes, #conditions, #tips, #cta { padding: 48px 24px; }
+      .includes-grid, .cond-grid, .tips-grid { grid-template-columns: 1fr; }
+      .detail-pros-cons { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============ LANGUAGE GATE ============ -->
+<div class="lang-gate" id="langGate" role="dialog" aria-modal="true" aria-labelledby="langGateTitle">
+  <div class="lang-gate-card">
+    <button class="lang-gate-close" onclick="dismissGate()" aria-label="Đóng">
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <svg class="leaf" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 20s-7-3-7-9a4 4 0 017-2.6A4 4 0 0118 11c0 6-7 9-7 9z"/><path d="M11 11v9" stroke-width="1.5"/></svg>
+    <h2 id="langGateTitle">Chào mừng đến Sen's</h2>
+    <p class="lg-sub">Chọn ngôn ngữ · Choose your language</p>
+    <div class="lang-gate-opts">
+      <a href="motorbike.html" onclick="setLang('vi')">
+        <span class="flag">🇻🇳</span>
+        <span><span class="lg-label">Tiếng Việt</span><br><span class="lg-native">Dành cho khách Việt Nam</span></span>
+      </a>
+      <a href="../motorbike.html" onclick="setLang('en')">
+        <span class="flag">🇬🇧</span>
+        <span><span class="lg-label">English</span><br><span class="lg-native">For international travellers</span></span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- Soft hint -->
+<div class="lang-hint" id="langHint" role="status">
+  <span>Prefer English?</span>
+  <a href="../motorbike.html" onclick="setLang('en')">View in English</a>
+  <button onclick="dismissHint()" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+</div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <svg class="leaf" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 20s-7-3-7-9a4 4 0 017-2.6A4 4 0 0118 11c0 6-7 9-7 9z"/><path d="M11 11v9" stroke-width="1.5"/></svg>
+    Sen's Homestay
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="rooms.html">Phòng</a>
+    <a href="motorbike.html" class="active">Thuê xe máy</a>
+    <a href="tours.html">Tour</a>
+    <a href="food.html">Ăn uống</a>
+    <a href="services.html">Dịch vụ</a>
+    <a href="itinerary.html">Lịch trình</a>
+    <a href="bus-ticket.html">Vé xe khách</a>
+    <span class="lang-switch">
+      <a href="../motorbike.html" onclick="setLang('en')">EN</a>
+      <a href="motorbike.html" class="active" aria-current="true">VI</a>
+    </span>
+    <a href="https://wa.me/84822946888?text=Ch%C3%A0o%20Sen!%20M%C3%ACnh%20mu%E1%BB%91n%20thu%E1%BB%87%20xe%20m%C3%A1y." class="nav-cta" target="_blank">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
+      WhatsApp
+    </a>
+  </div>
+  <div class="nav-hamburger" id="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <p class="section-label">Thuê xe máy vi vu · Cao Bằng</p>
+  <h1>Chọn xe hợp cung</h1>
+  <p>Nhận xe ngay ở trung tâm Cao Bằng. Mũ, áo mưa, giao xe và hỗ trợ đường đi đều có sẵn.</p>
+  <div class="hero-tags">
+    <span class="hero-tag">⛑️ Có sẵn mũ bảo hiểm</span>
+    <span class="hero-tag">🌧️ Chu bị sẵn áo mưa bộ</span>
+    <span class="hero-tag">🚗 Giao xe tận nơi miễn phí</span>
+    <span class="hero-tag">📞 Hỗ trợ 24/7 trên đường</span>
+    <span class="hero-tag">🌙 Nhận xe từ tối hôm trước</span>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <span class="filter-label">Dòng xe:</span>
+  <button class="filter-btn active" onclick="filterBikes('all',this)">Tất cả (9)</button>
+  <button class="filter-btn" onclick="filterBikes('auto',this)">🔵 Xe tay ga</button>
+  <button class="filter-btn" onclick="filterBikes('semi',this)">🟡 Xe số tự động</button>
+  <button class="filter-btn" onclick="filterBikes('manual',this)">🔴 Xe côn tay</button>
+</div>
+
+<!-- BIKES GRID -->
+<section id="bikes-section">
+  <div class="bikes-grid">
+
+    <!-- 1. Wave Alpha ⭐ -->
+    <div class="bike-card fade-in" data-type="semi">
+      <div class="bike-img">
+        <img loading="lazy" src="../images/bikes/wave-alpha.jpg" alt="Honda Wave Alpha"
+             onerror="this.parentElement.innerHTML='<div class=\'bike-img-placeholder\'><div class=\'bike-emoji\'>🏍️</div><span>../images/bikes/wave-alpha.jpg</span></div>'">
+        <span class="type-badge badge-semi">Xe số</span>
+        <span class="price-badge">180.000đ/ ngày</span>
+        <span class="bestseller-badge">⭐ BÁN CHẠY</span>
+      </div>
+      <div class="bike-body">
+        <h3>Honda Wave Alpha</h3>
+        <p class="bike-tagline">Nhẹ, bền, tiết kiệm xăng</p>
+        <div class="bike-specs">
+          <span class="spec-tag">110cc</span>
+          <span class="spec-tag">Không côn tay</span>
+          <span class="spec-tag">Trọng lượng nhẹ</span>
+        </div>
+        <div class="bike-details-content" id="d-wave">
+          <h4>Về xe</h4>
+          <p>Dòng xe số quốc dân — dễ lái, máy êm, siêu tiết kiệm xăng cho cả cung đường dài.</p>
+          <div class="detail-pros-cons">
+            <div class="detail-col pros"><h4>✅ Điểm cộng</h4><ul><li>Dễ chạy, cực tiết kiệm xăng</li><li>Dắt xe quay đầu nhẹ nhàng</li></ul></div>
+            <div class="detail-col cons"><h4>⚠️ Lưu ý</h4><ul><li>Máy 110cc chở 2 leo dốc cao sẽ hơi đuối</li></ul></div>
+          </div>
+          <h4>Phù hợp nhất</h4><p>Đi một mình, hành lý gọn nhẹ, tiết kiệm chi phí tối đa.</p>
+        </div>
+        <div class="bike-actions">
+          <button class="btn-toggle" onclick="toggleDetail('d-wave',this)">Chi tiết ↓</button>
+          <a href="https://wa.me/84822946888?text=Ch%C3%A0o%20Sen!%20M%C3%ACnh%20mu%E1%BB%91n%20thu%E1%BB%87%20xe%20Honda%20Wave%20Alpha." class="btn-book" target="_blank">💬 Đặt ngay</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Honda Future -->
+    <div class="bike-card fade-in" data-type="semi">
+      <div class="bike-img">
+        <img loading="lazy" src="../images/bikes/future.png" alt="Honda Future 125cc"
+             onerror="this.parentElement.innerHTML='<div class=\'bike-img-placeholder\'><div class=\'bike-emoji\'>🏍️</div><span>../images/bikes/future.png</span></div>'">
+        <span class="type-badge badge-semi">Xe số</span>
+        <span class="price-badge">250.000đ / ngày</span>
+      </div>
+      <div class="bike-body">
+        <h3>Honda Future 125cc</h3>
+        <p class="bike-tagline">Máy khỏe, leo dốc ổn, đi xa yên tâm</p>
+        <div class="bike-specs">
+          <span class="spec-tag">125cc</span>
+          <span class="spec-tag">Không côn tay</span>
+          <span class="spec-tag">Cốp rộng dưới yên</span>
+        </div>
+        <div class="bike-details-content" id="d-future">
+          <h4>Về xe</h4>
+          <p>Xe số cao cấp. Động cơ 125cc leo dốc khỏe hơn hẳn Wave, chạy đầm chắc trên đường dài.</p>
+          <div class="detail-pros-cons">
+            <div class="detail-col pros"><h4>✅ Điểm cộng</h4><ul><li>Máy bốc vượt dốc khỏe</li><li>Rất tiết kiệm xăng</li><li>Cốp xe rộng rãi</li></ul></div>
+            <div class="detail-col cons"><h4>⚠️ Lưu ý</h4><ul><li>Vẫn phải sang số bằng chân</li></ul></div>
+          </div>
+          <h4>Phù hợp nhất</h4><p>Đi dài ngày, cần xe khỏe để leo đèo mà vẫn tiết kiệm xăng.</p>
+        </div>
+        <div class="bike-actions">
+          <button class="btn-toggle" onclick="toggleDetail('d-future',this)">Chi tiết ↓</button>
+          <a href="https://wa.me/84822946888?text=Ch%C3%A0o%20Sen!%20M%C3%ACnh%20mu%E1%BB%91n%20thu%E1%BB%87%20xe%20Honda%20Future%20125cc." class="btn-book" target="_blank">💬 Đặt ngay</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Yamaha PG-1 -->
+    <div class="bike-card fade-in" data-type="semi">
+      <div class="bike-img">
+        <img loading="lazy" src="../images/bikes/pg1.jpg" alt="Yamaha PG-1 115cc"
+             onerror="this.parentElement.innerHTML='<div class=\'bike-img-placeholder\'><div class=\'bike-emoji\'>🏍️</div><span>../images/bikes/pg1.jpg</span></div>'">
+        <span class="type-badge badge-semi">Xe số</span>
+        <span class="price-badge">300.000đ / ngày</span>
+      </div>
+      <div class="bike-body">
+        <h3>Yamaha PG-1 115cc</h3>
+        <p class="bike-tagline">Gầm cao, kiểu phượt, đi đường xấu mượt</p>
+        <div class="bike-specs">
+          <span class="spec-tag">115cc</span>
+          <span class="spec-tag">Không côn tay</span>
+          <span class="spec-tag">Gầm xe cao 190mm</span>
+        </div>
+        <div class="bike-details-content" id="d-pg1">
+          <h4>Về xe</h4>
+          <p>Thiết kế retro cá tính, gầm cao vượt mọi ổ gà dốc đá cực kỳ êm ái.</p>
+          <div class="detail-pros-cons">
+            <div class="detail-col pros"><h4>✅ Điểm cộng</h4><ul><li>Gầm xe cao ít sợ chạm gầm</li><li>Lốp gai bám đường sỏi đá tốt</li><li>Lên hình phượt cực ngầu</li></ul></div>
+            <div class="detail-col cons"><h4>⚠️ Lưu ý</h4><ul><li>Không có cốp xe dưới yên</li></ul></div>
+          </div>
+          <h4>Phù hợp nhất</h4><p>Thích chụp ảnh sống ảo phong cách phượt, thích khám phá bản làng dốc đá.</p>
+        </div>
+        <div class="bike-actions">
+          <button class="btn-toggle" onclick="toggleDetail('d-pg1',this)">Chi tiết ↓</button>
+          <a href="https://wa.me/84822946888?text=Ch%C3%A0o%20Sen!%20M%C3%ACnh%20mu%E1%BB%91n%20thu%E1%BB%87%20xe%20Yamaha%20PG-1." class="btn-book" target="_blank">💬 Đặt ngay</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Honda Vision ⭐ -->
+    <div class="bike-card fade-in" data-type="auto">
+      <div class="bike-img">
+        <img loading="lazy" src="../images/bikes/vision.png" alt="Honda Vision 110cc"
+             onerror="this.parentElement.innerHTML='<div class=\'bike-img-placeholder\'><div class=\'bike-emoji\'>🛵</div><span>../images/bikes/vision.png</span></div>'">
+        <span class="type-badge badge-auto">Xe ga</span>
+        <span class="price-badge">250.000đ / ngày</span>
+        <span class="bestseller-badge">⭐ BÁN CHẠY</span>
+      </div>
+      <div class="bike-body">
+        <h3>Honda Vision 110cc</h3>
+        <p class="bike-tagline">Xe ga nhẹ, dạo phố dễ</p>
+        <div class="bike-specs">
+          <span class="spec-tag">110cc</span>
+          <span class="spec-tag">Chỉ ga là chạy</span>
+          <span class="spec-tag">Cốp rộng dưới yên</span>
+        </div>
+        <div class="bike-details-content" id="d-vision">
+          <h4>Về xe</h4>
+          <p>Xe ga quốc dân — không lo nhầm số, cứ ga là chạy. Nhẹ nhàng, dễ lái.</p>
+          <div class="detail-pros-cons">
+            <div class="detail-col pros"><h4>✅ Điểm cộng</h4><ul><li>Lái siêu dễ, không lo nhầm số</li><li>Cốp rộng chứa đồ thoải mái</li><li>Dắt xe cực nhẹ</li></ul></div>
+            <div class="detail-col cons"><h4>⚠️ Lưu ý</h4><ul><li>Chở 2 leo dốc đứng hơi đuối</li><li>Tốn xăng hơn xe số</li></ul></div>
+          </div>
+          <h4>Phù hợp nhất</h4><p>Các bạn nữ, lái mới hoặc dạo chơi quanh thành phố, điểm bằng phẳng.</p>
+        </div>
+        <div class="bike-actions">
+          <button class="btn-toggle" onclick="toggleDetail('d-vision',this)">Chi tiết ↓</button>
+          <a href="https://wa.me/84822946888?text=Ch%C3%A0o%20Sen!%20M%C3%ACnh%20mu%E1%BB%91n%20thu%E1%BB%87%20xe%20Honda%20Vision." class="btn-book" target="_blank">💬 Đặt ngay</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Honda Air Blade ⭐ -->
+    <div class="bike-card fade-in" data-type="auto">
+      <div class="bike-img">
+        <img loading="lazy" src="../images/bikes/airblade.jpg" alt="Honda Air Blade 125cc"
+             onerror="this.parentElement.innerHTML='<div class=\'bike-img-placeholder\'><div class=\'bike-emoji\'>🛵</div><span>../images/bikes/airblade.jpg</span></div>'">
+        <span class="type-badge badge-auto">Xe ga</span>
+        <span class="price-badge">300.000đ / ngày</span>
+        <span class="bestseller-badge">⭐ BÁN CHẠY</span>
+      </div>
+      <div class="bike-body">
+        <h3>Honda Air Blade 125cc</h3>
+        <p class="bike-tagline">Xe ga khỏe, chạy đầm, ngồi thoải mái</p>
+        <div class="bike-specs">
+          <span class="spec-tag">125cc</span>
+          <span class="spec-tag">Chỉ ga là chạy</span>
+          <span class="spec-tag">Kiểu dáng thể thao</span>
+        </div>
+        <div class="bike-details-content" id="d-ab">
+          <h4>Về xe</h4>
+          <p>Xe ga thể thao. Máy 125cc khỏe khoắn, chạy đầm chắc, thăng bằng tốt trên đường đèo.</p>
+          <div class="detail-pros-cons">
+            <div class="detail-col pros"><h4>✅ Điểm cộng</h4><ul><li>Khỏe hơn Vision, leo dốc đèo tốt</li><li>Khung xe nặng giúp chạy cực kỳ đầm</li><li>Cốp xe lớn</li></ul></div>
+            <div class="detail-col cons"><h4>⚠️ Lưu ý</h4><ul><li>Xe khá to và nặng</li></ul></div>
+          </div>
+          <h4>Phù hợp nhất</h4><p>Cặp đôi thích đi xe ga êm ái, đầm chắc trên đường đèo.</p>
+        </div>
+        <div class="bike-actions">
+          <button class="btn-toggle" onclick="toggleDetail('d-ab',this)">Chi tiết ↓</button>
+          <a href="https://wa.me/84822946888?text=Ch%C3%A0o%20Sen!%20M%C3%ACnh%20mu%E1%BB%91n%20thu%E1%BB%87%20xe%20Honda%20Air%20Blade%20125cc." class="btn-book" target="_blank">💬 Đặt ngay</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Honda Air Blade 160cc -->
+    <div class="bike-card fade-in" data-type="auto">
+      <div class="bike-img">
+        <img loading="lazy" src="../images/bikes/airblade160.jpg" alt="Honda Air Blade 160cc"
+             onerror="this.parentElement.innerHTML='<div class=\'bike-img-placeholder\'><div class=\'bike-emoji\'>🛵</div><span>../images/bikes/airblade160.jpg</span></div>'">
+        <span class="type-badge badge-auto">Xe ga</span>
+        <span class="price-badge">450.000đ/ ngày</span>
+        <span class="bestseller-badge">⭐ ĐỘC QUYỀN</span>
+      </div>
+      <div class="bike-body">
+        <h3>Honda Air Blade 160cc</h3>
+        <p class="bike-tagline">Máy mạnh, lên dốc ngon</p>
+        <div class="bike-specs">
+          <span class="spec-tag">160cc</span>
+          <span class="spec-tag">Chỉ ga là chạy</span>
+          <span class="spec-tag">Giảm xóc thể thao</span>
+        </div>
+        <div class="bike-details-content" id="d-ab160">
+          <h4>Về xe</h4>
+          <p>Xe ga mạnh mẽ nhất của Sen. Động cơ 160cc bốc máy, vượt dốc đứng Cao Bằng cực mượt.</p>
+          <div class="detail-pros-cons">
+            <div class="detail-col pros"><h4>✅ Điểm cộng</h4><ul><li>Xe ga mạnh nhất, không sợ dốc đứng</li><li>Chạy cực đầm chắc ở tốc độ cao</li></ul></div>
+            <div class="detail-col cons"><h4>⚠️ Lưu ý</h4><ul><li>Khá hao xăng</li></ul></div>
+          </div>
+          <h4>Phù hợp nhất</h4><p>Muốn đi xe ga phân khối lớn để chinh phục đèo dốc không tốn sức.</p>
+        </div>
+        <div class="bike-actions">
+          <button class="btn-toggle" onclick="toggleDetail('d-ab160',this)">Chi tiết ↓</button>
+          <a href="https://wa.me/84822946888?text=Ch%C3%A0o%20Sen!%20M%C3%ACnh%20mu%E1%BB%91n%20thu%E1%BB%87%20xe%20Honda%20Air%20Blade%20160cc." class="btn-book" target="_blank">💬 Đặt ngay</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. Honda Winner X ⭐ -->
+    <div class="bike-card fade-in" data-type="manual">
+      <div class="bike-img">
+        <img loading="lazy" src="../images/bikes/winner.png" alt="Honda Winner X 150cc"
+             onerror="this.parentElement.innerHTML='<div class=\'bike-img-placeholder\'><div class=\'bike-emoji\'>🏍️</div><span>../images/bikes/winner.png</span></div>'">
+        <span class="type-badge badge-manual">Côn tay</span>
+        <span class="price-badge">350.000đ / ngày</span>
+        <span class="bestseller-badge">⭐ BÁN CHẠY</span>
+      </div>
+      <div class="bike-body">
+        <h3>Honda Winner X 150cc</h3>
+        <p class="bike-tagline">Côn tay thể thao, có ABS</p>
+        <div class="bike-specs">
+          <span class="spec-tag">150cc</span>
+          <span class="spec-tag">Côn tay 6 số</span>
+          <span class="spec-tag">Phanh ABS an toàn</span>
+        </div>
+        <div class="bike-details-content" id="d-winner">
+          <h4>Về xe</h4>
+          <p>Dòng côn tay 150cc mạnh mẽ. Có phanh ABS chống bó cứng an toàn khi đổ đèo dốc đứng.</p>
+          <div class="detail-pros-cons">
+            <div class="detail-col pros"><h4>✅ Điểm cộng</h4><ul><li>Máy bốc leo đèo cực bốc</li><li>Phanh ABS an toàn vượt trội</li><li>Khung xe chạy đầm chắc</li></ul></div>
+            <div class="detail-col cons"><h4>⚠️ Lưu ý</h4><ul><li>Phải biết chạy côn tay</li><li>Không có cốp xe</li></ul></div>
+          </div>
+          <h4>Phù hợp nhất</h4><p>Các bạn đã quen chạy xe côn tay, thích cảm giác lái thể thao thể thao.</p>
+        </div>
+        <div class="bike-actions">
+          <button class="btn-toggle" onclick="toggleDetail('d-winner',this)">Chi tiết ↓</button>
+          <a href="https://wa.me/84822946888?text=Ch%C3%A0o%20Sen!%20M%C3%ACnh%20mu%E1%BB%91n%20thu%E1%BB%87%20xe%20Honda%20Winner%20X." class="btn-book" target="_blank">💬 Đặt ngay</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. Honda XR 150cc -->
+    <div class="bike-card fade-in" data-type="manual">
+      <div class="bike-img">
+        <img loading="lazy" src="../images/bikes/xr.jpg" alt="Honda XR 150cc"
+             onerror="this.parentElement.innerHTML='<div class=\'bike-img-placeholder\'><div class=\'bike-emoji\'>🏍️</div><span>../images/bikes/xr.jpg</span></div>'">
+        <span class="type-badge badge-manual">Cào cào</span>
+        <span class="price-badge">550.000đ / ngày</span>
+      </div>
+      <div class="bike-body">
+        <h3>Honda XR 150cc</h3>
+        <p class="bike-tagline">Cào cào gầm cao, hợp đường xấu</p>
+        <div class="bike-specs">
+          <span class="spec-tag">150cc</span>
+          <span class="spec-tag">Côn tay</span>
+          <span class="spec-tag">Phuộc hành trình dài</span>
+        </div>
+        <div class="bike-details-content" id="d-xr">
+          <h4>Về xe</h4>
+          <p>Cào cào đa địa hình thực thụ. Gầm cao phuộc dài nuốt trọn mọi ổ gà, đường đất đá Cao Bằng.</p>
+          <div class="detail-pros-cons">
+            <div class="detail-col pros"><h4>✅ Điểm cộng</h4><ul><li>Vượt mọi địa hình ổ gà êm ái</li><li>Ngồi thẳng lưng đỡ mỏi vai gáy</li><li>Dáng xe cực chiến</li></ul></div>
+            <div class="detail-col cons"><h4>⚠️ Lưu ý</h4><ul><li>Yên rất cao (dưới 1m7 chống chân hơi vất)</li><li>Không có cốp</li></ul></div>
+          </div>
+          <h4>Phù hợp nhất</h4><p>Phượt thủ cứng thích đi cung đường xấu, hẻo lánh dốc đá đất đỏ.</p>
+        </div>
+        <div class="bike-actions">
+          <button class="btn-toggle" onclick="toggleDetail('d-xr',this)">Chi tiết ↓</button>
+          <a href="https://wa.me/84822946888?text=Ch%C3%A0o%20Sen!%20M%C3%ACnh%20mu%E1%BB%91n%20thu%E1%BB%87%20xe%20Honda%20XR." class="btn-book" target="_blank">💬 Đặt ngay</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PLAN-YOUR-TRIP BANNER (bản VI bỏ khối "how to ride" — khách Việt trẻ đa số biết chạy xe số) -->
+<div class="how-to-banner fade-in">
+  <div class="how-to-inner" style="background:linear-gradient(135deg,var(--forest-deep),var(--forest));">
+    <div class="how-to-text">
+      <h3 style="color:white;">🗺️ Chưa biết đi cung đường nào?</h3>
+      <p style="color:rgba(255,255,255,0.75);">Hãy tự thiết kế lịch trình phượt từng ngày — tự chọn điểm tham quan, số ngày đi và nhận lộ trình chi tiết kèm khoảng cách thực tế cực tiện lợi.</p>
+    </div>
+    <a href="itinerary.html" class="btn-how-to" style="background:white;color:var(--forest);border:none;">Xem lịch trình →</a>
+  </div>
+</div>
+
+<!-- INCLUDES -->
+<section id="includes">
+  <div class="includes-inner">
+    <p class="section-label fade-in">Dịch vụ đi kèm</p>
+    <h2 class="section-title fade-in">Kèm xe là đủ đồ</h2>
+    <div class="includes-grid">
+      <div class="include-item fade-in"><div class="include-icon">⛑️</div><h4>Mũ bảo hiểm</h4><p>Mũ bảo hiểm chất lượng cho cả người lái và người ngồi sau hoàn toàn miễn phí.</p></div>
+      <div class="include-item fade-in"><div class="include-icon">🌧️</div><h4>Áo mưa bộ</h4><p>Thời tiết vùng cao thay đổi thất thường — Sen chuẩn bị sẵn áo mưa bộ chất lượng để bạn không lo bị ướt.</p></div>
+      <div class="include-item fade-in"><div class="include-icon">🚗</div><h4>Giao xe tận nơi</h4><p>Giao và nhận xe tận nơi miễn phí tại homestay hoặc khách sạn trong trung tâm thành phố Cao Bằng.</p></div>
+      <div class="include-item fade-in"><div class="include-icon">🌙</div><h4>Nhận xe sớm từ tối trước</h4><p>Hỗ trợ nhận xe sớm từ tối hôm trước để bạn xuất phát sớm vào sáng hôm sau — hoàn toàn miễn phí.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONDITIONS -->
+<section id="conditions">
+  <div class="conditions-inner">
+    <p class="section-label fade-in">Điều kiện thuê xe</p>
+    <h2 class="conditions-title fade-in">Lưu ý trước khi đi</h2>
+    <div class="cond-grid">
+      <div class="cond-item fade-in"><div class="cond-icon">🪪</div><div><h4>Giấy phép lái xe</h4><p>Yêu cầu bạn có bằng lái xe hợp lệ. Ký hợp đồng thuê xe nhanh gọn khi nhận xe.</p></div></div>
+      <div class="cond-item fade-in"><div class="cond-icon">💵</div><div><h4>Đặt cọc</h4><p>Sen giữ lại CCCD/Hộ chiếu làm cam kết và sẽ trả lại ngay khi bạn trả xe nguyên vẹn.</p></div></div>
+      <div class="cond-item fade-in"><div class="cond-icon">⛽</div><div><h4>Xăng xe</h4><p>Giá thuê chưa gồm xăng. Bạn không cần phải đổ đầy bình khi trả lại xe cho Sen.</p></div></div>
+      <div class="cond-item fade-in"><div class="cond-icon">🕗</div><div><h4>Nhận & trả xe</h4><p>Hỗ trợ giao nhận xe linh hoạt, có thể nhận xe sớm từ tối hôm trước (tùy tình trạng xe trống).</p></div></div>
+      <div class="cond-item fade-in"><div class="cond-icon">🔧</div><div><h4>Trách nhiệm bảo quản</h4><p>Bạn chịu trách nhiệm bảo quản xe trong suốt thời gian thuê. Va quẹt hoặc hư hỏng nặng có thể phát sinh phí đền bù.</p></div></div>
+      <div class="cond-item fade-in"><div class="cond-icon">📅</div><div><h4>Ưu đãi đi dài ngày</h4><p>Nếu bạn thuê xe từ 3 ngày trở lên, nhớ nhắn để Sen giảm giá ưu đãi cực tốt nha.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TIPS -->
+<section id="tips">
+  <div class="tips-inner">
+    <p class="section-label fade-in">Trước khi khởi hành</p>
+    <h2 class="tips-title fade-in">Mẹo chạy xe an toàn</h2>
+    <div class="tips-grid">
+      <div class="tip-item critical fade-in"><div class="tip-icon">🔑</div><div><h4>Luôn tắt máy rút chìa khóa!</h4><p>Luôn xoay khóa về nấc "OFF" và rút chìa khóa khi dừng chụp ảnh. Để quên khóa sẽ làm cạn bình ắc quy — giữa đèo núi hẻo lánh rất khó tìm thợ sửa đó nha.</p></div></div>
+      <div class="tip-item critical fade-in"><div class="tip-icon">📡</div><div><h4>Lưu ý khóa Smart Key</h4><p>Nếu thuê xe có khóa thông minh, bạn giữ remote bên người và chỉ cần xoay núm vặn trên xe để mở/tắt. Không nhấn linh tinh các nút trên điều khiển nha.</p></div></div>
+      <div class="tip-item fade-in"><div class="tip-icon">⛽</div><div><h4>Đổ đầy bình xăng trước khi đi</h4><p>Nhớ đổ đầy bình xăng trước khi ra khỏi thành phố Cao Bằng. Đi sâu vào các bản làng hay đường đèo núi sẽ rất hiếm cây xăng.</p></div></div>
+      <div class="tip-item fade-in"><div class="tip-icon">📵</div><div><h4>Tải trước bản đồ offline</h4><p>Hãy tải Google Maps offline khu vực Cao Bằng trước khi đi. Sóng điện thoại ở các thung lũng sâu có thể rất yếu hoặc mất kết nối hoàn toàn.</p></div></div>
+      <div class="tip-item fade-in"><div class="tip-icon">🌧️</div><div><h4>Chậm lại khi trời mưa</h4><p>Nếu gặp trời mưa, hãy giảm tốc độ và đi thật cẩn thận. Đường đèo dốc cực kỳ trơn trượt khi ướt. Luôn mang theo áo mưa Sen đã chuẩn bị sẵn.</p></div></div>
+      <div class="tip-item fade-in"><div class="tip-icon">📯</div><div><h4>Bấm còi ở các góc cua khuất</h4><p>Nhớ bấm còi nhẹ trước khi vào các khúc cua tay áo khuất tầm nhìn để báo hiệu cho xe đi ngược chiều biết. Đây là văn hóa đi đèo cực kỳ an toàn.</p></div></div>
+      <div class="tip-item fade-in"><div class="tip-icon">🐃</div><div><h4>Tránh trâu bò và vật nuôi</h4><p>Trâu bò, chó gà người dân nuôi thường chạy rông qua đường đột ngột. Giữ tốc độ vừa phải — các khúc cua ở đây gắt hơn bạn nghĩ nhiều.</p></div></div>
+      <div class="tip-item fade-in"><div class="tip-icon">🔐</div><div><h4>Luôn khóa cổ xe khi đỗ</h4><p>Khi đỗ xe ở bất cứ đâu, bạn bẻ hết cổ xe sang trái và vặn khóa về nấc "LOCK" để bảo vệ xe an toàn.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <p class="section-label">Sẵn sàng vi vu chưa?</p>
+  <h2>Đặt xe với Sen</h2>
+  <p>Nhắn WhatsApp để hỏi xe trống và chốt nhanh. Sen thường rep trong 1 giờ.</p>
+  <div class="cta-btns">
+    <a href="https://wa.me/84822946888?text=Ch%C3%A0o%20Sen!%20M%C3%ACnh%20mu%E1%BB%91n%20thu%E1%BB%87%20xe%20m%C3%A1y." class="btn-wa" target="_blank">
+      <svg viewBox="0 0 24 24" fill="white" width="20"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
+      Nhắn WhatsApp cho Sen
+    </a>
+    <a href="tours.html" class="btn-outline-white">🗺️ Xem Tour Cao Bằng</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Sen's Homestay · Cao Bằng, Việt Nam &nbsp;· <a href="https://wa.me/84822946888" target="_blank">WhatsApp</a> &nbsp;· Made with ❤️ in Cao Bang</p>
+</footer>
+
+<a href="https://wa.me/84822946888?text=Ch%C3%A0o%20Sen!" class="wa-float" target="_blank" title="Nhắn cho Sen">
+  <div class="wa-tooltip">Nhắn cho Sen</div>
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
+</a>
+
+<script>
+  window.addEventListener('scroll',()=>{ document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>40); });
+  function toggleNav(){ document.getElementById('navLinks').classList.toggle('open'); }
+  const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.1});
+  document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+
+  // LANGUAGE GATE + SWITCH
+  const LANG_HERE = 'vi';
+  function setLang(l){ try { localStorage.setItem('senLang', l); } catch(e){} }
+  function dismissGate(){
+    document.getElementById('langGate').classList.remove('show');
+    setLang(LANG_HERE);
+  }
+  function dismissHint(){
+    document.getElementById('langHint').classList.remove('show');
+    try { sessionStorage.setItem('senHintDismissed','1'); } catch(e){}
+  }
+  (function(){
+    let saved = null; try { saved = localStorage.getItem('senLang'); } catch(e){}
+    if (!saved) {
+      document.getElementById('langGate').classList.add('show');
+    } else if (saved !== LANG_HERE) {
+      let dismissed = null; try { dismissed = sessionStorage.getItem('senHintDismissed'); } catch(e){}
+      if (!dismissed) document.getElementById('langHint').classList.add('show');
+    }
+  })();
+
+  function toggleDetail(id,btn){ const el=document.getElementById(id); const open=el.classList.toggle('open'); btn.textContent=open?'Chi tiết ↑':'Chi tiết ↓'; }
+  function filterBikes(type,btn){ document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active')); btn.classList.add('active'); document.querySelectorAll('.bike-card').forEach(c=>{ c.classList.toggle('hidden',type!=='all'&&c.dataset.type!==type); }); }
+</script>
+</body>
+</html>

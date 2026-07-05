@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <title>Ăn gì ở Cao Bằng · Sen's Homestay</title>
+  <meta name="description" content="Quán ngon ở Cao Bằng do Sen chọn sẵn: đặc sản, ăn vặt, cà phê, món chay và đồ Âu. Xem nhanh rồi đi ăn." />
+  <link rel="alternate" hreflang="vi" href="food.html" />
+  <link rel="alternate" hreflang="en" href="../food.html" />
+  <link rel="alternate" hreflang="x-default" href="../food.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      /* Light highland design system */
+      --paper:#FBF7EF; --paper-2:#F3EBDA; --surface:#FFFFFF;
+      --ink:#2A2118; --ink-soft:#6B5D4C;
+      --terra:#B65A36; --terra-deep:#9A4A2E; --terra-soft:#C97048;
+      --forest:#3C5A40; --forest-deep:#2C4530; --amber:#C8841F;
+      --on-dark:#F6EFE2; --on-dark-soft:#D8CDB8;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --r-pill: 999px;
+      --green-dark:  var(--forest);
+      --green-mid:   var(--terra-soft);
+      --green-light: var(--paper-2);
+      --orange:      var(--terra-deep);
+      --orange-dark: var(--terra);
+      --cream:       var(--paper);
+      --brown:       var(--ink);
+      --white:       #FFFFFF;
+      --text:        var(--ink);
+      --text-muted:  var(--ink-soft);
+      --radius:      16px;
+      --shadow:      0 4px 14px rgba(42,33,24,0.07), 0 14px 34px rgba(42,33,24,0.09);
+      --line:        rgba(42,33,24,0.10);
+      --gd:var(--forest); --gm:var(--terra-soft); --gl:var(--paper-2);
+      --or:var(--terra-deep); --cr:var(--paper); --tx:var(--ink); --tm:var(--ink-soft);
+      --sh:var(--shadow); --r:16px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: 'Hanken Grotesk', system-ui, sans-serif;
+      background: var(--paper); color: var(--ink); overflow-x: hidden; line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; width: 100%; object-fit: cover; }
+    a { text-decoration: none; color: inherit; }
+    h1, h2, h3, h4 {
+      font-family: 'Bricolage Grotesque', 'Hanken Grotesk', sans-serif;
+      font-weight: 700; line-height: 1.1; letter-spacing: -0.02em;
+      color: var(--ink); text-wrap: balance;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; inset: 0 0 auto 0; z-index: 300;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px; padding: 0 34px;
+      background: rgba(251,247,239,0.9); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line); transition: box-shadow 0.4s var(--ease);
+    }
+    nav.scrolled { box-shadow: 0 6px 22px rgba(42,33,24,0.10); }
+    .nav-logo { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.34rem; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; display: flex; align-items: center; gap: 9px; }
+    .nav-logo .leaf { width: 25px; height: 25px; color: var(--terra-deep); stroke: currentColor; fill: none; stroke-width: 1.7; }
+    .nav-links { display: flex; gap: 26px; align-items: center; }
+    .nav-links a { font-size: 0.92rem; font-weight: 600; color: var(--ink-soft); transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--terra-deep); }
+    .nav-cta { display: inline-flex; align-items: center; gap: 7px; background: var(--terra-deep); color: #fff !important; padding: 10px 20px; border-radius: var(--r-pill); font-weight: 700; font-size: 0.86rem; transition: background 0.2s, transform 0.2s; }
+    .nav-cta:hover { background: var(--terra); transform: translateY(-2px); }
+    .nav-cta svg { width: 15px; height: 15px; fill: currentColor; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; }
+    .nav-hamburger span { width: 24px; height: 2px; background: var(--ink); border-radius: 2px; }
+
+    /* LANGUAGE SWITCH */
+    .lang-switch { display: inline-flex; align-items: center; border-radius: var(--r-pill); overflow: hidden; box-shadow: inset 0 0 0 1.5px rgba(42,33,24,0.18); margin: 0 4px; }
+    .lang-switch a { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.02em; padding: 6px 12px; color: var(--ink-soft); opacity: 0.9; transition: background 0.2s, color 0.2s; line-height: 1; }
+    .lang-switch a.active { background: var(--terra-deep); color: #fff !important; opacity: 1; }
+
+    /* LANGUAGE GATE */
+    .lang-gate { position: fixed; inset: 0; z-index: 400; display: none; align-items: center; justify-content: center; padding: 24px; background: rgba(24,20,14,0.55); backdrop-filter: blur(6px); }
+    .lang-gate.show { display: flex; animation: gate-fade 0.4s var(--ease); }
+    @keyframes gate-fade { from { opacity: 0; } to { opacity: 1; } }
+    .lang-gate-card { background: var(--paper); color: var(--ink); border-radius: var(--radius); box-shadow: var(--shadow); width: 100%; max-width: 420px; padding: 34px 30px; text-align: center; position: relative; }
+    .lang-gate-card .leaf { width: 34px; height: 34px; color: var(--terra-deep); margin: 0 auto 14px; }
+    .lang-gate-card h2 { font-size: 1.5rem; margin-bottom: 4px; }
+    .lang-gate-card .lg-sub { font-size: 0.92rem; color: var(--ink-soft); margin-bottom: 22px; }
+    .lang-gate-opts { display: flex; flex-direction: column; gap: 12px; }
+    .lang-gate-opts a { display: flex; align-items: center; gap: 14px; text-align: left; padding: 14px 18px; border-radius: 10px; min-height: 44px; background: var(--surface); box-shadow: inset 0 0 0 1.5px rgba(42,33,24,0.18); transition: transform 0.3s var(--ease), box-shadow 0.25s, background 0.25s; }
+    .lang-gate-opts a:hover { transform: translateY(-2px); box-shadow: inset 0 0 0 1.5px var(--terra-deep); background: rgba(182,90,54,0.06); }
+    .lang-gate-opts .flag { font-size: 1.5rem; line-height: 1; flex-shrink: 0; }
+    .lang-gate-opts .lg-label { font-weight: 700; font-size: 1rem; color: var(--ink); }
+    .lang-gate-opts .lg-native { font-size: 0.8rem; color: var(--ink-soft); }
+    .lang-gate-close { position: absolute; top: 12px; right: 12px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink-soft); border-radius: 50%; background: transparent; border: none; }
+    .lang-gate-close:hover { background: rgba(42,33,24,0.06); color: var(--ink); }
+    .lang-gate-close svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.7; }
+
+    /* Soft hint */
+    .lang-hint { position: fixed; left: 50%; transform: translateX(-50%) translateY(20px); bottom: calc(20px + env(safe-area-inset-bottom)); z-index: 200; display: none; align-items: center; gap: 12px; max-width: calc(100vw - 32px); background: var(--ink); color: #fff; padding: 12px 14px 12px 18px; border-radius: 999px; box-shadow: var(--shadow); font-size: 0.88rem; opacity: 0; transition: opacity 0.4s var(--ease), transform 0.4s var(--ease); }
+    .lang-hint.show { display: flex; opacity: 1; transform: translateX(-50%) translateY(0); }
+    .lang-hint a { background: #fff; color: var(--ink); font-weight: 700; padding: 8px 14px; border-radius: 999px; min-height: 36px; display: inline-flex; align-items: center; white-space: nowrap; }
+    .lang-hint button { background: transparent; border: none; color: rgba(255,255,255,0.7); cursor: pointer; padding: 6px; display: inline-flex; }
+    .lang-hint button svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.7; }
+
+    /* HERO */
+    .hero { height: 72vh; min-height: 480px; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+    .hero-bg { position: absolute; inset: 0; background: #1a2e1a; }
+    .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%); }
+    .hero-content { position: relative; z-index: 2; padding: 0 24px; }
+    .hero-label { font-size: 0.72rem; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 14px; display: block; }
+    .hero h1 { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(2.8rem, 6vw, 4.8rem); color: white; line-height: 1.05; margin-bottom: 16px; font-weight: 700; }
+    .hero h1 em { color: #F2C28E; font-style: italic; }
+    .hero-sub { color: rgba(255,255,255,0.7); font-size: 1rem; max-width: 460px; margin: 0 auto; line-height: 1.7; }
+
+    /* FILTER */
+    .filter-section { background: white; padding: 24px 48px; border-bottom: 1px solid rgba(0,0,0,0.07); }
+    .filter-inner { max-width: 1100px; margin: 0 auto; display: flex; gap: 32px; align-items: center; flex-wrap: wrap; }
+    .filter-group { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .filter-group-label { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); font-weight: 500; margin-right: 4px; }
+    .filter-btn { background: var(--cream); border: 1.5px solid rgba(45,106,79,0.2); color: var(--green-dark); font-family: 'Hanken Grotesk', sans-serif; font-size: 0.8rem; font-weight: 500; padding: 6px 16px; border-radius: 50px; cursor: pointer; transition: all 0.2s; }
+    .filter-btn:hover { background: var(--green-light); border-color: var(--green-dark); }
+    .filter-btn.active { background: var(--green-dark); color: white; border-color: var(--green-dark); }
+    .filter-divider { width: 1px; height: 28px; background: rgba(0,0,0,0.1); }
+
+    /* MEAL PLANNER */
+    #planner { background: var(--green-dark); padding: 48px; }
+    .planner-inner { max-width: 1100px; margin: 0 auto; }
+    .planner-label { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 10px; display: block; }
+    .planner-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(1.5rem, 2.5vw, 2rem); color: white; margin-bottom: 24px; }
+    .planner-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .planner-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius); padding: 16px 18px; cursor: pointer; transition: all 0.2s; }
+    .planner-card:hover { background: rgba(255,255,255,0.14); transform: translateY(-2px); }
+    .planner-time { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 6px; }
+    .planner-card h4 { font-size: 0.88rem; color: white; font-weight: 500; margin-bottom: 6px; }
+    .planner-card p { font-size: 0.76rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+    /* GRID */
+    #restaurants { padding: 56px 48px; }
+    .restaurants-inner { max-width: 1100px; margin: 0 auto; }
+    .results-count { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 28px; }
+    .food-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+
+    /* FOOD CARD */
+    .food-card { background: white; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; transition: transform 0.25s, box-shadow 0.25s; }
+    .food-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,0,0,0.12); }
+    .food-card.hidden { display: none; }
+
+    /* SLIDER */
+    .food-slider { position: relative; height: 340px; background: var(--green-light); overflow: hidden; }
+    .slider-track { display: flex; height: 100%; transition: transform 0.4s ease; will-change: transform; }
+    .slider-slide { min-width: 100%; width: 100%; height: 100%; flex-shrink: 0; position: relative; overflow: hidden; }
+    .slider-slide img { position: absolute; inset: 0; height: 100%; width: 100%; object-fit: cover; transition: transform 0.4s; }
+    .food-card:hover .slider-slide img { transform: scale(1.04); }
+    .slider-slide .img-ph { height: 100%; display: flex; align-items: center; justify-content: center; font-family: monospace; font-size: 0.72rem; color: var(--text-muted); padding: 16px; text-align: center; background: var(--green-light); }
+    .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.88); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem; z-index: 3; transition: opacity 0.2s, background 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.15); opacity: 0; }
+    .food-slider:hover .slider-btn { opacity: 1; }
+    .slider-btn.prev { left: 10px; }
+    .slider-btn.next { right: 10px; }
+    .slider-btn:hover { background: white; }
+    .slider-dots { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 3; }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; transition: background 0.2s, transform 0.2s; }
+    .dot.active { background: white; transform: scale(1.3); }
+
+    .food-badges { position: absolute; top: 12px; left: 12px; display: flex; flex-direction: column; gap: 5px; z-index: 2; }
+    .badge { font-size: 0.65rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 4px 10px; border-radius: 50px; display: inline-block; }
+    .badge-here { background: var(--green-dark); color: white; }
+    .food-card.card-home { border: 2px solid var(--green-dark); }
+    .badge-veg { background: var(--terra-soft); color: white; }
+    .meal-tags { position: absolute; bottom: 10px; right: 10px; display: flex; gap: 4px; z-index: 2; flex-wrap: wrap; justify-content: flex-end; max-width: 60%; }
+    .meal-tag { background: rgba(0,0,0,0.55); backdrop-filter: blur(4px); color: white; font-size: 0.65rem; padding: 3px 8px; border-radius: 50px; }
+
+    /* Card body */
+    .food-body { padding: 18px 18px 14px; flex: 1; display: flex; flex-direction: column; }
+    .food-restaurant { font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; color: var(--green-mid); font-weight: 600; margin-bottom: 4px; }
+    .food-dish { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.2rem; color: var(--green-dark); margin-bottom: 2px; line-height: 1.2; }
+    .food-dish-en { font-size: 0.78rem; color: var(--text-muted); font-style: italic; margin-bottom: 10px; }
+    .food-tagline { font-size: 0.83rem; color: var(--text); line-height: 1.55; margin-bottom: 8px; }
+    .food-unique { font-size: 0.78rem; color: var(--brown); background: rgba(92,61,46,0.07); border-left: 2px solid var(--orange); padding: 7px 10px; border-radius: 0 6px 6px 0; margin-bottom: 14px; line-height: 1.5; }
+
+    /* Card footer */
+    .food-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.06); }
+    .food-price { font-size: 0.82rem; font-weight: 600; color: var(--green-dark); }
+    .btn-maps { display: inline-flex; align-items: center; gap: 6px; background: var(--green-dark); color: white; font-family: 'Hanken Grotesk', sans-serif; font-size: 0.78rem; font-weight: 500; padding: 8px 16px; border-radius: 50px; transition: background 0.2s, transform 0.2s; }
+    .btn-maps:hover { background: var(--forest-deep); transform: translateY(-1px); }
+
+    /* CTA */
+    #cta { background: linear-gradient(135deg, var(--forest-deep), var(--green-dark)); padding: 64px 48px; text-align: center; }
+    .cta-label { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 12px; display: block; }
+    #cta h2 { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(1.8rem, 3vw, 2.6rem); color: white; margin-bottom: 12px; }
+    #cta p { color: rgba(255,255,255,0.65); margin-bottom: 28px; font-size: 0.92rem; line-height: 1.65; max-width: 420px; margin-left: auto; margin-right: auto; }
+    .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-wa { background: #25D366; color: white; padding: 13px 28px; border-radius: 50px; font-weight: 500; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 20px rgba(37,211,102,0.35); transition: filter 0.2s, transform 0.2s; }
+    .btn-wa:hover { filter: brightness(1.08); transform: translateY(-2px); }
+    .btn-outline { background: transparent; border: 1.5px solid rgba(255,255,255,0.35); color: white; padding: 13px 28px; border-radius: 50px; font-size: 0.92rem; display: inline-flex; align-items: center; gap: 8px; transition: background 0.2s, transform 0.2s; }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+    footer { background: #0f2419; color: rgba(255,255,255,0.4); text-align: center; padding: 22px; font-size: 0.8rem; }
+    footer a { color: var(--green-mid); }
+    .wa-float { position: fixed; bottom: 28px; right: 28px; width: 56px; height: 56px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 20px rgba(37,211,102,0.45); z-index: 998; transition: transform 0.2s; }
+    .wa-float:hover { transform: scale(1.1); }
+    .wa-float svg { width: 28px; fill: white; }
+
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    @media (max-width: 960px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; flex-direction: column; align-items:stretch; position: absolute; top: 100%; left: 0; right: 0; background: var(--terra-deep); padding: 14px 18px calc(14px + env(safe-area-inset-bottom)); gap: 2px; box-shadow: var(--shadow); }
+      .nav-links.open { display: flex; }
+      .nav-links a:not(.nav-cta), nav.scrolled .nav-links a:not(.nav-cta) { font-size:1rem; padding:15px 10px; color:#fff; opacity:1; border-bottom:1px solid rgba(255,255,255,0.16); }
+      .nav-links a:not(.nav-cta):last-of-type { border-bottom:none; }
+      .nav-links .nav-cta { justify-content:center; margin-top:12px; padding:14px 20px; font-size:0.95rem; }
+      .nav-hamburger { display: flex; }
+      .filter-section, #restaurants, #planner, #cta { padding: 24px; }
+      .food-grid { grid-template-columns: 1fr; }
+      .planner-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .planner-grid { grid-template-columns: 1fr; }
+      .filter-inner { gap: 16px; }
+      .food-slider { height: 280px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <svg class="leaf" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 20s-7-3-7-9a4 4 0 017-2.6A4 4 0 0118 11c0 6-7 9-7 9z"/><path d="M11 11v9" stroke-width="1.5"/></svg>
+    Sen's Homestay
+  </a>
+  <div class="nav-links" id="navLinks">
+    <a href="rooms.html">Phòng</a>
+    <a href="motorbike.html">Thuê xe máy</a>
+    <a href="tours.html">Tour</a>
+    <a href="food.html" class="active">Ăn uống</a>
+    <a href="services.html">Dịch vụ</a>
+    <a href="itinerary.html">Lịch trình</a>
+    <a href="bus-ticket.html">Vé xe khách</a>
+    <span class="lang-switch">
+      <a href="../food.html" onclick="setLang('en')">EN</a>
+      <a href="food.html" class="active" aria-current="true">VI</a>
+    </span>
+    <a href="https://wa.me/84822946888?text=Ch%C3%A0o%20Sen!%20M%C3%ACnh%20mu%E1%BB%91n%20%C4%91%E1%BA%B7t%20ph%C3%B2ng." class="nav-cta" target="_blank">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
+      WhatsApp
+    </a>
+  </div>
+  <div class="nav-hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg">
+    <img loading="lazy" src="../images/food/hero.jpg" alt="Ăn uống Cao Bằng" onerror="this.style.display='none'">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-label">Sen tuyển chọn · Cao Bằng</span>
+    <h1>Ăn ngon<br><em>Cao Bằng</em></h1>
+    <p class="hero-sub">Quán ngon Sen đã thử sẵn, từ ăn vặt đến đặc sản địa phương. Mở ra là biết nên đi đâu.</p>
+  </div>
+</div>
+
+<!-- FILTER -->
+<div class="filter-section">
+  <div class="filter-inner">
+    <div class="filter-group">
+      <span class="filter-group-label">Bữa ăn</span>
+      <button class="filter-btn active" onclick="filterFood('meal','all',this)">Tất cả</button>
+      <button class="filter-btn" onclick="filterFood('meal','breakfast',this)">☀️ Bữa sáng</button>
+      <button class="filter-btn" onclick="filterFood('meal','lunch',this)">🌤️ Bữa trưa</button>
+      <button class="filter-btn" onclick="filterFood('meal','dinner',this)">🌙 Bữa tối</button>
+      <button class="filter-btn" onclick="filterFood('meal','snack',this)">🍡 Ăn vặt</button>
+    </div>
+    <div class="filter-divider"></div>
+    <div class="filter-group">
+      <span class="filter-group-label">Loại hình</span>
+      <button class="filter-btn active" onclick="filterFood('type','all',this)">Tất cả</button>
+      <button class="filter-btn" onclick="filterFood('type','local',this)">🇻🇳 Đặc sản</button>
+      <button class="filter-btn" onclick="filterFood('type','western',this)">🍕 Món Âu</button>
+      <button class="filter-btn" onclick="filterFood('type','snack',this)">🥢 Ăn vặt</button>
+      <button class="filter-btn" onclick="filterFood('type','vegetarian',this)">🌱 Món chay</button>
+      <button class="filter-btn" onclick="filterFood('type','fastfood',this)">🍗 Fast food</button>
+      <button class="filter-btn" onclick="filterFood('type','dessert',this)">🍮 Tráng miệng</button>
+      <button class="filter-btn" onclick="filterFood('type','cafe',this)">☕ Cà phê</button>
+    </div>
+  </div>
+</div>
+
+<!-- MEAL PLANNER -->
+<section id="planner">
+  <div class="planner-inner">
+    <span class="planner-label">Chưa biết ăn gì?</span>
+    <h2 class="planner-title">Gợi ý nhanh từ Sen</h2>
+    <div class="planner-grid">
+      <div class="planner-card" onclick="filterFood('meal','breakfast',document.querySelector('[onclick*=breakfast]'))">
+        <div class="planner-time">☀️ Bữa sáng</div>
+        <h4>Khởi đầu ngày mới</h4>
+        <p>Phở vịt quay hoặc bánh cuốn nóng, đủ ấm bụng để bắt đầu ngày mới.</p>
+      </div>
+      <div class="planner-card" onclick="filterFood('meal','lunch',document.querySelector('[onclick*=lunch]'))">
+        <div class="planner-time">🌤️ Bữa trưa</div>
+        <h4>Ăn no nạp năng lượng</h4>
+        <p>Vịt quay giòn hoặc bún chả, no nhanh mà không ngấy.</p>
+      </div>
+      <div class="planner-card" onclick="filterFood('meal','snack',document.querySelector('[onclick*=snack]'))">
+        <div class="planner-time">🍡 Ăn vặt chiều</div>
+        <h4>Dạo phố ăn chơi</h4>
+        <p>Bánh áp chao giòn rụm hoặc bánh tráng nướng, ăn vặt là hợp.</p>
+      </div>
+      <div class="planner-card" onclick="filterFood('type','western',document.querySelector('[onclick*=western]'))">
+        <div class="planner-time">🍕 Đổi vị món Âu</div>
+        <h4>Chán cơm thèm pizza</h4>
+        <p>Pedro's Pizza - pizza Ý đế mỏng, đổi vị khá ổn.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESTAURANTS GRID -->
+<section id="restaurants">
+  <div class="restaurants-inner">
+    <p class="results-count" id="resultsCount">Đang hiện 9 quán ăn</p>
+    <div class="food-grid" id="foodGrid"></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <span class="cta-label">Vẫn thèm ăn gì đó?</span>
+  <h2>Nhắn Sen chỉ quán</h2>
+  <p>Sen biết kha khá quán ngon ở Cao Bằng. Bạn nhắn khu vực đang đứng, Sen chỉ quán gần nhất cho nhanh.</p>
+  <div class="cta-btns">
+    <a href="https://wa.me/84822946888?text=Ch%C3%A0o%20Sen!%20Sen%20g%E1%BB%A3i%20%C3%BD%20gi%C3%BAp%20m%C3%ACnh%20qu%C3%A1n%20%C4%83n%20ngon%20g%E1%BB%93m." class="btn-wa" target="_blank">
+      💬 Hỏi Sen ngay
+    </a>
+    <a href="tours.html" class="btn-outline">🗺️ Xem tour tiếp</a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Sen's Homestay · Cao Bằng &nbsp;·&nbsp; <a href="https://wa.me/84822946888" target="_blank">WhatsApp</a> &nbsp;·&nbsp; Made with ❤️ in Cao Bang</p>
+</footer>
+
+<a href="https://wa.me/84822946888" class="wa-float" target="_blank">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+  window.addEventListener('scroll', () => document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40));
+  function toggleNav() { document.getElementById('navLinks').classList.toggle('open'); }
+
+  const obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.07 });
+
+  const restaurants = [
+    {
+      id: 'sens-homestay-breakfast',
+      name: "Sen's Homestay",
+      dish: 'Bữa sáng & Cà phê',
+      dish_en: 'Breakfast & Coffee — Ngay tại đây',
+      tagline: 'Khởi đầu ngày mới cực nhàn — ăn sáng ngon lành và thưởng thức ly cà phê pha máy ngon tuyệt hảo ngay tại homestay.',
+      unique: 'Pha cà phê hạt đặc sản Cao Bằng cực thơm, phục vụ tận bàn, nghe Sen mách mẹo du lịch trước khi lên đường.',
+      price: 'Xem thực đơn',
+      meals: ['breakfast'],
+      type: 'cafe',
+      sen_pick: true,
+      vegetarian: true,
+      maps: 'https://maps.app.goo.gl/your-homestay-link',
+      imgs: ['../images/food/sens-breakfast/1.jpg','../images/food/sens-breakfast/2.jpg','../images/food/sens-breakfast/3.jpg','../images/food/sens-breakfast/4.jpg'],
+    },
+    {
+      id: 'pho-vit-quay-ngay',
+      name: 'Phở Vịt Quay',
+      dish: 'Phở vịt quay Cao Bằng',
+      dish_en: 'Roast Duck Pho · Đậm đà chuẩn vị',
+      tagline: 'Phở vịt quay da giòn rụm kết hợp nước dùng đậm đà — đặc sản không thể bỏ lỡ khi tới Cao Bằng.',
+      unique: 'Vịt được tẩm ướp lá mắc mật rừng rồi quay lu giòn bì, chuẩn vị Cao Bằng gốc.',
+      price: 'Từ 40.000đ',
+      meals: ['breakfast', 'lunch'],
+      type: 'local',
+      sen_pick: true,
+      vegetarian: false,
+      maps: 'https://maps.app.goo.gl/AmFJ7yFy3fHrmFNc7',
+      imgs: ['../images/food/pho-vit-quay/1.jpg','../images/food/pho-vit-quay/2.jpg','../images/food/pho-vit-quay/3.jpg'],
+    },
+    {
+      id: 'pho-vit-quay-toi',
+      name: 'Phở Vịt Quay Đêm',
+      dish: 'Phở vịt quay nóng hổi',
+      dish_en: 'Roast Duck Pho · Quán ăn đêm',
+      tagline: 'Vẫn là phở vịt quay đặc sản nhưng mở bán vào chiều tối cho những bạn thèm ăn đêm.',
+      unique: 'Quán ăn đêm cực đông khách, vịt quay lu liên tục nóng hổi giòn rụm.',
+      price: 'Từ 40.000đ',
+      meals: ['dinner'],
+      type: 'local',
+      sen_pick: false,
+      vegetarian: false,
+      maps: 'https://maps.app.goo.gl/uaWm8fFdpRFge5zb6',
+      imgs: ['../images/food/pho-vit-quay/1.jpg','../images/food/pho-vit-quay/2.jpg'],
+    },
+    {
+      id: 'banh-cuon-phong-uyen',
+      name: 'Bánh Cuốn Phong Uyên',
+      dish: 'Bánh cuốn canh Cao Bằng',
+      dish_en: 'Steamed Rice Rolls · Canh hâm xương',
+      tagline: 'Bánh cuốn nhân thịt băm mọc nhĩ tráng mỏng, ăn kèm bát nước canh xương hầm ngọt lịm và giò nấm.',
+      unique: 'Khác với bánh cuốn chấm nước mắm Hà Nội, bánh cuốn Cao Bằng ăn với canh xương hầm ngọt lịm cực kỳ lạ miệng và ấm lòng.',
+      price: '~35.000đ',
+      meals: ['breakfast', 'lunch', 'dinner'],
+      type: 'local',
+      sen_pick: true,
+      vegetarian: false,
+      maps: 'https://maps.app.goo.gl/MeTDqWwXvL1vTvSVA',
+      imgs: ['../images/food/banh-cuon/1.jpg','../images/food/banh-cuon/2.jpg','../images/food/banh-cuon/3.jpg'],
+    },
+    {
+      id: 'ap-chao-co-hac',
+      name: 'Bánh Áp Chao Cô Hạc',
+      dish: 'Bánh áp chao thịt vịt',
+      dish_en: 'Crispy Duck Dumplings · Ăn vặt',
+      tagline: 'Bánh rán giòn rụm từ bột gạo nếp, nhân thịt vịt tẩm ướp lá mắc mật, chấm nước mắm đu đủ chua ngọt.',
+      unique: 'Món ăn vặt quốc dân của người Cao Bằng mỗi khi chiều lạnh — ăn một lần là nhớ mãi.',
+      price: '7.000đ/chiếc',
+      meals: ['snack', 'dinner'],
+      type: 'snack',
+      sen_pick: false,
+      vegetarian: false,
+      maps: 'https://maps.app.goo.gl/gbaghegtzEAn1Aah6',
+      imgs: ['../images/food/ap-chao/1.jpg','../images/food/ap-chao/2.jpg'],
+    },
+    {
+      id: 'nem-nuong-co-lo',
+      name: 'Nem Nướng Cô Lô',
+      dish: 'Nem nướng Nha Trang',
+      dish_en: 'Nha Trang Grilled Pork Rolls',
+      tagline: 'Nem nướng thơm, cuốn rau sống và bánh tráng, chấm sốt nóng là chuẩn.',
+      unique: 'Tự cuốn tại bàn, chấm sốt đậm vị, ăn vui miệng.',
+      price: '40.000đ/suất',
+      meals: ['lunch', 'dinner'],
+      type: 'local',
+      sen_pick: false,
+      vegetarian: false,
+      maps: 'https://maps.app.goo.gl/qvcCdVDPVsR4epGe9',
+      imgs: ['../images/food/nem-nuong/1.jpg','../images/food/nem-nuong/2.jpg'],
+    },
+    {
+      id: 'bun-cha-ha-thanh',
+      name: 'Bún Chả Hà Thành',
+      dish: 'Bún chả nướng than hoa',
+      dish_en: 'Hanoi Grilled Pork Noodles',
+      tagline: 'Chả viên và chả miếng nướng xém cạnh thơm nức mũi trên than hoa, ăn kèm bún sợi nhỏ và rau sống.',
+      unique: 'Hương vị bún chả Hà Nội chuẩn chỉ giữa lòng Cao Bằng — thơm nức mũi mùi khói than.',
+      price: '45.000đ/suất',
+      meals: ['breakfast', 'lunch'],
+      type: 'local',
+      sen_pick: false,
+      vegetarian: false,
+      maps: 'https://maps.app.goo.gl/PE3RL2QB63dm3PE29',
+      imgs: ['../images/food/bun-cha/1.jpg','../images/food/bun-cha/2.jpg'],
+    },
+    {
+      id: 'vit-quay-gion-o-thoa',
+      name: 'Vịt Quay Giòn O Thoa',
+      dish: 'Vịt quay & Xá xíu da giòn',
+      dish_en: 'Crispy Duck & Char Siu',
+      tagline: 'Vịt quay và thịt xá xíu da giòn tan ăn kèm cơm trắng hạt dẻo thơm hoặc mì sợi.',
+      unique: 'Món thịt xá xíu da giòn kiểu Hồng Kông cực hiếm có tại Cao Bằng, chế biến rất xuất sắc.',
+      price: 'Từ 40.000đ',
+      meals: ['lunch', 'dinner'],
+      type: 'local',
+      sen_pick: true,
+      vegetarian: false,
+      maps: 'https://maps.app.goo.gl/rfJYvmaUDfKJ9LTy8',
+      imgs: ['../images/food/vit-quay-gion/1.jpg','../images/food/vit-quay-gion/2.jpg','../images/food/vit-quay-gion/3.jpg'],
+    },
+    {
+      id: 'banh-mi-thu-thang',
+      name: 'Bánh Mì Thu Thắng',
+      dish: 'Bánh mì chảo xèo xèo',
+      dish_en: 'Sizzling Pan Banh Mi',
+      tagline: 'Chảo gang nóng hổi xèo xèo trứng ốp, pate thơm ngậy, thịt nguội quyện sốt cà chua đậm đà để chấm bánh mì.',
+      unique: 'Sự kết hợp hoàn hảo giữa ẩm thực Pháp và Việt — bữa sáng giàu năng lượng cực kỳ được yêu thích.',
+      price: 'Từ 45.000đ',
+      meals: ['lunch', 'dinner'],
+      type: 'local',
+      sen_pick: false,
+      vegetarian: false,
+      maps: 'https://maps.app.goo.gl/J8HEs3XWh91UfQFp6',
+      imgs: ['../images/food/banh-mi-chao/1.jpg','../images/food/banh-mi-chao/2.jpg'],
+    },
+    {
+      id: 'tiem-banh-trang',
+      name: 'Tiệm Bánh Tráng',
+      dish: 'Bánh tráng nướng & Bánh tráng trộn',
+      dish_en: 'Street Pizza & Salad',
+      tagline: 'Bánh tráng nướng trứng cút hành mỡ giòn rụm hoặc bánh tráng cuộn, bánh tráng trộn chua cay.',
+      unique: 'Đầy đủ các món ăn vặt từ bánh tráng nướng "pizza Việt Nam" đến bánh tráng trộn cay xè cực hợp ăn chơi buổi chiều.',
+      price: '~40.000đ',
+      meals: ['snack'],
+      type: 'snack',
+      sen_pick: false,
+      vegetarian: true,
+      maps: 'https://maps.app.goo.gl/Gr6YpBkR3HLWq4Mq5',
+      imgs: ['../images/food/banh-trang/1.jpg','../images/food/banh-trang/2.jpg'],
+    },
+    {
+      id: 'pedros-pizza',
+      name: "Pedro's Pizza",
+      dish: 'Pizza Ý đế mỏng lò củi',
+      dish_en: 'Authentic Italian Pizza',
+      tagline: 'Pizza đế mỏng nướng lò củi theo công thức Ý truyền thống với nguyên liệu phô mai nhập khẩu cao cấp.',
+      unique: 'Quán gia đình cực kỳ tâm huyết. Nhiều lựa chọn chay cực ngon cho các bạn không ăn mặn.',
+      price: 'Từ 150.000đ',
+      meals: ['lunch', 'dinner'],
+      type: 'western',
+      sen_pick: false,
+      vegetarian: true,
+      maps: 'https://maps.app.goo.gl/bEwd77hNN9HogEDU8',
+      imgs: ['../images/food/pedros-pizza/1.jpg','../images/food/pedros-pizza/2.jpg'],
+    },
+    {
+      id: 'lela-vegan',
+      name: 'Nhà hàng chay Lela Vegan',
+      dish: 'Món chay sáng tạo',
+      dish_en: 'Diverse Vegan Bistro',
+      tagline: 'Nhà hàng chay nổi tiếng bậc nhất Cao Bằng với menu phong phú, bài trí hiện đại, tốt cho sức khỏe.',
+      unique: 'Địa chỉ ẩm thực thuần chay xịn mịn nhất thành phố — không chỉ có đậu hũ mà có rất nhiều món chay phá cách cực ngon.',
+      price: 'Từ 40.000đ',
+      meals: ['lunch', 'dinner'],
+      type: 'vegetarian',
+      sen_pick: true,
+      vegetarian: true,
+      maps: 'https://maps.app.goo.gl/ffGQ2KDsymptXf6x5',
+      imgs: ['../images/food/lela-vegan/1.jpg','../images/food/lela-vegan/2.jpg'],
+    },
+    {
+      id: 'do-nuong-duong-gio-tai',
+      name: 'Đồ Nướng Dương Gió Tai',
+      dish: 'Đồ nướng xiên & Lẩu Trung Hoa',
+      dish_en: 'Chinese BBQ & Hotpot',
+      tagline: 'Đồ nướng xiên kiểu Trung Hoa ướp gia vị tê cay đặc trưng nhâm nhi cùng bia lạnh cực hợp gu.',
+      unique: 'Tự chọn xiên que tại quầy rồi nướng trực tiếp tại bàn. Gia vị cay nồng chuẩn vị bản địa.',
+      price: 'Từ 50.000đ',
+      meals: ['dinner'],
+      type: 'local',
+      sen_pick: true,
+      vegetarian: false,
+      maps: 'https://maps.app.goo.gl/HMHDy85BgT2LGMeEA',
+      imgs: ['../images/food/duong-gio-tai/1.jpg','../images/food/duong-gio-tai/2.jpg'],
+    },
+    {
+      id: 'handak-korean-chicken',
+      name: 'Handak Korean Chicken',
+      dish: 'Gà rán sốt Hàn Quốc',
+      dish_en: 'Korean Fried Chicken & Pizza',
+      tagline: 'Gà rán giòn rụm phủ sốt cay ngọt kiểu Hàn, kèm pizza và các món ăn nhanh quen thuộc.',
+      unique: 'Tiệm gà rán Hàn Quốc chuẩn vị duy nhất tại Cao Bằng — lựa chọn đổi vị tuyệt vời cho các nhóm bạn trẻ.',
+      price: 'Từ 50.000đ',
+      meals: ['lunch', 'dinner'],
+      type: 'fastfood',
+      sen_pick: true,
+      vegetarian: false,
+      maps: 'https://maps.app.goo.gl/HZ4gnWVmdD6ZRikZ7',
+      imgs: ['../images/food/handak/1.jpg','../images/food/handak/2.jpg'],
+    },
+    {
+      id: 'tao-pho-lanh',
+      name: 'Tào Phớ Lành',
+      dish: 'Tào phớ mịn màng hạt sen',
+      dish_en: 'Smooth Tofu Pudding',
+      tagline: 'Tào phớ handmade mịn màng ăn kèm thạch đen, hạt sen, nhãn nhục ngọt thanh mát lạnh.',
+      unique: 'Tào phớ nổi tiếng nhất thành phố, siêu mịn và thơm mùi lá dứa. Giá hạt dẻ vô cùng.',
+      price: 'Từ 8.000đ',
+      meals: ['snack'],
+      type: 'dessert',
+      sen_pick: true,
+      vegetarian: true,
+      maps: 'https://maps.app.goo.gl/aCKapfavtxCNrim57',
+      imgs: ['../images/food/tao-pho-lanh/1.jpg','../images/food/tao-pho-lanh/2.jpg'],
+    },
+    {
+      id: 'che-pho-cao-bang',
+      name: 'Chè Phố Cao Bằng',
+      dish: 'Chè thái & Bơ kem sữa chua',
+      dish_en: 'Thai Sweet Soup & Yogurt',
+      tagline: 'Chè thái, kem bơ ngậy béo, sữa chua hoa quả thanh mát ngay trên tuyến phố đi bộ Cao Bằng.',
+      unique: 'Menu tráng miệng đa dạng bậc nhất thành phố — cực tiện cho nhóm đông người mỗi người một sở thích.',
+      price: 'Từ 20.000đ',
+      meals: ['snack'],
+      type: 'dessert',
+      sen_pick: true,
+      vegetarian: true,
+      maps: 'https://maps.app.goo.gl/s2ab9RysFCkZ6V5X8',
+      imgs: ['../images/food/che-pho/1.jpg','../images/food/che-pho/2.jpg'],
+    },
+    {
+      id: 'pho-chua-quyen',
+      name: 'Phở Chua Quyên',
+      dish: 'Phở chua đặc sản Cao Bằng',
+      dish_en: 'Sour Pho · Đặc sản Cao Bằng',
+      tagline: 'Phở nguội trộn vịt quay, khoai tây bào chiên giòn, lạp sườn quyện nước sốt chua ngọt đặc trưng.',
+      unique: 'Đặc sản trứ danh chỉ có tại Cao Bằng — vị chua ngọt thanh mát cực lạ miệng, ăn hoài không ngán.',
+      price: 'Từ 35.000đ',
+      meals: ['breakfast', 'lunch'],
+      type: 'local',
+      sen_pick: true,
+      vegetarian: false,
+      maps: 'https://maps.app.goo.gl/Bv9JXW63mBWqjyrBA',
+      imgs: ['../images/food/pho-chua/1.jpg','../images/food/pho-chua/2.jpg'],
+    },
+    {
+      id: 'fenice-caffe',
+      name: 'Fenice Caffè',
+      dish: 'Cà phê máy & Bánh ngọt Ý',
+      dish_en: 'Italian Coffee & Tiramisu',
+      tagline: 'Cà phê pha máy cao cấp phục vụ kèm bánh ngọt Ý chuẩn vị — quán có bánh Tiramisu ngon nhất Cao Bằng.',
+      unique: 'Ly Cappuccino bọt mịn chuẩn Ý giữa lòng phố núi — không gian hiện đại, yên tĩnh.',
+      price: 'Từ 30.000đ',
+      meals: ['breakfast', 'snack'],
+      type: 'cafe',
+      sen_pick: true,
+      vegetarian: true,
+      maps: 'https://maps.app.goo.gl/z8JzJAkx1Ur937ZY8',
+      imgs: ['../images/food/fenice-caffe/1.jpg','../images/food/fenice-caffe/2.jpg'],
+    },
+    {
+      id: 'with-us-coffee',
+      name: 'With Us Coffee',
+      dish: 'Matcha Nhật & Bánh mì giòn',
+      dish_en: 'Matcha & Banh Mi',
+      tagline: 'Đồ uống Matcha nguyên chất đậm vị đi kèm bánh mì giòn tan chuẩn vị địa phương.',
+      unique: 'Sự kết hợp độc đáo giữa Matcha Nhật Bản thanh mát và Bánh mì kẹp truyền thống cho bữa sáng nhanh gọn.',
+      price: 'Từ 20.000đ',
+      meals: ['breakfast', 'lunch', 'snack'],
+      type: 'cafe',
+      sen_pick: true,
+      vegetarian: false,
+      maps: 'https://maps.app.goo.gl/Gv7oB79cdrhw2vGU8',
+      imgs: ['../images/food/with-us-coffee/1.jpg','../images/food/with-us-coffee/2.jpg'],
+    },
+    {
+      id: 'yen-ngon-nhu-me-nau',
+      name: 'Yên - Cơm mâm mẹ nấu',
+      dish: 'Cơm mâm gia đình & Lẩu',
+      dish_en: 'Traditional Family Meal',
+      tagline: 'Các món cơm nhà truyền thống Việt Nam và lẩu ấm cúng phục vụ trong không gian vintage tinh tế.',
+      unique: 'Lựa chọn số một cho nhóm đông muốn ăn bữa cơm gia đình quây quần đầy đủ cá kho, canh chua, thịt luộc như ở nhà.',
+      price: 'Từ 150.000đ',
+      meals: ['lunch', 'dinner'],
+      type: 'local',
+      sen_pick: true,
+      vegetarian: false,
+      maps: 'https://maps.app.goo.gl/Hq7DbK77aLzs8pvUA',
+      imgs: ['../images/food/yen-com-me-nau/1.jpg','../images/food/yen-com-me-nau/2.jpg'],
+    },
+  ];
+
+  // ── SLIDER ──
+  const sliderState = {};
+
+  function buildSlider(el, id, imgs) {
+    const track = document.createElement('div');
+    track.className = 'slider-track';
+    track.id = 'strack-' + id;
+
+    imgs.forEach((src, i) => {
+      const slide = document.createElement('div');
+      slide.className = 'slider-slide';
+      slide.innerHTML = `
+        <img loading="lazy" src="${src}" alt="photo ${i+1}"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="img-ph" style="display:none">${src}</div>`;
+      track.appendChild(slide);
+    });
+    el.appendChild(track);
+
+    if (imgs.length > 1) {
+      const prev = document.createElement('button');
+      prev.className = 'slider-btn prev'; prev.textContent = '‹';
+      prev.onclick = () => slideFood(id, -1);
+      el.appendChild(prev);
+
+      const next = document.createElement('button');
+      next.className = 'slider-btn next'; next.textContent = '›';
+      next.onclick = () => slideFood(id, 1);
+      el.appendChild(next);
+
+      const dots = document.createElement('div');
+      dots.className = 'slider-dots'; dots.id = 'sdots-' + id;
+      imgs.forEach((_, i) => {
+        const d = document.createElement('div');
+        d.className = 'dot' + (i === 0 ? ' active' : '');
+        d.onclick = () => goToFoodSlide(id, i);
+        dots.appendChild(d);
+      });
+      el.appendChild(dots);
+    }
+
+    // touch swipe
+    let tx = 0;
+    el.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+    el.addEventListener('touchend', e => {
+      const diff = tx - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) slideFood(id, diff > 0 ? 1 : -1);
+    });
+
+    sliderState[id] = { current: 0, total: imgs.length };
+  }
+
+  function updateFoodSlider(id) {
+    const s = sliderState[id];
+    const track = document.getElementById('strack-' + id);
+    if (track) track.style.transform = `translateX(-${s.current * 100}%)`;
+    const dotsEl = document.getElementById('sdots-' + id);
+    if (dotsEl) dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === s.current));
+  }
+  function slideFood(id, dir) {
+    const s = sliderState[id];
+    s.current = (s.current + dir + s.total) % s.total;
+    updateFoodSlider(id);
+  }
+  function goToFoodSlide(id, idx) {
+    sliderState[id].current = idx;
+    updateFoodSlider(id);
+  }
+
+  // ── RENDER ──
+  function renderCards(list) {
+    const grid = document.getElementById('foodGrid');
+    grid.innerHTML = '';
+    document.getElementById('resultsCount').textContent = `Đang hiện ${list.length} quán ăn`;
+
+    list.forEach(r => {
+      const mealLabels = { breakfast:'☀️ Bữa sáng', lunch:'🌤️ Bữa trưa', dinner:'🌙 Bữa tối', snack:'🍡 Ăn vặt' };
+      const mealTags = r.meals.map(m => `<span class="meal-tag">${mealLabels[m]}</span>`).join('');
+      const badges = [
+        r.id === 'sens-homestay-breakfast' ? '<span class="badge badge-here">📍 Ngay tại đây</span>' : '',
+        r.sen_pick   ? '<span class="badge badge-sen">⭐ Sen khuyên chọn</span>' : '',
+        r.vegetarian ? '<span class="badge badge-veg">🌱 Có đồ chay</span>' : '',
+      ].filter(Boolean).join('');
+
+      const isHome = r.id === 'sens-homestay-breakfast';
+
+      const folderMap = {
+        'sens-homestay-breakfast':  'sens-breakfast',
+        'pho-vit-quay-ngay':        'pho-vit-quay',
+        'pho-vit-quay-toi':         'pho-vit-quay-toi',
+        'banh-cuon-phong-uyen':     'banh-cuon',
+        'ap-chao-co-hac':           'ap-chao',
+        'nem-nuong-co-lo':          'nem-nuong',
+        'bun-cha-ha-thanh':         'bun-cha',
+        'vit-quay-gion-o-thoa':     'vit-quay-gion',
+        'banh-mi-thu-thang':        'banh-mi-chao',
+        'tiem-banh-trang':          'banh-trang',
+        'pedros-pizza':             'pedros-pizza',
+        'lela-vegan':               'lela-vegan',
+        'do-nuong-duong-gio-tai':   'duong-gio-tai',
+        'handak-korean-chicken':    'handak',
+        'tao-pho-lanh':             'tao-pho-lanh',
+        'che-pho-cao-bang':         'che-pho',
+        'pho-chua-quyen':           'pho-chua',
+        'fenice-caffe':             'fenice-caffe',
+        'with-us-coffee':           'with-us-coffee',
+        'yen-ngon-nhu-me-nau':      'yen-com-me-nau',
+      };
+      const folder = `../images/food/${folderMap[r.id] || r.id}`;
+      const imgs = [1,2,3,4].map(n => `${folder}/${n}.jpg`);
+
+      const card = document.createElement('div');
+      card.className = `food-card${isHome ? ' card-home' : ''} fade-in`;
+      card.dataset.meals = r.meals.join(' ');
+      card.dataset.type = r.type;
+
+      const sliderEl = document.createElement('div');
+      sliderEl.className = 'food-slider';
+
+      if (badges) {
+        const badgeWrap = document.createElement('div');
+        badgeWrap.className = 'food-badges';
+        badgeWrap.innerHTML = badges;
+        sliderEl.appendChild(badgeWrap);
+      }
+      const mealWrap = document.createElement('div');
+      mealWrap.className = 'meal-tags';
+      mealWrap.innerHTML = mealTags;
+      sliderEl.appendChild(mealWrap);
+
+      buildSlider(sliderEl, r.id, imgs);
+      card.appendChild(sliderEl);
+
+      const body = document.createElement('div');
+      body.className = 'food-body';
+      body.innerHTML = `
+        <div class="food-restaurant">${r.name}</div>
+        <div class="food-dish">${r.dish}</div>
+        <div class="food-dish-en">${r.dish_en}</div>
+        <p class="food-tagline">${r.tagline}</p>
+        <div class="food-unique">✦ ${r.unique}</div>
+        <div class="food-footer">
+          <span class="food-price">${r.price}</span>
+          <a href="${r.maps}" class="btn-maps" target="_blank">📍 Google Maps</a>
+        </div>`;
+      card.appendChild(body);
+
+      grid.appendChild(card);
+      obs.observe(card);
+    });
+  }
+
+  // ── FILTER ──
+  let activeMeal = 'all';
+  let activeType = 'all';
+
+  function filterFood(dimension, value, btn) {
+    if (dimension === 'meal') {
+      activeMeal = value;
+      document.querySelectorAll('.filter-group:first-child .filter-btn').forEach(b => b.classList.remove('active'));
+    } else {
+      activeType = value;
+      document.querySelectorAll('.filter-group:last-child .filter-btn').forEach(b => b.classList.remove('active'));
+    }
+    if (btn) btn.classList.add('active');
+
+    const filtered = restaurants.filter(r => {
+      const mealOk = activeMeal === 'all' || r.meals.includes(activeMeal);
+      const typeOk = activeType === 'all' || r.type === activeType;
+      return mealOk && typeOk;
+    });
+    renderCards(filtered);
+  }
+
+  renderCards(restaurants);
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
