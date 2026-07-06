@@ -4,6 +4,8 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Food Guide · Sen's Homestay · Cao Bang</title>
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <link rel="apple-touch-icon" href="images/favicon.png" />
   <link rel="alternate" hreflang="en" href="food.html" />
   <link rel="alternate" hreflang="vi" href="vi/food.html" />
   <link rel="alternate" hreflang="x-default" href="food.html" />
@@ -36,6 +38,9 @@
     nav.scrolled { box-shadow: 0 6px 22px rgba(42,33,24,0.10); }
     .nav-logo { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.34rem; color: var(--ink); font-weight: 800; letter-spacing:-0.02em; white-space: nowrap; display:flex; align-items:center; gap:9px; }
     .nav-logo .leaf { width:25px; height:25px; color:var(--terra-deep); stroke:currentColor; fill:none; stroke-width:1.7; }
+    .nav-logo .logo-mark { width: 40px; height: 40px; border-radius: 50%; object-fit: cover;
+      box-shadow: 0 2px 8px rgba(16,12,6,0.35); background: #FBF7EF; }
+    nav.scrolled .nav-logo .logo-mark { box-shadow: 0 2px 8px rgba(42,33,24,0.16); }
     .nav-logo span { color: var(--terra-deep); }
     .nav-links { display: flex; gap: 26px; align-items: center; }
     .nav-links a { font-size: 0.92rem; font-weight: 600; color: var(--ink-soft); transition: color 0.2s; }
@@ -170,8 +175,7 @@
 <body>
 
 <nav id="navbar">
-  <a href="index.html" class="nav-logo">
-    <svg class="leaf" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 20s-7-3-7-9a4 4 0 017-2.6A4 4 0 0118 11c0 6-7 9-7 9z"/><path d="M11 11v9" stroke-width="1.5"/></svg>
+  <a href="index.html" class="nav-logo"><img class="logo-mark" src="images/logo-mark.png" alt="Sen's Homestay logo" width="40" height="40">
     Sen's Homestay
   </a>
   <div class="nav-links" id="navLinks">

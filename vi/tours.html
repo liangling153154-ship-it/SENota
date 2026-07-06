@@ -4,6 +4,8 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <title>Tour Cao Bằng · Sen's Homestay</title>
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <link rel="apple-touch-icon" href="images/favicon.png" />
   <meta name="description" content="Tour Cao Bằng đi xe máy hoặc ô tô riêng. Sen là người bản địa dẫn đường, lo lịch trình, ăn ngủ và báo giá gọn lẹ." />
   <link rel="alternate" hreflang="vi" href="tours.html" />
   <link rel="alternate" hreflang="en" href="../tours.html" />
@@ -65,6 +67,9 @@
     nav.scrolled { box-shadow: 0 6px 22px rgba(42,33,24,0.10); }
     .nav-logo { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.34rem; font-weight: 800; color: var(--ink); letter-spacing: -0.02em; display: flex; align-items: center; gap: 9px; }
     .nav-logo .leaf { width: 25px; height: 25px; color: var(--terra-deep); stroke: currentColor; fill: none; stroke-width: 1.7; }
+    .nav-logo .logo-mark { width: 40px; height: 40px; border-radius: 50%; object-fit: cover;
+      box-shadow: 0 2px 8px rgba(16,12,6,0.35); background: #FBF7EF; }
+    nav.scrolled .nav-logo .logo-mark { box-shadow: 0 2px 8px rgba(42,33,24,0.16); }
     .nav-links { display: flex; gap: 26px; align-items: center; }
     .nav-links a { font-size: 0.92rem; font-weight: 600; color: var(--ink-soft); transition: color 0.2s; }
     .nav-links a:hover, .nav-links a.active { color: var(--terra-deep); }
@@ -79,31 +84,6 @@
     .lang-switch a { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.02em; padding: 6px 12px; color: var(--ink-soft); opacity: 0.9; transition: background 0.2s, color 0.2s; line-height: 1; }
     .lang-switch a.active { background: var(--terra-deep); color: #fff !important; opacity: 1; }
     .lang-switch a:not(.active):hover { opacity: 1; }
-
-    /* ============ LANGUAGE GATE ============ */
-    .lang-gate { position: fixed; inset: 0; z-index: var(--z-overlay); display: none; align-items: center; justify-content: center; padding: 24px; background: rgba(24,20,14,0.55); backdrop-filter: blur(6px); }
-    .lang-gate.show { display: flex; animation: gate-fade 0.4s var(--ease); }
-    @keyframes gate-fade { from { opacity: 0; } to { opacity: 1; } }
-    .lang-gate-card { background: var(--paper); color: var(--ink); border-radius: var(--r); box-shadow: var(--shadow); width: 100%; max-width: 420px; padding: 34px 30px; text-align: center; position: relative; }
-    .lang-gate-card .leaf { width: 34px; height: 34px; color: var(--terra-deep); margin: 0 auto 14px; }
-    .lang-gate-card h2 { font-size: 1.5rem; margin-bottom: 4px; }
-    .lang-gate-card .lg-sub { font-size: 0.92rem; color: var(--ink-soft); margin-bottom: 22px; }
-    .lang-gate-opts { display: flex; flex-direction: column; gap: 12px; }
-    .lang-gate-opts a { display: flex; align-items: center; gap: 14px; text-align: left; padding: 14px 18px; border-radius: 10px; min-height: 44px; background: var(--surface); box-shadow: inset 0 0 0 1.5px rgba(42,33,24,0.18); transition: transform 0.3s var(--ease), box-shadow 0.25s, background 0.25s; }
-    .lang-gate-opts a:hover { transform: translateY(-2px); box-shadow: inset 0 0 0 1.5px var(--terra-deep); background: rgba(182,90,54,0.06); }
-    .lang-gate-opts .flag { font-size: 1.5rem; line-height: 1; flex-shrink: 0; }
-    .lang-gate-opts .lg-label { font-weight: 700; font-size: 1rem; color: var(--ink); }
-    .lang-gate-opts .lg-native { font-size: 0.8rem; color: var(--ink-soft); }
-    .lang-gate-close { position: absolute; top: 12px; right: 12px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--ink-soft); border-radius: 50%; background: transparent; border: none; }
-    .lang-gate-close:hover { background: rgba(42,33,24,0.06); color: var(--ink); }
-    .lang-gate-close svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 1.7; }
-
-    /* Soft hint for returning visitor */
-    .lang-hint { position: fixed; left: 50%; transform: translateX(-50%) translateY(20px); bottom: calc(20px + env(safe-area-inset-bottom)); z-index: var(--z-float); display: none; align-items: center; gap: 12px; max-width: calc(100vw - 32px); background: var(--ink); color: #fff; padding: 12px 14px 12px 18px; border-radius: 999px; box-shadow: var(--shadow); font-size: 0.88rem; opacity: 0; transition: opacity 0.4s var(--ease), transform 0.4s var(--ease); }
-    .lang-hint.show { display: flex; opacity: 1; transform: translateX(-50%) translateY(0); }
-    .lang-hint a { background: #fff; color: var(--ink); font-weight: 700; padding: 8px 14px; border-radius: 999px; min-height: 36px; display: inline-flex; align-items: center; white-space: nowrap; }
-    .lang-hint button { background: transparent; border: none; color: rgba(255,255,255,0.7); cursor: pointer; padding: 6px; display: inline-flex; }
-    .lang-hint button svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.7; }
 
     /* HERO */
     .hero { height: 88vh; min-height: 560px; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
@@ -178,6 +158,8 @@
     .day-btn:hover { background: var(--green-light); border-color: var(--green-dark); }
     .day-btn .day-km { color: var(--text-muted); font-size: 0.68rem; font-weight: 500; }
     .card-pricing { background: var(--cream); border-radius: 10px; padding: 13px 14px; margin-bottom: 14px; }
+    .pricing-incl { font-size: 0.72rem; color: var(--text-muted); margin-bottom: 10px; line-height: 1.5; }
+    .pricing-incl b { color: var(--green-dark); font-weight: 600; }
     .pricing-lbl { font-size: 0.67rem; text-transform: uppercase; letter-spacing: 2px; color: var(--green-mid); font-weight: 600; margin-bottom: 8px; }
     .price-row { display: flex; justify-content: space-between; align-items: center; font-size: 0.83rem; margin-bottom: 4px; }
     .price-row:last-child { margin-bottom: 0; }
@@ -337,39 +319,10 @@
 </head>
 <body>
 
-<!-- ============ LANGUAGE GATE (first visit only) ============ -->
-<div class="lang-gate" id="langGate" role="dialog" aria-modal="true" aria-labelledby="langGateTitle">
-  <div class="lang-gate-card">
-    <button class="lang-gate-close" onclick="dismissGate()" aria-label="Đóng">
-      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 6l12 12M18 6L6 18"/></svg>
-    </button>
-    <svg class="leaf" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 20s-7-3-7-9a4 4 0 017-2.6A4 4 0 0118 11c0 6-7 9-7 9z"/><path d="M11 11v9" stroke-width="1.5"/></svg>
-    <h2 id="langGateTitle">Chào mừng đến Sen's</h2>
-    <p class="lg-sub">Chọn ngôn ngữ · Choose your language</p>
-    <div class="lang-gate-opts">
-      <a href="tours.html" onclick="setLang('vi')">
-        <span class="flag">🇻🇳</span>
-        <span><span class="lg-label">Tiếng Việt</span><br><span class="lg-native">Dành cho khách Việt Nam</span></span>
-      </a>
-      <a href="../tours.html" onclick="setLang('en')">
-        <span class="flag">🇬🇧</span>
-        <span><span class="lg-label">English</span><br><span class="lg-native">For international travellers</span></span>
-      </a>
-    </div>
-  </div>
-</div>
-
-<!-- Soft hint for returning visitor -->
-<div class="lang-hint" id="langHint" role="status">
-  <span>Prefer English?</span>
-  <a href="../tours.html" onclick="setLang('en')">View in English</a>
-  <button onclick="dismissHint()" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-</div>
-
 <!-- ============ NAV ============ -->
 <nav id="navbar">
   <a href="index.html" class="nav-logo">
-    <svg class="leaf" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 20s-7-3-7-9a4 4 0 017-2.6A4 4 0 0118 11c0 6-7 9-7 9z"/><path d="M11 11v9" stroke-width="1.5"/></svg>
+    <img class="logo-mark" src="../images/logo-mark.png" alt="Sen's Homestay logo" width="40" height="40">
     Sen's Homestay
   </a>
   <div class="nav-links" id="navLinks">
@@ -470,6 +423,7 @@
         </div>
         <div class="card-pricing">
           <div class="pricing-lbl" id="pl-1d">Giá trọn gói mỗi người</div>
+          <div class="pricing-incl"><b>Đã bao gồm:</b> Ăn sáng · Ăn trưa · Vé vào cửa các điểm tham quan</div>
           <div id="pr-1d">
             <div class="price-row"><span class="price-group">Giá từ</span><span class="price-val">1.570.000đ <span class="price-usd">/ người</span></span></div>
           </div>
@@ -500,6 +454,7 @@
         </div>
         <div class="card-pricing">
           <div class="pricing-lbl" id="pl-2d">Giá trọn gói mỗi người</div>
+          <div class="pricing-incl"><b>Đã bao gồm:</b> Ăn sáng · Ăn trưa · Vé vào cửa các điểm tham quan</div>
           <div id="pr-2d">
             <div class="price-row"><span class="price-group">1–3 người</span><span class="price-val">3.450.000đ <span class="price-usd">/ người</span></span></div>
             <div class="price-row"><span class="price-group">4–8 người</span><span class="price-val">2.900.000đ <span class="price-usd">/ người</span></span></div>
@@ -531,6 +486,7 @@
         </div>
         <div class="card-pricing">
           <div class="pricing-lbl" id="pl-2d1n">Giá trọn gói mỗi người · Gồm chỗ nghỉ</div>
+          <div class="pricing-incl"><b>Đã bao gồm:</b> Ăn sáng · Ăn trưa · Vé vào cửa các điểm tham quan</div>
           <div id="pr-2d1n">
             <div class="price-row"><span class="price-group">1–3 người</span><span class="price-val">3.580.000đ <span class="price-usd">/ người</span></span></div>
             <div class="price-row"><span class="price-group">4–8 người</span><span class="price-val">2.950.000đ <span class="price-usd">/ người</span></span></div>
@@ -563,6 +519,7 @@
         </div>
         <div class="card-pricing">
           <div class="pricing-lbl" id="pl-3d2n">Giá trọn gói mỗi người · Gồm chỗ nghỉ</div>
+          <div class="pricing-incl"><b>Đã bao gồm:</b> Ăn sáng · Ăn trưa · Vé vào cửa các điểm tham quan</div>
           <div id="pr-3d2n">
             <div class="price-row"><span class="price-group">1–3 người</span><span class="price-val">5.150.000đ <span class="price-usd">/ người</span></span></div>
             <div class="price-row"><span class="price-group">4–8 người</span><span class="price-val">4.550.000đ <span class="price-usd">/ người</span></span></div>
@@ -596,6 +553,7 @@
         </div>
         <div class="card-pricing">
           <div class="pricing-lbl" id="pl-4d3n">Giá trọn gói mỗi người · Gồm chỗ nghỉ</div>
+          <div class="pricing-incl"><b>Đã bao gồm:</b> Ăn sáng · Ăn trưa · Vé vào cửa các điểm tham quan</div>
           <div id="pr-4d3n">
             <div class="price-row"><span class="price-group">1–3 người</span><span class="price-val">4.910.000đ <span class="price-usd">/ người</span></span></div>
             <div class="price-row"><span class="price-group">4–8 người</span><span class="price-val">6.150.000đ <span class="price-usd">/ người</span></span></div>
@@ -762,26 +720,11 @@
   const obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.07 });
   document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
 
-  // LANGUAGE GATE + SWITCH
-  const LANG_HERE = 'vi';
-  function setLang(l){ try { localStorage.setItem('senLang', l); } catch(e){} }
-  function dismissGate(){
-    document.getElementById('langGate').classList.remove('show');
-    setLang(LANG_HERE);
+  // Language switch: remember choice for the EN|VI nav toggle.
+  function setLang(l){
+    try { localStorage.setItem('senLang', l); } catch(e){}
+    try { document.cookie = 'senLang=' + l + ';path=/;max-age=31536000'; } catch(e){}
   }
-  function dismissHint(){
-    document.getElementById('langHint').classList.remove('show');
-    try { sessionStorage.setItem('senHintDismissed','1'); } catch(e){}
-  }
-  (function(){
-    let saved = null; try { saved = localStorage.getItem('senLang'); } catch(e){}
-    if (!saved) {
-      document.getElementById('langGate').classList.add('show');
-    } else if (saved !== LANG_HERE) {
-      let dismissed = null; try { dismissed = sessionStorage.getItem('senHintDismissed'); } catch(e){}
-      if (!dismissed) document.getElementById('langHint').classList.add('show');
-    }
-  })();
 
   // TOUR DATA
   const tourData = {

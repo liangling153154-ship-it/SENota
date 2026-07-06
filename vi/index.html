@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <title>Sen's Homestay · Cao Bằng</title>
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <link rel="apple-touch-icon" href="images/favicon.png" />
   <meta name="description" content="Homestay ở Cao Bằng: phòng đẹp view núi, thuê xe máy, tour Bản Giốc, vé xe khách — Sen lo hết cho bạn. Nhắn Sen qua Zalo." />
   <!-- Song ngữ: đây là bản tiếng Việt; bản tiếng Anh ở thư mục gốc. -->
   <link rel="alternate" hreflang="vi" href="index.html" />
@@ -117,6 +119,9 @@
     nav.scrolled .nav-logo { color: var(--ink); }
     .nav-logo .leaf { width: 25px; height: 25px; color: var(--terra-soft); }
     nav.scrolled .nav-logo .leaf { color: var(--terra-deep); }
+    .nav-logo .logo-mark { width: 40px; height: 40px; border-radius: 50%; object-fit: cover;
+      box-shadow: 0 2px 8px rgba(16,12,6,0.35); background: #FBF7EF; }
+    nav.scrolled .nav-logo .logo-mark { box-shadow: 0 2px 8px rgba(42,33,24,0.16); }
     .nav-links { display: flex; gap: 26px; align-items: center; }
     .nav-links a { font-size: 0.92rem; font-weight: 600; color: #fff; opacity: 0.9; transition: opacity 0.2s, color 0.3s var(--ease); position: relative; }
     nav.scrolled .nav-links a:not(.nav-cta) { color: var(--ink-soft); opacity: 1; }
@@ -146,43 +151,7 @@
     .lang-switch a:not(.active):hover { opacity: 1; }
     .lang-switch a::after { display: none !important; }
 
-    /* ============ LANGUAGE GATE (first-visit picker) ============ */
-    .lang-gate { position: fixed; inset: 0; z-index: var(--z-overlay); display: none;
-                 align-items: center; justify-content: center; padding: 24px;
-                 background: rgba(24,20,14,0.55); backdrop-filter: blur(6px); }
-    .lang-gate.show { display: flex; animation: gate-fade 0.4s var(--ease); }
-    @keyframes gate-fade { from { opacity: 0; } to { opacity: 1; } }
-    .lang-gate-card { background: var(--paper); color: var(--ink); border-radius: var(--r);
-                      box-shadow: var(--shadow-lg); width: 100%; max-width: 420px; padding: 34px 30px;
-                      text-align: center; position: relative; }
-    .lang-gate-card .leaf { width: 34px; height: 34px; color: var(--terra-deep); margin: 0 auto 14px; }
-    .lang-gate-card h2 { font-size: 1.5rem; margin-bottom: 4px; }
-    .lang-gate-card .lg-sub { font-size: 0.92rem; color: var(--ink-soft); margin-bottom: 22px; }
-    .lang-gate-opts { display: flex; flex-direction: column; gap: 12px; }
-    .lang-gate-opts a { display: flex; align-items: center; gap: 14px; text-align: left;
-                        padding: 14px 18px; border-radius: var(--r-sm); min-height: 44px;
-                        background: var(--surface); box-shadow: inset 0 0 0 1.5px var(--line-strong);
-                        transition: transform 0.3s var(--ease), box-shadow 0.25s, background 0.25s; }
-    .lang-gate-opts a:hover { transform: translateY(-2px); box-shadow: inset 0 0 0 1.5px var(--terra-deep); background: rgba(182,90,54,0.06); }
-    .lang-gate-opts .flag { font-size: 1.5rem; line-height: 1; flex-shrink: 0; }
-    .lang-gate-opts .lg-label { font-weight: 700; font-size: 1rem; color: var(--ink); }
-    .lang-gate-opts .lg-native { font-size: 0.8rem; color: var(--ink-soft); }
-    .lang-gate-close { position: absolute; top: 12px; right: 12px; width: 36px; height: 36px;
-                       display: flex; align-items: center; justify-content: center; cursor: pointer;
-                       color: var(--ink-soft); border-radius: 50%; background: transparent; border: none; }
-    .lang-gate-close:hover { background: rgba(42,33,24,0.06); color: var(--ink); }
-    .lang-gate-close .icon { width: 18px; height: 18px; }
-
     /* Soft suggestion bar: shown to an EN-preferring visitor who lands on this VI page. */
-    .lang-hint { position: fixed; left: 50%; transform: translateX(-50%) translateY(20px);
-                 bottom: calc(20px + env(safe-area-inset-bottom)); z-index: var(--z-float);
-                 display: none; align-items: center; gap: 12px; max-width: calc(100vw - 32px);
-                 background: var(--ink); color: #fff; padding: 12px 14px 12px 18px; border-radius: var(--r-pill);
-                 box-shadow: var(--shadow-lg); font-size: 0.88rem; opacity: 0; transition: opacity 0.4s var(--ease), transform 0.4s var(--ease); }
-    .lang-hint.show { display: flex; opacity: 1; transform: translateX(-50%) translateY(0); }
-    .lang-hint a { background: #fff; color: var(--ink); font-weight: 700; padding: 8px 14px; border-radius: var(--r-pill); min-height: 36px; display: inline-flex; align-items: center; white-space: nowrap; }
-    .lang-hint button { background: transparent; border: none; color: rgba(255,255,255,0.7); cursor: pointer; padding: 6px; display: inline-flex; }
-    .lang-hint button .icon { width: 16px; height: 16px; }
 
     /* ============ HERO ============ */
     #hero { position: relative; min-height: 100vh; min-height: 100dvh; display: flex; align-items: flex-end; overflow: hidden; padding: 120px 0 64px; }
@@ -513,39 +482,10 @@
 </head>
 <body>
 
-<!-- ============ LANGUAGE GATE (first visit only) ============ -->
-<div class="lang-gate" id="langGate" role="dialog" aria-modal="true" aria-labelledby="langGateTitle">
-  <div class="lang-gate-card">
-    <button class="lang-gate-close" onclick="dismissGate()" aria-label="Đóng">
-      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
-    </button>
-    <svg class="leaf icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 20s-7-3-7-9a4 4 0 017-2.6A4 4 0 0118 11c0 6-7 9-7 9z"/><path d="M11 11v9" stroke-width="1.5"/></svg>
-    <h2 id="langGateTitle">Chào mừng đến Sen's</h2>
-    <p class="lg-sub">Chọn ngôn ngữ · Choose your language</p>
-    <div class="lang-gate-opts">
-      <a href="index.html" onclick="return chooseLang('vi')">
-        <span class="flag">🇻🇳</span>
-        <span><span class="lg-label">Tiếng Việt</span><br><span class="lg-native">Dành cho khách Việt Nam</span></span>
-      </a>
-      <a href="../index.html" onclick="return chooseLang('en')">
-        <span class="flag">🇬🇧</span>
-        <span><span class="lg-label">English</span><br><span class="lg-native">For international travellers</span></span>
-      </a>
-    </div>
-  </div>
-</div>
-
-<!-- Soft hint for a returning EN-preferring visitor who lands here on the VI page -->
-<div class="lang-hint" id="langHint" role="status">
-  <span>Prefer English?</span>
-  <a href="../index.html" onclick="setLang('en')">View in English</a>
-  <button onclick="dismissHint()" aria-label="Close"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-</div>
-
 <!-- ============ NAV ============ -->
 <nav id="navbar">
   <a href="index.html" class="nav-logo">
-    <svg class="leaf icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 20s-7-3-7-9a4 4 0 017-2.6A4 4 0 0118 11c0 6-7 9-7 9z"/><path d="M11 11v9" stroke-width="1.5"/></svg>
+    <img class="logo-mark" src="../images/logo-mark.png" alt="Sen's Homestay logo" width="40" height="40">
     Sen's Homestay
   </a>
   <div class="nav-links" id="navLinks">
@@ -897,38 +837,11 @@
 </a>
 
 <script>
-  /* ============ LANGUAGE GATE + SWITCH ============
-     Self-contained; copy verbatim into every page. Only LANG_HERE changes per page. */
-  const LANG_HERE = 'vi';                 // this page is Vietnamese
-  const OTHER_URL = '../index.html';       // where the *other* language (EN) lives from here
-  function setLang(l){ try { localStorage.setItem('senLang', l); } catch(e){} }
-  // Save the choice, close the gate, and only navigate if the OTHER language was picked.
-  function chooseLang(l){
-    setLang(l);
-    document.getElementById('langGate').classList.remove('show');
-    if (l !== LANG_HERE) { window.location.href = OTHER_URL; }
-    return false;
+  // Language switch: remember the visitor's choice for the EN|VI nav toggle.
+  function setLang(l){
+    try { localStorage.setItem('senLang', l); } catch(e){}
+    try { document.cookie = 'senLang=' + l + ';path=/;max-age=31536000'; } catch(e){}
   }
-  function dismissGate(){
-    document.getElementById('langGate').classList.remove('show');
-    setLang(LANG_HERE);
-  }
-  function dismissHint(){
-    document.getElementById('langHint').classList.remove('show');
-    try { sessionStorage.setItem('senHintDismissed','1'); } catch(e){}
-  }
-  (function(){
-    let saved = null; try { saved = localStorage.getItem('senLang'); } catch(e){}
-    if (!saved) {
-      document.getElementById('langGate').classList.add('show');
-    } else if (saved !== LANG_HERE) {
-      let dismissed = null; try { dismissed = sessionStorage.getItem('senHintDismissed'); } catch(e){}
-      if (!dismissed) document.getElementById('langHint').classList.add('show');
-    }
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') document.getElementById('langGate').classList.remove('show');
-    });
-  })();
 
   window.addEventListener('scroll', () => {
     document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 24);

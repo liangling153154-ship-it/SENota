@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Rooms · Sen's Homestay · Cao Bang</title>
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <link rel="apple-touch-icon" href="images/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -54,6 +56,9 @@
     nav.scrolled { box-shadow: 0 6px 22px rgba(42,33,24,0.10); }
     .nav-logo { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.34rem; color: var(--ink); font-weight: 800; letter-spacing: -0.02em; display: flex; align-items: center; gap: 9px; }
     .nav-logo .leaf { width: 25px; height: 25px; color: var(--terra-deep); stroke: currentColor; fill: none; stroke-width: 1.7; }
+    .nav-logo .logo-mark { width: 40px; height: 40px; border-radius: 50%; object-fit: cover;
+      box-shadow: 0 2px 8px rgba(16,12,6,0.35); background: #FBF7EF; }
+    nav.scrolled .nav-logo .logo-mark { box-shadow: 0 2px 8px rgba(42,33,24,0.16); }
     .nav-logo span { color: var(--terra-deep); }
     .nav-links { display: flex; gap: 26px; align-items: center; }
     .nav-links a { font-size: 0.92rem; font-weight: 600; color: var(--ink-soft); transition: color 0.2s; }
@@ -275,8 +280,7 @@
 <body>
 
 <nav id="navbar">
-  <a href="index.html" class="nav-logo">
-    <svg class="leaf" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 20s-7-3-7-9a4 4 0 017-2.6A4 4 0 0118 11c0 6-7 9-7 9z"/><path d="M11 11v9" stroke-width="1.5"/></svg>
+  <a href="index.html" class="nav-logo"><img class="logo-mark" src="images/logo-mark.png" alt="Sen's Homestay logo" width="40" height="40">
     Sen's Homestay
   </a>
   <div class="nav-links" id="navLinks">
@@ -328,7 +332,7 @@
       <div class="room-slider" id="slider-beige"
            data-folder="room-101-beige" data-count="6" data-emoji="🛏️"
            data-badges='[{"cls":"badge-featured","text":"🏔️ Mountain View"}]'
-           data-price="620.000đ / night">
+           data-price="400.000đ / night">
       </div>
       <div class="room-body">
         <div class="room-number">Room 101</div>
@@ -339,6 +343,9 @@
           <span class="spec">👤👤 2 guests</span>
           <span class="spec">📐 21 m²</span>
           <span class="spec">🚿 Private Bath</span>
+                  <span class="spec">📽️ Projector</span>
+          <span class="spec">📺 Netflix</span>
+          <span class="spec">🎲 Board Game</span>
         </div>
         <div class="room-view"><span>🌄</span> River · Mountain · City view</div>
         <div class="room-details-content" id="d-beige">
@@ -376,6 +383,9 @@
           <span class="spec">🛏️ King Bed</span>
           <span class="spec">👤👤 2 guests</span>
           <span class="spec">🚿 Private Bath</span>
+                  <span class="spec">📽️ Projector</span>
+          <span class="spec">📺 Netflix</span>
+          <span class="spec">🎲 Board Game</span>
         </div>
         <div class="room-view"><span>🌄</span> Street · Mountain view</div>
         <div class="room-details-content" id="d-sunset">
@@ -415,6 +425,9 @@
           <span class="spec">📐 24 m²</span>
           <span class="spec">🚿 Private Bath</span>
           <span class="spec">🌿 Balcony</span>
+                  <span class="spec">📽️ Projector</span>
+          <span class="spec">📺 Netflix</span>
+          <span class="spec">🎲 Board Game</span>
         </div>
         <div class="room-view"><span>🌄</span> Street · Mountain view</div>
         <div class="room-details-content" id="d-pine">
@@ -453,6 +466,9 @@
           <span class="spec">👤👤👤👤 Up to 4</span>
           <span class="spec">📐 24 m²</span>
           <span class="spec">🚿 Private Bath</span>
+                  <span class="spec">📽️ Projector</span>
+          <span class="spec">📺 Netflix</span>
+          <span class="spec">🎲 Board Game</span>
         </div>
         <div class="room-view"><span>🌄</span> River · Mountain · City view</div>
         <div class="room-details-content" id="d-lotus">
@@ -491,6 +507,9 @@
           <span class="spec">👤👤👤👤 Up to 4</span>
           <span class="spec">📐 24 m²</span>
           <span class="spec">🚿 External Bath</span>
+                  <span class="spec">📽️ Projector</span>
+          <span class="spec">📺 Netflix</span>
+          <span class="spec">🎲 Board Game</span>
         </div>
         <div class="room-details-content" id="d-rustic">
           <div class="detail-grid">
@@ -530,6 +549,9 @@
           <span class="spec">🚿 Private Bath</span>
           <span class="spec">🌿 Balcony</span>
           <span class="spec">🍳 Kitchen</span>
+                  <span class="spec">📽️ Projector</span>
+          <span class="spec">📺 Netflix</span>
+          <span class="spec">🎲 Board Game</span>
         </div>
         <div class="room-view"><span>🌄</span> Street · Mountain · River view</div>
         <div class="room-details-content" id="d-hobo">

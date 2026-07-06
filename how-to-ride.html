@@ -4,6 +4,8 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>How to Ride a Semi-Auto Bike · Sen's Homestay</title>
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <link rel="apple-touch-icon" href="images/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
@@ -126,12 +128,15 @@
       .tips{grid-template-columns:1fr}
       .cta{padding:20px}
     }
+      .nav-logo .logo-mark { width: 40px; height: 40px; border-radius: 50%; object-fit: cover;
+      box-shadow: 0 2px 8px rgba(16,12,6,0.35); background: #FBF7EF; }
+    nav.scrolled .nav-logo .logo-mark { box-shadow: 0 2px 8px rgba(42,33,24,0.16); }
   </style>
 </head>
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo">Sen's Homestay</a>
+  <a href="index.html" class="nav-logo"><img class="logo-mark" src="images/logo-mark.png" alt="Sen's Homestay logo" width="40" height="40"> Sen's Homestay</a>
   <div class="nav-links" id="navLinks">
     <a href="rooms.html">Rooms</a>
     <a href="motorbike.html">Motorbike</a>
