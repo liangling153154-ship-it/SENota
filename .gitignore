@@ -16,3 +16,9 @@ impeccable-main/
 
 # Source video master (the compressed images/hero/hero.mp4 is what ships)
 video-hero/
+
+# Source assets the user sends for processing (compressed copies live in images/)
+USER GỬI CHO AI/
+
+# Original standalone map app — already vendored into /map/ (has its own .git)
+CAO BANG SUPER MAP/
