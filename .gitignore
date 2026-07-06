@@ -22,3 +22,6 @@ USER GỬI CHO AI/
 
 # Original standalone map app — already vendored into /map/ (has its own .git)
 CAO BANG SUPER MAP/
+
+# Dev tooling installer (codebase-memory-mcp) — not part of the website
+install.ps1

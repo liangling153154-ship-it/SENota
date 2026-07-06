@@ -1,30 +1,30 @@
-// itinerary-v2-data.js — destinations, distance matrix, presets, road SVG
+// itinerary-v2-data-vi.js — bản tiếng Việt (sinh từ itinerary-v2-data.js; đường dẫn ảnh ../ cho trang /vi/)
 const HOMESTAY = {x:544, y:301};
 const DAY_COLORS = ['#E76F51','#52B788','#F4B860','#84a9d4','#885AB7'];
 
 const LIBRARY = [
-  {id:'home',                      name:"Sen's Homestay",               cat:'stay',    km:0,    img:'images/homestay.jpg',                          sx:544, sy:301, maps:'https://maps.app.goo.gl/PQXqThDmfQtj135CA'},
-  {id:'blacksmith',                name:'Blacksmith Village',            cat:'craft',   km:32.3, img:'images/places/blacksmith.jpg',                 sx:650, sy:301,                  region:'east', maps:'https://maps.app.goo.gl/i59gAWAHYFwmf3TMA'},
-  {id:'ba-quang',                  name:'Ba Quang Panorama',            cat:'nature',  km:68.2, img:'images/places/ba-quang.jpg',                   sx:764, sy:297, iconic:true, overnight:true,  region:'east', maps:'https://maps.app.goo.gl/u34WeRJym6qau61BA'},
-  {id:'nguom-ngao',                name:'Nguom Ngao Cave',              cat:'nature',  km:83.5, img:'images/places/nguom-ngao.jpg',                 sx:801, sy:212, tag:'cave', iconic:true, region:'east', maps:'https://maps.app.goo.gl/cbi4wK8gWubkjGKS6'},
-  {id:'stone-village',             name:'Stone Village (Khuoi Ky)',            cat:'culture', km:81.7, img:'images/places/stone-village.jpg',              sx:796, sy:216, overnight:true,  region:'east', maps:'https://maps.app.goo.gl/fwJ37eFqSRSDfErf6'},
-  {id:'ban-gioc',                  name:'Ban Gioc Waterfall',                cat:'nature',  km:84.6, img:'images/places/ban-gioc.jpg',                   sx:819, sy:207, iconic:true,     region:'east', maps:'https://maps.app.goo.gl/gyWXajPY783VWbYRA'},
-  {id:'thoongot',                  name:'Thoong Got Viewpoint',               cat:'nature',  km:70.7, img:'images/places/thoongot.jpg',                   sx:756, sy:220,                  region:'east', maps:'https://maps.app.goo.gl/NMmEz9uQupietzm36'},
-  {id:'phat-tich',                 name:'Phat Tich Pagoda',     cat:'culture', km:83.5, img:'images/places/phat-tich.jpg',                  sx:811, sy:210,                  region:'east', maps:'https://maps.app.goo.gl/aqcQssDgcGJYH9HQ6'},
-  {id:'eye-mountain',              name:'Eye Mountain Angel',                 cat:'nature',  km:26.5, img:'images/places/eye-mountain.jpg',               sx:592, sy:258, iconic:true,     region:'east', maps:'https://maps.app.goo.gl/RHmtCPCC7nrTbKcm7'},
-  {id:'thang-hen',                 name:'Thang Hen Lake',               cat:'nature',  km:28.2, img:'images/places/thang-hen.jpg',                  sx:582, sy:264, overnight:true,  region:'east', maps:'https://maps.app.goo.gl/Vw7fLEnYAZUcYExaA'},
-  {id:'lung-luong',                name:'Lung Luong Valley',            cat:'nature',  km:46.4, img:'images/places/lung-luong.jpg',                 sx:465, sy:156,                  region:'west', maps:'https://maps.app.goo.gl/H4yuti4Z2HXgUiqh6'},
-  {id:'pac-bo',                    name:'Pac Bo - Lenin Stream',           cat:'history', km:50.4, img:'images/places/pac-bo.jpg',                     sx:444, sy:145, secondaryCat:'nature', iconic:true,                  region:'west', maps:'https://maps.app.goo.gl/CbrfWz1GHAASczcm9'},
-  {id:'kim-dong',                  name:'Kim Dong Historical',          cat:'history', km:44.6, img:'images/places/kim-dong.jpg',                   sx:440, sy:164,                  region:'west', maps:'https://maps.app.goo.gl/yzf3SmD1Ch8d6ohSA'},
-  {id:'khau-coc-cha',              name:'Khau Coc Cha Pass',            cat:'nature',  km:87.9, img:'images/places/khau-coc-cha.jpg',               sx:305, sy:169, tag:'14 turns', iconic:true,    region:'west', maps:'https://maps.app.goo.gl/2aMpTG8VB2NJbous5'},
-  {id:'bamboo',                    name:'Nguyen Binh Bamboo',         cat:'nature',  km:68.1, img:'images/places/bamboo.jpg',                     sx:335, sy:296,                  region:'west', maps:'https://maps.app.goo.gl/38ibUAVzZFtbFi4dA'},
-  {id:'phia-oac',                  name:'Phia Oac Peak',                cat:'nature',  km:63.4, img:'images/places/phia-oac.jpg',                   sx:363, sy:348,                  region:'west', maps:'https://maps.app.goo.gl/psHFoHu77Bmb4vkv9'},
-  {id:'kolia-tea',                 name:'Kolia Tea Hills',                cat:'craft',   km:69.7, img:'images/places/kolia-tea.jpg',                  sx:352, sy:366, overnight:true,  region:'west', maps:'https://maps.app.goo.gl/mk9rtcNMpH4z66yUA'},
-  {id:'phia-thap-village-incense', name:'Phia Thap Village - Incense',        cat:'craft',   km:35,   img:'images/places/phia-thap-village-incense.jpg',  sx:625, sy:291,                  region:'east', maps:''},
-  {id:'dia-tren-village-paper',    name:'Dia Tren Village - Paper',          cat:'craft',   km:28.5, img:'images/places/dia-tren-village-paper.jpg',     sx:638, sy:279,                  region:'east', maps:''},
-  {id:'swimming-quay-son-river',   name:'Swimming Quay Son River',       cat:'swim',    km:83,   img:'images/places/swimming-quay-son-river.jpg',    sx:803, sy:197,                  region:'east', maps:''},
-  {id:'pac-nga-hanging-bridge',    name:'Pac Nga Hanging Bridge',            cat:'nature',  km:92.5, img:'images/places/pac-nga-hanging-bridge.jpg',     sx:724, sy:183,                  region:'east', maps:''},
-  {id:'pi-pha-viewpoint',          name:'Pi Pha Viewpoint',             cat:'nature',  km:95.2, img:'images/places/pi-pha-viewpoint.jpg',           sx:736, sy:191, iconic:true,     region:'east', maps:''},
+  {id:'home',                      name:"Sen's Homestay",               cat:'stay',    km:0,    img:'../images/homestay.jpg',                          sx:544, sy:301, maps:'https://maps.app.goo.gl/PQXqThDmfQtj135CA'},
+  {id:'blacksmith',                name:'Làng rèn Phúc Sen',            cat:'craft',   km:32.3, img:'../images/places/blacksmith.jpg',                 sx:650, sy:301,                  region:'east', maps:'https://maps.app.goo.gl/i59gAWAHYFwmf3TMA'},
+  {id:'ba-quang',                  name:'Đồi cỏ Ba Quàng',            cat:'nature',  km:68.2, img:'../images/places/ba-quang.jpg',                   sx:764, sy:297, iconic:true, overnight:true,  region:'east', maps:'https://maps.app.goo.gl/u34WeRJym6qau61BA'},
+  {id:'nguom-ngao',                name:'Động Ngườm Ngao',              cat:'nature',  km:83.5, img:'../images/places/nguom-ngao.jpg',                 sx:801, sy:212, tag:'cave', iconic:true, region:'east', maps:'https://maps.app.goo.gl/cbi4wK8gWubkjGKS6'},
+  {id:'stone-village',             name:'Làng đá cổ Khuổi Ky',            cat:'culture', km:81.7, img:'../images/places/stone-village.jpg',              sx:796, sy:216, overnight:true,  region:'east', maps:'https://maps.app.goo.gl/fwJ37eFqSRSDfErf6'},
+  {id:'ban-gioc',                  name:'Thác Bản Giốc',                cat:'nature',  km:84.6, img:'../images/places/ban-gioc.jpg',                   sx:819, sy:207, iconic:true,     region:'east', maps:'https://maps.app.goo.gl/gyWXajPY783VWbYRA'},
+  {id:'thoongot',                  name:'Điểm ngắm cảnh Thoong Gót',               cat:'nature',  km:70.7, img:'../images/places/thoongot.jpg',                   sx:756, sy:220,                  region:'east', maps:'https://maps.app.goo.gl/NMmEz9uQupietzm36'},
+  {id:'phat-tich',                 name:'Chùa Phật Tích Trúc Lâm',     cat:'culture', km:83.5, img:'../images/places/phat-tich.jpg',                  sx:811, sy:210,                  region:'east', maps:'https://maps.app.goo.gl/aqcQssDgcGJYH9HQ6'},
+  {id:'eye-mountain',              name:'Núi Mắt Thần',                 cat:'nature',  km:26.5, img:'../images/places/eye-mountain.jpg',               sx:592, sy:258, iconic:true,     region:'east', maps:'https://maps.app.goo.gl/RHmtCPCC7nrTbKcm7'},
+  {id:'thang-hen',                 name:'Hồ Thang Hen',               cat:'nature',  km:28.2, img:'../images/places/thang-hen.jpg',                  sx:582, sy:264, overnight:true,  region:'east', maps:'https://maps.app.goo.gl/Vw7fLEnYAZUcYExaA'},
+  {id:'lung-luong',                name:'Thung lũng Lũng Luông',            cat:'nature',  km:46.4, img:'../images/places/lung-luong.jpg',                 sx:465, sy:156,                  region:'west', maps:'https://maps.app.goo.gl/H4yuti4Z2HXgUiqh6'},
+  {id:'pac-bo',                    name:'Pác Bó - Suối Lênin',           cat:'history', km:50.4, img:'../images/places/pac-bo.jpg',                     sx:444, sy:145, secondaryCat:'nature', iconic:true,                  region:'west', maps:'https://maps.app.goo.gl/CbrfWz1GHAASczcm9'},
+  {id:'kim-dong',                  name:'Khu di tích Kim Đồng',          cat:'history', km:44.6, img:'../images/places/kim-dong.jpg',                   sx:440, sy:164,                  region:'west', maps:'https://maps.app.goo.gl/yzf3SmD1Ch8d6ohSA'},
+  {id:'khau-coc-cha',              name:'Đèo Khau Cốc Chà',            cat:'nature',  km:87.9, img:'../images/places/khau-coc-cha.jpg',               sx:305, sy:169, tag:'14 turns', iconic:true,    region:'west', maps:'https://maps.app.goo.gl/2aMpTG8VB2NJbous5'},
+  {id:'bamboo',                    name:'Rừng trúc Nguyên Bình',         cat:'nature',  km:68.1, img:'../images/places/bamboo.jpg',                     sx:335, sy:296,                  region:'west', maps:'https://maps.app.goo.gl/38ibUAVzZFtbFi4dA'},
+  {id:'phia-oac',                  name:'Đỉnh Phia Oắc',                cat:'nature',  km:63.4, img:'../images/places/phia-oac.jpg',                   sx:363, sy:348,                  region:'west', maps:'https://maps.app.goo.gl/psHFoHu77Bmb4vkv9'},
+  {id:'kolia-tea',                 name:'Đồi chè Kolia',                cat:'craft',   km:69.7, img:'../images/places/kolia-tea.jpg',                  sx:352, sy:366, overnight:true,  region:'west', maps:'https://maps.app.goo.gl/mk9rtcNMpH4z66yUA'},
+  {id:'phia-thap-village-incense', name:'Làng hương Phia Thắp',        cat:'craft',   km:35,   img:'../images/places/phia-thap-village-incense.jpg',  sx:625, sy:291,                  region:'east', maps:''},
+  {id:'dia-tren-village-paper',    name:'Làng giấy bản Dìa Trên',          cat:'craft',   km:28.5, img:'../images/places/dia-tren-village-paper.jpg',     sx:638, sy:279,                  region:'east', maps:''},
+  {id:'swimming-quay-son-river',   name:'Tắm sông Quây Sơn',       cat:'swim',    km:83,   img:'../images/places/swimming-quay-son-river.jpg',    sx:803, sy:197,                  region:'east', maps:''},
+  {id:'pac-nga-hanging-bridge',    name:'Cầu treo Pác Ngà',            cat:'nature',  km:92.5, img:'../images/places/pac-nga-hanging-bridge.jpg',     sx:724, sy:183,                  region:'east', maps:''},
+  {id:'pi-pha-viewpoint',          name:'Điểm ngắm cảnh Pi Pha',             cat:'nature',  km:95.2, img:'../images/places/pi-pha-viewpoint.jpg',           sx:736, sy:191, iconic:true,     region:'east', maps:''},
 ];
 
 const KM = {
@@ -286,24 +286,24 @@ const KM = {
 const ITINERARIES = [
   {
     id: '1d-highlights',
-    title: 'CLASSIC ONE DAY',
-    subtitle: 'The greatest hits — Ban Gioc, the cave, and the iconic Eye',
+    title: 'KINH ĐIỂN 1 NGÀY',
+    subtitle: 'Những điểm hot nhất — Bản Giốc, Ngườm Ngao và Núi Mắt Thần',
     days: 1,
-    pace: 'Packed',
-    vibe: 'Full of icons',
-    cover: 'images/places/ban-gioc.jpg',
+    pace: 'Kín lịch',
+    vibe: 'Toàn điểm hot',
+    cover: '../images/places/ban-gioc.jpg',
     plan: [
       ['blacksmith','nguom-ngao','stone-village','ban-gioc','phat-tich','eye-mountain','home']
     ]
   },
   {
     id: '2d-icons-lakes',
-    title: 'Waterfall & Lakes 2D1N',
-    subtitle: 'Ban Gioc, the cave and Ba Quang on day 1; Pac Bo, Thang Hen and Eye Mountain on day 2',
+    title: 'Thác & Hồ 2N1Đ',
+    subtitle: 'Bản Giốc, hang động và Ba Quàng ngày 1; Pác Bó, Thang Hen và Núi Mắt Thần ngày 2',
     days: 2,
-    pace: 'Balanced',
-    vibe: 'Icons + lakes',
-    cover: 'images/places/ban-gioc.jpg',
+    pace: 'Cân bằng',
+    vibe: 'Biểu tượng + hồ',
+    cover: '../images/places/ban-gioc.jpg',
     plan: [
       ['ban-gioc','nguom-ngao','phat-tich','ba-quang','home'],
       ['pac-bo','thang-hen','eye-mountain']
@@ -311,12 +311,12 @@ const ITINERARIES = [
   },
   {
     id: '4d-grand-loop',
-    title: 'Grand Cao Bang Loop 4D3N',
-    subtitle: 'East villages & Ban Gioc, then Pac Bo, the west passes and Phia Oac',
+    title: 'Vòng Cung Cao Bằng 4N3Đ',
+    subtitle: 'Làng nghề phía đông & Bản Giốc, rồi Pác Bó, đèo phía tây và Phia Oắc',
     days: 4,
-    pace: 'Thorough',
-    vibe: 'The complete loop',
-    cover: 'images/places/khau-coc-cha.jpg',
+    pace: 'Trọn vẹn',
+    vibe: 'Cung đường đầy đủ',
+    cover: '../images/places/khau-coc-cha.jpg',
     plan: [
       ['blacksmith','ba-quang','ban-gioc','phat-tich'],
       ['nguom-ngao','thoongot','eye-mountain','thang-hen','lung-luong'],
@@ -326,12 +326,12 @@ const ITINERARIES = [
   },
   {
     id: '3d-craft-history',
-    title: 'Craft & History 3D2N',
-    subtitle: 'Craft villages & the lakes, Pac Bo history, then the eastern heritage finale',
+    title: 'Làng Nghề & Lịch Sử 3N2Đ',
+    subtitle: 'Làng nghề & hồ nước, lịch sử Pác Bó, kết màn di sản phía đông',
     days: 3,
-    pace: 'Balanced',
-    vibe: 'Culture + nature',
-    cover: 'images/places/blacksmith.jpg',
+    pace: 'Cân bằng',
+    vibe: 'Văn hóa + thiên nhiên',
+    cover: '../images/places/blacksmith.jpg',
     plan: [
       ['blacksmith','phia-thap-village-incense','dia-tren-village-paper','eye-mountain','thang-hen','home'],
       ['pac-bo','kim-dong','lung-luong'],
@@ -340,12 +340,12 @@ const ITINERARIES = [
   },
   {
     id: '2d-highlights-loop',
-    title: 'Highlights Loop 2D1N',
-    subtitle: 'Ban Gioc, cave and Ba Quang on day 1; Pac Bo, Thang Hen and Eye Mountain on day 2',
+    title: 'Vòng Điểm Nhấn 2N1Đ',
+    subtitle: 'Bản Giốc, hang động, Ba Quàng ngày 1; Pác Bó, Thang Hen, Núi Mắt Thần ngày 2',
     days: 2,
-    pace: 'Balanced',
-    vibe: 'Best of both regions',
-    cover: 'images/places/ban-gioc.jpg',
+    pace: 'Cân bằng',
+    vibe: 'Tinh hoa 2 miền',
+    cover: '../images/places/ban-gioc.jpg',
     plan: [
       ['ban-gioc','nguom-ngao','phat-tich','ba-quang','home'],
       ['pac-bo','thang-hen','eye-mountain','home']
@@ -354,21 +354,21 @@ const ITINERARIES = [
 ];
 
 const REGIONS = {
-  east: {label:'East',  emoji:'🧭', bg:'#cce8ff', txt:'#003d7a', border:'#8ec8f5'},
-  west: {label:'West',  emoji:'🧭', bg:'#c8f0d0', txt:'#1a5018', border:'#7ed4a0'},
+  east: {label:'Phía Đông',  emoji:'🧭', bg:'#cce8ff', txt:'#003d7a', border:'#8ec8f5'},
+  west: {label:'Phía Tây',  emoji:'🧭', bg:'#c8f0d0', txt:'#1a5018', border:'#7ed4a0'},
 };
 
 // Lodging suggestions attached per overnight spot.
 // Shared cluster arrays so spots in the same area show identical options.
 const _KHUOI_KY_STAYS = [
-  {name:'Lan Rừng Homestay', area:'in Khuoi Ky'},
-  {name:'Yến Nhi Homestay',  area:'in Khuoi Ky'},
+  {name:'Lan Rừng Homestay', area:'tại Khuổi Ky'},
+  {name:'Yến Nhi Homestay',  area:'tại Khuổi Ky'},
 ];
 const _PAC_BO_STAYS = [
-  {name:'Mế Farmstay',       area:'near Pac Bo'},
+  {name:'Mế Farmstay',       area:'gần Pác Bó'},
 ];
 const _PHIA_OAC_STAYS = [
-  {name:'Kolia Tea Hills',   area:'in Phia Oac'},
+  {name:'Đồi chè Kolia',   area:'tại Phia Oắc'},
 ];
 
 const SPOT_STAYS = {
@@ -383,12 +383,12 @@ const SPOT_STAYS = {
   'thoongot':                 _KHUOI_KY_STAYS,
 
   // ── Own on-site lodging ──
-  'ba-quang':    [{name:'Ba Quang Panorama', area:'on site'}],
-  'thang-hen':   [{name:'Thang Hen Lake',    area:'on site'}],
-  'kolia-tea':   [{name:'Kolia Tea Hills',   area:'on site'}],
+  'ba-quang':    [{name:'Đồi cỏ Ba Quàng', area:'tại chỗ'}],
+  'thang-hen':   [{name:'Hồ Thang Hen',    area:'tại chỗ'}],
+  'kolia-tea':   [{name:'Đồi chè Kolia',   area:'tại chỗ'}],
 
   // ── Eye Mountain → Thang Hen (2km) ──
-  'eye-mountain': [{name:'Thang Hen Lake', area:'~2km away'}],
+  'eye-mountain': [{name:'Hồ Thang Hen', area:'cách ~2km'}],
 
   // ── Pac Bo cluster (west north) ──
   'pac-bo':      _PAC_BO_STAYS,
@@ -402,15 +402,15 @@ const SPOT_STAYS = {
 };
 
 const CATS = [
-  {id:'all',     label:'All',        emoji:'🗺️',  bg:'#2D6A4F', txt:'#ffffff'},
-  {id:'nature',  label:'Nature',   emoji:'🌿',  bg:'#d4eedd', txt:'#1a4d2a'},
-  {id:'craft',   label:'Craft villages', emoji:'🏺',  bg:'#fde8d0', txt:'#6b3300'},
-  {id:'culture', label:'Culture',       emoji:'🏛️', bg:'#ead5f5', txt:'#3d1460'},
-  {id:'history', label:'History',       emoji:'📜',  bg:'#fef0cc', txt:'#5c3800'},
-  {id:'swim',    label:'Swimming',       emoji:'🏊',  bg:'#cce8ff', txt:'#003d7a'},
-  {id:'stay',    label:'Stay',       emoji:'🌙',  bg:'#ffd6e0', txt:'#7a0028'},
-  {id:'east',    label:'East',       emoji:'🧭',  bg:'#cce8ff', txt:'#003d7a'},
-  {id:'west',    label:'West',       emoji:'🧭',  bg:'#c8f0d0', txt:'#1a5018'},
+  {id:'all',     label:'Tất cả',        emoji:'🗺️',  bg:'#2D6A4F', txt:'#ffffff'},
+  {id:'nature',  label:'Thiên nhiên',   emoji:'🌿',  bg:'#d4eedd', txt:'#1a4d2a'},
+  {id:'craft',   label:'Làng nghề', emoji:'🏺',  bg:'#fde8d0', txt:'#6b3300'},
+  {id:'culture', label:'Văn hóa',       emoji:'🏛️', bg:'#ead5f5', txt:'#3d1460'},
+  {id:'history', label:'Lịch sử',       emoji:'📜',  bg:'#fef0cc', txt:'#5c3800'},
+  {id:'swim',    label:'Tắm suối',       emoji:'🏊',  bg:'#cce8ff', txt:'#003d7a'},
+  {id:'stay',    label:'Nghỉ đêm',       emoji:'🌙',  bg:'#ffd6e0', txt:'#7a0028'},
+  {id:'east',    label:'Phía Đông',       emoji:'🧭',  bg:'#cce8ff', txt:'#003d7a'},
+  {id:'west',    label:'Phía Tây',       emoji:'🧭',  bg:'#c8f0d0', txt:'#1a5018'},
 ];
 
 // Road SVG paths (as innerHTML for the <g id="roads">) — extracted from v1
