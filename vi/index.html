@@ -523,11 +523,11 @@
     <h2 id="langGateTitle">Chào mừng đến Sen's</h2>
     <p class="lg-sub">Chọn ngôn ngữ · Choose your language</p>
     <div class="lang-gate-opts">
-      <a href="index.html" onclick="setLang('vi')">
+      <a href="index.html" onclick="return chooseLang('vi')">
         <span class="flag">🇻🇳</span>
         <span><span class="lg-label">Tiếng Việt</span><br><span class="lg-native">Dành cho khách Việt Nam</span></span>
       </a>
-      <a href="../index.html" onclick="setLang('en')">
+      <a href="../index.html" onclick="return chooseLang('en')">
         <span class="flag">🇬🇧</span>
         <span><span class="lg-label">English</span><br><span class="lg-native">For international travellers</span></span>
       </a>
@@ -900,7 +900,15 @@
   /* ============ LANGUAGE GATE + SWITCH ============
      Self-contained; copy verbatim into every page. Only LANG_HERE changes per page. */
   const LANG_HERE = 'vi';                 // this page is Vietnamese
+  const OTHER_URL = '../index.html';       // where the *other* language (EN) lives from here
   function setLang(l){ try { localStorage.setItem('senLang', l); } catch(e){} }
+  // Save the choice, close the gate, and only navigate if the OTHER language was picked.
+  function chooseLang(l){
+    setLang(l);
+    document.getElementById('langGate').classList.remove('show');
+    if (l !== LANG_HERE) { window.location.href = OTHER_URL; }
+    return false;
+  }
   function dismissGate(){
     document.getElementById('langGate').classList.remove('show');
     setLang(LANG_HERE);
