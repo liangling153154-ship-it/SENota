@@ -5,7 +5,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Cao Bang Travel Map — Waterfalls, Caves &amp; City Guide</title>
-  <link rel="icon" type="image/png" href="assets/favicon.png" />
   <meta name="description"
     content="Interactive travel map of Cao Bang, Vietnam — Ban Gioc waterfall, Nguom Ngao cave, Pac Bo, plus where to eat, sleep and drink in Cao Bang city.">
   <meta name="theme-color" content="#0B2530">
@@ -526,6 +525,97 @@
       border-radius: 50%;
     }
 
+    /* "Nên đến" star — a small gold badge on signature (priority-1) pins so the
+       must-see highlights read instantly, without shouting. */
+    .must-badge {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      z-index: 5;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      background: #F6B93B;
+      color: #6B4B12;
+      font-size: 11px;
+      line-height: 17px;
+      text-align: center;
+      box-shadow: 0 1px 3px rgba(11, 37, 48, .35);
+      pointer-events: none;
+    }
+    .teardrop-wrap .must-badge { top: 2px; right: 4px; }
+
+    /* Tier 1 (signature stops): jade-turquoise ring + soft halo — the colour of
+       the Ban Gioc / Quây Sơn water, Cao Bang's most iconic hue. The one cold
+       colour on a warm cream map, so these pins pop instantly; the small gold
+       star on top completes the contrast. */
+    .is-must .teardrop,
+    .is-must .photo-pin,
+    .is-must .pin {
+      --c: #0891B2 !important;
+    }
+    .is-must .photo-pin {
+      box-shadow: 0 0 0 3.5px var(--c), 0 0 0 9px rgba(8, 145, 178, .30), 0 3px 10px rgba(11, 37, 48, .45);
+    }
+    .is-must .teardrop {
+      box-shadow: 0 0 0 5px rgba(8, 145, 178, .33), 0 5px 12px rgba(11, 37, 48, .5);
+    }
+    .is-must .pin {
+      box-shadow: 0 0 0 5px rgba(8, 145, 178, .33), 0 2px 8px rgba(11, 37, 48, .35);
+    }
+    .is-must .pin-label {
+      font-weight: 800;
+    }
+    .is-must .must-badge {
+      width: 19px;
+      height: 19px;
+      line-height: 19px;
+      font-size: 12px;
+    }
+
+    /* ---- Tier-2 dot mode (zoomed out, body.tier-dots) ----
+       Secondary places collapse to a small category-coloured dot: you can see
+       the map is rich without 40 full pins shouting at once. From z11 the
+       dots grow back into full pins. */
+    .mini-dot {
+      display: none;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 1.5px solid #fff;
+      box-shadow: 0 1px 3px rgba(11, 37, 48, .35);
+      pointer-events: none;
+    }
+    /* teardrop icons anchor at their tip, not the centre — keep the dot on the spot */
+    .teardrop-wrap .mini-dot { left: 27px; top: 66px; }
+    body.tier-dots .prio-2 .teardrop,
+    body.tier-dots .prio-2 .iconic-ping,
+    body.tier-dots .prio-2 .photo-pin,
+    body.tier-dots .prio-2 .pin,
+    body.tier-dots .prio-2 .pin-label {
+      display: none;
+    }
+    body.tier-dots .prio-2 .mini-dot {
+      display: block;
+    }
+
+    /* 11.5–12.5: tier-2 pins just hatched from dots — render them slightly
+       smaller so neighbours don't jostle; full size from z12.5. */
+    body.t2-mid .prio-2 .photo-pin,
+    body.t2-mid .prio-2 .pin {
+      transform: scale(.8);
+    }
+    body.t2-mid .prio-2 .teardrop {
+      transform: rotate(-45deg) scale(.8);
+    }
+    body.t2-mid .prio-2 .pin-label {
+      font-size: 10px;
+    }
+
     /* bigger touch target */
     .pin svg {
       width: 15px;
@@ -540,6 +630,27 @@
     .pin-lg svg {
       width: 19px;
       height: 19px;
+    }
+
+    /* Petrol: a bare crimson dot — no icon, no name (tap it for the card).
+       The network is dense; a quiet dot marks "fuel here" without clutter.
+       Grows a touch when zoomed into an area so it's easier to tap. */
+    .cat-fuel .pin,
+    .cat-fuel .pin.pin-lg {
+      width: 13px;
+      height: 13px;
+      border-width: 1.5px;
+      box-shadow: 0 1px 3px rgba(11, 37, 48, .3);
+    }
+    .cat-fuel .pin svg,
+    .cat-fuel .pin-label {
+      display: none;
+    }
+    .tz-near .cat-fuel .pin,
+    .tz-near .cat-fuel .pin.pin-lg {
+      width: 17px;
+      height: 17px;
+      border-width: 2px;
     }
 
     .zl-mid .pin:not(.pin-lg) {
@@ -607,9 +718,9 @@
       top: 0;
       left: 0;
       display: block;
-      width: 34px !important;    /* default (mid province zoom) */
+      width: 40px !important;    /* default (mid province zoom) */
       height: auto !important;
-      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, .3));
+      opacity: .92;              /* let it settle into the paper */
       transition: width .12s ease;
     }
     .town-name {
@@ -626,9 +737,12 @@
     /* whole-province overview: shrink icons & hide labels to stop overlap */
     body.tz-wide .town-glyph { width: 22px !important; }
     body.tz-wide .town-name  { display: none; }
-    /* zoomed into a district: bigger, easier to read */
-    body.tz-near .town-glyph { width: 46px !important; }
-    body.tz-near .town-name  { top: 8px; left: 50px; font-size: 13px; }
+    /* zoomed into a district: the town grows to read as an actual settlement */
+    body.tz-near .town-glyph { width: 72px !important; }
+    body.tz-near .town-name  { top: 24px; left: 78px; font-size: 14px; }
+    /* fully zoomed in: bigger still */
+    body.zl-max .town-glyph  { width: 96px !important; }
+    body.zl-max .town-name   { top: 34px; left: 102px; font-size: 15px; }
     body.dark .town-name {
       color: #cbd5e1;
       text-shadow: 0 1px 0 #0b1220, 0 -1px 0 #0b1220, 1px 0 0 #0b1220, -1px 0 0 #0b1220, 0 0 5px #0b1220;
@@ -735,14 +849,21 @@
       /* rounded on 3 corners, sharp bottom-left→ rotated so the tip points down */
       border-radius: 50% 50% 50% 0;
       transform: rotate(-45deg);
-      background: var(--c, var(--primary));
-      border: 3px solid #fff;
+      /* Google-style 4-colour sectors, softened to sit on the warm paper map
+         (muted denim / sage / honey / terracotta instead of raw Google hues).
+         The element is rotated -45°, so local angles = screen angles + 45°:
+         top→blue, right+tip→green, bottom-left→yellow, left→red. */
+      background: conic-gradient(from 0deg,
+        #5187D8 0 90deg,
+        #4C9E5F 90deg 245deg,
+        #E8B23A 245deg 305deg,
+        #D9564A 305deg 360deg);
+      border: 2px solid #0B2530;   /* ink-black outline so the pin pops */
       box-shadow: 0 5px 12px rgba(11, 37, 48, .5);
       transition: transform .18s ease;
       /* gentle breathing glow so the hero sights pull the eye */
       animation: iconic-glow 2.8s ease-in-out infinite;
     }
-
     /* expanding halo ring around each iconic pin, in its category colour */
     .iconic-ping {
       content: "";
@@ -773,7 +894,7 @@
 
     .teardrop-photo {
       position: absolute;
-      inset: 3.5px;
+      inset: 5px;               /* flat colored rim around the photo (Google-pin look) */
       border-radius: 50%;
       overflow: hidden;
       transform: rotate(45deg);
@@ -800,7 +921,7 @@
       border-radius: 50%;
       background: var(--c, var(--primary));
       border: 2px solid #fff;
-      display: flex;
+      display: none;   /* hidden — Google-pin cleanliness, the photo says it all */
       align-items: center;
       justify-content: center;
       color: #fff;
@@ -837,13 +958,16 @@
     }
 
     .capital-wrap .pin-label {
-      top: calc(50% + 24px);
-      background: #B45309;   /* amber to match the gold capital star */
+      top: calc(50% + 20px);
+      background: #B01818;   /* deep red to match the red capital ring */
     }
 
-    .teardrop-wrap .pin-label.label-above {
+    /* teardrop labels: a touch smaller, and always ABOVE the drop — the tip
+       points at the spot, the name floats over the pin's head */
+    .teardrop-wrap .pin-label {
       top: auto;
-      bottom: calc(50% + 44px);
+      bottom: calc(50% + 46px);
+      font-size: 10px;
     }
 
     body.dark .teardrop-wrap .pin-label,
@@ -852,24 +976,24 @@
       color: #0b1220;
     }
     body.dark .capital-wrap .pin-label {
-      background: #F5B301;
-      color: #3b2a02;
+      background: #DA251D;
+      color: #fff;
     }
 
-    /* ===== CAPITAL: a round city photo with a gold ring + star badge ===== */
+    /* ===== CAPITAL: a round city photo with a red ring + gold star badge
+       (đỏ + sao vàng — the flag motif marks the provincial capital) ===== */
     .capital-wrap {
       cursor: pointer;
     }
 
-    /* round photo of the city, ringed in gold to mark the provincial capital */
     .capital-pin {
       position: relative;
-      width: 66px;
-      height: 66px;
+      width: 54px;
+      height: 54px;
       border-radius: 50%;
-      background: #F5B301;                 /* gold ring */
-      padding: 3.5px;
-      box-shadow: 0 0 0 2px #fff, 0 5px 14px rgba(11, 37, 48, .55);
+      background: #DA251D;                 /* red ring */
+      padding: 3px;
+      box-shadow: 0 0 0 2px #fff, 0 4px 12px rgba(11, 37, 48, .5);
       transition: transform .18s ease;
     }
 
@@ -891,10 +1015,10 @@
     /* gold star badge sitting on the pin's top-right shoulder */
     .capital-badge {
       position: absolute;
-      top: -6px;
-      right: -6px;
-      width: 26px;
-      height: 26px;
+      top: -5px;
+      right: -5px;
+      width: 22px;
+      height: 22px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -902,7 +1026,7 @@
       background: linear-gradient(160deg, #FFD54A 0%, #F5B301 60%, #E38C00 100%);
       border: 2px solid #fff;
       color: #7a4d00;
-      font-size: 15px;
+      font-size: 13px;
       line-height: 1;
       box-shadow: 0 2px 5px rgba(11, 37, 48, .45);
     }
@@ -2136,6 +2260,27 @@
       bottom: calc(64px + env(safe-area-inset-bottom));
     }
 
+    /* current zoom readout — sits above the locate button */
+    .zoom-badge {
+      min-width: 34px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--ink-2);
+      font-size: 11px;
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: .03em;
+      box-shadow: var(--shadow-1);
+      margin-bottom: 8px;
+      pointer-events: none;
+      user-select: none;
+    }
+    body.dark .zoom-badge {
+      background: #14262F;
+      color: var(--ink-2);
+    }
+
     .leaflet-control-attribution {
       font-size: 10px !important;
       background: rgba(255, 255, 255, .75) !important;
@@ -2146,9 +2291,11 @@
         display: none;
       }
 
-      /* pinch to zoom on phones */
+      /* pinch to zoom on phones — but keep the locate button and zoom badge
+         ABOVE the bottom dock ("Stay with Sen's" + "Find places"), which used
+         to cover the locate button */
       .leaflet-bottom.leaflet-right {
-        bottom: calc(10px + env(safe-area-inset-bottom));
+        bottom: calc(76px + env(safe-area-inset-bottom));
       }
     }
 

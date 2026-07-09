@@ -48,7 +48,8 @@ var CATEGORIES = {
   shopping:  { label: "Shopping",          color: "#9333EA", icon: "bag" },
   services:  { label: "Services",          color: "#475569", icon: "wrench" },
   health:    { label: "Health",            color: "#DC2626", icon: "health" },
-  transport: { label: "Transport",         color: "#0284C7", icon: "bus" }
+  transport: { label: "Transport",         color: "#0284C7", icon: "bus" },
+  fuel:      { label: "Petrol",            color: "#E11D48", icon: "fuel" }
 };
 
 var MAP_CONFIG = {
@@ -57,7 +58,7 @@ var MAP_CONFIG = {
   cityThreshold: 12,          // city-tier pins appear at this zoom
   provinceCenter: [22.75, 106.20],
   provinceZoom: 9,
-  maxBounds: [[21.85, 104.90], [23.45, 107.40]],
+  maxBounds: [[21.00, 103.80], [24.20, 108.60]],
   cityImg: ASSETS + "images/places/cao-bang-city.jpg",
   cityPinImg: ASSETS + "images/places/cao-bang-city.jpg"   // photo shown in the city's map pin
 };
@@ -90,6 +91,7 @@ var POIS = [
 
   {
     id: "ban-gioc",
+    priority: 1,
     name: "Ban Gioc Waterfall",
     localName: "Thác Bản Giốc",
     category: "sights",
@@ -197,6 +199,7 @@ var POIS = [
 
   {
     id: "ba-quang",
+    priority: 1,
     name: "Ba Quang Hills",
     localName: "Đồi cỏ cháy Vinh Quý (Bả Quang)",
     category: "sights",
@@ -276,6 +279,7 @@ var POIS = [
     name: "Nung Indigo Cafe & Homestay",
     localName: "Nùng INDIGO Cafe & Homestay",
     category: "stay",
+    img: ASSETS + "images/places/nung-indigo.jpg",
     tier: "province",
     lat: 22.6894384,
     lng: 106.3871184,
@@ -304,6 +308,7 @@ var POIS = [
 
   {
     id: "mat-than",
+    priority: 1,
     name: "Angel Eye Mountain",
     localName: "Núi Mắt Thần",
     category: "sights",
@@ -321,6 +326,7 @@ var POIS = [
 
   {
     id: "pac-bo",
+    priority: 1,
     name: "Pac Bo Cave",
     localName: "Khu di tích Pác Bó",
     category: "culture",
@@ -372,6 +378,7 @@ var POIS = [
     name: "Ban Giang Waterfall",
     localName: "Thác Bản Giàng",
     category: "sights",
+    img: ASSETS + "images/places/ban-giang.jpg",
     tier: "province",
     lat: 22.91214,
     lng: 106.05841,
@@ -429,6 +436,7 @@ var POIS = [
 
   {
     id: "khau-coc-cha",
+    priority: 1,
     name: "Khau Coc Cha Pass",
     localName: "Đèo Khau Cốc Chà (15 tầng)",
     category: "sights",
@@ -847,5 +855,834 @@ var POIS = [
     mapsName: "Yên - Ngon như mẹ nấu",
     guideUrl: ASSETS + "food.html",
     guideLabel: "Food guide"
-  }
+  },
+
+  /* ---------------------------------------------------------------------
+     PRACTICAL SPOTS — added from Sen's list (USER GỬI CHO AI/Địa điểm.txt).
+     Supermarkets, ATM/money exchange, pharmacies, markets, the night
+     walking street, plus a few more local eateries & cafés. City tier,
+     coordinates read from each place's Google Maps pin.
+     --------------------------------------------------------------------- */
+
+  {
+    id: "nguyen-luong-market",
+    name: "Nguyen Luong Supermarket",
+    localName: "Siêu Thị Nguyễn Lương",
+    category: "shopping",
+    tier: "city",
+    lat: 22.6839092,
+    lng: 106.2179605,
+    minZoom: 14,
+    desc: "Handy grocery on the Đề Thám side of town — snacks, drinks and daily basics before you hit the road.",
+    maps: "https://maps.app.goo.gl/mcy5KXdNvWBo2Jj36",
+    mapsName: "Siêu Thị Nguyễn Lương"
+  },
+
+  {
+    id: "vietinbank-atm-de-tham",
+    name: "VietinBank ATM",
+    localName: "ATM VietinBank",
+    category: "services",
+    tier: "city",
+    lat: 22.6845542,
+    lng: 106.219543,
+    minZoom: 14,
+    desc: "Reliable ATM near Đề Thám street for cash withdrawals.",
+    maps: "https://maps.app.goo.gl/JRFf8Pok38aBpzBJ8",
+    mapsName: "VietinBank"
+  },
+
+  {
+    id: "long-chau-pharmacy-de-tham",
+    name: "Long Chau Pharmacy",
+    localName: "Nhà Thuốc FPT Long Châu",
+    category: "health",
+    tier: "city",
+    lat: 22.684094,
+    lng: 106.2211574,
+    minZoom: 14,
+    desc: "Trusted pharmacy chain — medicines, first-aid and travel basics.",
+    maps: "https://maps.app.goo.gl/FdfCfDv8P8e3iabTA",
+    mapsName: "Nhà Thuốc FPT Long Châu"
+  },
+
+  {
+    id: "com-ngon-vi-nha-lam",
+    name: "Local Rice Eatery",
+    localName: "Cơm Ngon Vị Nhà Làm",
+    category: "food",
+    tier: "city",
+    lat: 22.6836519,
+    lng: 106.2178027,
+    minZoom: 14,
+    desc: "Simple home-style rice eatery (cơm bình dân) — pick a few dishes over rice for a cheap, filling local lunch.",
+    maps: "https://maps.app.goo.gl/qX7PXuetmeSSo86s6",
+    mapsName: "Cơm Ngon vị nhà làm"
+  },
+
+  {
+    id: "thanh-an-bakery",
+    name: "Thanh An Bakery",
+    localName: "Bánh Thanh An",
+    category: "food",
+    tier: "city",
+    lat: 22.683912,
+    lng: 106.220435,
+    minZoom: 14,
+    desc: "Local bakery for fresh bread, cakes and quick sweet bites.",
+    maps: "https://maps.app.goo.gl/KM1nq8ZjtYPKHvXm8",
+    mapsName: "Thanh An bakerry"
+  },
+
+  {
+    id: "cao-bang-city-square",
+    name: "Cao Bang City Square",
+    localName: "Quảng trường TP. Cao Bằng",
+    category: "culture",
+    tier: "city",
+    lat: 22.6793742,
+    lng: 106.2216028,
+    minZoom: 13,
+    desc: "The city's main public square — locals gather here in the evenings; open space for a stroll.",
+    maps: "https://maps.app.goo.gl/jB66tGtJnboZKyKd9",
+    mapsName: "Cao Bang City Square"
+  },
+
+  {
+    id: "de-tham-central-market",
+    name: "De Tham Central Market",
+    localName: "Chợ Trung tâm km5 (Đề Thám)",
+    category: "shopping",
+    tier: "city",
+    lat: 22.6838946,
+    lng: 106.2209829,
+    minZoom: 13,
+    desc: "Busy central market on Đề Thám — fresh produce, local goods and a slice of everyday Cao Bang life.",
+    maps: "https://maps.app.goo.gl/Hum4rrJ7irhHuW4i7",
+    mapsName: "Central Market km5"
+  },
+
+  {
+    id: "winmart-de-tham",
+    name: "WinMart+ De Tham",
+    localName: "Siêu thị WinMart+ Đề Thám",
+    category: "shopping",
+    tier: "city",
+    lat: 22.6841339,
+    lng: 106.2200355,
+    minZoom: 14,
+    desc: "Modern convenience supermarket — snacks, drinks, toiletries and packaged goods.",
+    maps: "https://maps.app.goo.gl/aowv4XRHMQCsKMWC7",
+    mapsName: "Siêu thị Winmart+ Đề Thám"
+  },
+
+  {
+    id: "bun-cha-ha-noi",
+    name: "Bun Cha Ha Noi",
+    localName: "Bún Chả Hà Nội",
+    category: "food",
+    tier: "city",
+    lat: 22.6834763,
+    lng: 106.2242752,
+    minZoom: 14,
+    desc: "Hanoi-style grilled pork with vermicelli — a solid breakfast or lunch stop.",
+    price: "breakfast & lunch",
+    maps: "https://maps.app.goo.gl/9qidL5Q7YAiS8LHS9",
+    mapsName: "Bún Chả Hà Nội"
+  },
+
+  {
+    id: "banh-cuon-mo-hoang",
+    name: "Banh Cuon Mo Hoang",
+    localName: "Bánh Cuốn Mơ Hoàng",
+    category: "food",
+    tier: "city",
+    lat: 22.6826795,
+    lng: 106.2183386,
+    minZoom: 14,
+    desc: "Local Cao Bang banh cuon — silky rice rolls served in warm bone broth, a regional specialty.",
+    price: "breakfast",
+    maps: "https://maps.app.goo.gl/RPj8eEoEadEcWLzV6",
+    mapsName: "Bánh cuốn Mơ Hoàng"
+  },
+
+  {
+    id: "quan-que-noodles",
+    name: "Quan Que (Pho · Chao · Bun)",
+    localName: "Quán Quế",
+    category: "food",
+    tier: "city",
+    lat: 22.6810625,
+    lng: 106.2312933,
+    minZoom: 14,
+    desc: "Night eatery for noodle soups, rice congee with minced meat and other warming local bowls.",
+    price: "evening",
+    maps: "https://maps.app.goo.gl/K3PBEovuSHpGFaej9",
+    mapsName: "QUÁN QUẾ (PHỞ, CHÁO, BÚN, MIẾN)"
+  },
+
+  {
+    id: "pho-nha-do-duck",
+    name: "Pho Nha Do (Roast Duck Pho)",
+    localName: "Phở Nhà Đổ",
+    category: "food",
+    img: ASSETS + "images/Food/pho-nha-do/1.jpg",
+    tier: "city",
+    lat: 22.679376,
+    lng: 106.2181974,
+    minZoom: 14,
+    pick: true,
+    desc: "Well-known roast-duck pho spot — crispy-skinned duck over rice noodles in a rich broth, a Cao Bang classic.",
+    maps: "https://maps.app.goo.gl/GUzptY3wngc3XskN6",
+    mapsName: "PHỞ NHÀ ĐỔ"
+  },
+
+  {
+    id: "nga-ba-song-fish-hotpot",
+    name: "Nga Ba Song Fish Hotpot",
+    localName: "Nhà Hàng Ngã Ba Sông - Lẩu Thức Yến",
+    category: "food",
+    tier: "city",
+    lat: 22.673561,
+    lng: 106.2540119,
+    minZoom: 14,
+    desc: "Locally famous fish hotpot restaurant — great for a shared sit-down dinner by the river.",
+    maps: "https://maps.app.goo.gl/mgcKLH2117cuYPVd7",
+    mapsName: "Nhà Hàng Ngã Ba Sông-Lẩu Thức Yến"
+  },
+
+  {
+    id: "long-chau-pharmacy-song-hien",
+    name: "Long Chau Pharmacy (Song Hien)",
+    localName: "Nhà Thuốc FPT Long Châu",
+    category: "health",
+    tier: "city",
+    lat: 22.6744765,
+    lng: 106.2568224,
+    minZoom: 14,
+    desc: "Second Long Châu pharmacy branch, handy on the Sông Hiến side of town.",
+    maps: "https://maps.app.goo.gl/hW94RsiCuwA2WJKQ9",
+    mapsName: "Nhà Thuốc FPT Long Châu"
+  },
+
+  {
+    id: "ngoc-xuan-supermarket",
+    name: "Ngoc Xuan Supermarket",
+    localName: "Siêu thị Ngọc Xuân",
+    category: "shopping",
+    tier: "city",
+    lat: 22.6743175,
+    lng: 106.2571614,
+    minZoom: 13,
+    desc: "One of the bigger supermarkets in town — a good one-stop for groceries and supplies.",
+    maps: "https://maps.app.goo.gl/F22wfoAuvzbZAtLH6",
+    mapsName: "Siêu thị Ngọc Xuân"
+  },
+
+  {
+    id: "lang-ben-song-cafe",
+    name: "Riverside Garden Cafe",
+    localName: "Làng Bên Sông",
+    category: "food",
+    tier: "city",
+    lat: 22.6766402,
+    lng: 106.2477205,
+    minZoom: 14,
+    desc: "Relaxed riverside garden café — a leafy spot for coffee away from the traffic.",
+    maps: "https://maps.app.goo.gl/Yh6yoJSNLRwmu3gg9",
+    mapsName: "Làng Bên Sông"
+  },
+
+  {
+    id: "quan-an-dem-hieu-yen",
+    name: "Hieu Yen Night Eatery",
+    localName: "Quán Ăn Đêm Hiếu Yến",
+    category: "food",
+    tier: "city",
+    lat: 22.684286,
+    lng: 106.215768,
+    minZoom: 14,
+    desc: "Late-night local eatery — noodles, rice congee with minced meat, fried rice and more.",
+    price: "evening & late night",
+    maps: "https://maps.app.goo.gl/3v71ZMdmbKaZLGzF9",
+    mapsName: "QUÁN ĂN ĐÊM HIẾU YẾN"
+  },
+
+  {
+    id: "nang-cafe",
+    name: "Nang Cafe",
+    localName: "Nâng Café",
+    category: "food",
+    tier: "city",
+    lat: 22.6680676,
+    lng: 106.2543758,
+    minZoom: 14,
+    pick: true,
+    desc: "Well-loved café set in traditional Tày–Nùng architecture — a characterful place for a coffee break.",
+    maps: "https://maps.app.goo.gl/v32M3Q5fmwjXtubJ6",
+    mapsName: "Nâng café"
+  },
+
+  {
+    id: "hanwon-korean-bbq",
+    name: "HanWon Korean BBQ Buffet",
+    localName: "HanWon Cao Bằng",
+    category: "food",
+    tier: "city",
+    lat: 22.6628725,
+    lng: 106.2586243,
+    minZoom: 14,
+    desc: "All-you-can-eat Korean BBQ buffet — a fun change of pace for groups.",
+    maps: "https://maps.app.goo.gl/TCwcQvHKJ56ZHNET7",
+    mapsName: "HanWon Cao Bằng"
+  },
+
+  {
+    id: "kim-dong-walking-street",
+    name: "Kim Dong Night Walking Street",
+    localName: "Phố Đi Bộ Kim Đồng",
+    category: "nightlife",
+    tier: "city",
+    lat: 22.6640975,
+    lng: 106.2605052,
+    minZoom: 13,
+    featured: true,
+    desc: "The city's night walking street — food stalls, games and street life on Friday and Saturday evenings.",
+    maps: "https://maps.app.goo.gl/TbAa2Fur4TEs2Bcj9",
+    mapsName: "Phố Đi Bộ Kim Đồng"
+  },
+
+  {
+    id: "kim-tin-jewelry-exchange",
+    name: "Kim Tin Jewelry (Money Exchange)",
+    localName: "Kim Tín Jewelry",
+    category: "services",
+    tier: "city",
+    lat: 22.665546,
+    lng: 106.2610609,
+    minZoom: 14,
+    desc: "Jewelry store where you can also exchange currency at a good local rate.",
+    maps: "https://maps.app.goo.gl/FoU99ewXveo6eZ2Z8",
+    mapsName: "Kim Tin Jewelry Group"
+  },
+
+  {
+    id: "banh-my-pate-89",
+    name: "Banh Mi Pate 89",
+    localName: "Bánh Mỳ Pate 89",
+    category: "food",
+    img: ASSETS + "images/Food/banh-mi-pate-89/1.jpg",
+    tier: "city",
+    lat: 22.6630914,
+    lng: 106.2603396,
+    minZoom: 14,
+    pick: true,
+    desc: "Famous local traditional banh mi with pâté — a beloved quick breakfast in town.",
+    maps: "https://maps.app.goo.gl/etWDEBeR8JyPt9rn6",
+    mapsName: "Banh my Pate 89"
+  },
+
+  /* ---------------------------------------------------------------------
+     PETROL / FUEL STATIONS — added from Sen's list. Province-wide network
+     (Petrolimex + local stations); a few sit inside Cao Bang city, the rest
+     mark fuel stops between districts. Category "fuel" (its own filter chip).
+     Coordinates read from each place's Google Maps pin.
+     --------------------------------------------------------------------- */
+
+  {
+    id: "fuel-cay-xang-can-yen-1",
+    name: "⛽ Cần Yên",
+    localName: "Cây xăng Cần Yên",
+    category: "fuel",
+    tier: "province",
+    lat: 22.9092803,
+    lng: 105.9136406,
+    minZoom: 11,
+    desc: "Petrol / fuel station — handy to top up before longer rides between towns.",
+    maps: "https://maps.app.goo.gl/LKXLQHq6hu2GdkCfA",
+    mapsName: "Cây xăng Cần Yên"
+  },
+  {
+    id: "fuel-petrolimex-cua-hang-so-27-2",
+    name: "⛽ 27",
+    localName: "Petrolimex Cửa hàng số 27",
+    category: "fuel",
+    tier: "province",
+    lat: 22.6882057,
+    lng: 106.4321942,
+    minZoom: 11,
+    desc: "Petrol / fuel station — handy to top up before longer rides between towns.",
+    maps: "https://maps.app.goo.gl/zPVQQXHhoJRJxiZa8",
+    mapsName: "Petrolimex Cửa hàng số 27"
+  },
+  {
+    id: "fuel-petrolimex-cao-bang-3",
+    name: "⛽ Cao Bằng",
+    localName: "Petrolimex Cao Bằng",
+    category: "fuel",
+    tier: "city",
+    lat: 22.6680624,
+    lng: 106.2654265,
+    minZoom: 11,
+    desc: "Petrol / fuel station — handy to top up before longer rides between towns.",
+    maps: "https://maps.app.goo.gl/MVUB7E42agJxEqmd6",
+    mapsName: "Petrolimex Cao Bằng"
+  },
+  {
+    id: "fuel-cua-hang-xang-dau-bang-ca-4",
+    name: "⛽ Bằng Ca",
+    localName: "Cửa hàng xăng dầu Bằng Ca",
+    category: "fuel",
+    tier: "province",
+    lat: 22.7818661,
+    lng: 106.7727207,
+    minZoom: 11,
+    desc: "Petrol / fuel station — handy to top up before longer rides between towns.",
+    maps: "https://maps.app.goo.gl/idBbXqdRS6G238xbA",
+    mapsName: "Cửa hàng xăng dầu Bằng Ca"
+  },
+  {
+    id: "fuel-cua-hang-xang-dau-bach-dang-petrolimex-5",
+    name: "⛽ Bạch Đằng",
+    localName: "Cửa hàng xăng dầu Bạch Đằng (Petrolimex)",
+    category: "fuel",
+    tier: "city",
+    lat: 22.6623697,
+    lng: 106.1971671,
+    minZoom: 11,
+    desc: "Petrol / fuel station — handy to top up before longer rides between towns.",
+    maps: "https://maps.app.goo.gl/eFerjdWXEUyxjXBX6",
+    mapsName: "Cửa hàng xăng dầu Bạch Đằng (Petrolimex)"
+  },
+  {
+    id: "fuel-cua-hang-xang-dau-ho-hong-6",
+    name: "⛽ Hở Hồng",
+    localName: "Cửa hàng xăng dầu Hở Hồng",
+    category: "fuel",
+    tier: "province",
+    lat: 22.8333456,
+    lng: 106.5345757,
+    minZoom: 11,
+    desc: "Petrol / fuel station — handy to top up before longer rides between towns.",
+    maps: "https://maps.app.goo.gl/eS1CJ8pPASxAC9KD9",
+    mapsName: "Cửa hàng xăng dầu Hở Hồng"
+  },
+  {
+    id: "fuel-petrolimex-cua-hang-so-24-7",
+    name: "⛽ 24",
+    localName: "Petrolimex Cửa hàng số 24",
+    category: "fuel",
+    tier: "province",
+    lat: 22.709213,
+    lng: 106.327065,
+    minZoom: 11,
+    desc: "Petrol / fuel station — handy to top up before longer rides between towns.",
+    maps: "https://maps.app.goo.gl/nTU4Twjry6fPjqg88",
+    mapsName: "Petrolimex Cửa hàng số 24"
+  },
+  {
+    id: "fuel-petrolimex-cua-hang-so-29-8",
+    name: "⛽ 29",
+    localName: "Petrolimex Cửa hàng số 29",
+    category: "fuel",
+    tier: "province",
+    lat: 22.6935876,
+    lng: 106.6821447,
+    minZoom: 11,
+    desc: "Petrol / fuel station — handy to top up before longer rides between towns.",
+    maps: "https://maps.app.goo.gl/xJkuzX7nDyBD7QGFA",
+    mapsName: "Petrolimex Cửa hàng số 29"
+  },
+  {
+    id: "fuel-petrolimex-cua-hang-so-25-9",
+    name: "⛽ 25",
+    localName: "Petrolimex Cửa hàng số 25",
+    category: "fuel",
+    tier: "province",
+    lat: 22.7724869,
+    lng: 106.505568,
+    minZoom: 11,
+    desc: "Petrol / fuel station — handy to top up before longer rides between towns.",
+    maps: "https://maps.app.goo.gl/G4jZ2xqjHn2agKNg9",
+    mapsName: "Petrolimex Cửa hàng số 25"
+  },
+  {
+    id: "fuel-cay-xang-hoang-anh-10",
+    name: "⛽ Hoàng Anh",
+    localName: "Cây xăng Hoàng Anh",
+    category: "fuel",
+    tier: "province",
+    lat: 22.8214403,
+    lng: 106.6220563,
+    minZoom: 11,
+    desc: "Petrol / fuel station — handy to top up before longer rides between towns.",
+    maps: "https://maps.app.goo.gl/Vt48K4RGPqZi5k4m9",
+    mapsName: "Cây xăng Hoàng Anh"
+  },
+  {
+    id: "fuel-cay-xang-trung-khanh-11",
+    name: "⛽ Trùng Khánh",
+    localName: "Cây xăng Trùng Khánh",
+    category: "fuel",
+    tier: "province",
+    lat: 22.8563899,
+    lng: 106.6786999,
+    minZoom: 11,
+    desc: "Petrol / fuel station — handy to top up before longer rides between towns.",
+    maps: "https://maps.app.goo.gl/Eas7DWvNx4Q1MKzT7",
+    mapsName: "Cây xăng Trùng Khánh"
+  },
+  {
+    id: "fuel-petrolimex-cua-hang-so-26-12",
+    name: "⛽ 26",
+    localName: "Petrolimex Cửa hàng số 26",
+    category: "fuel",
+    tier: "province",
+    lat: 22.9303224,
+    lng: 106.5407596,
+    minZoom: 11,
+    desc: "Petrol / fuel station — handy to top up before longer rides between towns.",
+    maps: "https://maps.app.goo.gl/xf6vvs8fUKWxHqoc6",
+    mapsName: "Petrolimex Cửa hàng số 26"
+  },
+  {
+    id: "fuel-petrolimex-cua-hang-so-08-13",
+    name: "⛽ 8",
+    localName: "Petrolimex Cửa hàng số 08",
+    category: "fuel",
+    tier: "province",
+    lat: 22.8286624,
+    lng: 106.3241586,
+    minZoom: 11,
+    desc: "Petrol / fuel station — handy to top up before longer rides between towns.",
+    maps: "https://maps.app.goo.gl/RRP3BxFCUwFUVcwt8",
+    mapsName: "Petrolimex Cửa hàng số 08"
+  },
+  {
+    id: "fuel-petrolimex-cua-hang-so-28-14",
+    name: "⛽ 28",
+    localName: "Petrolimex Cửa hàng số 28",
+    category: "fuel",
+    tier: "province",
+    lat: 22.8052021,
+    lng: 106.3315601,
+    minZoom: 11,
+    desc: "Petrol / fuel station — handy to top up before longer rides between towns.",
+    maps: "https://maps.app.goo.gl/neW74HPcf4qZHnFx8",
+    mapsName: "Petrolimex Cửa hàng số 28"
+  },
+  {
+    id: "fuel-petrolimex-cua-hang-so-09-15",
+    name: "⛽ 9",
+    localName: "Petrolimex Cửa hàng số 09",
+    category: "fuel",
+    tier: "province",
+    lat: 22.734381,
+    lng: 106.1570601,
+    minZoom: 11,
+    desc: "Petrol / fuel station — handy to top up before longer rides between towns.",
+    maps: "https://maps.app.goo.gl/zWDZVTjSaZ1Z3Qhx9",
+    mapsName: "Petrolimex Cửa hàng số 09"
+  },
+  {
+    id: "fuel-petrolimex-cua-hang-so-21-16",
+    name: "⛽ 21",
+    localName: "Petrolimex Cửa hàng số 21",
+    category: "fuel",
+    tier: "province",
+    lat: 22.8283341,
+    lng: 106.1371233,
+    minZoom: 11,
+    desc: "Petrol / fuel station — handy to top up before longer rides between towns.",
+    maps: "https://maps.app.goo.gl/ZLr5qNE4CzCkjZVJ7",
+    mapsName: "Petrolimex Cửa hàng số 21"
+  },
+  {
+    id: "fuel-petrolimex-cua-hang-so-17-17",
+    name: "⛽ 17",
+    localName: "Petrolimex Cửa hàng số 17",
+    category: "fuel",
+    tier: "province",
+    lat: 22.8894915,
+    lng: 106.0894829,
+    minZoom: 11,
+    desc: "Petrol / fuel station — handy to top up before longer rides between towns.",
+    maps: "https://maps.app.goo.gl/fqKFu6tGRvGCdSuW7",
+    mapsName: "Petrolimex Cửa hàng số 17"
+  },
+  {
+    id: "fuel-petrolimex-cua-hang-so-30-18",
+    name: "⛽ 30",
+    localName: "Petrolimex Cửa hàng số 30",
+    category: "fuel",
+    tier: "city",
+    lat: 22.681159,
+    lng: 106.2595754,
+    minZoom: 11,
+    desc: "Petrol / fuel station — handy to top up before longer rides between towns.",
+    maps: "https://maps.app.goo.gl/8XtgRJQrcNkoueTG8",
+    mapsName: "Petrolimex Cửa hàng số 30"
+  },
+  {
+    id: "fuel-cua-hang-xang-dau-so-3-cao-bang-19",
+    name: "⛽ 3",
+    localName: "Cửa hàng xăng dầu số 3 Cao Bằng",
+    category: "fuel",
+    tier: "city",
+    lat: 22.6728987,
+    lng: 106.2466795,
+    minZoom: 11,
+    desc: "Petrol / fuel station — handy to top up before longer rides between towns.",
+    maps: "https://maps.app.goo.gl/mBidArThJiXv4D5A9",
+    mapsName: "Cửa hàng xăng dầu số 3 Cao Bằng"
+  },
+  {
+    id: "fuel-petrolimex-cua-hang-so-12-20",
+    name: "⛽ 12",
+    localName: "Petrolimex Cửa hàng số 12",
+    category: "fuel",
+    tier: "city",
+    lat: 22.6287254,
+    lng: 106.1851742,
+    minZoom: 11,
+    desc: "Petrol / fuel station — handy to top up before longer rides between towns.",
+    maps: "https://maps.app.goo.gl/9evnHPgos91AjrHK9",
+    mapsName: "Petrolimex Cửa hàng số 12"
+  },
+  {
+    id: "fuel-petrolimex-cua-hang-so-18-21",
+    name: "⛽ 18",
+    localName: "Petrolimex Cửa hàng số 18",
+    category: "fuel",
+    tier: "province",
+    lat: 22.7735994,
+    lng: 105.9835532,
+    minZoom: 11,
+    desc: "Petrol / fuel station — handy to top up before longer rides between towns.",
+    maps: "https://maps.app.goo.gl/UENBHNuCuWJ2LPdZ8",
+    mapsName: "Petrolimex Cửa hàng số 18"
+  },
+  {
+    id: "fuel-petrolimex-cua-hang-so-10-22",
+    name: "⛽ 10",
+    localName: "Petrolimex Cửa hàng số 10",
+    category: "fuel",
+    tier: "province",
+    lat: 22.9420416,
+    lng: 105.6741609,
+    minZoom: 11,
+    desc: "Petrol / fuel station — handy to top up before longer rides between towns.",
+    maps: "https://maps.app.goo.gl/uw1Dvzms2FzrgxEu9",
+    mapsName: "Petrolimex Cửa hàng số 10"
+  },
+  {
+    id: "fuel-petrolimex-cua-hang-so-32-23",
+    name: "⛽ 32",
+    localName: "Petrolimex Cửa hàng số 32",
+    category: "fuel",
+    tier: "province",
+    lat: 22.944823,
+    lng: 105.708558,
+    minZoom: 11,
+    desc: "Petrol / fuel station — handy to top up before longer rides between towns.",
+    maps: "https://maps.app.goo.gl/e4vXCuRQ9QWPr1e47",
+    mapsName: "Petrolimex Cửa hàng số 32"
+  },
+
+  /* ---------------------------------------------------------------------
+     MORE ADDITIONS — Tham Kham waterfall (with a homestay right beside it,
+     east of the city near Quang Uyen) and one extra petrol stop by KM5.
+     --------------------------------------------------------------------- */
+
+  {
+    id: "thac-thang-kham",
+    name: "Tham Kham Waterfall & Homestay",
+    localName: "Thác & Homestay Thàng Khám",
+    category: "sights",
+    img: ASSETS + "images/places/thac-thang-kham.jpg",
+    tier: "province",
+    lat: 22.6771433,
+    lng: 106.5971808,
+    minZoom: 10,
+    desc: "A quiet local waterfall east of the city near Quang Uyen — a refreshing off-the-beaten-path stop, with a homestay right beside it if you want to stay the night.",
+    maps: "https://maps.app.goo.gl/nN8sAU4icCjuvCwX6",
+    mapsName: "Thác Thàng Khám"
+  },
+
+  {
+    id: "fuel-km5",
+    name: "⛽ KM5",
+    localName: "Cây xăng KM5",
+    category: "fuel",
+    tier: "city",
+    lat: 22.6837905,
+    lng: 106.2233431,
+    minZoom: 11,
+    desc: "Petrol / fuel station by KM5 — handy top-up right in town.",
+    maps: "https://maps.app.goo.gl/mSro58T3Kh17gUTU7",
+    mapsName: "Garage Ô Tô Thái Tuấn"
+  },
+
+  /* ---------------------------------------------------------------------
+     MORE ADDITIONS (2) — western-district petrol stations (Nguyen Binh /
+     Bao Lac side) + Nam Thoong stream tourist area.
+     --------------------------------------------------------------------- */
+
+  {
+    id: "fuel-thuan-huong",
+    name: "⛽ Thuận Hương",
+    localName: "Cây Xăng Dầu Thuận Hương",
+    category: "fuel",
+    tier: "province",
+    lat: 22.564631,
+    lng: 105.8692311,
+    minZoom: 11,
+    desc: "Petrol / fuel station — handy to top up before longer rides between towns.",
+    maps: "https://maps.app.goo.gl/M5aSQyokexkp85ox7",
+    mapsName: "Cây Xăng Dầu Thuận Hương"
+  },
+
+  {
+    id: "fuel-petrolimex-so-20",
+    name: "⛽ 20",
+    localName: "Cửa hàng Xăng dầu Petrolimex Số 20",
+    category: "fuel",
+    tier: "province",
+    lat: 22.6467747,
+    lng: 105.8978051,
+    minZoom: 11,
+    desc: "Petrol / fuel station — handy to top up before longer rides between towns.",
+    maps: "https://maps.app.goo.gl/kncJjUWZMLoQFv4v6",
+    mapsName: "Cửa hàng Xăng dầu Petrolimex Số 20"
+  },
+
+  {
+    id: "fuel-so-2-nguyen-binh",
+    name: "⛽ 2 Nguyên Bình",
+    localName: "Cửa Hàng Xăng Dầu Số 2 Nguyên Bình",
+    category: "fuel",
+    tier: "province",
+    lat: 22.6532365,
+    lng: 105.9517144,
+    minZoom: 11,
+    desc: "Petrol / fuel station — handy to top up before longer rides between towns.",
+    maps: "https://maps.app.goo.gl/KrbUe31ky5YzRwSV8",
+    mapsName: "Cửa Hàng Xăng Dầu Số 2 Nguyên Bình"
+  },
+
+  {
+    id: "fuel-petrolimex-so-11",
+    name: "⛽ 11",
+    localName: "Cửa hàng Xăng dầu Petrolimex Số 11",
+    category: "fuel",
+    tier: "province",
+    lat: 22.6530059,
+    lng: 105.9792297,
+    minZoom: 11,
+    desc: "Petrol / fuel station — handy to top up before longer rides between towns.",
+    maps: "https://maps.app.goo.gl/7pNPRLbZt2pNHqRm6",
+    mapsName: "Cửa hàng Xăng dầu Petrolimex Số 11"
+  },
+
+  {
+    id: "fuel-na-bao",
+    name: "⛽ Nà Bao",
+    localName: "Cửa hàng xăng dầu Nà Bao",
+    category: "fuel",
+    tier: "province",
+    lat: 22.6706126,
+    lng: 106.0849132,
+    minZoom: 11,
+    desc: "Petrol / fuel station — handy to top up before longer rides between towns.",
+    maps: "https://maps.app.goo.gl/NUHYDCA3ACnEAw5N6",
+    mapsName: "Cửa hàng xăng dầu Nà Bao"
+  },
+
+  {
+    id: "nam-thoong-stream",
+    name: "Nam Thoong Stream",
+    localName: "Khu du lịch Suối Nặm Thoong",
+    category: "sights",
+    img: ASSETS + "images/places/nam-thoong.jpg",
+    tier: "province",
+    lat: 22.7770149,
+    lng: 106.1221351,
+    minZoom: 10,
+    desc: "A stream-side tourist area north of the city — a cool, green spot to stop and relax on the way through.",
+    maps: "https://maps.app.goo.gl/qxNiHnZy9osWCHCW8",
+    mapsName: "Khu du lịch Suối Nặm Thoong"
+  },
+
+  /* ---------------------------------------------------------------------
+     MORE ADDITIONS (3) — Ba Be Lake (Bac Kan province, just southwest of
+     Cao Bang; a natural extension of the trip) + one western petrol stop.
+     --------------------------------------------------------------------- */
+
+  {
+    id: "ba-be-lake",
+    priority: 1,
+    name: "Ba Be Lake",
+    localName: "Hồ Ba Bể",
+    category: "sights",
+    img: ASSETS + "images/places/ba-be-lake.jpg",
+    tier: "province",
+    lat: 22.4119661,
+    lng: 105.6133961,
+    minZoom: 8,
+    featured: true,
+    desc: "Vietnam's largest natural mountain lake, in neighbouring Bac Kan — emerald water ringed by karst forest. A popular add-on to a Cao Bang loop, best by boat.",
+    distance: "~130 km southwest · pairs with a Cao Bang trip",
+    maps: "https://maps.app.goo.gl/ySnbB8DqyZTXNCoKA",
+    mapsName: "Hồ Ba Bể"
+  },
+
+  {
+    id: "fuel-viet-khanh-2",
+    name: "⛽ Việt Khanh 2",
+    localName: "Cây Xăng Việt Khanh 2",
+    category: "fuel",
+    tier: "province",
+    lat: 22.7785199,
+    lng: 105.7445914,
+    minZoom: 11,
+    desc: "Petrol / fuel station — handy to top up before longer rides between towns.",
+    maps: "https://maps.app.goo.gl/PwU58SPQjZKNsPNQ9",
+    mapsName: "Cây Xăng Việt Khanh 2"
+  },
+
+  /* ---------------------------------------------------------------------
+     MA PHUC PASS — a scenic mountain pass on QL3 east of the city, on the
+     way to Trung Khanh / Ban Gioc. A classic photo stop.
+     --------------------------------------------------------------------- */
+
+  {
+    id: "ma-phuc-pass",
+    name: "Ma Phuc Pass",
+    localName: "Đèo Mã Phục",
+    category: "sights",
+    tier: "province",
+    img: ASSETS + "images/places/deo-ma-phuc.jpg",
+    lat: 22.7278271,
+    lng: 106.3368496,
+    minZoom: 10,
+    desc: "A dramatic switchback pass on QL3 east of the city, framed by karst peaks — the gateway you cross on the way to Trung Khanh and Ban Gioc.",
+    distance: "~22 km east · on the way to Ban Gioc",
+    maps: "https://maps.app.goo.gl/zXm84hic7FxvsLco7",
+    mapsName: "Đèo Mã Phục"
+  },
+
+  {
+    id: "ma-phuc-checkin",
+    name: "Ma Phuc Viewpoint",
+    localName: "Điểm check-in Đèo Mã Phục",
+    category: "sights",
+    tier: "province",
+    img: ASSETS + "images/places/ma-phuc-checkin.jpg",
+    lat: 22.7155035,
+    lng: 106.329728,
+    minZoom: 11,
+    desc: "The popular photo pull-out on Ma Phuc Pass — sweeping views over the terraced valleys and limestone ridges.",
+    maps: "https://maps.app.goo.gl/MYqEnRbKLa1bdkyU7",
+    mapsName: "Điểm check-in Đèo Mã Phục"
+  },
 ];

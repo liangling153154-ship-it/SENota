@@ -37,7 +37,8 @@
     locate: '<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>',
     arrow: '<path d="M9 18l6-6-6-6"/>',
     compass: '<circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>',
-    star: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>'
+    star: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
+    fuel: '<line x1="3" y1="22" x2="15" y2="22"/><line x1="4" y1="9" x2="14" y2="9"/><path d="M14 22V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v18"/><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 2 2a2 2 0 0 0 2-2V9.83a2 2 0 0 0-.59-1.42L18 5"/>'
   };
   function svg(name, extra) {
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"' +
@@ -191,16 +192,22 @@
     var labelCls = isProv ? "pin-label" : "pin-label city-label";
     if (poi.labelAbove) { labelCls += " label-above"; }
     var label = '<span class="' + labelCls + '">' + esc(poi.name) + "</span>";
+    // "Nên đến" star for signature spots (priority 1) — a small gold badge so
+    // travellers can spot the highlights at a glance.
+    var star = (poi._prio === 1) ? '<span class="must-badge" title="Nên đến">★</span>' : "";
+    var prioCls = " prio-" + (poi._prio || 2) + (poi._prio === 1 ? " is-must" : "");
+    // Tier-2 pins collapse to this dot while zoomed out (body.tier-dots).
+    var dot = (poi._prio === 2) ? '<span class="mini-dot" style="background:' + cat.color + '"></span>' : "";
 
     if (poi.photoPin && poi.img) {
       // ICONIC sites: a teardrop map-pin with the photo inside — a distinct
       // shape (not a plain circle) whose sharp tip marks the exact spot.
       return L.divIcon({
-        className: "poi-wrap teardrop-wrap",
+        className: "poi-wrap teardrop-wrap" + prioCls,
         html: '<span class="iconic-ping" style="--c:' + cat.color + '"></span>' +
           '<div class="teardrop" style="--c:' + cat.color + '">' +
           '<div class="teardrop-photo">' + pinImgTag(poi.img) + "</div>" +
-          '<span class="cat-badge">' + svg(cat.icon) + "</span></div>" + label,
+          '<span class="cat-badge">' + svg(cat.icon) + "</span>" + star + "</div>" + label + dot,
         iconSize: [54, 70],
         iconAnchor: [27, 66] // the tip touches the coordinate
       });
@@ -210,12 +217,12 @@
       // secondary places: round photo pin (province a bit larger than city)
       var size = isProv ? 42 : 38;
       var sizeCls = isProv ? " photo-md" : " photo-sm";
-      var wrapCls = "poi-wrap photo-wrap" + (isProv ? " photo-md-wrap" : " photo-sm-wrap");
+      var wrapCls = "poi-wrap photo-wrap" + (isProv ? " photo-md-wrap" : " photo-sm-wrap") + prioCls;
       return L.divIcon({
         className: wrapCls,
         html: '<div class="photo-pin' + sizeCls + (poi.featured ? " pin-featured" : "") +
           '" style="--c:' + cat.color + '">' + pinImgTag(poi.img) +
-          '<span class="cat-badge">' + svg(cat.icon) + "</span></div>" + label,
+          '<span class="cat-badge">' + svg(cat.icon) + "</span>" + star + "</div>" + label + dot,
         iconSize: [size, size],
         iconAnchor: [size / 2, size / 2]
       });
@@ -224,26 +231,69 @@
     var s = isProv ? 38 : 30;
     var html =
       '<div class="pin' + (isProv ? " pin-lg" : "") + (poi.featured ? " pin-featured" : "") +
-      '" style="--c:' + cat.color + '">' + svg(cat.icon) + "</div>" + label;
-    return L.divIcon({ className: "poi-wrap", html: html, iconSize: [s, s], iconAnchor: [s / 2, s / 2] });
+      '" style="--c:' + cat.color + '">' + svg(cat.icon) + star + "</div>" + label + dot;
+    return L.divIcon({ className: "poi-wrap cat-" + poi.category + prioCls, html: html, iconSize: [s, s], iconAnchor: [s / 2, s / 2] });
+  }
+
+  /* ---------------- Progressive disclosure (declutter by zoom) ----------------
+     102 pins on screen at once is noise. We reveal them in the order a traveller
+     actually cares about: must-see sights first, then places to eat/see, then
+     everyday utilities (fuel, ATM, pharmacy). Each POI gets an effective minZoom
+     from its PRIORITY and category — but an explicit `minZoom` in the data always
+     wins (manual override).
+
+       priority 1  = must-see / signature (featured, or a Sen's pick sight)      → earliest
+       priority 2  = worth-it (a normal Sen's pick, or any sight/culture/stay)   → mid
+       priority 3  = handy but ordinary (fill-in food, shopping, nightlife)      → late
+       priority 4  = pure utility (fuel, services, health, transport)            → latest
+
+     Tier 1 is hand-curated: ONLY POIs with an explicit `priority: 1` in the data
+     (Sen's list of signature stops). Everything else is inferred. Tier-2 places
+     stay on the map from province zoom but collapse to small dots below z11
+     (see the "tier-dots" body class) so they hint at coverage without clutter.
+     A POI can still force a reveal zoom with `minZoomHard`. */
+  function inferPriority(p) {
+    if (p.priority) { return p.priority; }                 // explicit wins (tier 1 list)
+    if (p.category === "fuel" || p.category === "services" ||
+        p.category === "health" || p.category === "transport") { return 4; }
+    if (p.category === "sights" || p.category === "culture" ||
+        p.category === "stay") { return 2; }
+    // food / shopping / nightlife: a Sen's pick is a local highlight, else fill-in
+    return p.pick ? 2 : 3;
+  }
+  // What zoom each priority band first appears at. Tier 1 & 2 are on the map
+  // from province zoom (tier 2 renders as dots until z11); utilities come last.
+  var PRIORITY_MINZOOM = { 1: 8, 2: 8, 3: 13, 4: 14 };
+  var TIER2_FULL_ZOOM = 11.5; // below this, tier-2 pins collapse to dots
+  var TIER2_EASE_ZOOM = 12.5; // 11.5–12.5: tier-2 pins render slightly smaller
+                              // (they still crowd a touch until this zoom)
+  function effectiveMinZoom(p) {
+    if (typeof p.minZoomHard === "number") { return p.minZoomHard; } // rare manual override
+    // Petrol surfaces earlier than other utilities — riders plan fuel stops
+    // while still looking at a whole district (its pins stay tiny until z12).
+    if (p.category === "fuel") { return 11.5; }
+    return PRIORITY_MINZOOM[inferPriority(p)] || 12;
   }
 
   POIS.forEach(function (poi) {
     var cat = CATEGORIES[poi.category];
     if (!cat) { return; }
+    poi._prio = inferPriority(poi);
+    poi._minZoom = effectiveMinZoom(poi);
     var marker = L.marker([poi.lat, poi.lng], {
       icon: makeIcon(poi, cat),
       keyboard: true,
       alt: poi.name
     });
     if (poi.zPriority) { marker.setZIndexOffset(poi.zPriority); } // hero pins win overlaps
+    else if (poi._prio === 1) { marker.setZIndexOffset(650); }    // tier-1 wins over tier-2 dots
     var rec = { poi: poi, cat: cat, marker: marker, onMap: false };
     marker.on("click", function () { selectPoi(rec, false); });
     records.push(rec);
   });
 
   /* City gateway — the provincial capital: a round photo of the city with a
-     distinct GOLD ring + star badge (marks the capital), shown while zoomed out. */
+     RED ring + gold star badge (đỏ sao vàng), shown while zoomed out. */
   var gateway = L.marker(MAP_CONFIG.cityCenter, {
     icon: L.divIcon({
       className: "poi-wrap capital-wrap",
@@ -251,8 +301,8 @@
         '<div class="capital-pin-photo">' + pinImgTag(MAP_CONFIG.cityPinImg) + "</div>" +
         '<span class="capital-badge">★</span></div>' +
         '<span class="pin-label capital-label">Cao Bằng City</span>',
-      iconSize: [72, 72],
-      iconAnchor: [36, 36]
+      iconSize: [60, 60],
+      iconAnchor: [30, 30]
     }),
     zIndexOffset: 900,
     alt: "Cao Bang City, provincial capital — tap to explore food, coffee and stay"
@@ -267,8 +317,8 @@
   /* Center a point in the visible area above the bottom card */
   function flyToPoi(poi) {
     var zoom = poi.tier === "city"
-      ? Math.max(16, (poi.minZoom || 0) + 1)
-      : Math.max(13, (poi.minZoom || 0) + 1);
+      ? Math.max(16, (poi._minZoom || 0) + 1)
+      : Math.max(13, (poi._minZoom || 0) + 1);
     var pt = map.project([poi.lat, poi.lng], zoom);
     var lift = window.innerWidth < 768 ? Math.min(130, window.innerHeight * 0.16) : 0;
     flyTo(map.unproject(pt.add([0, lift]), zoom), zoom);
@@ -287,7 +337,7 @@
       } else {
         ok = (activeCat === "all" || r.poi.category === activeCat) &&
           (r.poi.tier === "province" || cityVisible) &&
-          zoom >= (r.poi.minZoom || 0);
+          zoom >= (r.poi._minZoom || 0);
       }
       if (ok && !r.onMap) { r.marker.addTo(map); r.onMap = true; applyActiveClass(r); }
       else if (!ok && r.onMap) { map.removeLayer(r.marker); r.onMap = false; }
@@ -323,6 +373,10 @@
     // grow as you zoom into a district
     document.body.classList.toggle("tz-wide", zoom <= 9);   // whole-province overview
     document.body.classList.toggle("tz-near", zoom >= 12);  // zoomed into an area
+    // tier-2 pins collapse to small dots while zoomed out; full pins from z11.5,
+    // rendered slightly smaller until z12.5 so they don't jostle each other
+    document.body.classList.toggle("tier-dots", zoom < TIER2_FULL_ZOOM);
+    document.body.classList.toggle("t2-mid", zoom >= TIER2_FULL_ZOOM && zoom < TIER2_EASE_ZOOM);
   }
   map.on("zoomend", refresh);
   map.on("moveend", refresh);   // also fires after initial fitBounds → town zoom classes set from the start
@@ -1163,6 +1217,23 @@
     else if (err && err.code === 3) { msg = "Location timed out — try again outdoors"; }
     toast(msg);
   }
+
+  /* ---------------- Zoom level readout ---------------- */
+  // Small "z12" pill above the locate button — tells you the current zoom so
+  // it's obvious why some pins are hidden (they reveal progressively by zoom).
+  var zoomBadge = L.control({ position: "bottomright" });
+  zoomBadge.onAdd = function () {
+    var el = L.DomUtil.create("div", "zoom-badge");
+    el.setAttribute("aria-hidden", "true");
+    function render() {
+      var z = map.getZoom();
+      el.textContent = "z" + (z % 1 === 0 ? z : z.toFixed(1));
+    }
+    map.on("zoomend zoomlevelschange", render);
+    render();
+    return el;
+  };
+  zoomBadge.addTo(map);
 
   buildChips();
   refresh();
