@@ -1048,5 +1048,60 @@
     galleryGrid.appendChild(item);
   }
 </script>
+
+<!-- Language nudge — offer Vietnamese to visitors who may be on the wrong page -->
+<style>
+  .lang-nudge {
+    position: fixed; z-index: 1400;
+    left: 16px; bottom: calc(16px + env(safe-area-inset-bottom));
+    max-width: min(340px, calc(100vw - 32px));
+    display: none; align-items: center; gap: 12px;
+    padding: 12px 14px;
+    background: var(--surface, #fff); color: var(--ink, #2A2118);
+    border: 1px solid var(--line, rgba(42,33,24,0.12));
+    border-radius: 14px;
+    box-shadow: 0 10px 34px rgba(42,33,24,0.18);
+    font-size: 0.9rem; line-height: 1.4;
+    animation: lang-nudge-in .35s cubic-bezier(0.16,1,0.3,1) both;
+  }
+  .lang-nudge.show { display: flex; }
+  @keyframes lang-nudge-in { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  .lang-nudge .flag { font-size: 1.3rem; flex: none; }
+  .lang-nudge .txt { flex: 1; }
+  .lang-nudge .txt b { display: block; font-weight: 700; }
+  .lang-nudge .go {
+    flex: none; background: var(--terra-deep, #9A4A2E); color: #fff;
+    padding: 7px 13px; border-radius: 999px; font-weight: 700; font-size: 0.82rem;
+    text-decoration: none; white-space: nowrap;
+  }
+  .lang-nudge .close {
+    flex: none; width: 26px; height: 26px; border: 0; background: transparent;
+    color: var(--ink-soft, #6B5D4C); font-size: 1.3rem; line-height: 1; cursor: pointer;
+    border-radius: 8px;
+  }
+  .lang-nudge .close:hover { background: rgba(42,33,24,0.06); }
+</style>
+<div class="lang-nudge" id="langNudge" role="dialog" aria-label="Language">
+  <span class="flag">🇻🇳</span>
+  <span class="txt"><b>Xem bằng Tiếng Việt?</b>Trang này đang hiển thị Tiếng Anh.</span>
+  <a class="go" href="vi/index.html" id="langNudgeGo">Tiếng Việt</a>
+  <button class="close" id="langNudgeClose" aria-label="Dismiss">×</button>
+</div>
+<script>
+  (function () {
+    var KEY = "senLangNudge";        // "done" once chosen or dismissed
+    try { if (localStorage.getItem(KEY) === "done") return; } catch (e) {}
+    var el = document.getElementById("langNudge");
+    function done() { try { localStorage.setItem(KEY, "done"); } catch (e) {} el.classList.remove("show"); }
+    setTimeout(function () { el.classList.add("show"); }, 1200);
+    document.getElementById("langNudgeClose").addEventListener("click", done);
+    document.getElementById("langNudgeGo").addEventListener("click", function () {
+      try { localStorage.setItem("senLang", "vi"); localStorage.setItem(KEY, "done"); } catch (e) {}
+    });
+    document.querySelectorAll(".lang-switch a").forEach(function (a) {
+      a.addEventListener("click", done);
+    });
+  })();
+</script>
 </body>
 </html>
