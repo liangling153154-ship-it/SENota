@@ -84,85 +84,97 @@
     .lang-switch a.active { background: var(--terra-deep); color: #fff !important; opacity: 1; }
 
     /* HERO */
-    .hero { height: 72vh; min-height: 480px; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+    .hero { height: 66vh; min-height: 440px; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
     .hero-bg { position: absolute; inset: 0; background: #1a2e1a; }
-    .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
-    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%); }
+    .hero-bg img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.03); }
+    .hero-overlay { position: absolute; inset: 0; background: radial-gradient(120% 90% at 50% 15%, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.5) 60%, rgba(20,12,6,0.78) 100%); }
     .hero-content { position: relative; z-index: 2; padding: 0 24px; }
-    .hero-label { font-size: 0.72rem; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 14px; display: block; }
-    .hero h1 { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(2.8rem, 6vw, 4.8rem); color: white; line-height: 1.05; margin-bottom: 16px; font-weight: 700; }
+    .hero-label { font-size: 0.72rem; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.72); margin-bottom: 16px; display: inline-flex; align-items: center; gap: 9px; }
+    .hero-label::before, .hero-label::after { content: ""; width: 24px; height: 1px; background: rgba(255,255,255,0.4); }
+    .hero h1 { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(2.9rem, 6.4vw, 5rem); color: white; line-height: 1.02; margin-bottom: 18px; font-weight: 700; }
     .hero h1 em { color: #F2C28E; font-style: italic; }
-    .hero-sub { color: rgba(255,255,255,0.7); font-size: 1rem; max-width: 460px; margin: 0 auto; line-height: 1.7; }
+    .hero-sub { color: rgba(255,255,255,0.78); font-size: 1.02rem; max-width: 470px; margin: 0 auto; line-height: 1.7; }
 
     /* FILTER */
-    .filter-section { background: white; padding: 24px 48px; border-bottom: 1px solid rgba(0,0,0,0.07); }
-    .filter-inner { max-width: 1100px; margin: 0 auto; display: flex; gap: 32px; align-items: center; flex-wrap: wrap; }
-    .filter-group { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-    .filter-group-label { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); font-weight: 500; margin-right: 4px; }
-    .filter-btn { background: var(--cream); border: 1.5px solid rgba(45,106,79,0.2); color: var(--green-dark); font-family: 'Hanken Grotesk', sans-serif; font-size: 0.8rem; font-weight: 500; padding: 6px 16px; border-radius: 50px; cursor: pointer; transition: all 0.2s; }
-    .filter-btn:hover { background: var(--green-light); border-color: var(--green-dark); }
-    .filter-btn.active { background: var(--green-dark); color: white; border-color: var(--green-dark); }
-    .filter-divider { width: 1px; height: 28px; background: rgba(0,0,0,0.1); }
+    .filter-section { background: rgba(251,247,239,0.94); backdrop-filter: blur(12px); padding: 16px 48px; border-bottom: 1px solid var(--line); position: sticky; top: 72px; z-index: 90; }
+    .filter-inner { max-width: 1120px; margin: 0 auto; display: flex; gap: 22px 30px; align-items: center; flex-wrap: wrap; }
+    .filter-group { display: flex; gap: 8px; align-items: center; }
+    .filter-group-label { font-size: 0.66rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); font-weight: 600; margin-right: 2px; flex-shrink: 0; }
+    .filter-scroll { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; padding-bottom: 2px; }
+    .filter-scroll::-webkit-scrollbar { display: none; }
+    .filter-btn { background: var(--surface); border: 1.5px solid rgba(60,90,64,0.18); color: var(--green-dark); font-family: 'Hanken Grotesk', sans-serif; font-size: 0.8rem; font-weight: 600; padding: 7px 15px; border-radius: 50px; cursor: pointer; transition: all 0.2s var(--ease); white-space: nowrap; flex-shrink: 0; }
+    .filter-btn:hover { background: var(--green-light); border-color: var(--green-dark); transform: translateY(-1px); }
+    .filter-btn.active { background: var(--green-dark); color: white; border-color: var(--green-dark); box-shadow: 0 4px 12px rgba(60,90,64,0.22); }
+    .filter-divider { width: 1px; height: 26px; background: var(--line); flex-shrink: 0; }
 
     /* MEAL PLANNER */
-    #planner { background: var(--green-dark); padding: 48px; }
-    .planner-inner { max-width: 1100px; margin: 0 auto; }
-    .planner-label { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 10px; display: block; }
-    .planner-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(1.5rem, 2.5vw, 2rem); color: white; margin-bottom: 24px; }
-    .planner-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-    .planner-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius); padding: 16px 18px; cursor: pointer; transition: all 0.2s; }
-    .planner-card:hover { background: rgba(255,255,255,0.14); transform: translateY(-2px); }
-    .planner-time { font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--green-mid); margin-bottom: 6px; }
-    .planner-card h4 { font-size: 0.88rem; color: white; font-weight: 500; margin-bottom: 6px; }
-    .planner-card p { font-size: 0.76rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+    #planner { background: linear-gradient(150deg, var(--forest-deep), var(--green-dark)); padding: 56px 48px; }
+    .planner-inner { max-width: 1120px; margin: 0 auto; }
+    .planner-label { font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; color: var(--terra-soft); margin-bottom: 10px; display: block; }
+    .planner-title { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(1.6rem, 2.6vw, 2.1rem); color: white; margin-bottom: 26px; }
+    .planner-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .planner-card { position: relative; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius); padding: 20px 18px; cursor: pointer; transition: all 0.25s var(--ease); overflow: hidden; }
+    .planner-card::after { content: "→"; position: absolute; right: 16px; bottom: 14px; color: var(--terra-soft); opacity: 0; transform: translateX(-6px); transition: all 0.25s var(--ease); }
+    .planner-card:hover { background: rgba(255,255,255,0.13); transform: translateY(-3px); border-color: rgba(255,255,255,0.25); }
+    .planner-card:hover::after { opacity: 1; transform: translateX(0); }
+    .planner-time { font-size: 0.72rem; letter-spacing: 1px; text-transform: uppercase; color: var(--terra-soft); margin-bottom: 8px; font-weight: 600; }
+    .planner-card h4 { font-size: 0.94rem; color: white; font-weight: 600; margin-bottom: 7px; }
+    .planner-card p { font-size: 0.78rem; color: rgba(255,255,255,0.62); line-height: 1.55; }
 
     /* GRID */
-    #restaurants { padding: 56px 48px; }
-    .restaurants-inner { max-width: 1100px; margin: 0 auto; }
-    .results-count { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 28px; }
-    .food-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+    #restaurants { padding: 56px 48px 64px; }
+    .restaurants-inner { max-width: 1120px; margin: 0 auto; }
+    .results-count { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 26px; font-weight: 500; }
+    .food-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
 
     /* FOOD CARD */
-    .food-card { background: white; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; transition: transform 0.25s, box-shadow 0.25s; }
-    .food-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,0,0,0.12); }
+    .food-card { position: relative; background: var(--surface); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); display: flex; flex-direction: column; transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease); border: 1px solid rgba(42,33,24,0.05); }
+    .food-card:hover { transform: translateY(-6px); box-shadow: 0 22px 48px rgba(42,33,24,0.14); }
     .food-card.hidden { display: none; }
 
     /* SLIDER */
-    .food-slider { position: relative; height: 340px; background: var(--green-light); overflow: hidden; }
-    .slider-track { display: flex; height: 100%; transition: transform 0.4s ease; will-change: transform; }
+    .food-slider { position: relative; height: 220px; background: var(--green-light); overflow: hidden; }
+    .slider-track { display: flex; height: 100%; transition: transform 0.4s var(--ease); will-change: transform; }
     .slider-slide { min-width: 100%; width: 100%; height: 100%; flex-shrink: 0; position: relative; overflow: hidden; }
-    .slider-slide img { position: absolute; inset: 0; height: 100%; width: 100%; object-fit: cover; transition: transform 0.4s; }
-    .food-card:hover .slider-slide img { transform: scale(1.04); }
+    .slider-slide img { position: absolute; inset: 0; height: 100%; width: 100%; object-fit: cover; transition: transform 0.5s var(--ease); }
+    .food-card:hover .slider-slide img { transform: scale(1.05); }
     .slider-slide .img-ph { height: 100%; display: flex; align-items: center; justify-content: center; font-family: monospace; font-size: 0.72rem; color: var(--text-muted); padding: 16px; text-align: center; background: var(--green-light); }
-    .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.88); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem; z-index: 3; transition: opacity 0.2s, background 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.15); opacity: 0; }
+    .food-slider::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 42%); pointer-events: none; z-index: 1; }
+    .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.92); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem; color: var(--ink); z-index: 4; transition: opacity 0.2s, background 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.2); opacity: 0; }
     .food-slider:hover .slider-btn { opacity: 1; }
     .slider-btn.prev { left: 10px; }
     .slider-btn.next { right: 10px; }
     .slider-btn:hover { background: white; }
-    .slider-dots { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 3; }
-    .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; transition: background 0.2s, transform 0.2s; }
-    .dot.active { background: white; transform: scale(1.3); }
+    .slider-dots { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 6px; z-index: 4; }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.55); cursor: pointer; transition: background 0.2s, transform 0.2s; }
+    .dot.active { background: white; transform: scale(1.35); }
 
-    .food-badges { position: absolute; top: 12px; left: 12px; display: flex; flex-direction: column; gap: 5px; z-index: 2; }
-    .badge { font-size: 0.65rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 4px 10px; border-radius: 50px; display: inline-block; }
+    .food-badges { position: absolute; top: 11px; left: 11px; display: flex; flex-direction: column; gap: 5px; z-index: 3; align-items: flex-start; }
+    .badge { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; padding: 4px 9px; border-radius: 50px; display: inline-block; box-shadow: 0 2px 6px rgba(0,0,0,0.16); }
     .badge-here { background: var(--green-dark); color: white; }
-    .food-card.card-home { border: 2px solid var(--green-dark); }
+    .badge-sen { background: var(--amber); color: #2A1E08; }
     .badge-veg { background: var(--terra-soft); color: white; }
-    .meal-tags { position: absolute; bottom: 10px; right: 10px; display: flex; gap: 4px; z-index: 2; flex-wrap: wrap; justify-content: flex-end; max-width: 60%; }
-    .meal-tag { background: rgba(0,0,0,0.55); backdrop-filter: blur(4px); color: white; font-size: 0.65rem; padding: 3px 8px; border-radius: 50px; }
+    .badge-specialty { background: var(--terra-deep); color: white; }
+    .food-card.card-home { border: 1.5px solid var(--green-dark); }
+    .food-card.card-specialty { border: 1.5px solid var(--terra-soft); }
+    .specialty-heading { grid-column: 1 / -1; display: flex; align-items: center; gap: 12px; margin: 4px 0 -6px; }
+    .specialty-heading span { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--terra-deep); font-weight: 700; white-space: nowrap; }
+    .specialty-heading::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+    .meal-tags { position: absolute; bottom: 10px; right: 10px; display: flex; gap: 4px; z-index: 3; flex-wrap: wrap; justify-content: flex-end; max-width: 62%; }
+    .meal-tag { background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); color: white; font-size: 0.62rem; padding: 3px 8px; border-radius: 50px; }
 
     /* Card body */
-    .food-body { padding: 18px 18px 14px; flex: 1; display: flex; flex-direction: column; }
-    .food-restaurant { font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; color: var(--green-mid); font-weight: 600; margin-bottom: 4px; }
-    .food-dish { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.2rem; color: var(--green-dark); margin-bottom: 2px; line-height: 1.2; }
-    .food-dish-en { font-size: 0.78rem; color: var(--text-muted); font-style: italic; margin-bottom: 10px; }
-    .food-tagline { font-size: 0.83rem; color: var(--text); line-height: 1.55; margin-bottom: 8px; }
-    .food-unique { font-size: 0.78rem; color: var(--brown); background: rgba(92,61,46,0.07); border-left: 2px solid var(--orange); padding: 7px 10px; border-radius: 0 6px 6px 0; margin-bottom: 14px; line-height: 1.5; }
+    .food-body { padding: 16px 18px 15px; flex: 1; display: flex; flex-direction: column; }
+    .food-restaurant { font-size: 0.66rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--terra-soft); font-weight: 700; margin-bottom: 5px; }
+    .food-dish { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.14rem; color: var(--green-dark); margin-bottom: 2px; line-height: 1.2; }
+    .food-dish-en { font-size: 0.76rem; color: var(--text-muted); font-style: italic; margin-bottom: 10px; }
+    .food-tagline { font-size: 0.82rem; color: var(--text); line-height: 1.55; margin-bottom: 10px; }
+    .food-unique { font-size: 0.76rem; color: var(--brown); background: rgba(200,132,31,0.09); border-left: 2px solid var(--amber); padding: 8px 11px; border-radius: 0 8px 8px 0; margin-bottom: 14px; line-height: 1.5; }
 
     /* Card footer */
-    .food-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.06); }
-    .food-price { font-size: 0.82rem; font-weight: 600; color: var(--green-dark); }
-    .btn-maps { display: inline-flex; align-items: center; gap: 6px; background: var(--green-dark); color: white; font-family: 'Hanken Grotesk', sans-serif; font-size: 0.78rem; font-weight: 500; padding: 8px 16px; border-radius: 50px; transition: background 0.2s, transform 0.2s; }
+    .food-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: auto; padding-top: 13px; border-top: 1px solid rgba(42,33,24,0.07); }
+    .food-price { font-size: 0.84rem; font-weight: 700; color: var(--green-dark); }
+    .btn-maps { display: inline-flex; align-items: center; gap: 6px; background: var(--green-dark); color: white; font-family: 'Hanken Grotesk', sans-serif; font-size: 0.76rem; font-weight: 600; padding: 8px 15px; border-radius: 50px; transition: background 0.2s, transform 0.2s; flex-shrink: 0; }
     .btn-maps:hover { background: var(--forest-deep); transform: translateY(-1px); }
 
     /* CTA */
@@ -185,6 +197,9 @@
     .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .fade-in.visible { opacity: 1; transform: none; }
 
+    @media (max-width: 1080px) {
+      .food-grid { grid-template-columns: repeat(2, 1fr); }
+    }
     @media (max-width: 960px) {
       nav { padding: 0 20px; }
       .nav-links { display: none; flex-direction: column; align-items:stretch; position: absolute; top: 100%; left: 0; right: 0; background: var(--terra-deep); padding: 14px 18px calc(14px + env(safe-area-inset-bottom)); gap: 2px; box-shadow: var(--shadow); }
@@ -193,14 +208,18 @@
       .nav-links a:not(.nav-cta):last-of-type { border-bottom:none; }
       .nav-links .nav-cta { justify-content:center; margin-top:12px; padding:14px 20px; font-size:0.95rem; }
       .nav-hamburger { display: flex; }
-      .filter-section, #restaurants, #planner, #cta { padding: 24px; }
-      .food-grid { grid-template-columns: 1fr; }
+      .filter-section { padding: 14px 20px; }
+      #restaurants, #planner, #cta { padding: 40px 24px; }
       .planner-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 600px) {
+      .food-grid { grid-template-columns: 1fr; gap: 20px; }
       .planner-grid { grid-template-columns: 1fr; }
-      .filter-inner { gap: 16px; }
-      .food-slider { height: 280px; }
+      .filter-inner { gap: 12px 20px; }
+      .filter-group { width: 100%; }
+      .filter-scroll { flex: 1; }
+      .filter-divider { display: none; }
+      .food-slider { height: 240px; }
     }
   
     /* Zalo icon (thay icon WhatsApp cũ trên bản tiếng Việt) */
@@ -223,6 +242,7 @@
     <a href="rooms.html">Phòng</a>
     <a href="motorbike.html">Thuê xe máy</a>
     <a href="tours.html">Tour</a>
+    <a href="chuong-trinh/index.html">Chương trình</a>
     <a href="food.html" class="active">Ăn uống</a>
     <a href="services.html">Dịch vụ</a>
     <a href="itinerary.html">Lịch trình</a>
@@ -257,23 +277,27 @@
   <div class="filter-inner">
     <div class="filter-group">
       <span class="filter-group-label">Bữa ăn</span>
-      <button class="filter-btn active" onclick="filterFood('meal','all',this)">Tất cả</button>
-      <button class="filter-btn" onclick="filterFood('meal','breakfast',this)">☀️ Bữa sáng</button>
-      <button class="filter-btn" onclick="filterFood('meal','lunch',this)">🌤️ Bữa trưa</button>
-      <button class="filter-btn" onclick="filterFood('meal','dinner',this)">🌙 Bữa tối</button>
-      <button class="filter-btn" onclick="filterFood('meal','snack',this)">🍡 Ăn vặt</button>
+      <div class="filter-scroll">
+        <button class="filter-btn active" onclick="filterFood('meal','all',this)">Tất cả</button>
+        <button class="filter-btn" onclick="filterFood('meal','breakfast',this)">☀️ Bữa sáng</button>
+        <button class="filter-btn" onclick="filterFood('meal','lunch',this)">🌤️ Bữa trưa</button>
+        <button class="filter-btn" onclick="filterFood('meal','dinner',this)">🌙 Bữa tối</button>
+        <button class="filter-btn" onclick="filterFood('meal','snack',this)">🍡 Ăn vặt</button>
+      </div>
     </div>
     <div class="filter-divider"></div>
     <div class="filter-group">
       <span class="filter-group-label">Loại hình</span>
-      <button class="filter-btn active" onclick="filterFood('type','all',this)">Tất cả</button>
-      <button class="filter-btn" onclick="filterFood('type','local',this)">🇻🇳 Đặc sản</button>
-      <button class="filter-btn" onclick="filterFood('type','western',this)">🍕 Món Âu</button>
-      <button class="filter-btn" onclick="filterFood('type','snack',this)">🥢 Ăn vặt</button>
-      <button class="filter-btn" onclick="filterFood('type','vegetarian',this)">🌱 Món chay</button>
-      <button class="filter-btn" onclick="filterFood('type','fastfood',this)">🍗 Fast food</button>
-      <button class="filter-btn" onclick="filterFood('type','dessert',this)">🍮 Tráng miệng</button>
-      <button class="filter-btn" onclick="filterFood('type','cafe',this)">☕ Cà phê</button>
+      <div class="filter-scroll">
+        <button class="filter-btn active" onclick="filterFood('type','all',this)">Tất cả</button>
+        <button class="filter-btn" onclick="filterFood('type','local',this)">🇻🇳 Đặc sản</button>
+        <button class="filter-btn" onclick="filterFood('type','western',this)">🍕 Món Âu</button>
+        <button class="filter-btn" onclick="filterFood('type','snack',this)">🥢 Ăn vặt</button>
+        <button class="filter-btn" onclick="filterFood('type','vegetarian',this)">🌱 Món chay</button>
+        <button class="filter-btn" onclick="filterFood('type','fastfood',this)">🍗 Fast food</button>
+        <button class="filter-btn" onclick="filterFood('type','dessert',this)">🍮 Tráng miệng</button>
+        <button class="filter-btn" onclick="filterFood('type','cafe',this)">☕ Cà phê</button>
+      </div>
     </div>
   </div>
 </div>
@@ -369,6 +393,7 @@
       price: 'Từ 40.000đ',
       meals: ['breakfast', 'lunch'],
       type: 'local',
+      specialty: true,
       sen_pick: true,
       vegetarian: false,
       maps: 'https://maps.app.goo.gl/AmFJ7yFy3fHrmFNc7',
@@ -399,6 +424,7 @@
       price: '~35.000đ',
       meals: ['breakfast', 'lunch', 'dinner'],
       type: 'local',
+      specialty: true,
       sen_pick: true,
       vegetarian: false,
       maps: 'https://maps.app.goo.gl/MeTDqWwXvL1vTvSVA',
@@ -414,6 +440,7 @@
       price: '7.000đ/chiếc',
       meals: ['snack', 'dinner'],
       type: 'snack',
+      specialty: true,
       sen_pick: false,
       vegetarian: false,
       maps: 'https://maps.app.goo.gl/gbaghegtzEAn1Aah6',
@@ -594,6 +621,7 @@
       price: 'Từ 35.000đ',
       meals: ['breakfast', 'lunch'],
       type: 'local',
+      specialty: true,
       sen_pick: true,
       vegetarian: false,
       maps: 'https://maps.app.goo.gl/Bv9JXW63mBWqjyrBA',
@@ -721,10 +749,25 @@
     grid.innerHTML = '';
     document.getElementById('resultsCount').textContent = `Đang hiện ${list.length} quán ăn`;
 
-    list.forEach(r => {
+    // Đặc sản Cao Bằng đẩy lên đầu
+    const ordered = [...list].sort((a, b) => (b.specialty ? 1 : 0) - (a.specialty ? 1 : 0));
+    const hasSpecialty = ordered.some(r => r.specialty);
+    let headingDrawn = false;
+
+    ordered.forEach((r, i) => {
+      // Ngăn cách giữa đặc sản và các quán còn lại
+      if (hasSpecialty && !r.specialty && !headingDrawn) {
+        const h = document.createElement('div');
+        h.className = 'specialty-heading';
+        h.innerHTML = '<span>Quán ngon khác</span>';
+        grid.appendChild(h);
+        headingDrawn = true;
+      }
+
       const mealLabels = { breakfast:'☀️ Bữa sáng', lunch:'🌤️ Bữa trưa', dinner:'🌙 Bữa tối', snack:'🍡 Ăn vặt' };
       const mealTags = r.meals.map(m => `<span class="meal-tag">${mealLabels[m]}</span>`).join('');
       const badges = [
+        r.specialty  ? '<span class="badge badge-specialty">🏔️ Đặc sản Cao Bằng</span>' : '',
         r.id === 'sens-homestay-breakfast' ? '<span class="badge badge-here">📍 Ngay tại đây</span>' : '',
         r.sen_pick   ? '<span class="badge badge-sen">⭐ Sen khuyên chọn</span>' : '',
         r.vegetarian ? '<span class="badge badge-veg">🌱 Có đồ chay</span>' : '',
@@ -758,7 +801,7 @@
       const imgs = [1,2,3,4].map(n => `${folder}/${n}.jpg`);
 
       const card = document.createElement('div');
-      card.className = `food-card${isHome ? ' card-home' : ''} fade-in`;
+      card.className = `food-card${isHome ? ' card-home' : ''}${r.specialty ? ' card-specialty' : ''} fade-in`;
       card.dataset.meals = r.meals.join(' ');
       card.dataset.type = r.type;
 
