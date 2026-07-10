@@ -545,6 +545,36 @@
     }
     .teardrop-wrap .must-badge { top: 2px; right: 4px; }
 
+    /* Star-rating badge on a pin (Sen's rating) — a tiny pill sitting on the
+       pin's top-right shoulder. Hidden until zoomed in (body.stars-on) so the
+       wide view stays clean; only shows the "on" stars, colour-coded by level. */
+    .star-badge {
+      position: absolute;
+      top: -8px;
+      right: -9px;
+      z-index: 6;
+      display: none;               /* revealed by body.stars-on */
+      padding: 2px 5px;
+      border-radius: 999px;
+      background: #fff;
+      border: 1.5px solid #0B2530;   /* ink outline so stars pop off any pin */
+      font-size: 10px;
+      line-height: 1;
+      letter-spacing: -0.5px;
+      white-space: nowrap;
+      box-shadow: 0 1px 4px rgba(11, 37, 48, .45);
+      pointer-events: none;
+    }
+    .star-badge.sb-1 { color: #94A3B8; }
+    .star-badge.sb-2 { color: #0891B2; }
+    .star-badge.sb-3 { color: #F5B301; text-shadow: 0 0 4px rgba(245,179,1,0.7); }
+    body.stars-on .star-badge { display: inline-block; }
+    /* teardrop is tier-1 (no star-badge), but keep the shoulder placement sane
+       for photo/plain pins when the label sits below */
+    .photo-md-wrap .star-badge,
+    .photo-sm-wrap .star-badge { top: -7px; right: -8px; }
+    body.dark .star-badge { background: #14262F; border-color: #E9F2F6; }
+
     /* Tier 1 (signature stops): jade-turquoise ring + soft halo — the colour of
        the Ban Gioc / Quây Sơn water, Cao Bang's most iconic hue. The one cold
        colour on a warm cream map, so these pins pop instantly; the small gold
@@ -632,9 +662,9 @@
       height: 19px;
     }
 
-    /* Petrol: a bare crimson dot — no icon, no name (tap it for the card).
-       The network is dense; a quiet dot marks "fuel here" without clutter.
-       Grows a touch when zoomed into an area so it's easier to tap. */
+    /* Petrol: a bare crimson dot while zoomed out (the network is dense, a quiet
+       dot marks "fuel here" without clutter); once zoomed into an area it grows
+       into a proper pin showing the fuel-pump icon. Name stays hidden. */
     .cat-fuel .pin,
     .cat-fuel .pin.pin-lg {
       width: 13px;
@@ -642,15 +672,18 @@
       border-width: 1.5px;
       box-shadow: 0 1px 3px rgba(11, 37, 48, .3);
     }
-    .cat-fuel .pin svg,
-    .cat-fuel .pin-label {
-      display: none;
-    }
+    .cat-fuel .pin svg { display: none; }   /* icon hidden on the small dot */
+    .cat-fuel .pin-label { display: none; } /* petrol names never shown on map */
     .tz-near .cat-fuel .pin,
     .tz-near .cat-fuel .pin.pin-lg {
-      width: 17px;
-      height: 17px;
+      width: 26px;
+      height: 26px;
       border-width: 2px;
+    }
+    .tz-near .cat-fuel .pin svg {           /* show the fuel-pump icon when zoomed in */
+      display: block;
+      width: 14px;
+      height: 14px;
     }
 
     .zl-mid .pin:not(.pin-lg) {
@@ -737,12 +770,12 @@
     /* whole-province overview: shrink icons & hide labels to stop overlap */
     body.tz-wide .town-glyph { width: 22px !important; }
     body.tz-wide .town-name  { display: none; }
-    /* zoomed into a district: the town grows to read as an actual settlement */
-    body.tz-near .town-glyph { width: 72px !important; }
-    body.tz-near .town-name  { top: 24px; left: 78px; font-size: 14px; }
+    /* zoomed into a district (z>=12): the town grows to read as a real settlement */
+    body.tz-near .town-glyph { width: 104px !important; }
+    body.tz-near .town-name  { top: 36px; left: 112px; font-size: 15px; }
     /* fully zoomed in: bigger still */
-    body.zl-max .town-glyph  { width: 96px !important; }
-    body.zl-max .town-name   { top: 34px; left: 102px; font-size: 15px; }
+    body.zl-max .town-glyph  { width: 132px !important; }
+    body.zl-max .town-name   { top: 48px; left: 140px; font-size: 16px; }
     body.dark .town-name {
       color: #cbd5e1;
       text-shadow: 0 1px 0 #0b1220, 0 -1px 0 #0b1220, 1px 0 0 #0b1220, -1px 0 0 #0b1220, 0 0 5px #0b1220;
@@ -1210,6 +1243,34 @@
       line-height: 1.55;
       color: var(--ink);
       margin: 8px 0 0;
+    }
+
+    /* Đánh giá sao (Sen chấm) — 1 cơ bản · 2 tốt · 3 tuyệt vời */
+    .card-rating {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 8px 0 2px;
+    }
+    .card-rating .stars {
+      display: inline-flex;
+      gap: 2px;
+      font-size: 15px;
+      line-height: 1;
+    }
+    .card-rating .stars .s {
+      color: #D3D8DE;   /* sao rỗng — xám nhạt */
+    }
+    .card-rating .stars .s.on { color: var(--rc); }
+    .card-rating.r3 .stars .s.on {
+      color: #F5B301;
+      text-shadow: 0 0 6px rgba(245,179,1,0.6);   /* glow cho 3 sao */
+    }
+    .card-rating .r-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--rc);
+      letter-spacing: .01em;
     }
 
     .card-dist {
@@ -1891,6 +1952,16 @@
       flex: none;
     }
 
+    /* ngày đang hiển thị khi lọc theo ?day= / postMessage (chế độ nhúng) */
+    .day-chip.active {
+      box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--dc, var(--accent-deep));
+    }
+
+    /* ── Chế độ nhúng iframe (?embed): chỉ còn bản đồ trần ──
+       Trip bar cũng ẩn — day-tabs của trang tour điều khiển ngày rồi. */
+    body.embed .topbar { display: none; }
+    body.embed .trip-bar { display: none; }
+
     .trip-planner {
       flex: none;
       display: flex;
@@ -2388,6 +2459,7 @@
     <div class="card-body">
       <h2 class="card-title" id="card-title"></h2>
       <p class="card-local" id="card-local"></p>
+      <div class="card-rating" id="card-rating"></div>
       <p class="card-desc" id="card-desc"></p>
       <div class="card-dist" id="card-dist"></div>
       <div class="card-promo" id="card-promo" hidden></div>

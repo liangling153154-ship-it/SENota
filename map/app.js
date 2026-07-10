@@ -6,7 +6,12 @@
   "use strict";
 
   var REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var EDIT_MODE = new URLSearchParams(location.search).has("edit");
+  var QS = new URLSearchParams(location.search);
+  var EDIT_MODE = QS.has("edit");
+  /* ?embed — chế độ nhúng iframe (trang tour web nhánh Sen): ẩn topbar
+     search/chips + trip bar, chỉ còn bản đồ. */
+  var EMBED_MODE = QS.has("embed");
+  if (EMBED_MODE) { document.body.classList.add("embed"); }
 
   /* ---------------- Inline SVG icons ---------------- */
   var PATHS = {
@@ -38,7 +43,8 @@
     arrow: '<path d="M9 18l6-6-6-6"/>',
     compass: '<circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>',
     star: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
-    fuel: '<line x1="3" y1="22" x2="15" y2="22"/><line x1="4" y1="9" x2="14" y2="9"/><path d="M14 22V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v18"/><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 2 2a2 2 0 0 0 2-2V9.83a2 2 0 0 0-.59-1.42L18 5"/>'
+    fuel: '<line x1="3" y1="22" x2="15" y2="22"/><line x1="4" y1="9" x2="14" y2="9"/><path d="M14 22V4a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v18"/><path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 2 2a2 2 0 0 0 2-2V9.83a2 2 0 0 0-.59-1.42L18 5"/>',
+    dollar: '<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>'
   };
   function svg(name, extra) {
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"' +
@@ -198,6 +204,13 @@
     var prioCls = " prio-" + (poi._prio || 2) + (poi._prio === 1 ? " is-must" : "");
     // Tier-2 pins collapse to this dot while zoomed out (body.tier-dots).
     var dot = (poi._prio === 2) ? '<span class="mini-dot" style="background:' + cat.color + '"></span>' : "";
+    // Đánh giá sao (Sen chấm) — badge nhỏ ở góc pin, chỉ hiện khi zoom gần
+    // (body.stars-on). Tier 1 đã có must-badge riêng nên bỏ qua.
+    var rbadge = "";
+    if (poi._prio !== 1 && poi.stars >= 1 && poi.stars <= 3) {
+      rbadge = '<span class="star-badge sb-' + poi.stars + '" aria-hidden="true">' +
+        new Array(poi.stars + 1).join("★") + "</span>";
+    }
 
     if (poi.photoPin && poi.img) {
       // ICONIC sites: a teardrop map-pin with the photo inside — a distinct
@@ -222,7 +235,7 @@
         className: wrapCls,
         html: '<div class="photo-pin' + sizeCls + (poi.featured ? " pin-featured" : "") +
           '" style="--c:' + cat.color + '">' + pinImgTag(poi.img) +
-          '<span class="cat-badge">' + svg(cat.icon) + "</span>" + star + "</div>" + label + dot,
+          '<span class="cat-badge">' + svg(cat.icon) + "</span>" + star + rbadge + "</div>" + label + dot,
         iconSize: [size, size],
         iconAnchor: [size / 2, size / 2]
       });
@@ -231,7 +244,7 @@
     var s = isProv ? 38 : 30;
     var html =
       '<div class="pin' + (isProv ? " pin-lg" : "") + (poi.featured ? " pin-featured" : "") +
-      '" style="--c:' + cat.color + '">' + svg(cat.icon) + star + "</div>" + label + dot;
+      '" style="--c:' + cat.color + '">' + svg(cat.icon) + star + rbadge + "</div>" + label + dot;
     return L.divIcon({ className: "poi-wrap cat-" + poi.category + prioCls, html: html, iconSize: [s, s], iconAnchor: [s / 2, s / 2] });
   }
 
@@ -254,7 +267,7 @@
      A POI can still force a reveal zoom with `minZoomHard`. */
   function inferPriority(p) {
     if (p.priority) { return p.priority; }                 // explicit wins (tier 1 list)
-    if (p.category === "fuel" || p.category === "services" ||
+    if (p.category === "fuel" || p.category === "services" || p.category === "money" ||
         p.category === "health" || p.category === "transport") { return 4; }
     if (p.category === "sights" || p.category === "culture" ||
         p.category === "stay") { return 2; }
@@ -333,7 +346,10 @@
       var ok;
       if (activeTrip) {
         // trip mode: show exactly the itinerary's stops, nothing else
-        ok = !!activeTrip._set[r.poi.id];
+        // (khi lọc 1 ngày qua iframe/deep-link: chỉ POI của ngày đó)
+        var set = (activeTripDay !== null && activeTrip._daySet)
+          ? activeTrip._daySet[activeTripDay] : activeTrip._set;
+        ok = !!set[r.poi.id];
       } else {
         ok = (activeCat === "all" || r.poi.category === activeCat) &&
           (r.poi.tier === "province" || cityVisible) &&
@@ -358,11 +374,15 @@
     if (wantHw && !highwaysOn2) { highwayLayer.addTo(map); highwaysOn2 = true; }
     else if (!wantHw && highwaysOn2) { map.removeLayer(highwayLayer); highwaysOn2 = false; }
     if (highwaysOn2) {
-      var hwFaded = cityVisible;
-      var casingW = hwFaded ? 4 : 8;
-      var casingO = hwFaded ? 0.25 : 0.9;
-      var lineW   = hwFaded ? 2.5 : 4.5;
-      var lineO   = hwFaded ? 0.4 : 0.95;
+      // Keep the main roads bold & clear through the "zoomed into an area" band
+      // (z12–14, when travellers still read the route corridors); only ease them
+      // down once deep in the street-level city view (z15+) where OSM's own roads
+      // take over. Previously they faded from z12 and read too thin/pale.
+      var hwFaded = zoom >= 15;
+      var casingW = hwFaded ? 5 : 8;
+      var casingO = hwFaded ? 0.45 : 0.9;
+      var lineW   = hwFaded ? 3 : 4.5;
+      var lineO   = hwFaded ? 0.6 : 0.95;
       highwayCasings.forEach(function (c) { c.setStyle({ weight: casingW, opacity: casingO }); });
       highwayLines.forEach(function (l) { l.setStyle({ weight: lineW, opacity: lineO }); });
     }
@@ -377,6 +397,8 @@
     // rendered slightly smaller until z12.5 so they don't jostle each other
     document.body.classList.toggle("tier-dots", zoom < TIER2_FULL_ZOOM);
     document.body.classList.toggle("t2-mid", zoom >= TIER2_FULL_ZOOM && zoom < TIER2_EASE_ZOOM);
+    // star badges on pins only once zoomed in enough to read them (z >= 12.5)
+    document.body.classList.toggle("stars-on", zoom >= TIER2_EASE_ZOOM);
   }
   map.on("zoomend", refresh);
   map.on("moveend", refresh);   // also fires after initial fitBounds → town zoom classes set from the start
@@ -485,6 +507,25 @@
     cardTitle.textContent = poi.name;
     cardLocal.textContent = poi.localName || "";
     cardLocal.style.display = (poi.localName && poi.localName !== poi.name) ? "" : "none";
+
+    // Đánh giá sao (Sen chấm): 1 cơ bản · 2 tốt · 3 tuyệt vời (glow)
+    var rating = document.getElementById("card-rating");
+    if (poi.stars >= 1 && poi.stars <= 3) {
+      var RCOL = { 1: "#94A3B8", 2: "#0891B2", 3: "#F5B301" };
+      var RLAB = { 1: "Cơ bản", 2: "Đáng ghé", 3: "Tuyệt vời" };
+      var stars = "";
+      for (var si = 1; si <= 3; si++) {
+        stars += '<span class="s' + (si <= poi.stars ? " on" : "") + '">★</span>';
+      }
+      rating.className = "card-rating r" + poi.stars;
+      rating.style.setProperty("--rc", RCOL[poi.stars]);
+      rating.innerHTML = '<span class="stars">' + stars + "</span>" +
+        '<span class="r-label">' + RLAB[poi.stars] + "</span>";
+      rating.style.display = "";
+    } else {
+      rating.style.display = "none";
+    }
+
     cardDesc.textContent = poi.desc;
     var meta = [];
     if (poi.distance) { meta.push(esc(poi.distance)); }
@@ -571,10 +612,16 @@
     } else {
       hits.forEach(function (item) {
         var p = item.rec.poi, c = item.rec.cat;
+        var rst = "";
+        if (p.stars >= 1 && p.stars <= 3) {
+          var rc = { 1: "#94A3B8", 2: "#0891B2", 3: "#F5B301" }[p.stars];
+          rst = ' · <span class="res-stars" style="color:' + rc + '">' +
+            new Array(p.stars + 1).join("★") + "</span>";
+        }
         html += '<button class="result" data-id="' + p.id + '" role="option">' +
           '<span class="dot" style="background:' + c.color + '">' + svg(c.icon) + "</span>" +
           '<span><span class="t">' + esc(p.name) + '</span><br><span class="s">' +
-          esc(c.label) + " · " + (p.tier === "city" ? "Cao Bằng City" : "Province") + "</span></span></button>";
+          esc(c.label) + " · " + (p.tier === "city" ? "Cao Bằng City" : "Province") + rst + "</span></span></button>";
       });
     }
     resultsEl.innerHTML = html;
@@ -635,6 +682,7 @@
   var tripDaysEl = document.getElementById("trip-days");
   var tripPlanner = document.getElementById("trip-planner");
   var activeTrip = null;
+  var activeTripDay = null; // index ngày đang lọc (nhúng iframe); null = cả trip
   var tripLayer = null;
   var tripCasings = [];
 
@@ -672,17 +720,27 @@
     if (trip) { activateTrip(trip); }
   });
 
-  function activateTrip(trip) {
+  /* dayIdx (0-based, tuỳ chọn): chỉ vẽ route + pin của MỘT ngày, đánh số lại
+     1..n trong ngày đó — dùng khi nhúng iframe đồng bộ với day-tabs trang tour. */
+  function activateTrip(trip, dayIdx) {
+    if (typeof dayIdx !== "number" || dayIdx < 0 || dayIdx >= trip.days) { dayIdx = null; }
     exitTrip();
     closeCard();
     clearSearch();
     activeTrip = trip;
+    activeTripDay = dayIdx; // null = cả trip; số = chỉ hiện POI của ngày đó
     if (!trip._set) {
       trip._set = { "sens-homestay": true }; // route always starts at Sen's
       trip.stopsByDay.forEach(function (day) {
         day.forEach(function (id) { trip._set[id] = true; });
       });
     }
+    // Set POI theo TỪNG ngày — để lọc iframe không hiện pin ngày khác đè lên nhau
+    trip._daySet = trip.stopsByDay.map(function (day) {
+      var s = { "sens-homestay": true };
+      day.forEach(function (id) { s[id] = true; });
+      return s;
+    });
 
     var dark = document.body.classList.contains("dark");
     tripLayer = L.layerGroup();
@@ -690,6 +748,7 @@
     var allPts = [];
 
     trip.segsByDay.forEach(function (segs, di) {
+      if (dayIdx !== null && di !== dayIdx) { return; }
       var color = DAY_COLORS[di % DAY_COLORS.length];
       segs.forEach(function (line) {
         allPts = allPts.concat(line);
@@ -702,6 +761,7 @@
 
     var n = 0;
     trip.stopsByDay.forEach(function (day, di) {
+      if (dayIdx !== null && di !== dayIdx) { return; }
       var color = DAY_COLORS[di % DAY_COLORS.length];
       day.forEach(function (id) {
         var rec = records.find(function (r) { return r.poi.id === id; });
@@ -732,7 +792,8 @@
     var chips = "";
     for (var d = 0; d < trip.days; d++) {
       var dc = DAY_COLORS[d % DAY_COLORS.length];
-      chips += '<a class="day-chip" style="--dc:' + dc + '" target="_blank" rel="noopener" href="' +
+      chips += '<a class="day-chip' + (dayIdx === d ? " active" : "") + '" style="--dc:' + dc +
+        '" target="_blank" rel="noopener" href="' +
         esc(tripGmapsRoute(trip, d)) + '">' + svg("gmaps") + "Day " + (d + 1) + "</a>";
     }
     tripDaysEl.innerHTML = chips;
@@ -777,6 +838,7 @@
   function exitTrip() {
     if (!activeTrip) { return; }
     activeTrip = null;
+    activeTripDay = null;
     if (tripLayer) { map.removeLayer(tripLayer); tripLayer = null; }
     tripCasings = [];
     tripBar.hidden = true;
@@ -1238,4 +1300,36 @@
   buildChips();
   refresh();
   if (EDIT_MODE) { toast("Edit mode — tap the map to copy coordinates"); }
+
+  /* Deep-link: ?trip=<id>[&day=<n>] mở thẳng một lịch trình (trang tour web
+     nhánh Sen nhúng iframe bằng link này; day 1-based, có day → chỉ vẽ route +
+     pin của ngày đó, đánh số lại 1..n).
+     Không ghi localStorage welcomed — khách vào map bình thường vẫn thấy màn chào. */
+  var tripParam = QS.get("trip");
+  var linkedTrip = null;
+  if (tripParam) {
+    linkedTrip = TRIPS.find(function (t) { return t.id === tripParam; }) || null;
+    if (linkedTrip) {
+      welcome.classList.add("hide");
+      var dayParam = parseInt(QS.get("day"), 10);
+      activateTrip(linkedTrip, isNaN(dayParam) ? null : dayParam - 1);
+    }
+  }
+  /* Trang cha điều khiển qua postMessage:
+     - {type:'cbmap-trip', trip:'<id>', day:<1-based>?} → đổi hẳn trip (switcher lộ trình)
+     - {type:'cbmap-day',  day:<1-based>}               → đổi ngày trong trip hiện tại */
+  window.addEventListener("message", function (e) {
+    if (e.origin !== location.origin || !e.data) { return; }
+    if (e.data.type === "cbmap-trip") {
+      var nt = TRIPS.find(function (t) { return t.id === e.data.trip; });
+      if (!nt) { return; }
+      linkedTrip = nt;
+      welcome.classList.add("hide");
+      var nd = parseInt(e.data.day, 10);
+      activateTrip(nt, isNaN(nd) ? null : nd - 1);
+    } else if (e.data.type === "cbmap-day" && linkedTrip) {
+      var d = parseInt(e.data.day, 10);
+      if (!isNaN(d)) { activateTrip(linkedTrip, d - 1); }
+    }
+  });
 })();

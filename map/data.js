@@ -47,6 +47,7 @@ var CATEGORIES = {
   nightlife: { label: "Nightlife",         color: "#DB2777", icon: "wine" },
   shopping:  { label: "Shopping",          color: "#9333EA", icon: "bag" },
   services:  { label: "Services",          color: "#475569", icon: "wrench" },
+  money:     { label: "ATM & Đổi tiền",     color: "#0E9F6E", icon: "dollar" },
   health:    { label: "Health",            color: "#DC2626", icon: "health" },
   transport: { label: "Transport",         color: "#0284C7", icon: "bus" },
   fuel:      { label: "Petrol",            color: "#E11D48", icon: "fuel" }
@@ -111,6 +112,7 @@ var POIS = [
 
   {
     id: "nguom-ngao",
+    stars: 3,
     name: "Nguom Ngao Cave",
     localName: "Động Ngườm Ngao",
     category: "sights",
@@ -126,6 +128,7 @@ var POIS = [
 
   {
     id: "khuoi-ky",
+    stars: 3,
     name: "Khuoi Ky Stone Village",
     localName: "Làng đá Khuổi Ky",
     category: "culture",
@@ -140,6 +143,7 @@ var POIS = [
 
   {
     id: "phat-tich-pagoda",
+    stars: 3,
     name: "Phat Tich Truc Lam Pagoda",
     localName: "Chùa Phật Tích Trúc Lâm Bản Giốc",
     category: "culture",
@@ -154,6 +158,7 @@ var POIS = [
 
   {
     id: "quay-son-swim",
+    stars: 1,
     name: "Quay Son River Swim Spot",
     localName: "Tắm sông Quây Sơn",
     category: "sights",
@@ -169,31 +174,35 @@ var POIS = [
 
   {
     id: "pi-pha",
+    stars: 3,
     name: "Pi Pha Viewpoint",
     localName: "Điểm ngắm cảnh Pì Phà",
     category: "sights",
     tier: "province",
-    lat: 22.884,
-    lng: 106.583,
+    lat: 22.9262375,
+    lng: 106.5352969,
     minZoom: 10,
-    approx: true,
     desc: "Ridge-top panorama over the Phong Nam valley — rice paddies, jade river bends and karst towers. Best light at sunrise.",
     distance: "95 km east · 30 min beyond Ban Gioc",
+    maps: "https://maps.app.goo.gl/QhwwrbFhfRHqUXYR7",
+    mapsName: "Điểm ngắm cảnh Pì Phà",
     img: ASSETS + "images/places/pi-pha-viewpoint.jpg"
   },
 
   {
     id: "pac-nga-bridge",
+    stars: 1,
     name: "Pac Nga Hanging Bridge",
     localName: "Cầu treo Pác Ngà",
     category: "sights",
     tier: "province",
-    lat: 22.899,
-    lng: 106.562,
+    lat: 22.9317159,
+    lng: 106.533583,
     minZoom: 11,
-    approx: true,
     desc: "Wooden hanging bridge swaying over the Quay Son river, deep in the Phong Nam rice-paddy valley. A photographers' favourite.",
     distance: "92.5 km east",
+    maps: "https://maps.app.goo.gl/n9tBZAcWr25ZnAH28",
+    mapsName: "Cầu treo Pác Ngà",
     img: ASSETS + "images/places/pac-nga-hanging-bridge.jpg"
   },
 
@@ -216,6 +225,7 @@ var POIS = [
 
   {
     id: "thoongot",
+    stars: 2,
     name: "Thoong Got Panorama",
     localName: "Thoong Gót",
     category: "sights",
@@ -231,6 +241,7 @@ var POIS = [
 
   {
     id: "blacksmith",
+    stars: 3,
     name: "Pac Rang Forging Village",
     localName: "Làng rèn Pác Rằng, Phúc Sen",
     category: "culture",
@@ -246,36 +257,41 @@ var POIS = [
 
   {
     id: "phia-thap",
+    stars: 1,
     name: "Phia Thap Incense Village",
     localName: "Làng hương Phia Thắp",
     category: "culture",
     tier: "province",
-    lat: 22.696,
-    lng: 106.398,
+    lat: 22.7011419,
+    lng: 106.3695186,
     minZoom: 11,
-    approx: true,
     desc: "Nùng An village where every yard dries fans of pink incense sticks made from wild bee-tree bark. Next door to the forging village.",
     distance: "35 km east · ~50 min",
+    maps: "https://maps.app.goo.gl/7JpmQxoqjb8oCYYH9",
+    mapsName: "Làng hương Phia Thắp",
     img: ASSETS + "images/places/phia-thap-village-incense.jpg"
   },
 
   {
     id: "dia-tren",
+    stars: 2,
     name: "Dia Tren Paper Village",
     localName: "Làng giấy bản Dìa Trên",
     category: "culture",
     tier: "province",
-    lat: 22.714,
-    lng: 106.41,
+    lat: 22.71282,
+    lng: 106.3940494,
     minZoom: 12,
-    approx: true,
     desc: "Village still hand-making 'giay ban' bamboo paper the ancient way — soaking, pulping and sun-drying sheets in the yard.",
     distance: "28.5 km east",
+    maps: "https://maps.app.goo.gl/6vH7eqQLnHHv1gck9",
+    mapsName: "Làng giấy bản Dìa Trên",
     img: ASSETS + "images/places/dia-tren-village-paper.jpg"
   },
 
   {
     id: "nung-indigo",
+    stars: 3,
     name: "Nung Indigo Cafe & Homestay",
     localName: "Nùng INDIGO Cafe & Homestay",
     category: "stay",
@@ -292,6 +308,7 @@ var POIS = [
 
   {
     id: "thang-hen",
+    stars: 3,
     name: "Thang Hen Lake",
     localName: "Hồ Thang Hen",
     category: "sights",
@@ -345,6 +362,7 @@ var POIS = [
 
   {
     id: "kim-dong",
+    stars: 1,
     name: "Kim Dong Memorial",
     localName: "Khu di tích Kim Đồng",
     category: "culture",
@@ -360,6 +378,7 @@ var POIS = [
 
   {
     id: "lung-luong",
+    stars: 1,
     name: "Lung Luong Stone Flowers",
     localName: "Cúc đá Lũng Luông",
     category: "sights",
@@ -375,6 +394,7 @@ var POIS = [
 
   {
     id: "ban-giang",
+    stars: 2,
     name: "Ban Giang Waterfall",
     localName: "Thác Bản Giàng",
     category: "sights",
@@ -392,6 +412,7 @@ var POIS = [
 
   {
     id: "phia-oac",
+    stars: 3,
     name: "Phia Oac Peak",
     localName: "Đỉnh Phia Oắc 1931 m",
     category: "sights",
@@ -406,6 +427,7 @@ var POIS = [
 
   {
     id: "kolia",
+    stars: 3,
     name: "Kolia Tea Farm & Lodge",
     localName: "Đồn điền chè Kolia, Phia Đén",
     category: "stay",
@@ -421,6 +443,7 @@ var POIS = [
 
   {
     id: "bamboo-forest",
+    stars: 3,
     name: "Nguyen Binh Bamboo Forest",
     localName: "Rừng trúc Nguyên Bình",
     category: "sights",
@@ -453,6 +476,7 @@ var POIS = [
 
   {
     id: "sens-homestay",
+    stars: 3,
     name: "Sen's Homestay",
     localName: "Sen's Homestay – Tours & Motorbike Rental",
     category: "stay",
@@ -472,10 +496,12 @@ var POIS = [
 
   {
     id: "hoa-an-hotel",
+    stars: 3,
     name: "Hoa An Hotel",
     localName: "Hoà An Hotel",
     category: "stay",
     tier: "city",
+    img: ASSETS + "images/places/hoa-an-hotel.jpg",
     lat: 22.68404,
     lng: 106.21849,
     minZoom: 13,
@@ -520,6 +546,7 @@ var POIS = [
 
   {
     id: "pho-chua-quyen",
+    stars: 3,
     name: "Pho Chua Quyen",
     localName: "Phở Chua Gia Truyền Quyên",
     category: "food",
@@ -539,6 +566,7 @@ var POIS = [
 
   {
     id: "banh-cuon-phong-uyen",
+    stars: 3,
     name: "Banh Cuon Phong Uyen",
     localName: "Bánh cuốn Phong Uyên (Phố Cũ)",
     category: "food",
@@ -558,6 +586,7 @@ var POIS = [
 
   {
     id: "pho-vit-dung-thinh",
+    stars: 3,
     name: "Pho Vit Dung Thinh",
     localName: "Phở Vịt Dung Thịnh",
     category: "food",
@@ -576,6 +605,7 @@ var POIS = [
 
   {
     id: "vit-quay-o-thoa",
+    stars: 3,
     name: "Vit Quay Gion O Thoa",
     localName: "Vịt Quay Giòn O Thoa",
     category: "food",
@@ -595,6 +625,7 @@ var POIS = [
 
   {
     id: "ap-chao-co-hac",
+    stars: 3,
     name: "Ap Chao Co Hac",
     localName: "Áp chao vịt rán cô Hạc",
     category: "food",
@@ -613,6 +644,7 @@ var POIS = [
 
   {
     id: "nem-nuong-co-lo",
+    stars: 1,
     name: "Nem Nuong Co Lo",
     localName: "Nem nướng Cô Lô",
     category: "food",
@@ -631,6 +663,7 @@ var POIS = [
 
   {
     id: "bun-cha-ha-thanh",
+    stars: 1,
     name: "Bun Cha Ha Thanh",
     localName: "Bún chả Hà Thành",
     category: "food",
@@ -649,6 +682,7 @@ var POIS = [
 
   {
     id: "banh-mi-thu-thang",
+    stars: 3,
     name: "Banh Mi Chao Thu Thang",
     localName: "Bánh mỳ chảo Thu Thắng",
     category: "food",
@@ -667,6 +701,7 @@ var POIS = [
 
   {
     id: "tiem-banh-trang",
+    stars: 2,
     name: "Tiem Banh Trang",
     localName: "Tiệm Bánh Tráng",
     category: "food",
@@ -686,6 +721,7 @@ var POIS = [
 
   {
     id: "pedros-pizza",
+    stars: 2,
     name: "Pedro's Pizza",
     localName: "Pedro's Pizza",
     category: "food",
@@ -705,6 +741,7 @@ var POIS = [
 
   {
     id: "lela-vegan",
+    stars: 1,
     name: "Lela Vegan Bistro",
     localName: "Lela Vegan",
     category: "food",
@@ -725,6 +762,7 @@ var POIS = [
 
   {
     id: "duong-gio-tai",
+    stars: 1,
     name: "Duong Gio Tai BBQ",
     localName: "Đồ nướng Dương Gió Tai",
     category: "food",
@@ -744,6 +782,7 @@ var POIS = [
 
   {
     id: "handak-chicken",
+    stars: 1,
     name: "Handak Korean Chicken",
     localName: "Handak Korean Chicken",
     category: "food",
@@ -762,6 +801,7 @@ var POIS = [
 
   {
     id: "tao-pho-lanh",
+    stars: 2,
     name: "Tao Pho Lanh",
     localName: "Tào Phớ Lành",
     category: "food",
@@ -781,6 +821,7 @@ var POIS = [
 
   {
     id: "che-pho",
+    stars: 2,
     name: "Che Pho Dessert Bar",
     localName: "Chè Phố",
     category: "food",
@@ -801,6 +842,7 @@ var POIS = [
 
   {
     id: "fenice-caffe",
+    stars: 1,
     name: "Fenice Caffè",
     localName: "Fenice Caffè – Tiệm Cafe & Bánh Ngọt",
     category: "food",
@@ -821,6 +863,7 @@ var POIS = [
 
   {
     id: "with-us-coffee",
+    stars: 1,
     name: "With Us Coffee",
     localName: "With Us Coffee",
     category: "food",
@@ -840,6 +883,7 @@ var POIS = [
 
   {
     id: "yen-me-nau",
+    stars: 2,
     name: "Yen — Ngon Nhu Me Nau",
     localName: "Yên - Ngon như mẹ nấu",
     category: "food",
@@ -866,6 +910,7 @@ var POIS = [
 
   {
     id: "nguyen-luong-market",
+    stars: 2,
     name: "Nguyen Luong Supermarket",
     localName: "Siêu Thị Nguyễn Lương",
     category: "shopping",
@@ -882,7 +927,7 @@ var POIS = [
     id: "vietinbank-atm-de-tham",
     name: "VietinBank ATM",
     localName: "ATM VietinBank",
-    category: "services",
+    category: "money",
     tier: "city",
     lat: 22.6845542,
     lng: 106.219543,
@@ -936,6 +981,7 @@ var POIS = [
 
   {
     id: "cao-bang-city-square",
+    stars: 1,
     name: "Cao Bang City Square",
     localName: "Quảng trường TP. Cao Bằng",
     category: "culture",
@@ -964,6 +1010,7 @@ var POIS = [
 
   {
     id: "winmart-de-tham",
+    stars: 1,
     name: "WinMart+ De Tham",
     localName: "Siêu thị WinMart+ Đề Thám",
     category: "shopping",
@@ -978,6 +1025,7 @@ var POIS = [
 
   {
     id: "bun-cha-ha-noi",
+    stars: 1,
     name: "Bun Cha Ha Noi",
     localName: "Bún Chả Hà Nội",
     category: "food",
@@ -993,6 +1041,7 @@ var POIS = [
 
   {
     id: "banh-cuon-mo-hoang",
+    stars: 1,
     name: "Banh Cuon Mo Hoang",
     localName: "Bánh Cuốn Mơ Hoàng",
     category: "food",
@@ -1008,6 +1057,7 @@ var POIS = [
 
   {
     id: "quan-que-noodles",
+    stars: 2,
     name: "Quan Que (Pho · Chao · Bun)",
     localName: "Quán Quế",
     category: "food",
@@ -1023,6 +1073,7 @@ var POIS = [
 
   {
     id: "pho-nha-do-duck",
+    stars: 3,
     name: "Pho Nha Do (Roast Duck Pho)",
     localName: "Phở Nhà Đổ",
     category: "food",
@@ -1039,6 +1090,7 @@ var POIS = [
 
   {
     id: "nga-ba-song-fish-hotpot",
+    stars: 1,
     name: "Nga Ba Song Fish Hotpot",
     localName: "Nhà Hàng Ngã Ba Sông - Lẩu Thức Yến",
     category: "food",
@@ -1067,6 +1119,7 @@ var POIS = [
 
   {
     id: "ngoc-xuan-supermarket",
+    stars: 2,
     name: "Ngoc Xuan Supermarket",
     localName: "Siêu thị Ngọc Xuân",
     category: "shopping",
@@ -1081,6 +1134,7 @@ var POIS = [
 
   {
     id: "lang-ben-song-cafe",
+    stars: 1,
     name: "Riverside Garden Cafe",
     localName: "Làng Bên Sông",
     category: "food",
@@ -1110,6 +1164,7 @@ var POIS = [
 
   {
     id: "nang-cafe",
+    stars: 2,
     name: "Nang Cafe",
     localName: "Nâng Café",
     category: "food",
@@ -1139,6 +1194,7 @@ var POIS = [
 
   {
     id: "kim-dong-walking-street",
+    stars: 3,
     name: "Kim Dong Night Walking Street",
     localName: "Phố Đi Bộ Kim Đồng",
     category: "nightlife",
@@ -1156,7 +1212,7 @@ var POIS = [
     id: "kim-tin-jewelry-exchange",
     name: "Kim Tin Jewelry (Money Exchange)",
     localName: "Kim Tín Jewelry",
-    category: "services",
+    category: "money",
     tier: "city",
     lat: 22.665546,
     lng: 106.2610609,
@@ -1168,6 +1224,7 @@ var POIS = [
 
   {
     id: "banh-my-pate-89",
+    stars: 3,
     name: "Banh Mi Pate 89",
     localName: "Bánh Mỳ Pate 89",
     category: "food",
@@ -1496,6 +1553,7 @@ var POIS = [
 
   {
     id: "thac-thang-kham",
+    stars: 3,
     name: "Tham Kham Waterfall & Homestay",
     localName: "Thác & Homestay Thàng Khám",
     category: "sights",
@@ -1600,6 +1658,7 @@ var POIS = [
 
   {
     id: "nam-thoong-stream",
+    stars: 1,
     name: "Nam Thoong Stream",
     localName: "Khu du lịch Suối Nặm Thoong",
     category: "sights",
@@ -1657,6 +1716,7 @@ var POIS = [
 
   {
     id: "ma-phuc-pass",
+    stars: 3,
     name: "Ma Phuc Pass",
     localName: "Đèo Mã Phục",
     category: "sights",
@@ -1673,6 +1733,7 @@ var POIS = [
 
   {
     id: "ma-phuc-checkin",
+    stars: 3,
     name: "Ma Phuc Viewpoint",
     localName: "Điểm check-in Đèo Mã Phục",
     category: "sights",
@@ -1684,5 +1745,109 @@ var POIS = [
     desc: "The popular photo pull-out on Ma Phuc Pass — sweeping views over the terraced valleys and limestone ridges.",
     maps: "https://maps.app.goo.gl/MYqEnRbKLa1bdkyU7",
     mapsName: "Điểm check-in Đèo Mã Phục"
+  },
+
+  {
+    id: "com-binh-dan-ca-jun",
+    stars: 1,
+    name: "Local Rice Eatery",
+    localName: "Quán cơm bình dân (Đề Thám)",
+    category: "food",
+    tier: "city",
+    lat: 22.6842788,
+    lng: 106.2206127,
+    minZoom: 13,
+    desc: "A simple local rice eatery (cơm bình dân) near Đề Thám — pick a few home-style dishes over rice for a quick, cheap fill-up.",
+    maps: "https://maps.app.goo.gl/BQDx1ykATy4gMwFBA",
+    mapsName: "Quán Đồ Uống Và Đồ Ăn Vặt Ca Jun"
+  },
+
+  {
+    id: "nguom-bang-cave",
+    stars: 1,
+    name: "Nguom Bang Cave",
+    localName: "Động Ngườm Bang",
+    category: "sights",
+    tier: "province",
+    lat: 22.775668,
+    lng: 106.747832,
+    minZoom: 11,
+    desc: "A large limestone cave in Ha Lang, off the tourist trail — quiet stalactite chambers for those exploring the far eastern border.",
+    maps: "https://maps.app.goo.gl/aAMxmsSSdRR7joxE9",
+    mapsName: "Động Ngườm Bang"
+  },
+
+  {
+    id: "tay-quan-restaurant",
+    stars: 2,
+    name: "Tay Quan Restaurant",
+    localName: "Tày Quán",
+    category: "food",
+    tier: "province",
+    lat: 22.8514948,
+    lng: 106.7195136,
+    minZoom: 12,
+    desc: "Tay-style restaurant near Ban Gioc — local dishes in a traditional setting, handy for lunch after the waterfall.",
+    maps: "https://maps.app.goo.gl/TZo93rPKQc3JdKNx7",
+    mapsName: "TÀY QUÁN"
+  },
+
+  {
+    id: "phuong-cuu-restaurant",
+    stars: 1,
+    name: "Phuong Cuu Restaurant",
+    localName: "Nhà Hàng Phương Cưu",
+    category: "food",
+    tier: "province",
+    lat: 22.8513071,
+    lng: 106.7192757,
+    minZoom: 12,
+    desc: "A local restaurant right by Ban Gioc waterfall — a simple, convenient meal stop for tour groups.",
+    maps: "https://maps.app.goo.gl/vixQdC3kjy4oiarU8",
+    mapsName: "Nhà Hàng Phương Cưu"
+  },
+
+  {
+    id: "me-farmstay",
+    stars: 3,
+    name: "Me Farmstay",
+    localName: "Mế Farmstay",
+    category: "stay",
+    tier: "province",
+    lat: 22.9468855,
+    lng: 106.0423437,
+    minZoom: 12,
+    desc: "A peaceful farmstay retreat north of the city with its own restaurant and rooms — a green, rural base to slow down and unwind.",
+    maps: "https://maps.app.goo.gl/nffdtPnB5rsS5zth9",
+    mapsName: "MẾ FARMSTAY"
+  },
+
+  {
+    id: "biet-thu-phap-co",
+    stars: 2,
+    name: "Old French Villa Ruins",
+    localName: "Biệt thự hoang thời Pháp cổ",
+    category: "culture",
+    tier: "province",
+    lat: 22.5809682,
+    lng: 105.8673927,
+    minZoom: 12,
+    desc: "Atmospheric ruins of a colonial-era French villa reclaimed by the forest — an offbeat, photogenic stop for the curious.",
+    maps: "https://maps.app.goo.gl/PrbaXLqLtqBcjyhk6",
+    mapsName: "Khu phế tích từ thời Pháp thuộc"
+  },
+
+  {
+    id: "cao-bang-new-bus-station",
+    name: "Cao Bang New Bus Station",
+    localName: "Bến xe mới Cao Bằng",
+    category: "transport",
+    tier: "city",
+    lat: 22.6804174,
+    lng: 106.2024923,
+    minZoom: 13,
+    desc: "The city's main coach station — departures to Hanoi, Ha Giang, Ba Be and beyond.",
+    maps: "https://maps.app.goo.gl/HZgHKGRpKHSLYmPw6",
+    mapsName: "Cao Bang Bus Station"
   },
 ];
