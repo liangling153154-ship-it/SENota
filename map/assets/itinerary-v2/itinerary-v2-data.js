@@ -22,7 +22,7 @@ const LIBRARY = [
   {id:'kolia-tea',                 name:'Kolia Tea Hills',                cat:'craft',   km:69.7, img:'../images/places/kolia-tea.jpg',                  sx:352, sy:366, overnight:true,  region:'west', maps:'https://maps.app.goo.gl/mk9rtcNMpH4z66yUA'},
   {id:'phia-thap-village-incense', name:'Phia Thap Village - Incense',        cat:'craft',   km:35,   img:'../images/places/phia-thap-village-incense.jpg',  sx:625, sy:291,                  region:'east', maps:''},
   {id:'dia-tren-village-paper',    name:'Dia Tren Village - Paper',          cat:'craft',   km:28.5, img:'../images/places/dia-tren-village-paper.jpg',     sx:638, sy:279,                  region:'east', maps:''},
-  {id:'swimming-quay-son-river',   name:'Swimming Quay Son River',       cat:'swim',    km:83,   img:'../images/places/swimming-quay-son-river.jpg',    sx:803, sy:197,                  region:'east', maps:''},
+  {id:'swimming-quay-son-river',   name:'Swimming Quay Son River',       cat:'swim',    km:83,   img:'../images/places/swimming-quay-son-river.jpg',    sx:803, sy:197,                  region:'east', maps:'https://maps.app.goo.gl/PurK2qpCRLqH49NS6'},
   {id:'pac-nga-hanging-bridge',    name:'Pac Nga Hanging Bridge',            cat:'nature',  km:92.5, img:'../images/places/pac-nga-hanging-bridge.jpg',     sx:724, sy:183,                  region:'east', maps:''},
   {id:'pi-pha-viewpoint',          name:'Pi Pha Viewpoint',             cat:'nature',  km:95.2, img:'../images/places/pi-pha-viewpoint.jpg',           sx:736, sy:191, iconic:true,     region:'east', maps:''},
 ];

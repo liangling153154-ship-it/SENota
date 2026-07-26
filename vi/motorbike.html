@@ -212,6 +212,9 @@
       .nav-links { display: none; flex-direction: column; align-items: stretch; position: absolute; top: 100%; left: 0; right: 0; background: var(--terra-deep); padding: 14px 18px calc(14px + env(safe-area-inset-bottom)); gap: 2px; box-shadow: var(--shadow); }
       .nav-links.open { display: flex; }
       .nav-links a:not(.nav-cta), nav.scrolled .nav-links a:not(.nav-cta) { font-size: 1rem; padding: 15px 10px; color: #fff; opacity: 1; border-bottom: 1px solid rgba(255,255,255,0.16); }
+      .nav-links .nav-soon { font-size: 1rem; padding: 15px 10px; color: #fff; opacity: 0.72;
+        border-bottom: 1px solid rgba(255,255,255,0.16); justify-content: space-between; }
+      .nav-links .nav-soon em { background: rgba(255,255,255,0.2); color: #fff; }
       .nav-hamburger { display: flex; }
       .page-hero { padding: 120px 24px 60px; }
       .filter-bar { padding: 16px 24px; position: static; top: auto; box-shadow: none; }
@@ -233,6 +236,15 @@
     .wa-float { background: #fff !important; }
     .wa-float .zalo-ico { width: 40px; height: 40px; }
 
+  
+    /* Mục "Chương trình" tạm khoá — hiện nhưng không bấm được */
+    .nav-soon { display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.92rem; font-weight: 600; color: var(--ink-soft, #6B5D4C);
+      opacity: 0.55; cursor: default; user-select: none; }
+    .nav-soon em { font-style: normal; font-size: 0.66rem; font-weight: 700;
+      letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 7px;
+      border-radius: 999px; background: rgba(200,132,31,0.16);
+      color: #9A6A12; white-space: nowrap; }
   </style>
 </head>
 <body>
@@ -246,7 +258,7 @@
     <a href="rooms.html">Phòng</a>
     <a href="motorbike.html" class="active">Thuê xe máy</a>
     <a href="tours.html">Tour</a>
-    <a href="chuong-trinh/index.html">Chương trình</a>
+    <span class="nav-soon" title="Sắp ra mắt">Chương trình <em>Sắp ra mắt</em></span>
     <a href="food.html">Ăn uống</a>
     <a href="services.html">Dịch vụ</a>
     <a href="itinerary.html">Lịch trình</a>
@@ -570,10 +582,10 @@
     <p class="section-label fade-in">Dịch vụ đi kèm</p>
     <h2 class="section-title fade-in">Kèm xe là đủ đồ</h2>
     <div class="includes-grid">
-      <div class="include-item fade-in"><div class="include-icon">⛑️</div><h4>Mũ bảo hiểm</h4><p>Mũ bảo hiểm chất lượng cho cả người lái và người ngồi sau hoàn toàn miễn phí.</p></div>
-      <div class="include-item fade-in"><div class="include-icon">🌧️</div><h4>Áo mưa bộ</h4><p>Thời tiết vùng cao thay đổi thất thường — Sen chuẩn bị sẵn áo mưa bộ chất lượng để bạn không lo bị ướt.</p></div>
-      <div class="include-item fade-in"><div class="include-icon">🚗</div><h4>Giao xe tận nơi</h4><p>Giao và nhận xe tận nơi miễn phí tại homestay hoặc khách sạn trong trung tâm thành phố Cao Bằng.</p></div>
-      <div class="include-item fade-in"><div class="include-icon">🌙</div><h4>Nhận xe sớm từ tối trước</h4><p>Hỗ trợ nhận xe sớm từ tối hôm trước để bạn xuất phát sớm vào sáng hôm sau — hoàn toàn miễn phí.</p></div>
+      <div class="include-item fade-in"><div class="include-icon">⛑️</div><h4>Mũ bảo hiểm</h4><p>Miễn phí cho cả 2 người.</p></div>
+      <div class="include-item fade-in"><div class="include-icon">🌧️</div><h4>Áo mưa bộ</h4><p>Vùng cao mưa thất thường — có sẵn, khỏi lo.</p></div>
+      <div class="include-item fade-in"><div class="include-icon">🚗</div><h4>Giao xe tận nơi</h4><p>Miễn phí trong trung tâm TP. Cao Bằng.</p></div>
+      <div class="include-item fade-in"><div class="include-icon">🌙</div><h4>Nhận xe từ tối trước</h4><p>Miễn phí — sáng hôm sau xuất phát sớm.</p></div>
     </div>
   </div>
 </section>
@@ -584,12 +596,12 @@
     <p class="section-label fade-in">Điều kiện thuê xe</p>
     <h2 class="conditions-title fade-in">Lưu ý trước khi đi</h2>
     <div class="cond-grid">
-      <div class="cond-item fade-in"><div class="cond-icon">🪪</div><div><h4>Giấy phép lái xe</h4><p>Yêu cầu bạn có bằng lái xe hợp lệ. Ký hợp đồng thuê xe nhanh gọn khi nhận xe.</p></div></div>
-      <div class="cond-item fade-in"><div class="cond-icon">💵</div><div><h4>Đặt cọc</h4><p>Sen giữ lại CCCD/Hộ chiếu làm cam kết và sẽ trả lại ngay khi bạn trả xe nguyên vẹn.</p></div></div>
-      <div class="cond-item fade-in"><div class="cond-icon">⛽</div><div><h4>Xăng xe</h4><p>Giá thuê chưa gồm xăng. Bạn không cần phải đổ đầy bình khi trả lại xe cho Sen.</p></div></div>
-      <div class="cond-item fade-in"><div class="cond-icon">🕗</div><div><h4>Nhận & trả xe</h4><p>Hỗ trợ giao nhận xe linh hoạt, có thể nhận xe sớm từ tối hôm trước (tùy tình trạng xe trống).</p></div></div>
-      <div class="cond-item fade-in"><div class="cond-icon">🔧</div><div><h4>Trách nhiệm bảo quản</h4><p>Bạn chịu trách nhiệm bảo quản xe trong suốt thời gian thuê. Va quẹt hoặc hư hỏng nặng có thể phát sinh phí đền bù.</p></div></div>
-      <div class="cond-item fade-in"><div class="cond-icon">📅</div><div><h4>Ưu đãi đi dài ngày</h4><p>Nếu bạn thuê xe từ 3 ngày trở lên, nhớ nhắn để Sen giảm giá ưu đãi cực tốt nha.</p></div></div>
+      <div class="cond-item fade-in"><div class="cond-icon">🪪</div><div><h4>Giấy phép lái xe</h4><p>Có bằng lái hợp lệ, ký hợp đồng nhanh khi nhận xe.</p></div></div>
+      <div class="cond-item fade-in"><div class="cond-icon">💵</div><div><h4>Đặt cọc</h4><p>Gửi CCCD/Hộ chiếu, trả xe là nhận lại ngay.</p></div></div>
+      <div class="cond-item fade-in"><div class="cond-icon">⛽</div><div><h4>Xăng xe</h4><p>Giá chưa gồm xăng. Trả xe không cần đổ đầy.</p></div></div>
+      <div class="cond-item fade-in"><div class="cond-icon">🕗</div><div><h4>Nhận & trả xe</h4><p>Linh hoạt, nhận sớm từ tối trước (tùy xe trống).</p></div></div>
+      <div class="cond-item fade-in"><div class="cond-icon">🔧</div><div><h4>Trách nhiệm bảo quản</h4><p>Va quẹt, hư hỏng nặng có thể phát sinh phí đền bù.</p></div></div>
+      <div class="cond-item fade-in"><div class="cond-icon">📅</div><div><h4>Ưu đãi đi dài ngày</h4><p>Thuê từ 3 ngày, nhắn Sen để được giảm giá nha.</p></div></div>
     </div>
   </div>
 </section>
@@ -600,14 +612,10 @@
     <p class="section-label fade-in">Trước khi khởi hành</p>
     <h2 class="tips-title fade-in">Mẹo chạy xe an toàn</h2>
     <div class="tips-grid">
-      <div class="tip-item critical fade-in"><div class="tip-icon">🔑</div><div><h4>Luôn tắt máy rút chìa khóa!</h4><p>Luôn xoay khóa về nấc "OFF" và rút chìa khóa khi dừng chụp ảnh. Để quên khóa sẽ làm cạn bình ắc quy — giữa đèo núi hẻo lánh rất khó tìm thợ sửa đó nha.</p></div></div>
-      <div class="tip-item critical fade-in"><div class="tip-icon">📡</div><div><h4>Lưu ý khóa Smart Key</h4><p>Nếu thuê xe có khóa thông minh, bạn giữ remote bên người và chỉ cần xoay núm vặn trên xe để mở/tắt. Không nhấn linh tinh các nút trên điều khiển nha.</p></div></div>
-      <div class="tip-item fade-in"><div class="tip-icon">⛽</div><div><h4>Đổ đầy bình xăng trước khi đi</h4><p>Nhớ đổ đầy bình xăng trước khi ra khỏi thành phố Cao Bằng. Đi sâu vào các bản làng hay đường đèo núi sẽ rất hiếm cây xăng.</p></div></div>
-      <div class="tip-item fade-in"><div class="tip-icon">📵</div><div><h4>Tải trước bản đồ offline</h4><p>Hãy tải Google Maps offline khu vực Cao Bằng trước khi đi. Sóng điện thoại ở các thung lũng sâu có thể rất yếu hoặc mất kết nối hoàn toàn.</p></div></div>
-      <div class="tip-item fade-in"><div class="tip-icon">🌧️</div><div><h4>Chậm lại khi trời mưa</h4><p>Nếu gặp trời mưa, hãy giảm tốc độ và đi thật cẩn thận. Đường đèo dốc cực kỳ trơn trượt khi ướt. Luôn mang theo áo mưa Sen đã chuẩn bị sẵn.</p></div></div>
-      <div class="tip-item fade-in"><div class="tip-icon">📯</div><div><h4>Bấm còi ở các góc cua khuất</h4><p>Nhớ bấm còi nhẹ trước khi vào các khúc cua tay áo khuất tầm nhìn để báo hiệu cho xe đi ngược chiều biết. Đây là văn hóa đi đèo cực kỳ an toàn.</p></div></div>
-      <div class="tip-item fade-in"><div class="tip-icon">🐃</div><div><h4>Tránh trâu bò và vật nuôi</h4><p>Trâu bò, chó gà người dân nuôi thường chạy rông qua đường đột ngột. Giữ tốc độ vừa phải — các khúc cua ở đây gắt hơn bạn nghĩ nhiều.</p></div></div>
-      <div class="tip-item fade-in"><div class="tip-icon">🔐</div><div><h4>Luôn khóa cổ xe khi đỗ</h4><p>Khi đỗ xe ở bất cứ đâu, bạn bẻ hết cổ xe sang trái và vặn khóa về nấc "LOCK" để bảo vệ xe an toàn.</p></div></div>
+      <div class="tip-item critical fade-in"><div class="tip-icon">🔑</div><div><h4>Tắt máy, rút chìa khi dừng chụp ảnh</h4><p>Để quên là cạn ắc quy, giữa đèo khó tìm thợ.</p></div></div>
+      <div class="tip-item fade-in"><div class="tip-icon">⛽</div><div><h4>Đổ đầy xăng trước khi rời thành phố</h4><p>Vào bản, lên đèo rất hiếm cây xăng.</p></div></div>
+      <div class="tip-item fade-in"><div class="tip-icon">📵</div><div><h4>Tải bản đồ offline</h4><p>Thung lũng sâu hay yếu sóng, mất sóng.</p></div></div>
+      <div class="tip-item fade-in"><div class="tip-icon">🌧️</div><div><h4>Mưa thì chậm lại</h4><p>Đường đèo ướt rất trơn, áo mưa Sen có sẵn.</p></div></div>
     </div>
   </div>
 </section>

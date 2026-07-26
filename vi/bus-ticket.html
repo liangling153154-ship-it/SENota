@@ -170,6 +170,9 @@
       .nav-links a:not(.nav-cta), nav.scrolled .nav-links a:not(.nav-cta) { font-size: 1rem; padding: 15px 10px; color: #fff; opacity: 1; border-bottom: 1px solid rgba(255,255,255,0.16); }
       .nav-links a:not(.nav-cta):last-of-type { border-bottom: none; }
       .nav-links .nav-cta { justify-content: center; margin-top: 12px; padding: 14px 20px; font-size: 0.95rem; }
+      .nav-links .nav-soon { font-size: 1rem; padding: 15px 10px; color: #fff; opacity: 0.72;
+        border-bottom: 1px solid rgba(255,255,255,0.16); justify-content: space-between; }
+      .nav-links .nav-soon em { background: rgba(255,255,255,0.2); color: #fff; }
       .nav-hamburger { display: flex; }
       .pg-head { padding: 100px 16px 24px; }
       .booking-wrap { padding: 0 16px 60px; }
@@ -185,6 +188,15 @@
     .wa-float { background: #fff !important; }
     .wa-float .zalo-ico { width: 40px; height: 40px; }
 
+  
+    /* Mục "Chương trình" tạm khoá — hiện nhưng không bấm được */
+    .nav-soon { display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.92rem; font-weight: 600; color: var(--ink-soft, #6B5D4C);
+      opacity: 0.55; cursor: default; user-select: none; }
+    .nav-soon em { font-style: normal; font-size: 0.66rem; font-weight: 700;
+      letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 7px;
+      border-radius: 999px; background: rgba(200,132,31,0.16);
+      color: #9A6A12; white-space: nowrap; }
   </style>
 </head>
 <body>
@@ -197,7 +209,7 @@
     <a href="rooms.html">Phòng</a>
     <a href="motorbike.html">Thuê xe máy</a>
     <a href="tours.html">Tour</a>
-    <a href="chuong-trinh/index.html">Chương trình</a>
+    <span class="nav-soon" title="Sắp ra mắt">Chương trình <em>Sắp ra mắt</em></span>
     <a href="food.html">Ăn uống</a>
     <a href="services.html">Dịch vụ</a>
     <a href="itinerary.html">Lịch trình</a>

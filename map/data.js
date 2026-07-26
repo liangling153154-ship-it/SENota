@@ -163,13 +163,13 @@ var POIS = [
     localName: "Tắm sông Quây Sơn",
     category: "sights",
     tier: "province",
-    lat: 22.856,
-    lng: 106.708,
+    lat: 22.8684906,
+    lng: 106.7025051,
     minZoom: 12,
-    approx: true,
     desc: "Jade-green swimming hole in the Quay Son river near Khuoi Ky village. Summer only — the water is glacial-clear and cold.",
-    distance: "83 km east · 1.5 km from Ban Gioc",
-    img: ASSETS + "images/places/swimming-quay-son-river.jpg"
+    distance: "83 km east · 2.7 km from Ban Gioc",
+    img: ASSETS + "images/places/swimming-quay-son-river.jpg",
+    maps: "https://maps.app.goo.gl/PurK2qpCRLqH49NS6"
   },
 
   {

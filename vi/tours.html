@@ -288,6 +288,9 @@
       .nav-links .lang-switch { align-self: center; margin-top: 14px; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.55); }
       .nav-links .lang-switch a { color: #fff; padding: 10px 18px; border-bottom: none; }
       .nav-links .lang-switch a.active { background: rgba(255,255,255,0.22); }
+      .nav-links .nav-soon { font-size: 1rem; padding: 15px 10px; color: #fff; opacity: 0.72;
+        border-bottom: 1px solid rgba(255,255,255,0.16); justify-content: space-between; }
+      .nav-links .nav-soon em { background: rgba(255,255,255,0.2); color: #fff; }
       .nav-hamburger { display: flex; }
       .hero { height: 70vh; }
       #step1 { padding: 56px 24px 40px; }
@@ -315,6 +318,15 @@
     .wa-float { background: #fff !important; }
     .wa-float .zalo-ico { width: 40px; height: 40px; }
 
+  
+    /* Mục "Chương trình" tạm khoá — hiện nhưng không bấm được */
+    .nav-soon { display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.92rem; font-weight: 600; color: var(--ink-soft, #6B5D4C);
+      opacity: 0.55; cursor: default; user-select: none; }
+    .nav-soon em { font-style: normal; font-size: 0.66rem; font-weight: 700;
+      letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 7px;
+      border-radius: 999px; background: rgba(200,132,31,0.16);
+      color: #9A6A12; white-space: nowrap; }
   </style>
 </head>
 <body>
@@ -329,7 +341,7 @@
     <a href="rooms.html">Phòng</a>
     <a href="motorbike.html">Thuê xe máy</a>
     <a href="tours.html" class="active">Tour</a>
-    <a href="chuong-trinh/index.html">Chương trình</a>
+    <span class="nav-soon" title="Sắp ra mắt">Chương trình <em>Sắp ra mắt</em></span>
     <a href="food.html">Ăn uống</a>
     <a href="services.html">Dịch vụ</a>
     <a href="itinerary.html">Lịch trình</a>
@@ -365,25 +377,25 @@
   <div class="step-header fade-in">
     <div class="step-pill">Bước 1: Chọn bạn đồng hành</div>
     <h2>Đi kiểu nào?</h2>
-    <p>Chọn ô tô hay xe máy bên dưới là ra giá ngay. Muốn đổi lịch trình thì nhắn Sen, rất linh hoạt.</p>
+    <p>Chọn ô tô hay xe máy là ra giá ngay. Muốn đổi lịch, nhắn Sen.</p>
   </div>
   <div class="vehicle-grid fade-in">
     <div class="vehicle-btn" onclick="selectVehicle('car-guide', this)">
       <span class="vb-icon">🚗</span>
       <span class="vb-name">Đi ô tô riêng (Có tài xế)</span>
-      <span class="vb-desc">Xe 4-7 chỗ rộng rãi, tránh mưa nắng, cực an toàn. Tài xế kiêm HDV bản địa bao nhiệt tình.</span>
+      <span class="vb-desc">Xe 4-7 chỗ tránh mưa nắng, tài xế kiêm HDV bản địa.</span>
       <span class="vb-tag">Thoải mái nhất</span>
     </div>
     <div class="vehicle-btn" onclick="selectVehicle('easy-rider', this)">
       <span class="vb-icon">🏍️</span>
       <span class="vb-name">Xe ôm bản địa (Easy Rider)</span>
-      <span class="vb-desc">Ngồi sau xe phượt của các anh HDV bản địa. Chỉ việc ngắm cảnh, chụp ảnh và tận hưởng gió trời.</span>
+      <span class="vb-desc">Ngồi sau xe HDV bản địa, chỉ việc ngắm cảnh và chụp ảnh.</span>
       <span class="vb-tag orange">Trải nghiệm nhất</span>
     </div>
     <div class="vehicle-btn budget" onclick="selectVehicle('driver-only', this)">
       <span class="vb-icon">🚗🏍️</span>
       <span class="vb-name">Chỉ thuê xe và tài xế</span>
-      <span class="vb-desc">Tiết kiệm tối đa. Tài xế bản địa đón trả tận nơi. Bạn tự túc ăn uống & vé tham quan.</span>
+      <span class="vb-desc">Tiết kiệm nhất: đón trả tận nơi, tự túc ăn uống & vé.</span>
       <span class="vb-tag muted">Tiết kiệm</span>
     </div>
     <div class="vehicle-btn budget" onclick="selectVehicle('self-ride', this)">
@@ -584,7 +596,7 @@
       <div class="lolo-body">
         <span class="cbadge cbadge-pop" style="width:fit-content;">✨ Trải nghiệm mới</span>
         <h3>Trải nghiệm bản người Lô Lô</h3>
-        <p>Trải nghiệm văn hóa Lô Lô độc đáo: tập dệt vải, nấu bếp củi, dạo quanh bản cổ và ăn cơm gia đình cùng dân bản cực kỳ đầm ấm.</p>
+        <p>Văn hóa Lô Lô: tập dệt vải, nấu bếp củi, ăn cơm cùng dân bản.</p>
         <div class="lolo-acts">
           <span class="lolo-act">🧵 Tập dệt vải</span>
           <span class="lolo-act">🪓 Bổ củi</span>
@@ -640,22 +652,22 @@
   <div class="do-inner">
     <span class="do-section-label">Lựa chọn tiết kiệm</span>
     <h2>Bạn chỉ cần thuê xe và tài xế?</h2>
-    <p>Tự túc ăn uống & vé tham quan. Xe kèm tài xế bản địa đón tận nơi cực kỳ kinh tế.</p>
+    <p>Xe kèm tài xế bản địa đón tận nơi. Tự túc ăn uống & vé.</p>
     <div class="do-cards fade-in">
       <div class="do-card">
         <div class="do-icon">🚗</div>
         <h4>Chỉ thuê xe ô tô</h4>
-        <p>Xe 4-7 chỗ kèm tài xế bản địa kiêm người chỉ đường. Đi theo lịch trình tự chọn thoải mái.</p>
+        <p>Xe 4-7 chỗ kèm tài xế bản địa, lịch trình tự chọn.</p>
         <div class="do-price">1.900.000đ / ngày <span>· Trọn gói cả xe (tối đa 4 người)</span></div>
       </div>
       <div class="do-card">
         <div class="do-icon">🏍️</div>
         <h4>Chỉ tài xế xe máy</h4>
-        <p>Tài xế bản địa kiêm bạn đồng hành chở vi vu xe máy, luồn lách mọi ngóc ngách đèo dốc.</p>
+        <p>Tài xế bản địa chở vi vu, luồn mọi ngóc ngách đèo dốc.</p>
         <div class="do-price">Nhắn Sen báo giá <span>· tùy theo chặng đi thực tế</span></div>
       </div>
     </div>
-    <p class="do-warning">⚠️ Chưa bao gồm ăn uống, vé tham quan. Sen gợi ý quán ăn chuẩn vị địa phương trên đường đi cho bạn.</p>
+    <p class="do-warning">⚠️ Chưa gồm ăn uống, vé tham quan. Sen gợi ý quán ngon dọc đường.</p>
   </div>
 </section>
 
@@ -673,7 +685,7 @@
 <section id="cta">
   <span class="cta-label">Sẵn sàng khám phá?</span>
   <h2>Nhắn Sen chốt lịch</h2>
-  <p>Chỉ cần gửi ngày đi, số người và gu của bạn. Sen sẽ ráp lịch trình gọn, đúng nhu cầu và báo giá luôn.</p>
+  <p>Gửi ngày đi, số người và gu của bạn, Sen ráp lịch và báo giá luôn.</p>
   <div class="cta-btns">
     <a href="https://zalo.me/0822946888" class="btn-wa" target="_blank">
       <img class="zalo-ico" src="../images/icon-zalo.png" alt="Zalo" aria-hidden="true">

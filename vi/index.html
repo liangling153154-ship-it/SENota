@@ -415,6 +415,9 @@
       .nav-links .lang-switch { align-self: center; margin-top: 14px; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.55); }
       .nav-links .lang-switch a, nav.scrolled .nav-links .lang-switch a { color: #fff; padding: 10px 18px; border-bottom: none; }
       .nav-links .lang-switch a.active { background: rgba(255,255,255,0.22); }
+      .nav-links .nav-soon { font-size: 1rem; padding: 15px 10px; color: #fff; opacity: 0.72;
+        border-bottom: 1px solid rgba(255,255,255,0.16); justify-content: space-between; }
+      .nav-links .nav-soon em { background: rgba(255,255,255,0.2); color: #fff; }
       .nav-hamburger { display: flex; }
       .section-pad { padding: 64px 0; }
       .hl-grid { grid-template-columns: 1fr; gap: 28px; }
@@ -490,6 +493,17 @@
     .wa-float { background: #fff !important; }
     .wa-float .zalo-ico { width: 40px; height: 40px; }
 
+  
+    /* Mục "Chương trình" tạm khoá — hiện nhưng không bấm được */
+    .nav-soon { display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.92rem; font-weight: 600; color: var(--ink-soft, #6B5D4C);
+      opacity: 0.55; cursor: default; user-select: none; }
+    /* Nút CTA của card chương trình khi đang tạm khoá */
+    .ct-soon { opacity: 0.6; cursor: default; user-select: none; pointer-events: none; }
+    .nav-soon em { font-style: normal; font-size: 0.66rem; font-weight: 700;
+      letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 7px;
+      border-radius: 999px; background: rgba(200,132,31,0.16);
+      color: #9A6A12; white-space: nowrap; }
   </style>
 </head>
 <body>
@@ -504,7 +518,7 @@
     <a href="rooms.html">Phòng</a>
     <a href="motorbike.html">Thuê xe máy</a>
     <a href="tours.html">Tour</a>
-    <a href="chuong-trinh/index.html">Chương trình</a>
+    <span class="nav-soon" title="Sắp ra mắt">Chương trình <em>Sắp ra mắt</em></span>
     <a href="food.html">Ăn uống</a>
     <a href="services.html">Dịch vụ</a>
     <a href="itinerary.html">Lịch trình</a>
@@ -567,7 +581,7 @@
   <div class="wrap">
     <div class="lead center reveal">
       <h2>Khám phá Cao Bằng, có Sen lo</h2>
-      <p>Mọi thứ gói gọn một chỗ ngay trung tâm thành phố. Bạn chỉ việc đi chơi, còn lại để Sen lo.</p>
+      <p>Bạn chỉ việc đi chơi, còn lại để Sen lo.</p>
     </div>
 
     <div class="services-grid">
@@ -607,9 +621,9 @@
         <div class="mr-overlay">
           <span class="mr-flag">Combo trọn gói · Giá /2 khách</span>
           <h3>Cao Bằng đã có Sen lên lịch</h3>
-          <p>Khỏi lên kế hoạch. Chọn combo 2N1Đ hoặc 3N2Đ, xách balo đi — xe, phòng, lịch trình, quán ăn: Sen lo hết.</p>
+          <p>Chọn combo 2N1Đ hoặc 3N2Đ: xe, phòng, lịch trình, quán ăn — Sen lo hết.</p>
         </div>
-        <span class="mr-badge" style="background:linear-gradient(135deg,#F5B301,#C8841F);color:#2A1E08;font-weight:800;letter-spacing:0.04em;">MỚI</span>
+        <span class="mr-badge" style="background:linear-gradient(135deg,#F5B301,#C8841F);color:#2A1E08;font-weight:800;letter-spacing:0.04em;">SẮP RA MẮT</span>
       </div>
       <div class="mr-foot">
         <div class="tags">
@@ -617,7 +631,7 @@
           <span class="pill"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/></svg> 3 Ngày 2 Đêm</span>
           <span class="pill"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Xe + phòng + xe máy + lịch trình</span>
         </div>
-        <a href="chuong-trinh/index.html" class="link-btn btn-amber" style="padding:11px 20px;font-size:0.84rem;">Xem chương trình <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <span class="link-btn btn-amber ct-soon" style="padding:11px 20px;font-size:0.84rem;">Sắp ra mắt</span>
       </div>
     </div>
 
@@ -645,7 +659,7 @@
         <div class="dest"><img class="dest-photo" loading="lazy" src="../images/bus/ba-be.jpg" alt="Hồ Ba Bể" onerror="this.style.display=&quot;none&quot;"><div class="dest-info"><div class="dest-head"><div class="dest-name">Hồ Ba Bể</div><div class="dest-time">~3 giờ</div></div><div class="dest-body"><span class="tag-bus tag-limo">Limousine</span><br>12h</div></div></div>
       </div>
       <div class="bus-foot">
-        <p>Đón tại Sen's Homestay. Giờ chạy có thể thay đổi, Sen sẽ xác nhận lại. Không phí đặt vé.</p>
+        <p>Giờ chạy có thể thay đổi, Sen sẽ xác nhận lại.</p>
         <a href="bus-ticket.html" class="link-btn btn-line" style="padding:11px 20px;font-size:0.84rem;">Chọn ngày và đặt vé <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
       <div id="busShowMore">
@@ -661,7 +675,7 @@
           <div class="mr-overlay">
             <span class="mr-flag">Tương tác · Người bản địa tự làm</span>
             <h3>CaoBang Travel Map</h3>
-            <p>Bản đồ Cao Bằng cực xịn, Sen tự đánh dấu: thác, view đẹp, quán cà phê và cung đường nào đáng đi thật sự.</p>
+            <p>Sen tự đánh dấu: thác, view đẹp, quán cà phê, cung đường đáng đi.</p>
           </div>
           <span class="mr-badge" style="background:rgba(20,15,10,0.72);border:1px solid rgba(244,233,216,0.22);color:var(--cream-bright);backdrop-filter:blur(4px);"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4 4 6v14l5-2 6 2 5-2V4l-5 2-6-2z"/><path d="M9 4v14M15 6v14"/></svg> Bản đồ</span>
         </div>
@@ -683,7 +697,7 @@
           <div class="mr-overlay">
             <span class="mr-flag">Gợi ý &amp; tự lên · Nhận báo giá</span>
             <h3>Lên lịch trình</h3>
-            <p>Bắt đầu từ các cung Sen gợi ý, rồi tự chia lịch từng ngày và gửi Sen báo giá nhanh gọn.</p>
+            <p>Chọn cung Sen gợi ý, chia lịch từng ngày, gửi Sen báo giá.</p>
           </div>
           <span class="mr-badge" style="background:var(--amber);color:var(--char);"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg> Lịch trình</span>
         </div>
