@@ -37,8 +37,6 @@
     map: '<path d="m9 3-6 2v16l6-2 6 2 6-2V3l-6 2-6-2z"/><path d="M9 3v16"/><path d="M15 5v16"/>',
     globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a15 15 0 0 1 0 18"/><path d="M12 3a15 15 0 0 0 0 18"/>',
     gmaps: '<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
-    moon: '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>',
-    sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>',
     locate: '<circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>',
     arrow: '<path d="M9 18l6-6-6-6"/>',
     compass: '<circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>',
@@ -84,7 +82,6 @@
     crossOrigin: true
   };
   var lightTiles = L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png", tileOpts);
-  var darkTiles = L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", tileOpts);
   var satTiles = L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
     attribution: 'Imagery &copy; Esri, Maxar, Earthstar Geographics · photos &copy; Sen&#39;s Homestay',
     maxZoom: 19,
@@ -108,7 +105,7 @@
     updateWhenIdle: false,
     crossOrigin: true
   });
-  var ALL_BASE_LAYERS = [lightTiles, darkTiles, satTiles, satLabels, topoTiles];
+  var ALL_BASE_LAYERS = [lightTiles, satTiles, satLabels, topoTiles];
 
   /* ---------------- Province boundary + dim everything outside ---------------- */
   function ringToLatLngs(ring) {
@@ -684,7 +681,6 @@
   var activeTrip = null;
   var activeTripDay = null; // index ngày đang lọc (nhúng iframe); null = cả trip
   var tripLayer = null;
-  var tripCasings = [];
 
   document.getElementById("trips-planner-link").href = ASSETS + "itinerary-v2/itinerary-v2.html";
   document.getElementById("trips-close").innerHTML = svg("close");
@@ -742,9 +738,7 @@
       return s;
     });
 
-    var dark = document.body.classList.contains("dark");
     tripLayer = L.layerGroup();
-    tripCasings = [];
     var allPts = [];
 
     trip.segsByDay.forEach(function (segs, di) {
@@ -752,8 +746,7 @@
       var color = DAY_COLORS[di % DAY_COLORS.length];
       segs.forEach(function (line) {
         allPts = allPts.concat(line);
-        var casing = L.polyline(line, { color: dark ? "#0B1519" : "#FFFFFF", weight: 10, opacity: 0.95, lineJoin: "round", lineCap: "round", interactive: false });
-        tripCasings.push(casing);
+        var casing = L.polyline(line, { color: "#FFFFFF", weight: 10, opacity: 0.95, lineJoin: "round", lineCap: "round", interactive: false });
         tripLayer.addLayer(casing);
         tripLayer.addLayer(L.polyline(line, { color: color, weight: 6, opacity: 1, lineJoin: "round", lineCap: "round", interactive: false }));
       });
@@ -840,7 +833,6 @@
     activeTrip = null;
     activeTripDay = null;
     if (tripLayer) { map.removeLayer(tripLayer); tripLayer = null; }
-    tripCasings = [];
     tripBar.hidden = true;
     document.body.classList.remove("trip-open");
     refresh();
@@ -996,7 +988,6 @@
   bmBtn.innerHTML = svg("all");
 
   function applyBasemap() {
-    var dark = document.body.classList.contains("dark");
     ALL_BASE_LAYERS.forEach(function (l) { if (map.hasLayer(l)) { map.removeLayer(l); } });
     if (basemap === "satellite") {
       satTiles.addTo(map);
@@ -1004,13 +995,13 @@
     } else if (basemap === "terrain") {
       topoTiles.addTo(map);
     } else {
-      (dark ? darkTiles : lightTiles).addTo(map);
+      lightTiles.addTo(map);
     }
     // boundary + outside-dim tuned per background
     var line, maskC, maskO;
     if (basemap === "satellite") { line = "#7DD3FC"; maskC = "#000000"; maskO = 0.62; }
-    else if (basemap === "terrain") { line = "#0E7490"; maskC = "#0B2530"; maskO = dark ? 0.55 : 0.5; }
-    else { line = dark ? "#38BDF8" : "#0E7490"; maskC = dark ? "#000000" : "#0B2530"; maskO = dark ? 0.58 : 0.46; }
+    else if (basemap === "terrain") { line = "#0E7490"; maskC = "#0B2530"; maskO = 0.5; }
+    else { line = "#0E7490"; maskC = "#0B2530"; maskO = 0.46; }
     boundaryLine.setStyle({ color: line });
     outsideMask.setStyle({ fillColor: maskC, fillOpacity: maskO });
     // highway casing: subtle dark halo on satellite, bright white elsewhere
@@ -1045,24 +1036,7 @@
     if (tb) { tb.setAttribute("aria-pressed", highwaysToggle ? "true" : "false"); }
   })();
 
-  /* ---------------- Theme (light / dark) ---------------- */
-  var themeBtn = document.getElementById("theme-btn");
-  var themeKey = "cbmap-theme";
-  var metaTheme = document.querySelector('meta[name="theme-color"]');
-  function applyTheme(dark) {
-    document.body.classList.toggle("dark", dark);
-    applyBasemap(); // streets variant + boundary/mask follow the theme
-    tripCasings.forEach(function (c) { c.setStyle({ color: dark ? "#14262F" : "#FFFFFF" }); });
-    themeBtn.innerHTML = svg(dark ? "sun" : "moon");
-    themeBtn.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
-    if (metaTheme) { metaTheme.content = dark ? "#0D1B22" : "#0B2530"; }
-    try { localStorage.setItem(themeKey, dark ? "dark" : "light"); } catch (e) { /* private mode */ }
-  }
-  var storedTheme = null;
-  try { storedTheme = localStorage.getItem(themeKey); } catch (e) { /* private mode */ }
-  var isDark = storedTheme ? storedTheme === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
-  themeBtn.addEventListener("click", function () { isDark = !isDark; applyTheme(isDark); });
-  applyTheme(isDark);
+  applyBasemap();
 
   /* ---------------- Misc UI ---------------- */
   document.getElementById("brand").innerHTML =
@@ -1132,9 +1106,8 @@
     if (basemap === "terrain") {
       return "https://" + "abc"[(x + y) % 3] + ".tile.opentopomap.org/" + z + "/" + x + "/" + y + ".png";
     }
-    var style = document.body.classList.contains("dark") ? "dark_all" : "rastertiles/voyager";
     var r = L.Browser.retina ? "@2x" : "";
-    return "https://" + "abcd"[(x + y) % 4] + ".basemaps.cartocdn.com/" + style + "/" + z + "/" + x + "/" + y + r + ".png";
+    return "https://" + "abcd"[(x + y) % 4] + ".basemaps.cartocdn.com/rastertiles/voyager/" + z + "/" + x + "/" + y + r + ".png";
   }
 
   function bboxUrls(bbox, zFrom, zTo) {
@@ -1151,9 +1124,7 @@
 
   var preloadRunning = false;
   function preloadKey() {
-    return "cbmap-preload-" + basemap +
-      (document.body.classList.contains("dark") && basemap === "streets" ? "-dark" : "") +
-      (L.Browser.retina ? "@2x" : "");
+    return "cbmap-preload-" + basemap + (L.Browser.retina ? "@2x" : "");
   }
 
   function runPreload() {

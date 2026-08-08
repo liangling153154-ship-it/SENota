@@ -32,64 +32,6 @@
       --r-lg: 20px;
     }
 
-    /* ---------------- Dark mode ---------------- */
-    body.dark {
-      --ink: #E9F2F6;
-      --ink-2: #9DB4BF;
-      --surface: #14262F;
-      --bg-soft: #0D1B22;
-      --line: #24404C;
-      --primary: #4FC3E8;
-      --shadow-1: 0 2px 10px rgba(0, 0, 0, .5);
-      --shadow-2: 0 10px 32px rgba(0, 0, 0, .65);
-    }
-
-    body.dark #map {
-      background: #0D1B22;
-    }
-
-    body.dark .pin-label {
-      text-shadow: 0 1px 0 #0D1B22, 0 -1px 0 #0D1B22, 1px 0 0 #0D1B22, -1px 0 0 #0D1B22, 0 0 6px #0D1B22;
-    }
-
-    body.dark .chip[aria-pressed="true"],
-    body.dark .toast {
-      background: #E9F2F6;
-      color: #0B2530;
-    }
-
-    body.dark .chip[aria-pressed="true"] svg {
-      color: #0B2530;
-    }
-
-    body.dark .btn-secondary {
-      background: #1D3440;
-      border-color: #24404C;
-      color: #E9F2F6;
-    }
-
-    body.dark .btn-secondary:hover {
-      background: #24404C;
-    }
-
-    body.dark .welcome {
-      background: rgba(0, 0, 0, .62);
-    }
-
-    body.dark .leaflet-control-zoom a {
-      background: #14262F !important;
-      color: #E9F2F6 !important;
-    }
-
-    body.dark .leaflet-control-attribution {
-      background: rgba(13, 27, 34, .8) !important;
-      color: #9DB4BF !important;
-    }
-
-    body.dark .leaflet-control-attribution a {
-      color: #B8D2DD !important;
-    }
-
     * {
       box-sizing: border-box;
     }
@@ -222,8 +164,7 @@
     }
 
     #search-clear,
-    #basemap-btn,
-    #theme-btn {
+    #basemap-btn {
       flex: none;
       width: 34px;
       height: 34px;
@@ -239,19 +180,14 @@
       display: none;
     }
 
-    #theme-btn {
-      display: flex;
-      margin-right: -6px;
-    }
-
     #search-clear:hover,
-    #basemap-btn:hover,
-    #theme-btn:hover {
+    #basemap-btn:hover {
       background: var(--bg-soft);
     }
 
     #basemap-btn {
       display: flex;
+      margin-right: -6px;
     }
 
     #basemap-btn svg {
@@ -312,15 +248,6 @@
       color: #fff;
     }
 
-    body.dark .bm-menu button[aria-pressed="true"] {
-      background: #E9F2F6;
-      color: #0B2530;
-    }
-
-    body.dark .bm-menu button[aria-pressed="true"] svg {
-      color: #0B2530;
-    }
-
     .bm-sep {
       height: 1px;
       background: var(--line);
@@ -360,11 +287,6 @@
     #search-clear svg {
       width: 16px;
       height: 16px;
-    }
-
-    #theme-btn svg {
-      width: 17px;
-      height: 17px;
     }
 
     .search-open #search-clear {
@@ -573,7 +495,6 @@
        for photo/plain pins when the label sits below */
     .photo-md-wrap .star-badge,
     .photo-sm-wrap .star-badge { top: -7px; right: -8px; }
-    body.dark .star-badge { background: #14262F; border-color: #E9F2F6; }
 
     /* Tier 1 (signature stops): jade-turquoise ring + soft halo — the colour of
        the Ban Gioc / Quây Sơn water, Cao Bang's most iconic hue. The one cold
@@ -776,10 +697,6 @@
     /* fully zoomed in: bigger still */
     body.zl-max .town-glyph  { width: 132px !important; }
     body.zl-max .town-name   { top: 48px; left: 140px; font-size: 16px; }
-    body.dark .town-name {
-      color: #cbd5e1;
-      text-shadow: 0 1px 0 #0b1220, 0 -1px 0 #0b1220, 1px 0 0 #0b1220, -1px 0 0 #0b1220, 0 0 5px #0b1220;
-    }
 
     /* Photo pins — hero sights show their own photo instead of an icon */
     .photo-pin {
@@ -1001,16 +918,6 @@
       top: auto;
       bottom: calc(50% + 46px);
       font-size: 10px;
-    }
-
-    body.dark .teardrop-wrap .pin-label,
-    body.dark .capital-wrap .pin-label {
-      background: rgba(226, 232, 240, .92);
-      color: #0b1220;
-    }
-    body.dark .capital-wrap .pin-label {
-      background: #DA251D;
-      color: #fff;
     }
 
     /* ===== CAPITAL: a round city photo with a red ring + gold star badge
@@ -1323,12 +1230,6 @@
     .promo-text strong {
       font-weight: 800;
     }
-    body.dark .card-promo {
-      background: linear-gradient(135deg, #2A1B0E 0%, #3A2410 100%);
-      border-color: #7C4A16;
-    }
-    body.dark .promo-head { color: #FBBF24; }
-    body.dark .promo-text { color: #FED7AA; }
 
     .card-actions {
       display: flex;
@@ -1499,15 +1400,6 @@
       color: #FDBA74;
     }
 
-    body.dark .looking-btn {
-      background: #E9F2F6;
-      color: #0B2530;
-    }
-
-    body.dark .looking-ic svg {
-      color: var(--accent);
-    }
-
     body.card-open .bottom-dock,
     body.trip-open .bottom-dock {
       opacity: 0;
@@ -1530,11 +1422,6 @@
     .ask-sheet[hidden],
     .list-sheet[hidden] {
       display: none;
-    }
-
-    body.dark .ask-sheet,
-    body.dark .list-sheet {
-      background: rgba(0, 0, 0, .55);
     }
 
     .ask-panel,
@@ -2018,15 +1905,6 @@
       background: var(--ink);
     }
 
-    body.dark .trip-stop {
-      border-color: #14262F;
-    }
-
-    body.dark .trip-stop-home {
-      background: #E9F2F6;
-      color: #0B2530;
-    }
-
     /* ---------------- Welcome overlay ---------------- */
     .welcome {
       position: fixed;
@@ -2251,15 +2129,6 @@
       color: #1D4ED8;
     }
 
-    body.dark .locate-btn {
-      background: #14262F;
-      color: var(--ink);
-    }
-
-    body.dark .locate-btn.locate-active {
-      color: #60A5FA;
-    }
-
     .locate-btn.locate-loading svg {
       animation: locate-spin 1s linear infinite;
     }
@@ -2347,11 +2216,6 @@
       pointer-events: none;
       user-select: none;
     }
-    body.dark .zoom-badge {
-      background: #14262F;
-      color: var(--ink-2);
-    }
-
     .leaflet-control-attribution {
       font-size: 10px !important;
       background: rgba(255, 255, 255, .75) !important;
@@ -2446,7 +2310,6 @@
           placeholder="Search waterfalls, food, hotels…" aria-label="Search places in Cao Bang">
         <button id="search-clear" aria-label="Clear search"></button>
         <button id="basemap-btn" aria-label="Map style" aria-haspopup="true"></button>
-        <button id="theme-btn" aria-label="Toggle dark mode"></button>
       </div>
       <div class="results" id="results" role="listbox" aria-label="Search results"></div>
       <div class="bm-menu" id="basemap-menu" hidden aria-label="Map style"></div>
