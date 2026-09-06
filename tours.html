@@ -52,16 +52,29 @@
     .nav-hamburger span { width: 24px; height: 2px; background: var(--ink); border-radius: 2px; }
 
     /* HERO */
-    .hero { height: 88vh; min-height: 560px; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
-    .hero-bg { position: absolute; inset: 0; background: var(--forest-deep); }
-    .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
-    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.55) 100%); }
-    .hero-content { position: relative; z-index: 2; padding: 0 24px; }
-    .hero-label { font-size: 0.72rem; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 16px; display: block; }
-    .hero h1 { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(3rem, 7vw, 5.5rem); color: white; line-height: 1.05; margin-bottom: 20px; font-weight: 700; }
+    .hero { height: 88vh; min-height: 560px; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; background: var(--forest-deep); }
+    /* diagonal marquee of guest photos — same set as the Memories gallery */
+    .hero-marquee { position: absolute; inset: 0; overflow: hidden; }
+    .hero-marquee-inner { --mq-h: calc(28vh + 7.5vw); position: absolute; top: 50%; left: 50%; width: 175vw; display: flex; flex-direction: column; gap: 2vh; transform: translate(-50%, -50%) rotate(-12deg); }
+    .mq-row { display: flex; width: 100%; overflow: hidden; }
+    .mq-track { display: flex; flex-shrink: 0; animation: mq-left var(--speed, 120s) linear infinite; will-change: transform; }
+    .mq-track.rev { animation-name: mq-right; }
+    .mq-set { display: flex; flex-shrink: 0; }
+    .mq-card { position: relative; height: var(--mq-h); width: calc(var(--mq-h) * 4 / 3); flex-shrink: 0; margin-right: 2vh; border-radius: 18px; overflow: hidden; box-shadow: 0 18px 44px rgba(0,0,0,0.42); }
+    .mq-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .mq-card::after { content: ''; position: absolute; inset: 0; background: rgba(20,14,8,0.07); }
+    @keyframes mq-left  { from { transform: translate3d(0,0,0); }    to { transform: translate3d(-50%,0,0); } }
+    @keyframes mq-right { from { transform: translate3d(-50%,0,0); } to { transform: translate3d(0,0,0); } }
+    @media (prefers-reduced-motion: reduce) { .mq-track { animation: none; } }
+    .hero-overlay { position: absolute; inset: 0; z-index: 1; background:
+      radial-gradient(ellipse 46% 40% at 50% 45%, rgba(0,0,0,0.46) 0%, rgba(0,0,0,0.30) 52%, rgba(0,0,0,0.10) 80%, rgba(0,0,0,0) 100%),
+      linear-gradient(to bottom, rgba(0,0,0,0.34) 0%, rgba(0,0,0,0.03) 30%, rgba(0,0,0,0.04) 72%, rgba(0,0,0,0.18) 100%); }
+    .hero-content { position: relative; z-index: 3; padding: 0 24px; text-shadow: 0 1px 2px rgba(0,0,0,0.72), 0 3px 12px rgba(0,0,0,0.66), 0 8px 34px rgba(0,0,0,0.5); }
+    .hero-label { font-size: 0.72rem; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.82); margin-bottom: 16px; display: block; }
+    .hero h1 { font-family: 'Bricolage Grotesque', sans-serif; font-size: clamp(3rem, 7vw, 5.5rem); color: white; line-height: 1.05; margin-bottom: 20px; font-weight: 700; text-shadow: 0 2px 6px rgba(0,0,0,0.78), 0 8px 24px rgba(0,0,0,0.7), 0 18px 58px rgba(0,0,0,0.55); }
     .hero h1 em { color: #a8d5b8; font-style: italic; }
-    .hero-sub { color: rgba(255,255,255,0.7); font-size: 1.05rem; max-width: 480px; margin: 0 auto 36px; line-height: 1.7; }
-    .hero-scroll { color: rgba(255,255,255,0.38); font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; animation: bounce 2s infinite; display: block; }
+    .hero-sub { color: rgba(255,255,255,0.88); font-size: 1.05rem; max-width: 480px; margin: 0 auto 36px; line-height: 1.7; }
+    .hero-scroll { color: rgba(255,255,255,0.6); font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; animation: bounce 2s infinite; display: block; }
     @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(7px)} }
 
     /* STEP 1 */
@@ -130,6 +143,9 @@
     .price-row:last-child { margin-bottom: 0; }
     .price-group { color: var(--text-muted); }
     .price-val { font-weight: 700; color: var(--green-dark); }
+    /* single price with no group label — let it carry the box */
+    .price-row:only-child .price-val { font-size: 1.15rem; letter-spacing: -0.3px; }
+    .price-row:only-child .price-usd { font-size: 0.75rem; }
     .price-usd { font-size: 0.7rem; color: var(--text-muted); font-weight: 400; margin-left: 4px; }
     .driver-note { background: rgba(92,61,46,0.06); border: 1px solid rgba(92,61,46,0.15); border-radius: 8px; padding: 9px 13px; font-size: 0.76rem; color: var(--brown); margin-bottom: 14px; line-height: 1.5; }
     .self-drive-note { background: rgba(82,183,136,0.08); border: 1px solid rgba(82,183,136,0.25); border-radius: 8px; padding: 9px 13px; font-size: 0.76rem; color: var(--green-dark); margin-bottom: 14px; line-height: 1.5; }
@@ -143,13 +159,15 @@
     .lolo-wrap { max-width: 1080px; margin: 24px auto 0; }
     .lolo-card { background: white; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); display: grid; grid-template-columns: 1fr 2fr; border: 2px dashed rgba(82,183,136,0.3); }
     .lolo-visual { background: linear-gradient(135deg, var(--forest-deep), #3d8b6b); display: flex; align-items: center; justify-content: center; padding: 40px; min-height: 200px; }
-    .lolo-visual-inner { text-align: center; color: white; }
+    .lolo-visual-inner { text-align: center; color: white; text-shadow: 0 2px 6px rgba(0,0,0,0.75), 0 6px 22px rgba(0,0,0,0.65), 0 14px 50px rgba(0,0,0,0.5); }
     .lolo-emoji { font-size: 3rem; display: block; margin-bottom: 10px; }
-    .lolo-visual-inner h3 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.5rem; margin-bottom: 5px; }
+    .lolo-visual-inner h3 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.5rem; margin-bottom: 5px; text-shadow: 0 3px 9px rgba(0,0,0,0.8), 0 9px 30px rgba(0,0,0,0.7), 0 20px 64px rgba(0,0,0,0.5); }
     .lolo-visual-inner p { font-size: 0.8rem; color: rgba(255,255,255,0.6); }
     .lolo-body { padding: 28px; display: flex; flex-direction: column; justify-content: center; }
     .lolo-body h3 { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.3rem; color: var(--green-dark); margin: 10px 0 7px; }
     .lolo-body > p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; margin-bottom: 14px; }
+    .lolo-note { font-size: 0.78rem; color: var(--text-muted); line-height: 1.6; background: rgba(200,132,31,0.09); border-left: 3px solid var(--amber); padding: 9px 12px; border-radius: 8px; margin-bottom: 14px; }
+    .lolo-note strong { color: var(--brown); }
     .lolo-acts { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 16px; }
     .lolo-act { background: var(--green-light); color: var(--green-dark); font-size: 0.73rem; padding: 5px 11px; border-radius: 50px; }
     .lolo-prices { margin-bottom: 16px; }
@@ -254,8 +272,25 @@
       .nav-links .nav-cta { justify-content:center; margin-top:12px; padding:14px 20px; font-size:0.95rem; }
       .nav-hamburger { display: flex; }
       .hero { height: 70vh; }
-      #step1 { padding: 56px 24px 40px; }
-      .vehicle-grid { grid-template-columns: 1fr 1fr; max-width: 600px; margin: 0 auto; }
+      .hero-content { padding: 0 20px; }
+      .hero-label { font-size: 0.62rem; letter-spacing: 3px; margin-bottom: 12px; }
+      .hero h1 { font-size: clamp(1.9rem, 8.5vw, 2.6rem); line-height: 1.12; margin-bottom: 14px; }
+      .hero-sub { font-size: 0.9rem; line-height: 1.6; max-width: 300px; margin-bottom: 26px; }
+      .hero-scroll { font-size: 0.68rem; letter-spacing: 2.5px; color: rgba(255,255,255,0.75); }
+      .hero-marquee-inner { --mq-h: calc(22vh + 7vw); gap: 1.5vh; }
+      .mq-card { margin-right: 1.5vh; border-radius: 14px; }
+      #step1 { padding: 44px 18px 34px; }
+      .step-header { margin-bottom: 24px; }
+      .step-header h2 { font-size: 1.55rem; }
+      .step-header p { font-size: 0.84rem; }
+      .step-pill { font-size: 0.62rem; letter-spacing: 2px; padding: 6px 14px; margin-bottom: 10px; }
+      .vehicle-grid { grid-template-columns: 1fr 1fr; gap: 10px; max-width: 600px; margin: 0 auto; }
+      .vehicle-btn { padding: 16px 11px; border-width: 1.5px; }
+      .vb-icon { font-size: 1.6rem; margin-bottom: 6px; }
+      .vb-name { font-size: 0.92rem; margin-bottom: 4px; }
+      .vb-desc { font-size: 0.71rem; line-height: 1.45; }
+      .vb-tag { font-size: 0.58rem; letter-spacing: 0.8px; padding: 3px 9px; margin-top: 8px; }
+      .vehicle-hint { font-size: 0.76rem; margin-top: 16px; }
       #step2 { padding: 0 24px 60px; }
       .tours-grid { grid-template-columns: 1fr; }
       .tour-card.span2 { grid-column: span 1; display: flex; flex-direction: column; }
@@ -293,14 +328,12 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-bg">
-    <img loading="lazy" src="images/tours/hero.jpg" alt="Cao Bang Tours" onerror="this.style.display='none';this.insertAdjacentHTML('afterend','<div style=\'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:0.9rem;color:rgba(255,255,255,0.5);\'>images/tours/hero.jpg</div>')">
-  </div>
+  <div class="hero-marquee" id="heroMarquee" aria-hidden="true"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <span class="hero-label">Tours · Cao Bang · Vietnam</span>
+    <span class="hero-label">Cao Bang · Vietnam</span>
     <h1>Discover Cao Bang<br><em>Your way</em></h1>
-    <p class="hero-sub">Waterfalls, caves, mountain passes, and quiet villages — guided tours built around how you want to travel.</p>
+    <p class="hero-sub">Waterfalls, caves, mountain passes — and the road between them.</p>
     <span class="hero-scroll">↓ choose your ride</span>
   </div>
 </div>
@@ -310,32 +343,32 @@
   <div class="step-header fade-in">
     <div class="step-pill">Step 1 · How do you want to travel?</div>
     <h2>Choose your vehicle</h2>
-    <p>This changes your price and experience. You can always ask Sen to customize anything.</p>
+    <p>This sets your price and your experience.</p>
   </div>
   <div class="vehicle-grid fade-in">
     <div class="vehicle-btn" onclick="selectVehicle('car-guide', this)">
       <span class="vb-icon">🚗</span>
       <span class="vb-name">Private Car + Guide</span>
-      <span class="vb-desc">Comfortable 4-seat car. English-speaking guide included. Best for couples and families who want zero hassle.</span>
+      <span class="vb-desc">4-seat car with an English-speaking guide. Zero hassle.</span>
       <span class="vb-tag">Most comfortable</span>
     </div>
     <div class="vehicle-btn" onclick="selectVehicle('easy-rider', this)">
       <span class="vb-icon">🏍️</span>
       <span class="vb-name">Easy Rider + Guide</span>
-      <span class="vb-desc">Ride pillion on our guide's motorbike. Immersive, authentic, and adventurous — the classic way to explore.</span>
+      <span class="vb-desc">Ride pillion behind your guide. The classic way.</span>
       <span class="vb-tag orange">Most adventurous</span>
     </div>
     <div class="vehicle-btn budget" onclick="selectVehicle('driver-only', this)">
       <span class="vb-icon">🚗🏍️</span>
       <span class="vb-name">Driver Only</span>
-      <span class="vb-desc">Just a driver — no guide, no meals. Car or motorbike. Explore independently at a lower cost.</span>
+      <span class="vb-desc">Just a driver — no guide, no meals. Car or bike.</span>
       <span class="vb-tag muted">Budget option</span>
     </div>
     <div class="vehicle-btn budget" onclick="selectVehicle('self-ride', this)">
       <span class="vb-icon">🏍️⛽</span>
       <span class="vb-name">Self-ride Motorbike</span>
-      <span class="vb-desc">Ride your own rented motorbike alongside the tour group with our guide. 20% off the Easy Rider price. Fuel paid by you — Sen handles everything else.</span>
-      <span class="vb-tag" style="background:rgba(231,111,81,0.12);color:var(--terra);">−20% · Fuel on you</span>
+      <span class="vb-desc">Your own bike, our guide leading. You pay the fuel.</span>
+      <span class="vb-tag" style="background:rgba(231,111,81,0.12);color:var(--terra);">−15% · Fuel on you</span>
     </div>
   </div>
   <p class="vehicle-hint fade-in">Not sure which to pick? <a href="https://wa.me/84822946888?text=Hi%20Sen!%20I%27m%20not%20sure%20which%20tour%20option%20suits%20me." target="_blank">Ask Sen on WhatsApp</a> — she'll help in 2 minutes.</p>
@@ -351,7 +384,7 @@
 
   <div class="tours-grid">
 
-    <!-- 1 DAY -->
+    <!-- 1 DAY TOUR -->
     <div class="tour-card fade-in">
       <div class="card-hero">
         <img loading="lazy" class="card-hero-img" src="images/tours/card-1d.jpg" alt="1 Day Tour" onerror="this.style.opacity='0';var ph=document.createElement('div');ph.style.cssText='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:0.78rem;color:rgba(255,255,255,0.45);';ph.textContent='images/tours/card-1d.jpg';this.parentElement.appendChild(ph);">
@@ -369,9 +402,9 @@
           <button class="day-btn" onclick="openModal('1d',0)">🗺️ See itinerary <span class="day-km">~195km</span></button>
         </div>
         <div class="card-pricing">
-          <div class="pricing-lbl" id="pl-1d">Private Car + Guide · Price per person<br>Included: Breakfast, Lunch & Admission Tickets to Attractions</div>
+          <div class="pricing-lbl" id="pl-1d">Private Car + Guide · Price per person<br>Included: Breakfast, lunch &amp; dinner · Entrance tickets</div>
           <div id="pr-1d">
-            <div class="price-row"><span class="price-group">1–8 people</span><span class="price-val">1.570.000đ <span class="price-usd">≈ $62</span></span></div>
+            <div class="price-row"><span class="price-val">1.470.000đ <span class="price-usd">≈ $57</span></span></div>
           </div>
         </div>
         <div class="card-actions">          <a href="https://wa.me/84822946888?text=Hi%20Sen!%20I%27d%20like%20to%20book%20the%201-day%20tour." class="btn-book" target="_blank">💬 Book Now</a>
@@ -379,62 +412,29 @@
       </div>
     </div>
 
-    <!-- 2 DAYS -->
+    <!-- 2D1N TOUR -->
     <div class="tour-card fade-in">
-      <div class="card-hero">
-        <img loading="lazy" class="card-hero-img" src="images/tours/card-2d.jpg" alt="2 Days Tour" onerror="this.style.opacity='0';var ph=document.createElement('div');ph.style.cssText='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:0.78rem;color:rgba(255,255,255,0.45);';ph.textContent='images/tours/card-2d.jpg';this.parentElement.appendChild(ph);">
-        <div class="card-hero-overlay"></div>
-        <div class="card-hero-top"><span class="cbadge cbadge-start">No overnight</span></div>
-        <div class="card-hero-bottom">
-          <div class="card-duration-days">2</div>
-          <div class="card-duration-label">Days · No overnight</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <h3 class="card-title">Two-Day Explorer</h3>
-        <p class="card-subtitle">Cave · Stone Village · Waterfall · Pac Bo</p>
-        <div class="day-buttons">
-          <button class="day-btn" onclick="openModal('2d',0)">🗺️ Day 1 <span class="day-km">~183km</span></button>
-          <button class="day-btn" onclick="openModal('2d',1)">🗺️ Day 2 <span class="day-km">~136km</span></button>
-        </div>
-        <div class="card-pricing">
-          <div class="pricing-lbl" id="pl-2d">Private Car + Guide · Price per person<br>Included: Breakfast, Lunch & Admission Tickets to Attractions</div>
-          <div id="pr-2d">
-            <div class="price-row"><span class="price-group">1–3 people</span><span class="price-val">3.450.000đ <span class="price-usd">≈ $135</span></span></div>
-            <div class="price-row"><span class="price-group">4–8 people</span><span class="price-val">2.900.000đ <span class="price-usd">≈ $112</span></span></div>
-          </div>
-        </div>
-        <div class="card-actions">          <a href="https://wa.me/84822946888?text=Hi%20Sen!%20I%27d%20like%20to%20book%20the%202-day%20tour." class="btn-book" target="_blank">💬 Book Now</a>
-        </div>
-      </div>
-    </div>
-
-    <!-- 2D1N -->
-    <div class="tour-card span2 fade-in">
       <div class="card-hero">
         <img loading="lazy" class="card-hero-img" src="images/tours/card-2d1n.jpg" alt="2D1N Tour" onerror="this.style.opacity='0';var ph=document.createElement('div');ph.style.cssText='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:0.78rem;color:rgba(255,255,255,0.45);';ph.textContent='images/tours/card-2d1n.jpg';this.parentElement.appendChild(ph);">
         <div class="card-hero-overlay"></div>
-        <div class="card-hero-top">
-          <span class="cbadge cbadge-pop">⭐ Most Popular</span>
-          <span class="cbadge cbadge-loop" style="margin-top:4px;">Overnight at Ban Gioc</span>
-        </div>
+        <div class="card-hero-top"><span class="cbadge cbadge-pop">⭐ Most Popular</span>
+          <span class="cbadge cbadge-loop" style="margin-top:4px;">Night at Stone Village</span></div>
         <div class="card-hero-bottom">
           <div class="card-duration-days">2D 1N</div>
           <div class="card-duration-label">The most popular choice</div>
         </div>
       </div>
       <div class="card-body">
-        <h3 class="card-title">Overnight at Ban Gioc</h3>
-        <p class="card-subtitle">Ba Quang Panorama · Nguom Ngao Cave · Stone Village · Ban Gioc · Eye Mountain</p>
+        <h3 class="card-title">Ban Gioc &amp; Stone Village</h3>
+        <p class="card-subtitle">Blacksmith · Ba Quang Panorama · Nguom Ngao Cave · Stone Village · Ban Gioc</p>
         <div class="day-buttons">
           <button class="day-btn" onclick="openModal('2d1n',0)">🗺️ Day 1 <span class="day-km">~124km</span></button>
           <button class="day-btn" onclick="openModal('2d1n',1)">🗺️ Day 2 <span class="day-km">~114km</span></button>
         </div>
         <div class="card-pricing">
-          <div class="pricing-lbl" id="pl-2d1n">Private Car + Guide · Price per person<br>Included: Breakfast, Lunch & Admission Tickets to Attractions</div>
+          <div class="pricing-lbl" id="pl-2d1n">Private Car + Guide · Price per person · 1 night included<br>Included: Breakfast, lunch &amp; dinner · Entrance tickets</div>
           <div id="pr-2d1n">
-            <div class="price-row"><span class="price-group">1–3 people</span><span class="price-val">3.580.000đ <span class="price-usd">≈ $140</span></span></div>
-            <div class="price-row"><span class="price-group">4–8 people</span><span class="price-val">2.950.000đ <span class="price-usd">≈ $115</span></span></div>
+            <div class="price-row"><span class="price-val">3.380.000đ <span class="price-usd">≈ $130</span></span></div>
           </div>
         </div>
         <div class="card-actions">          <a href="https://wa.me/84822946888?text=Hi%20Sen!%20I%27d%20like%20to%20book%20the%202D1N%20tour." class="btn-book" target="_blank">💬 Book Now</a>
@@ -442,65 +442,62 @@
       </div>
     </div>
 
-    <!-- 3D2N -->
+    <!-- 3D2N NORTHEAST TOUR -->
     <div class="tour-card fade-in">
       <div class="card-hero">
-        <img loading="lazy" class="card-hero-img" src="images/tours/card-3d2n.jpg" alt="3D2N Tour" onerror="this.style.opacity='0';var ph=document.createElement('div');ph.style.cssText='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:0.78rem;color:rgba(255,255,255,0.45);';ph.textContent='images/tours/card-3d2n.jpg';this.parentElement.appendChild(ph);">
+        <img loading="lazy" class="card-hero-img" src="images/tours/card-3d2n.jpg" alt="3D2N Northeast Tour" onerror="this.style.opacity='0';var ph=document.createElement('div');ph.style.cssText='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:0.78rem;color:rgba(255,255,255,0.45);';ph.textContent='images/tours/card-3d2n.jpg';this.parentElement.appendChild(ph);">
         <div class="card-hero-overlay"></div>
         <div class="card-hero-top"><span class="cbadge cbadge-best">🏆 Bestseller</span></div>
         <div class="card-hero-bottom">
           <div class="card-duration-days">3D 2N</div>
-          <div class="card-duration-label">Best seller · 2 overnights</div>
+          <div class="card-duration-label">Northeast · 11 locations</div>
         </div>
       </div>
       <div class="card-body">
-        <h3 class="card-title">The Full Experience</h3>
-        <p class="card-subtitle">Valley · Lake · Cave · Panorama · Waterfall · Viewpoint</p>
+        <h3 class="card-title">Cao Bang Northeast</h3>
+        <p class="card-subtitle">Pac Bo · Thang Hen Lake · Nguom Ngao Cave · Stone Village · Ban Gioc</p>
         <div class="day-buttons">
-          <button class="day-btn" onclick="openModal('3d2n',0)">🗺️ Day 1 <span class="day-km">~136km</span></button>
-          <button class="day-btn" onclick="openModal('3d2n',1)">🗺️ Day 2 <span class="day-km">~124km</span></button>
-          <button class="day-btn" onclick="openModal('3d2n',2)">🗺️ Day 3 <span class="day-km">~102km</span></button>
+          <button class="day-btn" onclick="openModal('3d2n-ne',0)">🗺️ Day 1 <span class="day-km">~136km</span></button>
+          <button class="day-btn" onclick="openModal('3d2n-ne',1)">🗺️ Day 2 <span class="day-km">~124km</span></button>
+          <button class="day-btn" onclick="openModal('3d2n-ne',2)">🗺️ Day 3 <span class="day-km">~102km</span></button>
         </div>
         <div class="card-pricing">
-          <div class="pricing-lbl" id="pl-3d2n">Private Car + Guide · Price per person · 2 nights included</div>
-          <div id="pr-3d2n">
-            <div class="price-row"><span class="price-group">1–3 people</span><span class="price-val">5.150.000đ <span class="price-usd">≈ $202</span></span></div>
-            <div class="price-row"><span class="price-group">4–8 people</span><span class="price-val">4.550.000đ <span class="price-usd">≈ $176</span></span></div>
+          <div class="pricing-lbl" id="pl-3d2n-ne">Private Car + Guide · Price per person · 2 nights included<br>Included: Breakfast, lunch &amp; dinner · Entrance tickets</div>
+          <div id="pr-3d2n-ne">
+            <div class="price-row"><span class="price-val">4.950.000đ <span class="price-usd">≈ $190</span></span></div>
           </div>
         </div>
-        <div class="card-actions">          <a href="https://wa.me/84822946888?text=Hi%20Sen!%20I%27d%20like%20to%20book%20the%203D2N%20tour." class="btn-book" target="_blank">💬 Book Now</a>
+        <div class="card-actions">          <a href="https://wa.me/84822946888?text=Hi%20Sen!%20I%27d%20like%20to%20book%20the%203D2N%20Cao%20Bang%20Northeast%20tour." class="btn-book" target="_blank">💬 Book Now</a>
         </div>
       </div>
     </div>
 
-    <!-- 4D3N -->
+    <!-- 3D2N NORTHWEST TOUR -->
     <div class="tour-card fade-in">
       <div class="card-hero">
-        <img loading="lazy" class="card-hero-img" src="images/tours/card-4d3n.jpg" alt="4D3N Tour" onerror="this.style.opacity='0';var ph=document.createElement('div');ph.style.cssText='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:0.78rem;color:rgba(255,255,255,0.45);';ph.textContent='images/tours/card-4d3n.jpg';this.parentElement.appendChild(ph);">
+        <img loading="lazy" class="card-hero-img" src="images/tours/card-4d3n.jpg" alt="3D2N Northwest Tour" onerror="this.style.opacity='0';var ph=document.createElement('div');ph.style.cssText='position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:monospace;font-size:0.78rem;color:rgba(255,255,255,0.45);';ph.textContent='images/tours/card-4d3n.jpg';this.parentElement.appendChild(ph);">
         <div class="card-hero-overlay"></div>
-        <div class="card-hero-top"><span class="cbadge cbadge-loop">🗺️ Cao Bang Loop</span></div>
+        <div class="card-hero-top"><span class="cbadge cbadge-loop">🗺️ Most locations</span></div>
         <div class="card-hero-bottom">
-          <div class="card-duration-days">4D 3N</div>
-          <div class="card-duration-label">The full loop · 3 overnights</div>
+          <div class="card-duration-days">3D 2N</div>
+          <div class="card-duration-label">Northwest · 13 locations</div>
         </div>
       </div>
       <div class="card-body">
-        <h3 class="card-title">Cao Bang Loop</h3>
-        <p class="card-subtitle">The complete Cao Bang — bamboo forest, mountain pass, tea hills</p>
+        <h3 class="card-title">Cao Bang Northwest</h3>
+        <p class="card-subtitle">Ban Gioc · Thang Hen Lake · Phia Oac Peak · Kolia Tea Hills</p>
         <div class="day-buttons">
-          <button class="day-btn" onclick="openModal('4d3n',0)">🗺️ Day 1 <span class="day-km">~124km</span></button>
-          <button class="day-btn" onclick="openModal('4d3n',1)">🗺️ Day 2 <span class="day-km">~149km</span></button>
-          <button class="day-btn" onclick="openModal('4d3n',2)">🗺️ Day 3 <span class="day-km">~69km</span></button>
-          <button class="day-btn" onclick="openModal('4d3n',3)">🗺️ Day 4 <span class="day-km">~144km</span></button>
+          <button class="day-btn" onclick="openModal('3d2n-nw',0)">🗺️ Day 1 <span class="day-km">~124km</span></button>
+          <button class="day-btn" onclick="openModal('3d2n-nw',1)">🗺️ Day 2 <span class="day-km">~102km</span></button>
+          <button class="day-btn" onclick="openModal('3d2n-nw',2)">🗺️ Day 3 <span class="day-km">~144km</span></button>
         </div>
         <div class="card-pricing">
-          <div class="pricing-lbl" id="pl-4d3n">Private Car + Guide · Price per person · 3 nights included</div>
-          <div id="pr-4d3n">
-            <div class="price-row"><span class="price-group">1–3 people</span><span class="price-val">4.910.000đ <span class="price-usd">≈ $193</span></span></div>
-            <div class="price-row"><span class="price-group">4–8 people</span><span class="price-val">6.150.000đ <span class="price-usd">≈ $237</span></span></div>
+          <div class="pricing-lbl" id="pl-3d2n-nw">Private Car + Guide · Price per person · 2 nights included<br>Included: Breakfast, lunch &amp; dinner · Entrance tickets</div>
+          <div id="pr-3d2n-nw">
+            <div class="price-row"><span class="price-val">5.150.000đ <span class="price-usd">≈ $198</span></span></div>
           </div>
         </div>
-        <div class="card-actions">          <a href="https://wa.me/84822946888?text=Hi%20Sen!%20I%27d%20like%20to%20book%20the%204D3N%20Cao%20Bang%20Loop." class="btn-book" target="_blank">💬 Book Now</a>
+        <div class="card-actions">          <a href="https://wa.me/84822946888?text=Hi%20Sen!%20I%27d%20like%20to%20book%20the%203D2N%20Cao%20Bang%20Northwest%20tour." class="btn-book" target="_blank">💬 Book Now</a>
         </div>
       </div>
     </div>
@@ -517,13 +514,14 @@
         <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.15) 100%);"></div>
         <div class="lolo-visual-inner" style="position:relative;z-index:2;">
           <h3>Lolo Village</h3>
-          <p>3 Days · 2 Nights · Car or Motorbike</p>
+          <p>3 Days · 2 Nights · Car or Motorbike · ~239km</p>
         </div>
       </div>
       <div class="lolo-body">
         <span class="cbadge cbadge-pop" style="width:fit-content;">✨ New Experience</span>
         <h3>Life in a Lolo Village</h3>
-        <p>Step into the daily life of the Lolo ethnic minority — one of Cao Bang's most unique communities. Weave, cook, hike, and share meals with the villagers.</p>
+        <p>Step into the daily life of the Black Lolo ethnic minority — one of Cao Bang's most unique communities. Weave, cook, hike, and share meals with the villagers.</p>
+        <p class="lolo-note">✨ The village became known to travellers after French rugby player <strong>Frédéric Michalak</strong> came here in June 2011 to live the local way of life.</p>
         <div class="lolo-acts">
           <span class="lolo-act">🧵 Weaving cloth</span>
           <span class="lolo-act">🪓 Chopping wood</span>
@@ -531,8 +529,13 @@
           <span class="lolo-act">🐄 Feeding animals</span>
           <span class="lolo-act">🥾 Village hiking</span>
         </div>
+        <div class="day-buttons">
+          <button class="day-btn" onclick="openModal('lolo',0)">🗺️ Day 1 <span class="day-km">~121km</span></button>
+          <button class="day-btn" onclick="openModal('lolo',1)">🗺️ Day 2 <span class="day-km">In the village</span></button>
+          <button class="day-btn" onclick="openModal('lolo',2)">🗺️ Day 3 <span class="day-km">~118km</span></button>
+        </div>
         <div class="lolo-prices">
-          <div class="price-row"><span class="price-group" style="font-size:0.82rem;">Per person</span><span class="price-val">5.850.000đ <span class="price-usd">≈ $229</span></span></div>
+          <div class="price-row"><span class="price-group" style="font-size:0.82rem;">2 nights included</span><span class="price-val">5.850.000đ <span class="price-usd">≈ $225</span></span></div>
         </div>
         <a href="https://wa.me/84822946888?text=Hi%20Sen!%20I%27m%20interested%20in%20the%20Lolo%20Village%20experience." class="btn-lolo" target="_blank">💬 Ask Sen for details</a>
       </div>
@@ -550,7 +553,7 @@
         <h4>✅ Included in all full tours</h4>
         <ul class="inc-list">
           <li><span class="ico">🎟️</span> Entrance tickets to all attractions</li>
-          <li><span class="ico">🍳</span> Breakfast and lunch <em style="color:var(--text-muted);font-size:0.78rem;">(dinner included only on overnight tours)</em></li>
+          <li><span class="ico">🍳</span> Breakfast, lunch and dinner</li>
           <li><span class="ico">💧</span> One bottle of water per person per day</li>
           <li><span class="ico">👨‍🦯</span> Experienced local guide (Easy Rider & Car+Guide)</li>
           <li><span class="ico">⛽</span> Vehicle and fuel</li>
@@ -566,11 +569,12 @@
           <li><span class="ico">🗣️</span> English-speaking guide: +300.000đ/day (optional)</li>
           <li><span class="ico">🚌</span> Sleeper bus tickets (if needed)</li>
           <li><span class="ico">💸</span> Tips for driver or guide</li>
-          <li><span class="ico">🧺</span> Personal expenses (laundry, shopping, etc.)</li>
+          <li><span class="ico">🚕</span> Taxi, laundry and other personal expenses</li>
+          <li><span class="ico">🧾</span> VAT</li>
         </ul>
       </div>
     </div>
-    <p class="inc-note">👶 Children 8 and under receive 20% off all packages &nbsp;·&nbsp; 🛵 Self-drive tours are discounted 20% on all packages</p>
+    <p class="inc-note">👶 Children 8 and under receive 20% off all packages &nbsp;·&nbsp; 🛵 Self-drive tours are discounted 15% on all packages</p>
   </div>
 </section>
 
@@ -585,13 +589,13 @@
         <div class="do-icon">🚗</div>
         <h4>Driver Only · Car</h4>
         <p>Private 4-seat car + experienced driver. Communicates via Google Translate. Follow our itinerary or choose your own spots.</p>
-        <div class="do-price">1.900.000đ / day <span>· for the whole vehicle (up to 4 people)</span></div>
+        <div class="do-price">1.500.000 – 1.900.000đ / day <span>· whole vehicle · depends on the itinerary</span></div>
       </div>
       <div class="do-card">
         <div class="do-icon">🏍️</div>
         <h4>Driver Only · Motorbike</h4>
         <p>A driver takes you on his motorbike. Flexible, affordable, and gets you everywhere. No English guide — communication by gesture and translate apps.</p>
-        <div class="do-price">Contact Sen <span>· price depends on route & duration</span></div>
+        <div class="do-price">600.000 – 800.000đ / day <span>· per bike · depends on the route</span></div>
       </div>
     </div>
     <p class="do-warning">⚠️ Meals, entrance fees, and personal expenses are not covered. Sen can recommend the best local spots to eat along the route.</p>
@@ -653,6 +657,29 @@
   window.addEventListener('scroll', () => document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40));
   function toggleNav() { document.getElementById('navLinks').classList.toggle('open'); }
 
+  // HERO MARQUEE — the Memories photos, on diagonal rows
+  (function () {
+    const wrap = document.getElementById('heroMarquee');
+    if (!wrap) return;
+    const photos = [];
+    for (let i = 1; i <= 24; i++) photos.push('images/memories/hero/' + String(i).padStart(2, '0') + '.jpg');
+    // offset each row so the same photo never lines up across rows
+    const rows = [
+      { speed: 180, rev: false, offset: 0 },
+      { speed: 150, rev: true,  offset: 8 },
+      { speed: 210, rev: false, offset: 16 },
+    ];
+    const inner = document.createElement('div');
+    inner.className = 'hero-marquee-inner';
+    inner.innerHTML = rows.map(r => {
+      const list = photos.slice(r.offset).concat(photos.slice(0, r.offset)).slice(0, 10);
+      const set = '<div class="mq-set">' + list.map(src =>
+        `<div class="mq-card"><img src="${src}" alt="" decoding="async"></div>`).join('') + '</div>';
+      return `<div class="mq-row"><div class="mq-track${r.rev ? ' rev' : ''}" style="--speed:${r.speed}s">${set}${set}</div></div>`;
+    }).join('');
+    wrap.appendChild(inner);
+  })();
+
   // FADE IN
   const obs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.07 });
   document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
@@ -667,22 +694,7 @@
         { name:'Eye Mountain Angel', desc:'Famous natural rock formation that looks like a giant eye from the valley below', img:'images/places/eye-mountain.jpg', emoji:'👁️' },
       ]}
     ]},
-    '2d': { title:'Two-Day Explorer', days:[
-      { label:'Day 1', km:'~183km', night:'Return to city', places:[
-        { name:'Blacksmith Village', desc:'Traditional Nung An people blacksmith craft village', img:'images/places/blacksmith.jpg', emoji:'🔨', pos:'center 35%' },
-        { name:'Nguom Ngao Cave', desc:'Stunning ancient cave with spectacular stalactites and underground streams', img:'images/places/nguom-ngao.jpg', emoji:'🪨' },
-        { name:'Stone Village', desc:'Remote village nestled deep among karst limestone formations', img:'images/places/stone-village.jpg', emoji:'🏘️' },
-        { name:'Ban Gioc Waterfall', desc:'Vietnam\'s most spectacular waterfall on the China border', img:'images/places/ban-gioc.jpg', emoji:'💧' },
-        { name:'Thoongot Viewpoint', desc:'Panoramic mountain viewpoint — short hike required', img:'images/places/thoongot.jpg', emoji:'🏔️' },
-      ]},
-      { label:'Day 2', km:'~136km', night:'Return to city', places:[
-        { name:'Eye Mountain Angel', desc:'Famous natural rock formation with a giant eye shape', img:'images/places/eye-mountain.jpg', emoji:'👁️' },
-        { name:'Thang Hen Lake', desc:'Serene turquoise lake surrounded by karst mountains', img:'images/places/thang-hen.jpg', emoji:'🏞️' },
-        { name:'Lung Luong Valley', desc:'Sweeping valley with terraced rice fields and morning mist', img:'images/places/lung-luong.jpg', emoji:'🌾' },
-        { name:'Pac Bo', desc:'Historic revolutionary site with peaceful jungle streams', img:'images/places/pac-bo.jpg', emoji:'🌿' },
-      ]},
-    ]},
-    '2d1n': { title:'Overnight at Ban Gioc', days:[
+    '2d1n': { title:'Ban Gioc & Stone Village', days:[
       { label:'Day 1', km:'~124km', night:'Night at Stone Village', places:[
         { name:'Blacksmith Village', desc:'Traditional Nung An people blacksmith craft village', img:'images/places/blacksmith.jpg', emoji:'🔨', pos:'center 35%' },
         { name:'Ba Quang Panorama', desc:'Sweeping panoramic viewpoint over the karst landscape', img:'images/places/ba-quang.jpg', emoji:'🏔️' },
@@ -696,7 +708,7 @@
         { name:'Eye Mountain Angel', desc:'Famous natural rock formation with a giant eye shape', img:'images/places/eye-mountain.jpg', emoji:'👁️' },
       ]},
     ]},
-    '3d2n': { title:'The Full Experience', days:[
+    '3d2n-ne': { title:'Cao Bang Northeast', days:[
       { label:'Day 1', km:'~136km', night:'Night at Homestay', places:[
         { name:'Pac Bo', desc:'Historic revolutionary site with peaceful jungle streams', img:'images/places/pac-bo.jpg', emoji:'🌿' },
         { name:'Lung Luong Valley', desc:'Sweeping valley with terraced rice fields', img:'images/places/lung-luong.jpg', emoji:'🌾' },
@@ -715,26 +727,39 @@
         { name:'Thoongot Viewpoint', desc:'Panoramic mountain viewpoint', img:'images/places/thoongot.jpg', emoji:'🏔️' },
       ]},
     ]},
-    '4d3n': { title:'Cao Bang Loop', days:[
+    '3d2n-nw': { title:'Cao Bang Northwest', days:[
       { label:'Day 1', km:'~124km', night:'Night at Stone Village', places:[
         { name:'Blacksmith Village', desc:'Traditional Nung An people blacksmith craft village', img:'images/places/blacksmith.jpg', emoji:'🔨', pos:'center 35%' },
-        { name:'Ba Quang Panorama', desc:'Sweeping panoramic viewpoint', img:'images/places/ba-quang.jpg', emoji:'🏔️' },
-        { name:'Ban Gioc Waterfall', desc:'Vietnam\'s most spectacular waterfall', img:'images/places/ban-gioc.jpg', emoji:'💧' },
-        { name:'Phat Tich Pagoda', desc:'Beautiful ancient pagoda', img:'images/places/phat-tich.jpg', emoji:'🛕' },
-      ]},
-      { label:'Day 2', km:'~149km', night:'Night at PacBo Homestay', places:[
+        { name:'Ba Quang Panorama', desc:'Sweeping panoramic viewpoint over the karst landscape', img:'images/places/ba-quang.jpg', emoji:'🏔️' },
         { name:'Nguom Ngao Cave', desc:'Stunning ancient cave with spectacular stalactites', img:'images/places/nguom-ngao.jpg', emoji:'🪨' },
-        { name:'Thoongot Viewpoint', desc:'Panoramic mountain viewpoint', img:'images/places/thoongot.jpg', emoji:'🏔️' },
-        { name:'Eye Mountain Angel', desc:'Famous natural rock formation', img:'images/places/eye-mountain.jpg', emoji:'👁️' },
-        { name:'Thang Hen Lake', desc:'Serene turquoise lake', img:'images/places/thang-hen.jpg', emoji:'🏞️' },
-        { name:'Lung Luong Valley', desc:'Sweeping valley with terraced rice fields', img:'images/places/lung-luong.jpg', emoji:'🌾' },
+        { name:'Stone Village', desc:'Remote village — overnight stay here among the limestone peaks', img:'images/places/stone-village.jpg', emoji:'🛏️' },
+        { name:'Phat Tich Pagoda', desc:'Beautiful ancient pagoda perched in the mountains', img:'images/places/phat-tich.jpg', emoji:'🛕' },
       ]},
-      { label:'Day 3', km:'~69km', night:'Night at Khau Coc Cha', places:[
-        { name:'Pac Bo', desc:'Historic revolutionary site', img:'images/places/pac-bo.jpg', emoji:'🌿' },
-        { name:'Kim Dong Historical Site', desc:'Important historical landmark of the revolution', img:'images/places/kim-dong.jpg', emoji:'🏛️' },
-        { name:'Khau Coc Cha Pass', desc:'Dramatic mountain pass with stunning panoramic views', img:'images/places/khau-coc-cha.jpg', emoji:'⛰️' },
+      { label:'Day 2', km:'~102km', night:'Night at Sen\'s Homestay', places:[
+        { name:'Ban Gioc Waterfall', desc:'Vietnam\'s most spectacular waterfall on the China border', img:'images/places/ban-gioc.jpg', emoji:'💧' },
+        { name:'Thoongot Viewpoint', desc:'Panoramic mountain viewpoint — short hike required', img:'images/places/thoongot.jpg', emoji:'🏔️' },
+        { name:'Eye Mountain Angel', desc:'Famous natural rock formation with a giant eye shape', img:'images/places/eye-mountain.jpg', emoji:'👁️' },
+        { name:'Thang Hen Lake', desc:'Serene turquoise lake surrounded by karst mountains', img:'images/places/thang-hen.jpg', emoji:'🏞️' },
       ]},
-      { label:'Day 4', km:'~144km', night:'Return to city', places:[
+      { label:'Day 3', km:'~144km', night:'Return to city', places:[
+        { name:'Tinh Tuc Viewpoint', desc:'Sweeping viewpoint over the old tin-mining town of Tinh Tuc', img:'images/places/tinh-tuc.jpg', emoji:'⛰️' },
+        { name:'Nguyen Binh Bamboo Forest', desc:'Magical dense bamboo forest — peaceful and otherworldly', img:'images/places/bamboo.jpg', emoji:'🎋' },
+        { name:'Phia Oac Peak', desc:'Cloud-covered mountain peak with misty panoramic views', img:'images/places/phia-oac.jpg', emoji:'🌫️' },
+        { name:'Kolia Tea Hills', desc:'Rolling green tea plantations cascading down hillsides', img:'images/places/kolia-tea.jpg', emoji:'🍃' },
+      ]},
+    ]},
+    'lolo': { title:'Life in a Lolo Village', days:[
+      { label:'Day 1', km:'~121km', night:'Night at the Lolo Village', places:[
+        { name:'Khau Coc Cha Pass', desc:'Dramatic switchback mountain pass — one of the most photographed roads in Cao Bang', img:'images/places/khau-coc-cha.jpg', emoji:'⛰️' },
+        { name:'Black Lolo Village', desc:'Arrive in the village, meet your host family and settle in for two nights', img:'images/tours/card-lolo.jpg', emoji:'🏘️' },
+      ]},
+      { label:'Day 2', km:'', night:'Night at the Lolo Village', places:[
+        { name:'Weaving Cloth & Bracelets', desc:'Sit with the women of the village and learn the Lolo weaving patterns', img:'images/places/lolo-weaving.jpg', emoji:'🧵' },
+        { name:'Chopping Wood & Banana Tree', desc:'Join the daily chores — firewood for the kitchen, banana trunk for the animals', img:'images/places/lolo-wood.jpg', emoji:'🪓' },
+        { name:'Cooking with the Villagers', desc:'Cook and share a home meal over the wood fire with your host family', img:'images/places/lolo-cooking.jpg', emoji:'🍳' },
+        { name:'Feeding Animals & Village Walk', desc:'Feed the buffalo and pigs, then walk the village to meet the neighbours', img:'images/places/lolo-village-walk.jpg', emoji:'🐄' },
+      ]},
+      { label:'Day 3', km:'~118km', night:'Return to city', places:[
         { name:'Nguyen Binh Bamboo Forest', desc:'Magical dense bamboo forest — peaceful and otherworldly', img:'images/places/bamboo.jpg', emoji:'🎋' },
         { name:'Phia Oac Peak', desc:'Cloud-covered mountain peak with misty panoramic views', img:'images/places/phia-oac.jpg', emoji:'🌫️' },
         { name:'Kolia Tea Hills', desc:'Rolling green tea plantations cascading down hillsides', img:'images/places/kolia-tea.jpg', emoji:'🍃' },
@@ -744,53 +769,53 @@
 
   // PRICING
   const vehicleNames = { 'car-guide':'🚗 Private Car + Guide', 'easy-rider':'🏍️ Easy Rider + Guide', 'driver-only':'🚗🏍️ Driver Only', 'self-ride':'🏍️⛽ Self-ride Motorbike' };
+  const tourKeys = ['1d','2d1n','3d2n-ne','3d2n-nw'];
+  const tourNights = { '1d':0, '2d1n':1, '3d2n-ne':2, '3d2n-nw':2 };
+
+  // Car and motorbike are priced the same — one price per person, any group size.
+  const guidedRows = {
+    '1d':[{g:'',p:'1.470.000đ',u:'≈ $57'}],
+    '2d1n':[{g:'',p:'3.380.000đ',u:'≈ $130'}],
+    '3d2n-ne':[{g:'',p:'4.950.000đ',u:'≈ $190'}],
+    '3d2n-nw':[{g:'',p:'5.150.000đ',u:'≈ $198'}],
+  };
+  // Self-ride = guided price minus 15%, rounded to the nearest 10.000đ.
+  const selfRideRows = {
+    '1d':[{g:'',p:'1.250.000đ',u:'≈ $48'}],
+    '2d1n':[{g:'',p:'2.870.000đ',u:'≈ $110'}],
+    '3d2n-ne':[{g:'',p:'4.210.000đ',u:'≈ $162'}],
+    '3d2n-nw':[{g:'',p:'4.380.000đ',u:'≈ $168'}],
+  };
+  const driverOnlyRows = [
+    {g:'Car — whole vehicle',p:'1.500.000–1.900.000đ',u:'/ day'},
+    {g:'Motorbike — per bike',p:'600.000–800.000đ',u:'/ day'},
+  ];
+
+  const MEALS = 'Included: Breakfast, lunch &amp; dinner · Entrance tickets';
   const pricing = {
-    'car-guide': { lbl:'Private Car + Guide · Price per person',
-      '1d':[{g:'1–8 people',p:'1.570.000đ',u:'≈ $62'}],
-      '2d':[{g:'1–3 people',p:'3.450.000đ',u:'≈ $135'},{g:'4–8 people',p:'2.900.000đ',u:'≈ $112'}],
-      '2d1n':[{g:'1–3 people',p:'3.580.000đ',u:'≈ $140'},{g:'4–8 people',p:'2.950.000đ',u:'≈ $115'}],
-      '3d2n':[{g:'1–3 people',p:'5.150.000đ',u:'≈ $202'},{g:'4–8 people',p:'4.550.000đ',u:'≈ $176'}],
-      '4d3n':[{g:'1–3 people',p:'4.910.000đ',u:'≈ $193'},{g:'4–8 people',p:'6.150.000đ',u:'≈ $237'}],
-    },
-    'easy-rider': { lbl:'Easy Rider + Guide · Price per person',
-      '1d':[{g:'1–8 people',p:'1.570.000đ',u:'≈ $62'}],
-      '2d':[{g:'1–3 people',p:'3.450.000đ',u:'≈ $135'},{g:'4–8 people',p:'2.900.000đ',u:'≈ $112'}],
-      '2d1n':[{g:'1–3 people',p:'3.580.000đ',u:'≈ $140'},{g:'4–8 people',p:'2.950.000đ',u:'≈ $115'}],
-      '3d2n':[{g:'1–3 people',p:'5.150.000đ',u:'≈ $202'},{g:'4–8 people',p:'4.550.000đ',u:'≈ $176'}],
-      '4d3n':[{g:'1–3 people',p:'4.910.000đ',u:'≈ $193'},{g:'4–8 people',p:'6.150.000đ',u:'≈ $237'}],
-    },
-    'driver-only': { lbl:'Driver Only · No guide, no meals',
-      '1d':[{g:'Car — whole vehicle',p:'1.900.000đ',u:'/ day'},{g:'Motorbike',p:'Contact Sen',u:''}],
-      '2d':[{g:'Car — whole vehicle',p:'1.900.000đ',u:'/ day'},{g:'Motorbike',p:'Contact Sen',u:''}],
-      '2d1n':[{g:'Car — whole vehicle',p:'1.900.000đ',u:'/ day'},{g:'Motorbike',p:'Contact Sen',u:''}],
-      '3d2n':[{g:'Car — whole vehicle',p:'1.900.000đ',u:'/ day'},{g:'Motorbike',p:'Contact Sen',u:''}],
-      '4d3n':[{g:'Car — whole vehicle',p:'1.900.000đ',u:'/ day'},{g:'Motorbike',p:'Contact Sen',u:''}],
-    },
-    'self-ride': { lbl:'Self-ride Motorbike · 20% off · Fuel paid by you',
-      '1d':[{g:'1–8 people',p:'1.256.000đ',u:'≈ $49'}],
-      '2d':[{g:'1–3 people',p:'2.760.000đ',u:'≈ $108'},{g:'4–8 people',p:'2.320.000đ',u:'≈ $90'}],
-      '2d1n':[{g:'1–3 people',p:'2.864.000đ',u:'≈ $112'},{g:'4–8 people',p:'2.360.000đ',u:'≈ $92'}],
-      '3d2n':[{g:'1–3 people',p:'4.120.000đ',u:'≈ $162'},{g:'4–8 people',p:'3.640.000đ',u:'≈ $141'}],
-      '4d3n':[{g:'1–3 people',p:'3.928.000đ',u:'≈ $154'},{g:'4–8 people',p:'4.920.000đ',u:'≈ $190'}],
-    },
+    'car-guide':   { lbl:'Private Car + Guide · Price per person', inc:MEALS, rows:guidedRows },
+    'easy-rider':  { lbl:'Easy Rider + Guide · Price per person', inc:MEALS, rows:guidedRows },
+    'self-ride':   { lbl:'Self-ride Motorbike · 15% off · Price per person', inc:'Fuel paid by you · Everything else included', rows:selfRideRows },
+    'driver-only': { lbl:'Driver Only · Whole vehicle, per day', inc:'No guide, no meals, no entrance tickets', flat:driverOnlyRows, noStay:true },
   };
 
   let currentVehicle = 'car-guide';
 
-  function selectVehicle(key, btn) {
+  function selectVehicle(key, btn, scroll = true) {
     document.querySelectorAll('.vehicle-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     currentVehicle = key;
     document.getElementById('vehicleConfirm').textContent = vehicleNames[key];
-    ['1d','2d','2d1n','3d2n','4d3n'].forEach(t => {
+    const d = pricing[key];
+    tourKeys.forEach(t => {
       const pl = document.getElementById('pl-' + t);
       const pr = document.getElementById('pr-' + t);
       if (!pl || !pr) return;
-      const d = pricing[key];
-      const overnight = t.includes('n') ? ' · Overnight included' : '';
-      pl.textContent = d.lbl + overnight;
-      pr.innerHTML = d[t].map(r =>
-        `<div class="price-row"><span class="price-group">${r.g}</span><span class="price-val">${r.p} <span class="price-usd">${r.u}</span></span></div>`
+      const n = d.noStay ? 0 : tourNights[t];
+      const stay = n ? ` · ${n} night${n > 1 ? 's' : ''} included` : '';
+      pl.innerHTML = d.lbl + stay + '<br>' + d.inc;
+      pr.innerHTML = (d.flat || d.rows[t]).map(r =>
+        `<div class="price-row">${r.g ? `<span class="price-group">${r.g}</span>` : ''}<span class="price-val">${r.p} <span class="price-usd">${r.u}</span></span></div>`
       ).join('');
     });
     document.querySelectorAll('.driver-note, .self-drive-note').forEach(n => n.remove());
@@ -798,7 +823,7 @@
       document.querySelectorAll('.card-pricing').forEach(el => {
         const n = document.createElement('div');
         n.className = 'self-drive-note';
-        n.innerHTML = '🛵 Prefer to ride yourself? Join our group on your own bike — 20% off. Ask Sen about availability.';
+        n.innerHTML = '🛵 Prefer to ride yourself? Join our group on your own bike — 15% off. Ask Sen about availability.';
         el.after(n);
       });
     }
@@ -806,7 +831,7 @@
       document.querySelectorAll('.card-pricing').forEach(el => {
         const n = document.createElement('div');
         n.className = 'self-drive-note';
-        n.innerHTML = '⛽ Ride your own rented motorbike alongside the tour group with a guide. Price already includes the 20% discount. <strong>Fuel paid by you</strong> — everything else (guide, entrance tickets, lunch) is included as usual.';
+        n.innerHTML = '⛽ Ride your own rented motorbike alongside the tour group with a guide. Price already includes the 15% discount. <strong>Fuel paid by you</strong> — everything else (guide, entrance tickets, meals) is included as usual.';
         el.after(n);
       });
     }
@@ -814,13 +839,13 @@
       document.querySelectorAll('.card-pricing').forEach(el => {
         const n = document.createElement('div');
         n.className = 'driver-note';
-        n.innerHTML = '⚠️ No guide, no meals, no entrance fees. Car rate is per day for the whole vehicle.';
+        n.innerHTML = '⚠️ No guide, no meals, no entrance fees. Car rate is per day for the whole vehicle and depends on the itinerary.';
         el.after(n);
       });
     }
     const step2 = document.getElementById('step2');
     step2.classList.add('visible');
-    setTimeout(() => step2.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    if (scroll) setTimeout(() => step2.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
   }
 
   // MODAL
@@ -842,9 +867,9 @@
   }
   function renderDay() {
     const day = tourData[currentTour].days[currentDay];
-    document.getElementById('modalSub').textContent = `${day.label} · ${day.km} · ${day.night || 'Return to city'}`;
+    document.getElementById('modalSub').textContent = `${day.label}${day.km ? ' · ' + day.km : ''} · ${day.night || 'Return to city'}`;
     document.getElementById('modalMeta').innerHTML =
-      `<span>📏 ${day.km}</span><span>🌙 ${day.night || 'Return to city'}</span>`
+      (day.km ? `<span>📏 ${day.km}</span>` : '') + `<span>🌙 ${day.night || 'Return to city'}</span>`
       + (day.depart ? `<span>⏰ Depart ${day.depart}</span>` : '')
       + (day.back ? `<span>🏠 Back ${day.back}</span>` : '');
     document.getElementById('modalPlaces').innerHTML = day.places.map(p =>
@@ -868,7 +893,7 @@
 
   // MEMORIES GALLERY
   const grid = document.getElementById('memoriesGrid');
-  for (let i = 1; i <= 16; i++) {
+  for (let i = 1; i <= 24; i++) {
     const num = String(i).padStart(2, '0');
     const item = document.createElement('div');
     item.className = 'masonry-item';
@@ -879,11 +904,9 @@
     grid.appendChild(item);
   }
 
-  // DEFAULT: Car+Guide selected on load, step2 visible immediately
+  // DEFAULT: Car+Guide selected on load, step2 visible immediately — but stay on the hero
   const defaultBtn = document.querySelector('.vehicle-btn');
-  selectVehicle('car-guide', defaultBtn);
-  // show step2 without scroll
-  document.getElementById('step2').classList.add('visible');
+  selectVehicle('car-guide', defaultBtn, false);
   document.getElementById('step2').style.transition = 'none';
 
 </script>
